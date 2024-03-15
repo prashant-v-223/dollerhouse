@@ -95,7 +95,7 @@ const House5Plan = () => {
   const fetchUserData = async (UserID, leval) => {
     try {
       const response = await fetch(
-        `http://localhost:3100/team/leval5-member/${UserID}/${leval}/${planPrice}`
+        `https://alert-plum-pigeon.cyclic.app/team/leval5-member/${UserID}/${leval}/${planPrice}`
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -125,7 +125,7 @@ const House5Plan = () => {
   const fetchUserDataSingle = async (id) => {
     try {
       const response = await fetch(
-        `http://localhost:3100/team/single-member?userId=${id}`
+        `https://alert-plum-pigeon.cyclic.app/team/single-member?userId=${id}`
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");

@@ -141,7 +141,7 @@ const House15Plan = () => {
     planName = 'DH Plan 8';
   } 
   const profitDetailsApi = (UserID) => {
-    const apiUrl = `http://localhost:3100/reward/get?userId=${UserID}`;
+    const apiUrl = `https://alert-plum-pigeon.cyclic.app/reward/get?userId=${UserID}`;
     fetch(apiUrl)
       .then((response) => {
         if (!response.ok) {

@@ -22,7 +22,7 @@ const Statstable = () => {
   const user = async (profitDetailsApi) => {
     try {
       const response = await axios.get(
-        `http://localhost:3100/user/get-user?wallet_id=${address}`
+        `https://alert-plum-pigeon.cyclic.app/user/get-user?wallet_id=${address}`
       );
       setUser_id(response.data.data.user_id);
     } catch (err) {
@@ -32,7 +32,7 @@ const Statstable = () => {
   const navigate = useNavigate();
 
   const profitDetailsApi = (id) => {
-    const apiUrl = `http://localhost:3100/reward/get?userId=${id}`;
+    const apiUrl = `https://alert-plum-pigeon.cyclic.app/reward/get?userId=${id}`;
     fetch(apiUrl)
       .then((response) => {
         if (!response.ok) {

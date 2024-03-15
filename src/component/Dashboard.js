@@ -66,7 +66,7 @@ const Dashboard = () => {
   const user = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:3100/user/get-user?wallet_id=${walletAddress}`
+        `https://alert-plum-pigeon.cyclic.app/user/get-user?wallet_id=${walletAddress}`
       );
 
       console.log(response.data.data);
@@ -95,7 +95,7 @@ const Dashboard = () => {
   const profitDetailsApi = async (main_user_id) => {
     try {
       const response = await axios.get(
-        `http://localhost:3100/profit/total-profit?userId=${main_user_id}`
+        `https://alert-plum-pigeon.cyclic.app/profit/total-profit?userId=${main_user_id}`
       );
       setProfitDetails(response.data.data);
     } catch (err) {
@@ -128,7 +128,7 @@ const Dashboard = () => {
     setLoading(true);
     try {
       //console.log("Inside try block")
-      const response = await fetch("http://localhost:3100/plan/create", {
+      const response = await fetch("https://alert-plum-pigeon.cyclic.app/plan/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -154,7 +154,7 @@ const Dashboard = () => {
   const PostHouse5Plan = async (plan_price) => {
     setLoading(true);
     try {
-      const response = await fetch("http://localhost:3100/team/add", {
+      const response = await fetch("https://alert-plum-pigeon.cyclic.app/team/add", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -230,7 +230,7 @@ const Dashboard = () => {
     formData.append("filename", "Test");
     try {
       const response = await axios.post(
-        "http://localhost:3100/profile/upload",
+        "https://alert-plum-pigeon.cyclic.app/profile/upload",
         formData,
         {
           headers: {
@@ -284,7 +284,7 @@ const Dashboard = () => {
   const GetPlanDetail = async (main_user_id) => {
     try {
       const response = await fetch(
-        `http://localhost:3100/plan/get-plan?userid=${main_user_id}`
+        `https://alert-plum-pigeon.cyclic.app/plan/get-plan?userid=${main_user_id}`
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -307,7 +307,7 @@ const Dashboard = () => {
   const fetchProfile = async (wallet) => {
     try {
       const response = await fetch(
-        `http://localhost:3100/profile/get-profile?wallet_id=${wallet}`
+        `https://alert-plum-pigeon.cyclic.app/profile/get-profile?wallet_id=${wallet}`
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");

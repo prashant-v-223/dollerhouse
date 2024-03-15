@@ -131,7 +131,7 @@ const Registration = () => {
   const PostHouse5Plan = async (plan_price) => {
     setIsLoading(true)
     try {
-      const response = await fetch("http://localhost:3100/team/add", {
+      const response = await fetch("https://alert-plum-pigeon.cyclic.app/team/add", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -162,7 +162,7 @@ const Registration = () => {
   const handleBuyPlan = async () => {
     setIsLoading(true)
     try {
-      const response = await fetch("http://localhost:3100/plan/create", {
+      const response = await fetch("https://alert-plum-pigeon.cyclic.app/plan/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -225,7 +225,7 @@ const Registration = () => {
     console.log(address)
     try {
       const response = await axios.get(
-        `http://localhost:3100/user/get-user?wallet_id=${address}`
+        `https://alert-plum-pigeon.cyclic.app/user/get-user?wallet_id=${address}`
       );
 
       if(response.ok){
