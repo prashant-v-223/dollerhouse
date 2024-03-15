@@ -33,6 +33,8 @@ const House5Plan = () => {
   const [wallet_address, setWalletAddress] = useState(wallet_address_real);
   console.log(wallet_address);
 
+  const urlParams = new URLSearchParams(window.location.search);
+  const planPrice = urlParams.get('plan_price');
   const copyToClipboard = (invited_member_id) => {
     const textField = document.createElement("textarea");
     textField.innerText = invited_member_id;
@@ -45,47 +47,6 @@ const House5Plan = () => {
       position: toast.POSITION.TOP_RIGHT,
     });
   };
-  const sumPlanDetailsAmount = (item) => {
-    if (item.result && item.result.length > 0) {
-      const planDetails = item.result[0].plan_details;
-      if (planDetails && planDetails.length > 0) {
-        return planDetails.reduce((acc, curr) => {
-          switch (curr.amount) {
-            case 20:
-              curr.subamount = 5;
-              break;
-            case 40:
-              curr.subamount = 10;
-              break;
-            case 100:
-              curr.subamount = 30;
-              break;
-            case 200:
-              curr.subamount = 60;
-              break;
-            case 500:
-              curr.subamount = 120;
-              break;
-            case 1000:
-              curr.subamount = 250;
-              break;
-            case 2000:
-              curr.subamount = 500;
-              break;
-            case 4000:
-              curr.subamount = 1000;
-              break;
-            default:
-              curr.subamount = 0;
-              break;
-          }
-          return acc + curr.subamount; // Add subamount to accumulator
-        }, 0);
-      }
-    }
-    return 0; // Return 0 if there are no plan_details or no amount in plan_details
-  };
-
   // const wallet_address = userDataReal?.data?.wallet_address;
 
   const [tableData, setTableData] = useState("");
@@ -134,7 +95,7 @@ const House5Plan = () => {
   const fetchUserData = async (UserID, leval) => {
     try {
       const response = await fetch(
-        `http://localhost:3100/team/leval5-member/${UserID}/${leval}`
+        `http://localhost:3100/team/leval5-member/${UserID}/${leval}/${planPrice}`
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -152,8 +113,13 @@ const House5Plan = () => {
   };
   const memoizedHouse5Plan = useMemo(() => {
     // Your logic to calculate the value of house5Plan goes here
-    return house5Plan;
-  }, [house5Plan]);
+    const sortedArray = house5Plan && [...house5Plan].sort((a, b) => {
+      // Assuming house5Plan is an array of objects with a property 'creactetime'
+      return a.uid - b.uid;
+    });
+
+    return sortedArray;
+  }, [house5Plan, count]);
   console.log("house5Plan1[0]?.referBY", memoizedHouse5Plan);
   const [house5PlanSingle, setHouse5PlanSingle] = useState(null);
   const fetchUserDataSingle = async (id) => {
@@ -178,269 +144,197 @@ const House5Plan = () => {
   // useEffect(() => {
   //   window.location.reload();
   // }, [house5Plan1])
-
+  const sumtotal = (referBYArray) => {
+    let sum = 0;
+    if (referBYArray) {
+      referBYArray?.forEach(item => {
+        const parse = item.depthleval + 1 === 1 ? 0 : item.depthleval + 1 === 2 ? 10 : item.depthleval + 1 === 3 ? 20 : item.depthleval + 1 === 4 ? 20 : item.depthleval + 1 === 5 ? 50 : 0;
+        sum += 5 * parse / 100;
+      });
+    }
+    return sum
+  }
   const leftsaid = () => {
+    console.log("memoizedHouse5Plan", memoizedHouse5Plan);
     return (
-      <div className="circle_preview_5_left ">
-        <div className="circle_pre_1_1">
-          <h4 >
-            {memoizedHouse5Plan?.length > 1 && memoizedHouse5Plan[1]?.uid || 0}
-          </h4>
-        </div>
+      <div className="circle_preview_5_left">
+        {memoizedHouse5Plan && memoizedHouse5Plan.length > 0 ? (
+          <div className="circle_pre_1_1">
+            <h4>
+              {memoizedHouse5Plan[1]?.uid || 0}
+            </h4>
+          </div>
+        ) :
+          (<div className="circle_pre_1_1">
+            <h4>
+              {0}
+            </h4>
+          </div>)}
         <div className="circle_pre_1_2">
-          <h4
-          >
-            {memoizedHouse5Plan && memoizedHouse5Plan[1]?.depthData[0]?.uid || 0}
-          </h4>
-          <h4
-          >
-            {memoizedHouse5Plan && memoizedHouse5Plan[1]?.depthData[1]?.uid || 0}
-          </h4>
+          {[1, 2].map((el, index) => {
+            const filteredData = house5Plan1[0]?.referBY
+              .filter(item => item.refId === memoizedHouse5Plan?.[1]?.referred?.[index]);
+            return (
+              <h4 key={index}>
+                {filteredData?.length > 0 ? filteredData[0]?.uid : "0"}
+              </h4>
+            );
+          })}
         </div>
+
         <div className="circle_pre_1_3">
-          {[1, 2].map((el, index) => {
-            return (
-              <h4
-              >
-                {memoizedHouse5Plan && memoizedHouse5Plan[1]?.depthData[0]?.depthData[index]?.uid || "0"}
-              </h4>)
-          })}
-          {[1, 2].map((el, index) => {
-            return (
-              <h4
-              >
-                {memoizedHouse5Plan && memoizedHouse5Plan[1]?.depthData[1]?.depthData[index]?.uid || "0"}
-              </h4>)
+          {[1, 2].map((el, index1) => {
+            return [1, 2].map((el, index) => {
+              let a = house5Plan1[0]?.referBY
+                .filter(item => item.refId === memoizedHouse5Plan?.[1]?.referred?.[index1])?.[0]?.referred;
+              const filteredData = house5Plan1[0]?.referBY
+                .filter(item => item.refId === a?.[index]);
+              return (
+                <h4 key={index1 + index}>
+                  {filteredData?.length > 0 ? filteredData[0]?.uid : "0"}
+                </h4>
+              );
+            });
           })}
         </div>
+
         <div className="circle_pre_1_4">
-          {[1, 2].map((el, index) => {
-            return (
-              <h4
-              >
-                {memoizedHouse5Plan && memoizedHouse5Plan[1]?.depthData[0]?.depthData[0]?.depthData[index]?.uid || "0"}
-              </h4>)
-          })}
-          {[1, 2].map((el, index) => {
-            return (
-              <h4
-              >
-                {memoizedHouse5Plan && memoizedHouse5Plan[1]?.depthData[0]?.depthData[1]?.depthData[index]?.uid || "0"}
-              </h4>)
-          })}
-          {[1, 2].map((el, index) => {
-            return (
-              <h4
-              >
-                {memoizedHouse5Plan && memoizedHouse5Plan[1]?.depthData[1]?.depthData[0]?.depthData[index]?.uid || "0"}
-              </h4>)
-          })}
-          {[1, 2].map((el, index) => {
-            return (
-              <h4
-              >
-                {memoizedHouse5Plan && memoizedHouse5Plan[1]?.depthData[1]?.depthData[1]?.depthData[index]?.uid || "0"}
-              </h4>)
-          })}
+          {[1, 2].map((el, index2) => (
+            [1, 2].map((el, index1) => (
+              [1, 2].map((el, index) => {
+                let a = house5Plan1[0]?.referBY
+                  .filter(item => item.refId === memoizedHouse5Plan?.[1]?.referred?.[index2])?.[0]?.referred;
+                let b = house5Plan1[0]?.referBY
+                  .filter(item => item.refId === a?.[index1]);
+                const filteredData = house5Plan1[0]?.referBY
+                  .filter(item => item.refId === b?.[0]?.referred?.[index]);
+                return (
+                  <h4 key={index2 + index1 + index}>
+                    {filteredData?.length > 0 ? filteredData[0]?.uid : "0"}
+                  </h4>
+                );
+              })
+            ))
+          ))}
         </div>
+
         <div className="circle_pre_1_6">
-          {[1, 2].map((el, index) => {
-            const filteredDatalastwor = house5Plan2?.filter(item => item.refId === memoizedHouse5Plan[1]?.depthData[0]?.depthData[0]?.depthData[0]?.referred[index]);
-            return (
-              <h4 >
-                {filteredDatalastwor && filteredDatalastwor[0]?.uid || 0}
-              </h4>)
-          })}
-          {[1, 2].map((el, index) => {
-            const filteredDatalastwor = house5Plan2?.filter(item => item.refId === memoizedHouse5Plan[1]?.depthData[0]?.depthData[0]?.depthData[1]?.referred[index]);
-            return (
-              <h4 >
-                {filteredDatalastwor && filteredDatalastwor[0]?.uid || 0}
-              </h4>)
-          })}
-          {[1, 2].map((el, index) => {
-            const filteredDatalastwor = house5Plan2?.filter(item => item.refId === memoizedHouse5Plan[1]?.depthData[0]?.depthData[1]?.depthData[0]?.referred[index]);
-            return (
-              <h4 >
-                {filteredDatalastwor && filteredDatalastwor[0]?.uid || 0}
-              </h4>)
-          })}
-          {[1, 2].map((el, index) => {
-            const filteredDatalastwor = house5Plan2?.filter(item => item.refId === memoizedHouse5Plan[1]?.depthData[0]?.depthData[1]?.depthData[1]?.referred[index]);
-            return (
-              <h4 >
-                {filteredDatalastwor && filteredDatalastwor[0]?.uid || 0}
-              </h4>)
-          })}
-          {[1, 2].map((el, index) => {
-            const filteredDatalastwor = house5Plan2?.filter(item => item.refId === memoizedHouse5Plan[1]?.depthData[1]?.depthData[0]?.depthData[0]?.referred[index]);
-            return (
-              <h4 >
-                {filteredDatalastwor && filteredDatalastwor[0]?.uid || 0}
-              </h4>)
-          })}
-          {[1, 2].map((el, index) => {
-            const filteredDatalastwor = house5Plan2?.filter(item => item.refId === memoizedHouse5Plan[1]?.depthData[1]?.depthData[0]?.depthData[1]?.referred[index]);
-            return (
-              <h4 >
-                {filteredDatalastwor && filteredDatalastwor[0]?.uid || 0}
-              </h4>)
-          })}
-          {[1, 2].map((el, index) => {
-            const filteredDatalastwor = house5Plan2?.filter(item => item.refId === memoizedHouse5Plan[1]?.depthData[1]?.depthData[1]?.depthData[0]?.referred[index]);
-            return (
-              <h4 >
-                {filteredDatalastwor && filteredDatalastwor[0]?.uid || 0}
-              </h4>)
-          })}
-          {[1, 2].map((el, index) => {
-            const filteredDatalastwor = house5Plan2?.filter(item => item.refId === memoizedHouse5Plan[1]?.depthData[1]?.depthData[1]?.depthData[1]?.referred[index]);
-            return (
-              <h4 >
-                {filteredDatalastwor && filteredDatalastwor[0]?.uid || 0}
-              </h4>)
-          })}
+          {[1, 2].map((el, index3) => (
+            [1, 2].map((el, index2) => (
+              [1, 2].map((el, index1) => (
+                [1, 2].map((el, index) => {
+                  let a = house5Plan1[0]?.referBY
+                    .filter(item => item.refId === memoizedHouse5Plan?.[1]?.referred?.[index3])?.[0]?.referred;
+                  let b = house5Plan1[0]?.referBY
+                    .filter(item => item.refId === a?.[index2]);
+                  let c = house5Plan1[0]?.referBY
+                    .filter(item => item.refId === b?.[0]?.referred?.[index1]);
+                  const filteredData = house5Plan1[0]?.referBY
+                    .filter(item => item.refId === c?.[0]?.referred?.[index]);
+                  return (
+                    <h4 key={index3 + index2 + index1 + index}>
+                      {filteredData?.length > 0 ? filteredData[0]?.uid : "0"}
+                    </h4>
+                  );
+                })
+              ))
+            ))
+          ))}
         </div>
       </div>
-    )
+    );
   }
+
   const Rightsaid = () => {
     return (
-      <div className="circle_preview_5_left ">
-        {/* {house5Plan?.map((el) => {
-        if (el?.depthleval === 0) {
-          return (
-            <> */}
-        <div className="circle_pre_1_1">
-          <h4 >
-            {memoizedHouse5Plan?.length > 0 && memoizedHouse5Plan[0]?.uid || 0}
-          </h4>
-        </div>
+      <div className="circle_preview_5_left">
+        {memoizedHouse5Plan && memoizedHouse5Plan.length > 0 ? (
+          <div className="circle_pre_1_1">
+            <h4>
+              {memoizedHouse5Plan[0]?.uid || 0}
+            </h4>
+          </div>
+        ) :
+          (<div className="circle_pre_1_1">
+            <h4>
+              {0}
+            </h4>
+          </div>)}
         <div className="circle_pre_1_2">
-          <h4
-          >
-            {memoizedHouse5Plan && memoizedHouse5Plan[0]?.depthData[0]?.uid || 0}
-          </h4>
-          <h4
-          >
-            {memoizedHouse5Plan && memoizedHouse5Plan[0]?.depthData[1]?.uid || 0}
-          </h4>
+          {[1, 2].map((el, index) => {
+            const filteredData = house5Plan1[0]?.referBY
+              .filter(item => item.refId === memoizedHouse5Plan?.[0]?.referred?.[index]);
+            return (
+              <h4 key={index}>
+                {filteredData?.length > 0 ? filteredData[0]?.uid : "0"}
+              </h4>
+            );
+          })}
         </div>
+
         <div className="circle_pre_1_3">
-          {[1, 2].map((el, index) => {
-            return (
-              <h4
-
-              >
-                {memoizedHouse5Plan && memoizedHouse5Plan[0]?.depthData[0]?.depthData[index]?.uid || "0"}
-              </h4>)
-          })}
-          {[1, 2].map((el, index) => {
-            return (
-              <h4
-
-              >
-                {memoizedHouse5Plan && memoizedHouse5Plan[0]?.depthData[1]?.depthData[index]?.uid || "0"}
-              </h4>)
+          {[1, 2].map((el, index1) => {
+            return [1, 2].map((el, index) => {
+              let a = house5Plan1[0]?.referBY
+                .filter(item => item.refId === memoizedHouse5Plan?.[0]?.referred?.[index1])?.[0]?.referred;
+              const filteredData = house5Plan1[0]?.referBY
+                .filter(item => item.refId === a?.[index]);
+              return (
+                <h4 key={index1 + index}>
+                  {filteredData?.length > 0 ? filteredData[0]?.uid : "0"}
+                </h4>
+              );
+            });
           })}
         </div>
+
         <div className="circle_pre_1_4">
-          {[1, 2].map((el, index) => {
-            console.log(memoizedHouse5Plan && memoizedHouse5Plan[0]?.depthData[1]?.depthData);
-            return (
-              <h4
-              >
-                {memoizedHouse5Plan && memoizedHouse5Plan[0]?.depthData[0]?.depthData[0]?.depthData[index]?.uid || "0"}
-              </h4>)
-          })}
-          {[1, 2].map((el, index) => {
-            return (
-              <h4
-
-              >
-                {memoizedHouse5Plan && memoizedHouse5Plan[0]?.depthData[0]?.depthData[1]?.depthData[index]?.uid || "0"}
-              </h4>)
-          })}
-          {[1, 2].map((el, index) => {
-            return (
-              <h4
-
-              >
-                {memoizedHouse5Plan && memoizedHouse5Plan[0]?.depthData[1]?.depthData[0]?.depthData[index]?.uid || "0"}
-              </h4>)
-          })}
-          {[1, 2].map((el, index) => {
-            console.log(memoizedHouse5Plan && memoizedHouse5Plan[0]?.depthData[1]?.depthData[0]);
-            return (
-              <h4
-              >
-                {memoizedHouse5Plan && memoizedHouse5Plan[0]?.depthData[1]?.depthData[1]?.depthData[index]?.uid || "0"}
-              </h4>)
-          })}
+          {[1, 2].map((el, index2) => (
+            [1, 2].map((el, index1) => (
+              [1, 2].map((el, index) => {
+                let a = house5Plan1[0]?.referBY
+                  .filter(item => item.refId === memoizedHouse5Plan?.[0]?.referred?.[index2])?.[0]?.referred;
+                let b = house5Plan1[0]?.referBY
+                  .filter(item => item.refId === a?.[index1]);
+                const filteredData = house5Plan1[0]?.referBY
+                  .filter(item => item.refId === b?.[0]?.referred?.[index]);
+                return (
+                  <h4 key={index2 + index1 + index}>
+                    {filteredData?.length > 0 ? filteredData[0]?.uid : "0"}
+                  </h4>
+                );
+              })
+            ))
+          ))}
         </div>
-        <div className="circle_pre_1_6">
-          {[1, 2].map((el, index) => {
-            const referredIndex = memoizedHouse5Plan && memoizedHouse5Plan[0]?.depthData[0]?.depthData[0]?.depthData[0]?.referred[index]
 
-            const filteredDatalastwor = house5Plan2?.filter(item => item.refId === referredIndex);
-            return (
-              <h4 >
-                {filteredDatalastwor && filteredDatalastwor[0]?.uid || 0}
-              </h4>)
-          })}
-          {[1, 2].map((el, index) => {
-            const referredIndex = memoizedHouse5Plan && memoizedHouse5Plan[0]?.depthData[0]?.depthData[0]?.depthData[1]?.referred[index]
-            const filteredDatalastwor = house5Plan2?.filter(item => item.refId === referredIndex);
-            return (
-              <h4 >
-                {filteredDatalastwor && filteredDatalastwor[0]?.uid || 0}
-              </h4>)
-          })}
-          {[1, 2].map((el, index) => {
-            const filteredDatalastwor = house5Plan2?.filter(item => item.refId === memoizedHouse5Plan[0]?.depthData[0]?.depthData[1]?.depthData[0]?.referred[index]);
-            return (
-              <h4 >
-                {filteredDatalastwor && filteredDatalastwor[0]?.uid || 0}
-              </h4>)
-          })}
-          {[1, 2].map((el, index) => {
-            const filteredDatalastwor = house5Plan2?.filter(item => item.refId === memoizedHouse5Plan[0]?.depthData[0]?.depthData[1]?.depthData[1]?.referred[index]);
-            return (
-              <h4 >
-                {filteredDatalastwor && filteredDatalastwor[0]?.uid || 0}
-              </h4>)
-          })}
-          {[1, 2].map((el, index) => {
-            const filteredDatalastwor = house5Plan2?.filter(item => item.refId === memoizedHouse5Plan[0]?.depthData[1]?.depthData[0]?.depthData[0]?.referred[index]);
-            return (
-              <h4 >
-                {filteredDatalastwor && filteredDatalastwor[0]?.uid || 0}
-              </h4>)
-          })}
-          {[1, 2].map((el, index) => {
-            const filteredDatalastwor = house5Plan2?.filter(item => item.refId === memoizedHouse5Plan[0]?.depthData[1]?.depthData[0]?.depthData[1]?.referred[index]);
-            return (
-              <h4 >
-                {filteredDatalastwor && filteredDatalastwor[0]?.uid || 0}
-              </h4>)
-          })}
-          {[1, 2].map((el, index) => {
-            const filteredDatalastwor = house5Plan2?.filter(item => item.refId === memoizedHouse5Plan[0]?.depthData[1]?.depthData[1]?.depthData[0]?.referred[index]);
-            return (
-              <h4 >
-                {filteredDatalastwor && filteredDatalastwor[0]?.uid || 0}
-              </h4>)
-          })}{[1, 2].map((el, index) => {
-            const filteredDatalastwor = house5Plan2?.filter(item => item.refId === memoizedHouse5Plan[1]?.depthData[1]?.depthData[1]?.depthData[1]?.referred[index]);
-            return (
-              <h4 >
-                {filteredDatalastwor && filteredDatalastwor[0]?.uid || 0}
-              </h4>)
-          })}
+        <div className="circle_pre_1_6">
+          {[1, 2].map((el, index3) => (
+            [1, 2].map((el, index2) => (
+              [1, 2].map((el, index1) => (
+                [1, 2].map((el, index) => {
+                  let a = house5Plan1[0]?.referBY
+                    .filter(item => item.refId === memoizedHouse5Plan?.[0]?.referred?.[index3])?.[0]?.referred;
+                  let b = house5Plan1[0]?.referBY
+                    .filter(item => item.refId === a?.[index2]);
+                  let c = house5Plan1[0]?.referBY
+                    .filter(item => item.refId === b?.[0]?.referred?.[index1]);
+                  const filteredData = house5Plan1[0]?.referBY
+                    .filter(item => item.refId === c?.[0]?.referred?.[index]);
+                  return (
+                    <h4 key={index3 + index2 + index1 + index}>
+                      {filteredData?.length > 0 ? filteredData[0]?.uid : "0"}
+                    </h4>
+                  );
+                })
+              ))
+            ))
+          ))}
         </div>
       </div>
-    )
+    );
   }
+
   return (
     <React.Fragment>
       <div className="container">
@@ -470,9 +364,9 @@ const House5Plan = () => {
               <div className="center_contant_forsage">
                 <div className="forsgae_level_card">
                   <div className="level_title">
-                    <h4>House 5 Plan <br /> leval:{"  "}{count + 1}</h4>
+                    <h4>House 5 Plan</h4>
                     <h1>
-                      00
+                      {sumtotal(house5Plan1[0]?.referBY?.slice(0, 60))}
                       <span>
                         <img
                           src={UsdtIcon}
@@ -501,12 +395,12 @@ const House5Plan = () => {
                               className="userd_icon"
                             />
                           </span>
-                          {/* {Number(result50)} */}
+                          {house5Plan1[0]?.referBY.length}
                         </h5>
                       </div>
 
                       <div className="partners">
-                        <p>Cycles</p>
+                        <p>Cycles {count + 1}</p>
                         <h5>
                           <span>
                             <img
@@ -523,7 +417,7 @@ const House5Plan = () => {
                     <div className="Total_revenue">
                       <p>Total revenue</p>
                       <h1>
-                        00
+                        {sumtotal(house5Plan1[0]?.referBY?.slice(0, 60))}
                         <span>
                           <img
                             src={UsdtIcon}
@@ -578,7 +472,7 @@ const House5Plan = () => {
                           )}
                           {item.depthleval + 1}
                         </td>
-                        <td>{5 * parse / 100}</td>
+                        <td>{planPrice == 20 ? 5 * parse / 100 : planPrice == 40 ? 10 * parse / 100 : planPrice == 100 ? 20 * parse / 100 : 40 * parse / 100}</td>
                         <td className="text-center">
                           {item.refId.slice(0, 4)}...{" "}
                           {item.refId.slice(-4)}
@@ -603,7 +497,7 @@ const House5Plan = () => {
                         </td>
 
                         <td className="text-center">
-                          {/* {new Date(item.result[0].createdAt).toLocaleString()} */}
+                          {new Date(item.result[0]?.createdAt).toLocaleString()}
                         </td>
                       </tr>)
                     })}
