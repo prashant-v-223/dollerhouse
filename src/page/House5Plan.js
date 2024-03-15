@@ -472,7 +472,7 @@ const House5Plan = () => {
                           )}
                           {item.depthleval + 1}
                         </td>
-                        <td>{planPrice == 20 ? 5 * parse / 100 : planPrice == 40 ? 10 * parse / 100 : planPrice == 100 ? 20 * parse / 100 : 40 * parse / 100}</td>
+                        <td>{planPrice == 20 ? 5 * parse / 100 : planPrice == 40 ? 10 * parse / 100 : planPrice == 100 ? 30 * parse / 100 : 60 * parse / 100}</td>
                         <td className="text-center">
                           {item.refId.slice(0, 4)}...{" "}
                           {item.refId.slice(-4)}
