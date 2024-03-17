@@ -30,7 +30,7 @@ import Boxs from "./Boxs";
 
 const House15Plan = () => {
   const [tableData, setTableData] = useState("");
- 
+
   const [previewID, setPreviewID] = useState("");
   // Retrieve data from localStorage
 
@@ -41,9 +41,9 @@ const House15Plan = () => {
     "0x0ECBBF0D46E13cC4fffdf14AbC39D8332c89Ad8b"
   );
 
- 
 
- 
+
+
   const itemsPerPage = 10;
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -137,9 +137,9 @@ const House15Plan = () => {
     planName = 'DH Plan 6';
   } else if (planPrice == '2000') {
     planName = 'DH Plan 7';
-  }  else if (planPrice == '4000') {
+  } else if (planPrice == '4000') {
     planName = 'DH Plan 8';
-  } 
+  }
   const profitDetailsApi = (UserID) => {
     const apiUrl = `https://alert-plum-pigeon.cyclic.app/reward/get?userId=${UserID}`;
     fetch(apiUrl)
@@ -239,6 +239,12 @@ const House15Plan = () => {
                 <p>You can view the details of your House 15 Plan </p>
               </div>
             </div>
+
+            <div className="d-flex w-100 justify-content-center">
+              <div className="forsgae_level_card m-auto d-block d-flex w-100 justify-content-center">
+                <h4> UPLINE ID {localStorage.getItem("UPlineUserID")}</h4>
+              </div>
+            </div>
             <div className="forsage_prive_center_btn">
               <div className="previews_btn_forsage">
                 <button onClick={handlePrevious} disabled={currentPage === 0}>
@@ -277,13 +283,12 @@ const House15Plan = () => {
                           const item = maindata && maindata[index];
                           return (
                             <h4
-                              className={`${
-                                item && item.status == "missed"
+                              className={`${item && item.status == "missed"
                                   ? "background_cyan_bilkul"
                                   : ""
-                              } cursor-pointer bg-[#743b07]`}
+                                } cursor-pointer bg-[#743b07]`}
                               key={index}
-                              // onClick={() => handleNewIdData(item?.user_id)}
+                            // onClick={() => handleNewIdData(item?.user_id)}
                             >
                               {item ? item.user_id : ""}
                             </h4>
@@ -385,7 +390,7 @@ const House15Plan = () => {
                             <span className="table_id">ID{item.user_id}</span>
                           </td>
                           <td className="text-center">{item.amount}</td>
-                          <td className="text-center">{item.status == "missed" ? "Sent to Upline" : item.house_reward }</td>
+                          <td className="text-center">{item.status == "missed" ? "Sent to Upline" : item.house_reward}</td>
                           <td className="text-center">
                             {item.invited_member_id.slice(0, 4)}...{" "}
                             {item.invited_member_id.slice(-4)}

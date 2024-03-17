@@ -36,7 +36,7 @@ const House1Plan = () => {
   const wallet_address = userDataReal?.data?.wallet_address;
   const navigate = useNavigate();
   const [tableData, setTableData] = useState("");
-  
+
 
   const [previewID, setPreviewID] = useState("");
   const [userData, setUserData] = useState(null);
@@ -45,8 +45,8 @@ const House1Plan = () => {
     setPreviewID(event.target.value);
   };
 
-  
-  
+
+
   // Retrieve data from localStorage
 
   const { contract } = useContract(
@@ -65,7 +65,7 @@ const House1Plan = () => {
 
   const result50 = getThePlansCount;
   const box50 = Number(result50 && result50?._hex);
-   const blueElements50 = Array.from({ length: box50 }).map((_, index) => (
+  const blueElements50 = Array.from({ length: box50 }).map((_, index) => (
     <h3
       key={index}
       className={
@@ -169,9 +169,9 @@ const House1Plan = () => {
     planName = 'DH Plan 6';
   } else if (planPrice == '2000') {
     planName = 'DH Plan 7';
-  }  else if (planPrice == '4000') {
+  } else if (planPrice == '4000') {
     planName = 'DH Plan 8';
-  } 
+  }
 
   const profitDetailsApi = (id) => {
     const apiUrl = `https://alert-plum-pigeon.cyclic.app/reward/get?userId=${id}`;
@@ -272,6 +272,11 @@ const House1Plan = () => {
               </div>
             </div>
 
+            <div className="d-flex w-100 justify-content-center">
+              <div className="forsgae_level_card m-auto d-block d-flex w-100 justify-content-center">
+                <h4> UPLINE ID {localStorage.getItem("UPlineUserID")}</h4>
+              </div>
+            </div>
             <div className="forsage_prive_center_btn">
               <div className="previews_btn_forsage">
                 <button onClick={handlePrevious} disabled={currentPage === 0}>
@@ -298,17 +303,17 @@ const House1Plan = () => {
                     {Array.from({ length: 4 }).map((_, index) => {
                       const item = maindata && maindata[index]; // Ignore data at index 0
                       if (item && item.status) {
-                      return <h4 className="upline_heading">Sent to<br/> upline</h4>;
+                        return <h4 className="upline_heading">Sent to<br /> upline</h4>;
                       }
                       return (
-                          <h4
-                              className={`${index === 3 ? "background_cyan" : ""} cursor-pointer bg-[#743b07]`}
-                              onClick={() => handleNewIdData(item?.user_id)}
-                              key={index}
-                          >
-                              {item ? item.user_id : ""}
-                              {index === 3 && <FaArrowUp className="up_arrow" />}
-                          </h4>
+                        <h4
+                          className={`${index === 3 ? "background_cyan" : ""} cursor-pointer bg-[#743b07]`}
+                          onClick={() => handleNewIdData(item?.user_id)}
+                          key={index}
+                        >
+                          {item ? item.user_id : ""}
+                          {index === 3 && <FaArrowUp className="up_arrow" />}
+                        </h4>
                       );
                     })}
                   </div>
