@@ -455,7 +455,7 @@ const Dashboard = () => {
                         {/* <img onClick={()=> setIsModalOpen(true)} className="edit_icon" src="/pen.png" /> */}
                       </div>
                       <div className="id_user right_text d-block m-auto w-100 px-2 px-md-4">
-                        <div className="d-flex justify-content-between mb-2" >
+                        <div className="d-flex justify-content-between mt-4" >
                           <div className=" ">
                             <h4 className="text-light m-0">User Name</h4>
                           </div>
@@ -468,10 +468,9 @@ const Dashboard = () => {
                             width: "100%",
                             fontSize: "13px",
                             justifyContent: "space-between !important;",
-                            marginBottom: "0",
                             display: "flex"
                           }}
-                          className="justify-content-between mts-3" >
+                          className="justify-content-between mt-3 mb-2" >
                           {modifiedAddress}{" "}
                           {modifiedAddress && (
                             <MdContentCopy
@@ -487,8 +486,8 @@ const Dashboard = () => {
                         </p>
                         <div className="justify-content-between" style={{ display: "flex" }}>
                           <span
-                            className="id_bg id_user_top parent_address"
-                            style={{ width: "154px", fontSize: "13px" }}
+                            className="id_bg id_user_top parent_address "
+                            style={{ width: "180px", fontSize: "13.75px" }}
                           >
                             {`
                        ${modifiedAddress1
@@ -781,7 +780,7 @@ const Dashboard = () => {
             </div>
 
             <div className="preview_by_doller_program">
-              <div className="container">
+              <div className="container p-0">
                 <div className="preview_card_pogram_title">
                   <h3>
                     {" "}
@@ -791,7 +790,7 @@ const Dashboard = () => {
 
                 <div className="privew_card_container_main">
                   {CardData.map((item, index) => (
-                    <div className="relative privew_card_sub">
+                    <div className="relative privew_card_sub mx-2">
                       <div
                         key={index}
                         className={

@@ -81,11 +81,11 @@ const Navbar = () => {
   return (
     <div>
       <div className="sidebar">
-        {/* <img className="main_desktop_logo" src={logo} /> */}
+        <img className="main_desktop_logo" src={logo} />
         <div className="sidebar_menu">
           <div className="said_icons">
-            <div className="d-flex justify-content-center align-content-center">
-              <img src={logo} className="img-fluid w-50 m-4 " />
+            <div className="d-flex d-md-none justify-content-center align-content-center">
+              <img className="img-fluid " src={logo} width={55} height={55} />
             </div>
             <div className="metamask_button_right">
               <div className="mobile_connect_button">
