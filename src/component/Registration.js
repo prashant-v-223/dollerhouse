@@ -21,7 +21,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { UsdtContract, usdt_abi } from "./usdt.js";
 import { color } from "framer-motion";
 
-const Registration = () => {
+const Registration = ({ id }) => {
   const [USDTAmt, setUSDTAmt] = useState("");
   const [approveAmt, setApproveAmt] = useState("");
   const [BuyTokenLoading, setBuyTokenLoading] = useState(false);
@@ -35,6 +35,10 @@ const Registration = () => {
   const handleConfetti = () => {
     confetti({});
   };
+  useEffect(() => {
+    setReferralCode(id)
+  }, [id])
+
   const [activeTab, setActiveTab] = useState("home");
   const handleTabClick = (tabId) => {
     setActiveTab(tabId);
@@ -52,8 +56,8 @@ const Registration = () => {
 
   var storedData = localStorage.getItem("UserID");
   var UserID = JSON.parse(storedData);
-  const  address = useAddress();
-   
+  const address = useAddress();
+
   //read functions
   const { contract } = useContract(
     "0x642ba5BEF7030FD665b671E12090268086EFF1eC"
@@ -149,7 +153,7 @@ const Registration = () => {
       toast.success("Tokens Bought Successfully", {
         position: toast.POSITION.TOP_CENTER,
       });
-      if(response.ok){
+      if (response.ok) {
         user()
         navigate("/dashboard");
       }
@@ -158,7 +162,7 @@ const Registration = () => {
       setIsLoading(true)
     }
   };
- 
+
   const handleBuyPlan = async () => {
     setIsLoading(true)
     try {
@@ -179,7 +183,7 @@ const Registration = () => {
           ],
         }),
       });
-     
+
       if (response.ok) { // Check if response is successful
         setIsLoading(false)
         PostHouse5Plan(20);
@@ -228,11 +232,11 @@ const Registration = () => {
         `https://alert-plum-pigeon.cyclic.app/user/get-user?wallet_id=${address}`
       );
 
-      if(response.ok){
+      if (response.ok) {
         localStorage.setItem("UserID", JSON.stringify(response.data.data.user_id));
         navigate("/dashboard");
       }
-    
+
     } catch (err) {
       //console.log(err);
     }
@@ -242,7 +246,7 @@ const Registration = () => {
     <div className="regi_main">
       <div style={{ zIndex: 99999999 }}>
         <ToastContainer />
-         
+
       </div>
 
       {/* <img src={blueflase} className="bludeflasereg" alt="blueflase" /> */}
@@ -273,7 +277,7 @@ const Registration = () => {
             </div>
           </div>
         </div>
-        
+
         {isLoading && <Loading />}
         <div className="registion_from">
           <div className="row">
@@ -412,11 +416,11 @@ const Registration = () => {
                       <source src="movie.ogg" type="video/ogg" />
                       Your browser does not support the video tag.
                     </video> */}
-                    <img
+                    {/* <img
                       src={welcome_benner}
                       alt="img"
                       className="rg_lion_img"
-                    />
+                    /> */}
                   </div>
                 </div>
 

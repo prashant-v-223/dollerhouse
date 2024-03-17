@@ -48,7 +48,7 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(false);
   const sdk = useSDK();
 
- const wallet_address = useAddress()
+  const wallet_address = useAddress()
 
   const [walletAddress, setWalletAddress] = useState(wallet_address)
 
@@ -56,6 +56,7 @@ const Dashboard = () => {
   var UserID = JSON.parse(userDataReal);
 
   const [main_user_id, setUser_id] = useState(UserID);
+  const [user_id, setUser_id1] = useState(0);
   const handleChange = (event) => {
     setPreviewID(event.target.value);
   };
@@ -73,7 +74,9 @@ const Dashboard = () => {
       setTime(response.data.data.createdAt);
       console.log(response.data.data.createdAt);
       setRefferal(response.data.data.parent_details.wallet_id);
+      user1(response.data.data.parent_details.wallet_id);
       setUser_id(response.data.data.user_id);
+      console.log("response.data.data.parent_details.wallet_id", response.data.data.parent_details.wallet_id);
       // localStorage.setItem("UserID", JSON.stringify(response.data.data.user_id));
     } catch (err) {
       //console.log(err);
@@ -82,9 +85,21 @@ const Dashboard = () => {
   useEffect(() => {
     if (walletAddress) {
       user();
+
     }
   }, [walletAddress]);
+  const user1 = async (w) => {
+    try {
+      const response = await axios.get(
+        `https://alert-plum-pigeon.cyclic.app/user/get-user?wallet_id=${w}`
+      );
 
+      setUser_id1(response.data.data.user_id);
+
+    } catch (err) {
+      //console.log(err);
+    }
+  };
   const dateTime = new Date(time);
   const day = dateTime.getDate();
   const month = dateTime.getMonth() + 1; // Month is zero-indexed
@@ -120,7 +135,7 @@ const Dashboard = () => {
 
   const modifiedAddress = removeAndReplaceMiddleCharacters(walletAddress);
   const modifiedAddress1 = removeAndReplaceMiddleCharacters(
-    profileData?.data?.parent_details.wallet_id
+    refferal
   );
 
   let ref = "0x7a343FF69aE56cb8bf799dCBedACfe41a1434162";
@@ -267,7 +282,7 @@ const Dashboard = () => {
 
   const handleCopyReferralLink2 = () => {
     const tempTextArea = document.createElement("textarea");
-    tempTextArea.value = `https://dollarhouse.co/${walletAddress?.toLowerCase()}`;
+    tempTextArea.value = `http://localhost:3000/${walletAddress?.toLowerCase()}`;
     document.body.appendChild(tempTextArea);
     tempTextArea.select();
     document.execCommand("copy");
@@ -340,7 +355,7 @@ const Dashboard = () => {
 
   const [totalInvestMent, setTotalInvestMent] = useState("")
 
-  useEffect(()=>{
+  useEffect(() => {
     const sumOfAmounts = planDetails?.reduce((acc, item) => acc + Number(item.amount), 0);
 
     setTotalInvestMent(sumOfAmounts);
@@ -353,7 +368,7 @@ const Dashboard = () => {
   };
 
 
-  const searchParentData = (ID) =>{
+  const searchParentData = (ID) => {
     localStorage.setItem("UserID", JSON.stringify(ID));
     window.location.reload();
   }
@@ -453,7 +468,11 @@ const Dashboard = () => {
                             )}
                           </h1>
                         ) : (
-                          <h1>User Name</h1>
+                          <h1>User Name
+                            <span className="profile_user_id table_id">
+                              ID {localStorage.getItem("UserID")?.replace(/,/g, "")}
+                            </span>
+                          </h1>
                         )}
                         <p
                           style={{
@@ -481,16 +500,15 @@ const Dashboard = () => {
                             style={{ width: "154px", fontSize: "13px" }}
                           >
                             {`
-                      ${
-                        modifiedAddress1
-                          ? `Invited at ${formattedDate} by ${modifiedAddress1}`
-                          : "Invited 01.03.2021 By"
-                      }`}
+                       ${modifiedAddress1
+                                ? `Invited at ${formattedDate} by ${modifiedAddress1}`
+                                : "Invited 01.03.2021 By"
+                              }`}
                           </span>
                           <span style={{ marginTop: "22px" }}>
-                            {profileData?.data?.parent_details?.user_id && (
-                              <span onClick={()=>{searchParentData(profileData?.data?.parent_details.user_id)}} className="cursor-pointer profile_user_id table_id">
-                                ID {profileData?.data?.parent_details.user_id}
+                            {refferal && (
+                              <span onClick={() => { searchParentData(refferal) }} className="cursor-pointer profile_user_id table_id">
+                                ID {user_id}
                               </span>
                             )}
                           </span>
@@ -504,16 +522,16 @@ const Dashboard = () => {
                     <div className="personal_user_right stack-personal-user">
                       <div
                         className="frgx"
-                        // style={{
-                        //   backgroundImage: `url(${frgx})`,
-                        //   backgroundSize: "cover",
-                        // }}
+                      // style={{
+                      //   backgroundImage: `url(${frgx})`,
+                      //   backgroundSize: "cover",
+                      // }}
                       >
                         <div className="login_to_show">
                           <p>Personal link</p>
                           <div className="personal_link_desbord">
                             <h4 className="stacked_value copy_address">
-                              https://dollarhouse.co/{modifiedAddress?.toLowerCase()}
+                              http://localhost:3000/{modifiedAddress?.toLowerCase().split(0, 10)}
                             </h4>
                             <button onClick={handleCopyReferralLink2} className="personal_link_copy_a">Copy</button>
                           </div>
@@ -540,10 +558,10 @@ const Dashboard = () => {
                     <div className="card_section2_left">
                       <div
                         className="teams_all_card teams_all_card2"
-                        // style={{
-                        //   backgroundImage: `url(${Partners})`,
-                        //   backgroundSize: "cover",
-                        // }}
+                      // style={{
+                      //   backgroundImage: `url(${Partners})`,
+                      //   backgroundSize: "cover",
+                      // }}
                       >
                         <p className="card_title">Direct Team</p>
                         <h1>{profitDetails ? profitDetails?.directTeam : 0}</h1>
@@ -572,10 +590,10 @@ const Dashboard = () => {
 
                       <div
                         className="teams_all_card teams_all_card2"
-                        // style={{
-                        //   backgroundImage: `url(${team})`,
-                        //   backgroundSize: "cover",
-                        // }}
+                      // style={{
+                      //   backgroundImage: `url(${team})`,
+                      //   backgroundSize: "cover",
+                      // }}
                       >
                         <p className="card_title">Total Team</p>
                         <h1>{profitDetails ? profitDetails?.total_team : 0}</h1>
@@ -605,11 +623,11 @@ const Dashboard = () => {
 
                       <div
                         className="teams_all_card teams_all_card2"
-                        //  style={{ backgroundImage: `url(${Ratio})`, backgroundSize: 'cover' }}
+                      //  style={{ backgroundImage: `url(${Ratio})`, backgroundSize: 'cover' }}
                       >
                         <p className="card_title">Ratio</p>
                         <h1 className="text-green-500">
-                          {profitDetails && ((profitDetails?.overAllProfit/totalInvestMent)*100).toFixed(4)}%
+                          {profitDetails && ((profitDetails?.overAllProfit / totalInvestMent) * 100).toFixed(4)}%
                         </h1>
                       </div>
                     </div>
@@ -617,10 +635,10 @@ const Dashboard = () => {
                     <div className="card_section2_right">
                       <div
                         className="teams_all_card teams_all_card3"
-                        // style={{
-                        //   backgroundImage: `url(${Profits})`,
-                        //   backgroundSize: "cover",
-                        // }}
+                      // style={{
+                      //   backgroundImage: `url(${Profits})`,
+                      //   backgroundSize: "cover",
+                      // }}
                       >
                         <p className="card_title">Over All Profit</p>
                         <div className="Profits-number">

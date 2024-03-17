@@ -363,8 +363,9 @@ const House5Plan = () => {
               </div>
               <div className="center_contant_forsage">
                 <div className="forsgae_level_card">
+                  <h4>House 5 Plan</h4>
                   <div className="level_title">
-                    <h4>House 5 Plan</h4>
+                    <h4>ID 2</h4>
                     <h1>
                       {sumtotal(house5Plan1[0]?.referBY?.slice(0, 60))}
                       <span>

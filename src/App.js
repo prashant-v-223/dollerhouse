@@ -16,6 +16,7 @@ const App = () => {
       <React.Fragment>
         <Routes>
           <Route path="/" element={<Landingpage />} />
+          <Route path="/:id" element={<Landingpage />} />
           <Route path="/house-1-plan" element={<House1Plan />} />
           <Route path="/house-5-plan" element={<House5Plan />} />
           <Route path="/house-15-plan" element={<House15Plan />} />

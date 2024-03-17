@@ -43,17 +43,21 @@ import {
 } from "@thirdweb-dev/react";
 
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import "react-toastify/dist/ReactToastify.css"; import { useParams } from 'react-router-dom';
+
+import Registration from "../component/Registration";
 const Landingpage = () => {
   const wallet_address = useAddress()
   const [showButton, setShowButton] = useState(true);
+  let { id } = useParams();
+  const [userID, setuserID] = useState(null);
   const navigate = useNavigate();
   useEffect(() => {
     const walletElement = document.querySelector(".tw-connect-wallet");
     if (walletElement) {
       // If .tw-connect-wallet is present, hide the button
       setShowButton(false);
-    }
+    } localStorage.clear();
   }, [showButton]);
 
   const [previewID, setPreviewID] = useState("");
@@ -67,8 +71,8 @@ const Landingpage = () => {
   );
 
 
- 
-  
+
+
   const handleSearch = () => {
     navigate("/dashboard");
   };
@@ -79,27 +83,30 @@ const Landingpage = () => {
     [wallet_address]
   );
 
-  const [UserID, SetUserId]= useState("")
+  const [UserID, SetUserId] = useState("")
   const GetUserId = async (wallet_address) => {
-      try {
-        const response = await axios.get(
-          `https://alert-plum-pigeon.cyclic.app/user/get-user?wallet_id=${wallet_address}`
-        );
-        console.log(response.data.data.user_id)
-        // localStorage.setItem("UserID", JSON.stringify(response.data.data.user_id));
-      } catch (err) {
-        //console.log(err);
-      }
+    try {
+      const response = await axios.get(
+        `https://alert-plum-pigeon.cyclic.app/user/get-user?wallet_id=${wallet_address}`
+      );
+      console.log(response.data.data.user_id)
+      localStorage.setItem("UserID", JSON.stringify(response.data.data.user_id))
+      handleSearchDashboard()
+      setuserID("UserID", JSON.stringify(response.data.data.user_id));
+
+    } catch (err) {
+      //console.log(err);
+    }
   }
 
-  useEffect(()=>{
-      GetUserId(wallet_address)
+  useEffect(() => {
+    GetUserId(wallet_address)
   }, [wallet_address])
 
 
   const handleSearchDashboard = async () => {
-      navigate("/dashboard");
-}
+    navigate("/dashboard");
+  }
 
   return (
     <div id="scrollToTopBtn" className="landingpage_main">
@@ -124,10 +131,10 @@ const Landingpage = () => {
               <p>Smart Chain</p>
             </div>
 
-            <div className="connect_btn mobile-connect-button">
-              {/* <button> <Link to="/dashboard">Dashboard </Link></button> */}
-              <ConnectWallet />
-            </div>
+            {/* <div className="connect_btn mobile-connect-button"> */}
+            {/* <button> <Link to="/dashboard">Dashboard </Link></button> */}
+
+            {/* </div> */}
           </div>
         </div>
         <div
@@ -144,7 +151,7 @@ const Landingpage = () => {
             </p>
             <div className="join_bth">
 
-              {Parent === "0x0000000000000000000000000000000000000000" || Parent === undefined ?
+              {/* {userID === null ?
                 <button>
                   <a href="/Registration" className="join_btn">
                     Sign In
@@ -153,12 +160,13 @@ const Landingpage = () => {
                 <button onClick={handleSearchDashboard}>
                   Dashboard
                 </button>
-              }
-              <button>
+              } */}
+              <ConnectWallet />
+              {/* <button>
                 <a href="/Registration" className="wath_tut">
                   Registration
                 </a>
-              </button>
+              </button> */}
             </div>
           </div>
 
@@ -166,7 +174,7 @@ const Landingpage = () => {
             <img src={poket_img} alt="pocket_img" className="poket_img" />
           </div>
         </div>
-      
+        <Registration id={id} />
         <div className="doller_house_owl_crousel">
           <div className="container">
             <div id="demo" class="carousel slide" data-ride="carousel">
@@ -471,25 +479,25 @@ const Landingpage = () => {
         </div> */}
 
         <div className="footer">
-            <h4>Dollarhouse.All Rights Reserved.2024</h4>
-            <div className="social_icon">
-              <p><i class="fa fa-instagram" aria-hidden="true"></i></p>
-              <p> <Link to="https://t.me/dollerhouse"><i class="fa fa-telegram" aria-hidden="true"></i></Link></p>
-              <p><i class="fa fa-twitter" aria-hidden="true"></i></p>
-            </div>
-
-            <div className="copy_right_containt">
-              <p>
-                Trading cryptocurrencies carries a high level of risk, and may not be suitable for all investors. Before deciding to trade cryptocurrency, you should carefully consider
-                your investment objectives, level of experience, and risk appetite. The possibility exists that you could sustain a loss of some or all of your initial investment and therefore
-                you should not invest money that you cannot afford to lose. You should be aware of all the risks associated with cryptocurrency trading, and seek advice from an
-                independent financial advisor. Any opinions, news, research, analyses, prices, or other information contained on this website is provided as general market commentary,
-                and does not constitute investment advice. The CUNetwork will not accept liability for any loss or damage, including without limitation to, any loss of profit, which may
-                arise directly or indirectly from use of or reliance on such information. All opinions expressed on this site are owned by the respective writer and should never be considered
-                as advice in any form. The CUNetwork makes no representation or warranties as to the accuracy and or timelines of the information contained herein. A qualified
-                professional should be consulted before making any financial decisions.</p>
-            </div>
+          <h4>Dollarhouse.All Rights Reserved.2024</h4>
+          <div className="social_icon">
+            <p><i class="fa fa-instagram" aria-hidden="true"></i></p>
+            <p> <Link to="https://t.me/dollerhouse"><i class="fa fa-telegram" aria-hidden="true"></i></Link></p>
+            <p><i class="fa fa-twitter" aria-hidden="true"></i></p>
           </div>
+
+          <div className="copy_right_containt">
+            <p>
+              Trading cryptocurrencies carries a high level of risk, and may not be suitable for all investors. Before deciding to trade cryptocurrency, you should carefully consider
+              your investment objectives, level of experience, and risk appetite. The possibility exists that you could sustain a loss of some or all of your initial investment and therefore
+              you should not invest money that you cannot afford to lose. You should be aware of all the risks associated with cryptocurrency trading, and seek advice from an
+              independent financial advisor. Any opinions, news, research, analyses, prices, or other information contained on this website is provided as general market commentary,
+              and does not constitute investment advice. The CUNetwork will not accept liability for any loss or damage, including without limitation to, any loss of profit, which may
+              arise directly or indirectly from use of or reliance on such information. All opinions expressed on this site are owned by the respective writer and should never be considered
+              as advice in any form. The CUNetwork makes no representation or warranties as to the accuracy and or timelines of the information contained herein. A qualified
+              professional should be consulted before making any financial decisions.</p>
+          </div>
+        </div>
       </div>
     </div>
   );
