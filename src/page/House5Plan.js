@@ -94,18 +94,6 @@ const House5Plan = () => {
   const [house5Plan2, setHouse5Plan2] = useState([]);
   const [user_id, setUser_id1] = useState(0);
 
-  const user1 = async (w) => {
-    try {
-      const response = await axios.get(
-        `https://alert-plum-pigeon.cyclic.app/user/get-user?wallet_id=${UserID}`
-      );
-
-      setUser_id1(response.data.data.user_id);
-
-    } catch (err) {
-      //console.log(err);
-    }
-  };
   const fetchUserData = async (UserID, leval) => {
     try {
       const response = await fetch(
@@ -154,7 +142,6 @@ const House5Plan = () => {
   };
   useEffect(() => {
     fetchUserData(UserID, count);
-    user1();
   }, [count, UserID]);
   // useEffect(() => {
   //   window.location.reload();
