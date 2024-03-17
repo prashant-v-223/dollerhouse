@@ -77,7 +77,6 @@ const Dashboard = () => {
       user1(response.data.data.parent_details.wallet_id);
       setUser_id(response.data.data.user_id);
       console.log("response.data.data.parent_details.wallet_id", response.data.data.parent_details.wallet_id);
-      // localStorage.setItem("UserID", JSON.stringify(response.data.data.user_id));
     } catch (err) {
       //console.log(err);
     }
@@ -96,6 +95,7 @@ const Dashboard = () => {
 
       setUser_id1(response.data.data.user_id);
 
+      localStorage.setItem("UPlineUserID", JSON.stringify(response.data.data.user_id));
     } catch (err) {
       //console.log(err);
     }
@@ -470,7 +470,7 @@ const Dashboard = () => {
                         ) : (
                           <h1>User Name
                             <span className="profile_user_id table_id">
-                              ID {localStorage.getItem("UserID")?.replace(/,/g, "")}
+                              ID {UserID}
                             </span>
                           </h1>
                         )}

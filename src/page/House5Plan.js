@@ -92,6 +92,20 @@ const House5Plan = () => {
   const [house5Plan, setHouse5Plan] = useState([]);
   const [house5Plan1, setHouse5Plan1] = useState([]);
   const [house5Plan2, setHouse5Plan2] = useState([]);
+  const [user_id, setUser_id1] = useState(0);
+
+  const user1 = async (w) => {
+    try {
+      const response = await axios.get(
+        `https://alert-plum-pigeon.cyclic.app/user/get-user?wallet_id=${UserID}`
+      );
+
+      setUser_id1(response.data.data.user_id);
+
+    } catch (err) {
+      //console.log(err);
+    }
+  };
   const fetchUserData = async (UserID, leval) => {
     try {
       const response = await fetch(
@@ -140,7 +154,8 @@ const House5Plan = () => {
   };
   useEffect(() => {
     fetchUserData(UserID, count);
-  }, [count]);
+    user1();
+  }, [count, UserID]);
   // useEffect(() => {
   //   window.location.reload();
   // }, [house5Plan1])
@@ -353,6 +368,11 @@ const House5Plan = () => {
                 <p>You can view the details of your House 1 Plan </p>
               </div>
             </div>
+            <div className="d-flex w-100 justify-content-center">
+              <div className="forsgae_level_card m-auto d-block d-flex w-100 justify-content-center">
+                <h4> UPLINE ID {localStorage.getItem("UPlineUserID")}</h4>
+              </div>
+            </div>
             <div className="forsage_prive_center_btn">
               <div className="previews_btn_forsage" onClick={() => {
                 setCount((co) => {
@@ -365,7 +385,7 @@ const House5Plan = () => {
                 <div className="forsgae_level_card">
                   <h4>House 5 Plan</h4>
                   <div className="level_title">
-                    <h4>ID 2</h4>
+                    <h4>ID {localStorage.getItem("UserID")}</h4>
                     <h1>
                       {sumtotal(house5Plan1[0]?.referBY?.slice(0, 60))}
                       <span>
