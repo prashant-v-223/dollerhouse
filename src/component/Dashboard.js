@@ -441,46 +441,37 @@ const Dashboard = () => {
                 <div className="row">
                   <div className="col-lg-6 profile-section">
                     <div className="personal_user_left">
-                      <div className="unknowuser_img">
-                        <span className="unknowUser">
-                          <img
-                            onClick={() => {
-                              setProfilePopup(!profilePopup);
-                            }}
-                            className="user_logo"
-                            src={uset_img}
-                            alt="uset_img"
-                          />
+                      <div className="unknowuser_img d-block m-auto">
+                        <img
+                          onClick={() => {
+                            setProfilePopup(!profilePopup);
+                          }}
+                          className="user_logo  ml-0 ml-md-4"
+                          src={uset_img}
+                          alt="uset_img"
+                          minwidth={130}
+                        />
 
-                          {/* <img onClick={()=> setIsModalOpen(true)} className="edit_icon" src="/pen.png" /> */}
-                        </span>
+                        {/* <img onClick={()=> setIsModalOpen(true)} className="edit_icon" src="/pen.png" /> */}
                       </div>
-                      <div className="id_user right_text">
-                        {profileData?.data?.username ? (
-                          <h1>
-                            {profileData?.data?.username.length > 0
-                              ? profileData?.data?.username
-                              : "username"}
-                            {profileData?.data.user_id && (
-                              <span className="profile_user_id table_id">
-                                ID {profileData?.data.user_id}{" "}
-                              </span>
-                            )}
-                          </h1>
-                        ) : (
-                          <h1>User Name
-                            <span className="profile_user_id table_id">
-                              ID {UserID}
-                            </span>
-                          </h1>
-                        )}
+                      <div className="id_user right_text d-block m-auto w-100 px-2 px-md-4">
+                        <div className="d-flex justify-content-between mb-2" >
+                          <div className=" ">
+                            <h4 className="text-light m-0">User Name</h4>
+                          </div>
+                          <div className="profile_user_id table_id">
+                            ID {UserID}
+                          </div>
+                        </div>
                         <p
                           style={{
-                            width: "200px",
+                            width: "100%",
                             fontSize: "13px",
+                            justifyContent: "space-between !important;",
                             marginBottom: "0",
+                            display: "flex"
                           }}
-                        >
+                          className="justify-content-between mts-3" >
                           {modifiedAddress}{" "}
                           {modifiedAddress && (
                             <MdContentCopy
@@ -494,7 +485,7 @@ const Dashboard = () => {
                             />
                           )}
                         </p>
-                        <div style={{ display: "flex" }}>
+                        <div className="justify-content-between" style={{ display: "flex" }}>
                           <span
                             className="id_bg id_user_top parent_address"
                             style={{ width: "154px", fontSize: "13px" }}
@@ -507,7 +498,7 @@ const Dashboard = () => {
                           </span>
                           <span style={{ marginTop: "22px" }}>
                             {refferal && (
-                              <span onClick={() => { searchParentData(refferal) }} className="cursor-pointer profile_user_id table_id">
+                              <span onClick={() => { searchParentData(user_id) }} className="cursor-pointer profile_user_id table_id">
                                 ID {user_id}
                               </span>
                             )}
@@ -531,7 +522,8 @@ const Dashboard = () => {
                           <p>Personal link</p>
                           <div className="personal_link_desbord">
                             <h4 className="stacked_value copy_address">
-                              https://dollerhouse.vercel.app/{modifiedAddress?.toLowerCase().split(0, 10)}
+                              https://dollerhouse.vercel.app/
+                              <br />  {modifiedAddress?.toLowerCase().split(0, 10)}
                             </h4>
                             <button onClick={handleCopyReferralLink2} className="personal_link_copy_a">Copy</button>
                           </div>

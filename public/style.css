@@ -2485,11 +2485,6 @@ img.welcome_benner_card {
     flex-direction: column;
     align-content: flex-start;
     align-items: flex-start;
-    padding: 31px 21px !important;
-  }
-
-  .unknowuser_img {
-    display: none;
   }
 
   .partners_card_section {
