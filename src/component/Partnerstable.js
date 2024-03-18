@@ -70,10 +70,8 @@ const PartnersTable = () => {
   };
 
   useEffect(() => {
-    if (address) {
-      user();
-      profitDetailsApi(userIDReal);
-    }
+    user();
+    profitDetailsApi(userIDReal);
   }, [address]);
 
   const itemsPerPage = 10;
@@ -197,9 +195,8 @@ const PartnersTable = () => {
         <div className="tabls table_margin_top">
           <div className="flex space-x-2">
             <button
-              className={`${
-                rewards === 1 ? "background_change" : ""
-              } bg-orange-500 py-1 px-2 filter_button text-white rounded-sm`}
+              className={`${rewards === 1 ? "background_change" : ""
+                } bg-orange-500 py-1 px-2 filter_button text-white rounded-sm`}
               onClick={() => {
                 setRewards(1);
               }}
@@ -207,9 +204,8 @@ const PartnersTable = () => {
               Level Rewards
             </button>
             <button
-              className={`${
-                rewards === 2 ? "background_change" : ""
-              } bg-orange-500 py-1 px-2 filter_button text-white rounded-sm`}
+              className={`${rewards === 2 ? "background_change" : ""
+                } bg-orange-500 py-1 px-2 filter_button text-white rounded-sm`}
               onClick={() => {
                 setRewards(2);
               }}
@@ -309,7 +305,7 @@ const PartnersTable = () => {
                         <tr key={index}>
                           <td>
                             {item.status ? (
-                              <img src="/up-arrow.png" style={{width: "30px"}} />
+                              <img src="/up-arrow.png" style={{ width: "30px" }} />
                             ) : (
                               <img
                                 src="/static/media/svg-image-23.aa0930be96db08ffc8e973487f0567fb.svg"
