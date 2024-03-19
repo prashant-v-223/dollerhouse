@@ -27,6 +27,7 @@ import {
   useContractWrite,
 } from "@thirdweb-dev/react";
 import Boxs from "./Boxs";
+import axios from "axios";
 
 const House5Plan = () => {
   const wallet_address_real = useAddress();
