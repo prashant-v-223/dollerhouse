@@ -64,10 +64,10 @@ const Dashboard = () => {
   // Get User ID by wallet_address
   const [time, setTime] = useState(null);
 
-  const user = async () => {
+  const user = async (e) => {
     try {
       const response = await axios.get(
-        `https://odd-rose-sockeye-cap.cyclic.app/user/get-user?wallet_id=${walletAddress}`
+        `https://odd-rose-sockeye-cap.cyclic.app/user/get-user?wallet_id=${e}`
       );
 
       console.log(response.data.data);
@@ -82,9 +82,8 @@ const Dashboard = () => {
     }
   };
   useEffect(() => {
-    user();
-    user1();
-  }, []);
+    user(walletAddress);
+  }, [walletAddress]);
   const user1 = async (w) => {
     try {
       const response = await axios.get(
@@ -467,7 +466,7 @@ const Dashboard = () => {
                             {/* <h4 className="text-light m-0">User Name</h4> */}
                           </div>
                           <div className="cursor-pointer profile_user_id table_id">
-                            ID {main_user_id}
+                            ID {UserID || main_user_id}
                           </div>
                         </div>
                         <p
