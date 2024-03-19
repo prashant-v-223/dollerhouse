@@ -87,7 +87,7 @@ const Landingpage = () => {
   const GetUserId = async (wallet_address) => {
     try {
       const response = await axios.get(
-        `https://alert-plum-pigeon.cyclic.app/user/get-user?wallet_id=${wallet_address}`
+        `https://odd-rose-sockeye-cap.cyclic.app/user/get-user?wallet_id=${wallet_address}`
       );
       console.log(response.data.data.user_id)
       localStorage.setItem("UserID", JSON.stringify(response.data.data.user_id))

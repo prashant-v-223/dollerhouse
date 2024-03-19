@@ -98,7 +98,7 @@ const House5Plan = () => {
   const user1 = async (w) => {
     try {
       const response = await axios.get(
-        `https://alert-plum-pigeon.cyclic.app/user/get-user?wallet_id=${UserID}`
+        `https://odd-rose-sockeye-cap.cyclic.app/user/get-user?wallet_id=${UserID}`
       );
 
       setUser_id1(response.data.data.user_id);
@@ -110,7 +110,7 @@ const House5Plan = () => {
   const fetchUserData = async (UserID, leval) => {
     try {
       const response = await fetch(
-        `https://alert-plum-pigeon.cyclic.app/team/leval5-member/${UserID}/${leval}/${planPrice}`
+        `https://odd-rose-sockeye-cap.cyclic.app/team/leval5-member/${UserID}/${leval}/${planPrice}`
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -141,7 +141,7 @@ const House5Plan = () => {
   const fetchUserDataSingle = async (id) => {
     try {
       const response = await fetch(
-        `https://alert-plum-pigeon.cyclic.app/team/single-member?userId=${id}`
+        `https://odd-rose-sockeye-cap.cyclic.app/team/single-member?userId=${id}`
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");
