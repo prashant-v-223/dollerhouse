@@ -82,11 +82,9 @@ const Dashboard = () => {
     }
   };
   useEffect(() => {
-    if (walletAddress) {
-      user();
-
-    }
-  }, [walletAddress]);
+    user();
+    user1();
+  }, []);
   const user1 = async (w) => {
     try {
       const response = await axios.get(
@@ -468,8 +466,8 @@ const Dashboard = () => {
                             )}
                             {/* <h4 className="text-light m-0">User Name</h4> */}
                           </div>
-                          <div  className="cursor-pointer profile_user_id table_id">
-                            ID {UserID}
+                          <div className="cursor-pointer profile_user_id table_id">
+                            ID {main_user_id}
                           </div>
                         </div>
                         <p

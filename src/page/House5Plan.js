@@ -509,11 +509,7 @@ const House5Plan = () => {
                           </button>
                         </td>
                         <td className="status_row">
-                          {item.status ? (
-                            "Sent to Upline"
-                          ) : (
-                            <p className="recieved_status">Received</p>
-                          )}
+                          {item.status}
                         </td>
                         <td>
                           <span className="table_id">ID{item.uid}</span>
