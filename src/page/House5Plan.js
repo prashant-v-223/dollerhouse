@@ -469,10 +469,12 @@ const House5Plan = () => {
               <table className="table">
                 <thead>
                   <tr>
+                    <th className="text-center">type</th>
                     <th className="text-center">Level</th>
                     <th className="text-center">Reward</th>
                     <th className="text-center">Reward Value</th>
                     <th className="text-center">Wallet Id</th>
+                    <th className="text-center">status </th>
                     <th className="text-center">User Id</th>
                     <th className="text-center">Time</th>
                   </tr>
@@ -495,8 +497,10 @@ const House5Plan = () => {
                               className="wallet_icon_last "
                             />
                           )}
-                          {item.depthleval + 1}
                         </td>
+                        <td>                          {item.depthleval + 1}
+                        </td>
+                        <td>{planPrice}</td>
                         <td>{planPrice == 20 ? 5 * parse / 100 : planPrice == 40 ? 10 * parse / 100 : planPrice == 100 ? 30 * parse / 100 : 60 * parse / 100}</td>
                         <td className="text-center">
                           {item.refId.slice(0, 4)}...{" "}
