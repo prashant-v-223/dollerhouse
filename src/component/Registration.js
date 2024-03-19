@@ -24,41 +24,33 @@ import { color } from "framer-motion";
 const Registration = ({ id }) => {
   const [USDTAmt, setUSDTAmt] = useState("");
   const [approveAmt, setApproveAmt] = useState("");
-  const [BuyTokenLoading, setBuyTokenLoading] = useState(false);
-  const [directStakeJoiningLoading, setDirectStakeJoiningLoading] =
-    useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [ApproveTokensloading, setApproveTokensLoading] = useState(false);
-  const referralLinkRef = useRef(null);
   const [refferalCode, setReferralCode] = useState("");
+  const referralLinkRef = useRef(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setReferralCode(id);
+  }, [id]);
+
   const handleConfetti = () => {
     confetti({});
   };
-  useEffect(() => {
-    setReferralCode(id)
-  }, [id])
 
-  const [activeTab, setActiveTab] = useState("home");
   const handleTabClick = (tabId) => {
     setActiveTab(tabId);
   };
 
-
-  const [selectedValue, setSelectedValue] = useState("20");
   const handleReferralChange = (event) => {
     setReferralCode(event.target.value);
   };
 
-
-
   const isValidUSDTamount = Number(USDTAmt) >= 20 || USDTAmt == "";
 
-  var storedData = localStorage.getItem("UserID");
-  var UserID = JSON.parse(storedData);
+  const storedData = localStorage.getItem("UserID");
+  const UserID = JSON.parse(storedData);
   const address = useAddress();
 
-  //read functions
   const { contract } = useContract(
     "0x642ba5BEF7030FD665b671E12090268086EFF1eC"
   );
@@ -93,7 +85,6 @@ const Registration = ({ id }) => {
       document.execCommand("copy");
       window.getSelection().removeAllRanges();
 
-      // Use react-toastify to display a toaster notification
       toast.success("Referral link copied to clipboard!", {
         position: toast.POSITION.TOP_RIGHT,
       });
@@ -101,31 +92,25 @@ const Registration = ({ id }) => {
   };
 
   const approveTokens = async () => {
-    setBuyTokenLoading(true);
-    setIsLoading(true)
+    setIsLoading(true);
     try {
       let spender = "0x642ba5BEF7030FD665b671E12090268086EFF1eC"; //contract address
       let approveAmount = ethers.utils.parseEther(approveAmt);
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       const signer = provider.getSigner();
       const contract = new ethers.Contract(UsdtContract, usdt_abi, signer);
-      console.log(contract);
       const token = await contract.approve(spender, approveAmount.toString(), {
         gasLimit: 80000,
       });
-      console.log(token);
       const receipt = await token.wait();
-      console.log(receipt);
-      console.log(receipt.status);
       if (receipt.status === 1) {
         toast.success("Successfully approved tokens!", {
           position: toast.POSITION.TOP_CENTER,
         });
       }
-      setIsLoading(false)
-      setBuyTokenLoading(false);
+      setIsLoading(false);
     } catch (error) {
-      setBuyTokenLoading(false);
+      setIsLoading(false);
       toast.error("Failed", {
         position: toast.POSITION.TOP_CENTER,
       });
@@ -133,7 +118,7 @@ const Registration = ({ id }) => {
   };
 
   const PostHouse5Plan = async (plan_price) => {
-    setIsLoading(true)
+    setIsLoading(true);
     try {
       const response = await fetch("https://odd-rose-sockeye-cap.cyclic.app/team/add", {
         method: "POST",
@@ -147,24 +132,23 @@ const Registration = ({ id }) => {
         }),
       });
       const data = await response.json();
-      console.log(data);
-      setIsLoading(false)
+      setIsLoading(false);
 
       toast.success("Tokens Bought Successfully", {
         position: toast.POSITION.TOP_CENTER,
       });
       if (response.ok) {
-        user()
+        user();
         navigate("/dashboard");
       }
     } catch (error) {
       console.error("Error fetching user details:", error);
-      setIsLoading(true)
+      setIsLoading(false);
     }
   };
 
   const handleBuyPlan = async () => {
-    setIsLoading(true)
+    setIsLoading(true);
     try {
       const response = await fetch("https://odd-rose-sockeye-cap.cyclic.app/plan/create", {
         method: "POST",
@@ -184,20 +168,20 @@ const Registration = ({ id }) => {
         }),
       });
 
-      if (response.ok) { // Check if response is successful
-        setIsLoading(false)
+      if (response.ok) {
+        setIsLoading(false);
         PostHouse5Plan(20);
       } else {
         console.error("Error:", response.statusText);
       }
     } catch (error) {
-      setIsLoading(false)
+      setIsLoading(false);
       console.error("Error fetching user details:", error);
     }
   };
 
   const buyToken = async () => {
-    setBuyTokenLoading(true);
+    setIsLoading(true);
     try {
       let tierplan = ethers.utils.parseEther(selectedValue);
       try {
@@ -205,7 +189,6 @@ const Registration = ({ id }) => {
         const signer = provider.getSigner();
         const contract = new ethers.Contract(stakecontract, stake_abi, signer);
         const token = await contract.buyTokens(refferalCode, tierplan);
-        console.log(token);
         const receipt = await token.wait();
         if (receipt.status === 1) {
           handleBuyPlan();
@@ -216,7 +199,7 @@ const Registration = ({ id }) => {
           position: toast.POSITION.TOP_CENTER,
         });
       }
-      setBuyTokenLoading(false);
+      setIsLoading(false);
     } catch (err) {
       toast.error("You can not buy more than $1000 in one transaction", {
         position: toast.POSITION.TOP_CENTER,
@@ -226,7 +209,7 @@ const Registration = ({ id }) => {
   };
 
   const user = async () => {
-    console.log(address)
+    console.log(address);
     try {
       const response = await axios.get(
         `https://odd-rose-sockeye-cap.cyclic.app/user/get-user?wallet_id=${address}`
@@ -236,7 +219,6 @@ const Registration = ({ id }) => {
         localStorage.setItem("UserID", JSON.stringify(response.data.data.user_id));
         navigate("/dashboard");
       }
-
     } catch (err) {
       //console.log(err);
     }
@@ -246,11 +228,15 @@ const Registration = ({ id }) => {
     <div className="regi_main">
       <div style={{ zIndex: 99999999 }}>
         <ToastContainer />
-
       </div>
 
-      {/* <img src={blueflase} className="bludeflasereg" alt="blueflase" /> */}
-      <div className={`container`}>
+      {isLoading && (
+        <div className="overlay">
+          <Loading />
+        </div>
+      )}
+
+      <div className={`container ${isLoading ? "blur" : ""}`}>
         <div className="main_top_logo">
           <div className="logos_landing">
             <span>
@@ -270,15 +256,10 @@ const Registration = ({ id }) => {
               <p>Smart Chain</p>
             </div>
 
-            <div className="connect_btn">
-              {/* <button>
-                <Link to="/">Back </Link>
-              </button> */}
-            </div>
+            <div className="connect_btn"></div>
           </div>
         </div>
 
-        {isLoading && <Loading />}
         <div className="registion_from">
           <div className="row">
             <div className="col-lg-6">
@@ -351,15 +332,9 @@ const Registration = ({ id }) => {
                       </p>
                     )}
                   </div>
-                  {walletBalValue && ApprovedValue && address ? (
-                    <div className="chech_agin_btn">
-                      <button onClick={handleBuyPlan}>Register with $20 Slot</button>
-                    </div>
-                  ) : (
-                    <div className="chech_agin_btn">
-                      <button onClick={handleBuyPlan}>Register with $20 Slot</button>
-                    </div>
-                  )}
+                  <div className="chech_agin_btn">
+                    <button onClick={handleBuyPlan} disabled={isLoading}>Register with $20 Slot</button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -405,25 +380,10 @@ const Registration = ({ id }) => {
                       (”Discover” button in Tokenpoket) or with Metamask
                       extension installed.
                     </p>
-
                     <button>Read guide</button>
                   </div>
                 </div>
-                <div className="video_section_ragistration">
-                  <div className="video_section_registration">
-                    {/* <video width="100%" height="240" controls>
-                      <source src="movie.mp4" type="video/mp4" />
-                      <source src="movie.ogg" type="video/ogg" />
-                      Your browser does not support the video tag.
-                    </video> */}
-                    {/* <img
-                      src={welcome_benner}
-                      alt="img"
-                      className="rg_lion_img"
-                    /> */}
-                  </div>
-                </div>
-
+                <div className="video_section_ragistration"></div>
                 <div className="nedd_help_section">
                   <p>
                     {" "}
