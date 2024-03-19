@@ -89,6 +89,7 @@ const House5Plan = () => {
   var UserID = JSON.parse(userDataReal);
 
   const [count, setCount] = useState(0);
+  const [missedincome, setmissedincome] = useState(0);
   const [house5Plan, setHouse5Plan] = useState([]);
   const [house5Plan1, setHouse5Plan1] = useState([]);
   const [house5Plan2, setHouse5Plan2] = useState([]);
@@ -116,6 +117,7 @@ const House5Plan = () => {
       }
       const data = await response.json();
       // setHouse5Plan(data?.data);
+      setmissedincome(data?.missedincometotal || 0)
       console.log("data?.datadata?.datadata?.data", data);
       setHouse5Plan(data?.data);
       setHouse5Plan2(data?.filteredDatalastwor);
@@ -368,9 +370,10 @@ const House5Plan = () => {
                 <p>You can view the details of your House 1 Plan </p>
               </div>
             </div>
-            <div className="d-flex w-100 justify-content-center">
-              <div className="forsgae_level_card m-auto d-block d-flex w-100 justify-content-center">
-                <h4> UPLINE ID {localStorage.getItem("UPlineUserID")}</h4>
+            <div className="d-flex w-100 justify-content-between">
+              <div className="forsgae_level_card  d-flex w-100 justify-content-between mx-4">
+                <h4> Upline ID {localStorage.getItem("UPlineUserID")}</h4>
+                <h4> Missed Income: {missedincome}{" "}$</h4>
               </div>
             </div>
             <div className="forsage_prive_center_btn">
