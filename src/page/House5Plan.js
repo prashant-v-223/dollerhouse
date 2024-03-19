@@ -119,9 +119,9 @@ const House5Plan = () => {
       const data = await response.json();
       // setHouse5Plan(data?.data);
       setmissedincome(data?.missedincometotal || 0)
-      console.log("data?.datadata?.datadata?.data", data);
+      console.log("data?.datadata?.datadata?.data", data?.data1[0].missedusers);
       setHouse5Plan(data?.data);
-      setHouse5Plan2(data?.filteredDatalastwor);
+      setHouse5Plan2(data?.userdata.missedusers);
       setHouse5Plan1(data?.data1);
       setColor(data?.color);
     } catch (error) {
@@ -137,7 +137,7 @@ const House5Plan = () => {
 
     return sortedArray;
   }, [house5Plan, count]);
-  console.log("house5Plan1[0]?.referBY", memoizedHouse5Plan);
+  console.log("house5Plan1[0]?.referBY", house5Plan1);
   const [house5PlanSingle, setHouse5PlanSingle] = useState(null);
   const fetchUserDataSingle = async (id) => {
     try {
@@ -166,8 +166,10 @@ const House5Plan = () => {
     let sum = 0;
     if (referBYArray) {
       referBYArray?.forEach(item => {
-        const parse = item.depthleval + 1 === 1 ? 0 : item.depthleval + 1 === 2 ? 10 : item.depthleval + 1 === 3 ? 20 : item.depthleval + 1 === 4 ? 20 : item.depthleval + 1 === 5 ? 50 : 0;
-        sum += 5 * parse / 100;
+        if (item.status === "done") {
+          const parse = item.depthleval + 1 === 1 ? 0 : item.depthleval + 1 === 2 ? 10 : item.depthleval + 1 === 3 ? 20 : item.depthleval + 1 === 4 ? 20 : item.depthleval + 1 === 5 ? 50 : 0;
+          sum += 5 * parse / 100;
+        }
       });
     }
     return sum
@@ -352,6 +354,7 @@ const House5Plan = () => {
       </div>
     );
   }
+  console.log("house5Plan2", house5Plan2);
 
   return (
     <React.Fragment>
@@ -372,9 +375,8 @@ const House5Plan = () => {
               </div>
             </div>
             <div className="d-flex w-100 justify-content-between">
-              <div className="forsgae_level_card  d-flex w-100 justify-content-between mx-4">
-                <h4> Upline ID {localStorage.getItem("UPlineUserID")}</h4>
-                <h4> Missed Income: {missedincome}{" "}$</h4>
+              <div className="forsgae_level_card  d-flex w-100 justify-content-center mx-5">
+                <h4 className=""> Upline:  {localStorage.getItem("UPlineUserID")}</h4>
               </div>
             </div>
             <div className="forsage_prive_center_btn">
@@ -387,19 +389,15 @@ const House5Plan = () => {
               </div>
               <div className="center_contant_forsage">
                 <div className="forsgae_level_card">
-                  <h4>House 5 Plan</h4>
-                  <div className="level_title">
-                    <h4>ID {localStorage.getItem("UserID")}</h4>
-                    <h1>
-                      {sumtotal(house5Plan1[0]?.referBY?.slice(0, 60))}
-                      <span>
-                        <img
-                          src={UsdtIcon}
-                          className="usdt_icon_slot"
-                          alt="icon_usdt"
-                        />
+                  <div className="level_title mx-3">
+                    <h5>H.5</h5>
+                    <h5 className="text-center">ID {localStorage.getItem("UserID")}</h5>
+                    <h5>
+                      5
+                      <span className="px-2">
+                        USDT
                       </span>
-                    </h1>
+                    </h5>
                   </div>
                   {/* <Boxs box={box50} tableData={tableData} /> */}
 
@@ -425,7 +423,7 @@ const House5Plan = () => {
                       </div>
 
                       <div className="partners">
-                        <p>Cycles {count + 1}</p>
+                        <p>Cycles </p>
                         <h5>
                           <span>
                             <img
@@ -433,7 +431,7 @@ const House5Plan = () => {
                               alt="user_icon"
                               className="userd_icon"
                             />
-                          </span>
+                          </span>{count + 1}
                           {/* {Number(result50)} */}
                         </h5>
                       </div>
@@ -442,13 +440,9 @@ const House5Plan = () => {
                     <div className="Total_revenue">
                       <p>Total revenue</p>
                       <h1>
-                        {sumtotal(house5Plan1[0]?.referBY?.slice(0, 60))}
-                        <span>
-                          <img
-                            src={UsdtIcon}
-                            className="usdt_icon_slot ml-2"
-                            alt="icon_usdt"
-                          />
+                        {sumtotal(house5Plan2?.slice(0, 60))}
+                        <span className="pl-3">
+                          USDT
                         </span>
                       </h1>
                       {/* <span><img src={img4} alt='user_icon' className='userd_icon' /></span> */}
@@ -480,12 +474,12 @@ const House5Plan = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {house5Plan1 &&
-                    house5Plan1[0]?.referBY?.sort((a, b) => a.depthleval - b.depthleval)?.map((item, index) => {
+                  {house5Plan2 &&
+                    house5Plan2?.map((item, index) => {
                       let parse = item.depthleval + 1 === 1 ? 0 : item.depthleval + 1 === 2 ? 10 : item.depthleval + 1 === 3 ? 20 : item.depthleval + 1 === 4 ? 20 : item.depthleval + 1 === 5 ? 50 : 0
                       return (<tr key={index}>
                         <td>
-                          {item.status ? (
+                          {item.status !== "done" ? (
                             <img
                               src="/up-arrow.png"
                               className="wallet_icon_last upline_arrow"
@@ -526,7 +520,7 @@ const House5Plan = () => {
                         </td>
 
                         <td className="text-center">
-                          {new Date(item.result[0]?.createdAt).toLocaleString()}
+                          {new Date(item.createdAt).toLocaleString()}
                         </td>
                       </tr>)
                     })}

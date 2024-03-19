@@ -286,15 +286,11 @@ const House1Plan = () => {
               <div className="center_contant_forsage">
                 <div className="forsgae_level_card">
                   <div className="level_title">
-                    <h4>House 1 Plan </h4>
+                    <h4>H.1</h4>
                     <h1>
-                      {totalHouseRewards}.00{" "}
-                      <span>
-                        <img
-                          src={UsdtIcon}
-                          className="usdt_icon_slot"
-                          alt="icon_usdt"
-                        />
+                      {5}{" "}
+                      <span className="ml-2">
+                        USDT
                       </span>
                     </h1>
                   </div>
@@ -303,7 +299,10 @@ const House1Plan = () => {
                     {Array.from({ length: 4 }).map((_, index) => {
                       const item = maindata && maindata[index]; // Ignore data at index 0
                       if (item && item.status) {
-                        return <h4 className="upline_heading">Sent to<br /> upline</h4>;
+                        return <h4 className={`${index === 3 ? "background_cyan" : ""} cursor-pointer bg-[#743b07]`}>
+                          {item.user_id}
+                          {/* {<FaArrowUp className="up_arrow" />} */}
+                        </h4>;
                       }
                       return (
                         <h4
@@ -353,12 +352,9 @@ const House1Plan = () => {
                       <p>Total revenue</p>
                       <h1>
                         {totalHouseRewards}.00{" "}
+                        {" "}
                         <span className="ml-2">
-                          <img
-                            src={UsdtIcon}
-                            className="usdt_icon_slot"
-                            alt="icon_usdt"
-                          />
+                          USDT
                         </span>
                       </h1>
                       {/* <span><img src={img4} alt='user_icon' className='userd_icon' /></span> */}
@@ -411,7 +407,7 @@ const House1Plan = () => {
                           <td className="text-center">{item.house_reward}</td>
                           <td className="status_row">
                             {item.status ? (
-                              "Sent to Upline"
+                              <p className="text-success">Recycle</p>
                             ) : (
                               <p className="recieved_status">Received</p>
                             )}

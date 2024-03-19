@@ -151,7 +151,7 @@ const House15Plan = () => {
       })
       .then((data) => {
         setData(
-          data.data.house_reward?.filter((obj) => obj.plan_name == planName)
+          data.data.level_reward?.filter((obj) => obj.plan_name == planName)
         );
         // console.log(data.data.level_reward);
       })
@@ -169,7 +169,9 @@ const House15Plan = () => {
   function calculateTotalLevelRewards(data) {
     let total = 0;
     for (let i = 0; i < data?.length; i++) {
-      total += data[i].house_reward;
+      if (data[i].status !== "missed") {
+        total += data[i].reward;
+      }
     }
     return total;
   }
@@ -254,7 +256,7 @@ const House15Plan = () => {
               <div className="center_contant_forsage">
                 <div className="forsgae_level_card">
                   <div className="level_title">
-                    <h4>House 15 Plan </h4>
+                    <h4>H.15 </h4>
                     <h1>
                       {totalLevelRewards}
                       <span>
@@ -284,8 +286,8 @@ const House15Plan = () => {
                           return (
                             <h4
                               className={`${item && item.status == "missed"
-                                  ? "background_cyan_bilkul"
-                                  : ""
+                                ? "background_cyan_bilkul"
+                                : ""
                                 } cursor-pointer bg-[#743b07]`}
                               key={index}
                             // onClick={() => handleNewIdData(item?.user_id)}
