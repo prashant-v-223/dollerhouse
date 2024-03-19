@@ -457,9 +457,18 @@ const Dashboard = () => {
                       <div className="id_user right_text d-block m-auto w-100 px-2 px-md-4">
                         <div className="d-flex justify-content-between mt-4" >
                           <div className=" ">
-                            <h4 className="text-light m-0">User Name</h4>
+                            {profileData?.data?.username ? (
+                              <h1>
+                                {profileData?.data?.username.length > 0
+                                  ? profileData?.data?.username
+                                  : "username"}
+                              </h1>
+                            ) : (
+                              <h1>User Name</h1>
+                            )}
+                            {/* <h4 className="text-light m-0">User Name</h4> */}
                           </div>
-                          <div className="profile_user_id table_id">
+                          <div  className="cursor-pointer profile_user_id table_id">
                             ID {UserID}
                           </div>
                         </div>
