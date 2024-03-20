@@ -392,7 +392,7 @@ const Dashboard = () => {
   return (
     <React.Fragment>
       {loading && <Loading />}
-      {data12?.r20 && <div className={loading && "opacity_manage"}>
+      {<div className={loading && "opacity_manage"}>
         <div>
           {profilePopup && (
             <div className="profile_main_div relative">
@@ -897,6 +897,7 @@ const Dashboard = () => {
                     })
                     let b = CardData[da + 1]
                     let isAmountGreaterThan3 = []
+                    let isAmountGreaterThan4 = []
                     if (item?.plan_price == 20) {
                       isAmountGreaterThan3.push(data12?.r20 > 3);
                     } else if (item?.plan_price == 40) {
@@ -904,11 +905,19 @@ const Dashboard = () => {
                     } else if (item?.plan_price == 100) {
                       isAmountGreaterThan3.push(data12?.r100 > 3);
                     }
+                    if (item?.plan_price == 20) {
+                      isAmountGreaterThan4.push(data123?.r20 > 0);
+                    } else if (item?.plan_price == 40) {
+                      isAmountGreaterThan4.push(data123?.r40 > 0);
+                    } else if (item?.plan_price == 100) {
+                      isAmountGreaterThan4.push(data123?.r100 > 0);
+                    }
                     // const isAmountGreaterThan3 = checkAmount11(item, data12);
                     const showPreview = checkAmount(item.plan_price);
                     const showPreview1 = checkAmount(b?.plan_price);
                     console.log("isAmountGreaterThan3", isAmountGreaterThan3);
-                    return (<div className={`relative privew_card_sub mx-2 ${showPreview1 ? "B" : isAmountGreaterThan3[index] ? "bg-primary" : "B"}`}>
+                    return (<div className={`relative privew_card_sub mx-2`}>
+                      {/* ${showPreview1 ? "B" : isAmountGreaterThan3[index] ? "bg-primary" : isAmountGreaterThan3[index] ? "bg-danger" : ""} */}
                       <div
                         key={index}
                         className={
