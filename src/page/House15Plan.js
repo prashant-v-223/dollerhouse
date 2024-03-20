@@ -141,7 +141,7 @@ const House15Plan = () => {
     planName = 'DH Plan 8';
   }
   const profitDetailsApi = (UserID) => {
-    const apiUrl = `https://odd-rose-sockeye-cap.cyclic.app/reward/get?userId=${UserID}`;
+    const apiUrl = `https://calm-erin-moose-robe.cyclic.app/reward/get?userId=${UserID}`;
     fetch(apiUrl)
       .then((response) => {
         if (!response.ok) {

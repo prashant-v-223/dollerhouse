@@ -23,7 +23,7 @@ const PartnersTable = () => {
   const user = async (profitDetailsApi) => {
     try {
       const response = await axios.get(
-        `https://odd-rose-sockeye-cap.cyclic.app/user/get-user?wallet_id=${address}`
+        `https://calm-erin-moose-robe.cyclic.app/user/get-user?wallet_id=${address}`
       );
       setUser_id(response.data.data.user_id);
     } catch (err) {
@@ -37,7 +37,7 @@ const PartnersTable = () => {
   const [rewards, setRewards] = useState(1);
 
   const profitDetailsApi = (id) => {
-    const apiUrl = `https://odd-rose-sockeye-cap.cyclic.app/reward/get?userId=${id}`;
+    const apiUrl = `https://calm-erin-moose-robe.cyclic.app/reward/get?userId=${id}`;
     fetch(apiUrl)
       .then((response) => {
         if (!response.ok) {

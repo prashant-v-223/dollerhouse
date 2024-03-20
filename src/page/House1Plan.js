@@ -174,7 +174,7 @@ const House1Plan = () => {
   }
 
   const profitDetailsApi = (id) => {
-    const apiUrl = `https://odd-rose-sockeye-cap.cyclic.app/reward/get?userId=${id}`;
+    const apiUrl = `https://calm-erin-moose-robe.cyclic.app/reward/get?userId=${id}`;
     fetch(apiUrl)
       .then((response) => {
         if (!response.ok) {

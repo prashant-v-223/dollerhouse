@@ -71,7 +71,7 @@ const Landingpage = () => {
   const GetUserId = async (wallet_address) => {
     try {
       const response = await axios.get(
-        `https://odd-rose-sockeye-cap.cyclic.app/user/get-user?wallet_id=${wallet_address}`
+        `https://calm-erin-moose-robe.cyclic.app/user/get-user?wallet_id=${wallet_address}`
       );
       console.log(response.data.data.user_id)
       setuserID(JSON.stringify(response.data.data.user_id));
