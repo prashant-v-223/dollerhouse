@@ -392,7 +392,7 @@ const House15Plan = () => {
                             <span className="table_id">ID{item.user_id}</span>
                           </td>
                           <td className="text-center">{item.amount}</td>
-                          <td className="text-center">{item.status ? `Sent to Upline ${item.reward}` : item.reward}</td>
+                          <td className="text-center">{item.status ? `Sent to Upline` : item.reward}</td>
                           <td className="text-center">
                             {item.invited_member_id.slice(0, 4)}...{" "}
                             {item.invited_member_id.slice(-4)}

@@ -37,6 +37,8 @@ const Dashboard = () => {
   const [BuyTokenLoading, setBuyTokenLoading] = useState(false);
   const [refferal, setRefferal] = useState();
   const [profileData, setProfileData] = useState(null);
+  const [data12, setdata12] = useState({});
+  const [data123, setdata123] = useState({});
   const [profilePopup, setProfilePopup] = useState(false);
   const [previewID, setPreviewID] = useState("");
 
@@ -303,6 +305,8 @@ const Dashboard = () => {
       }
       const data = await response.json();
       setPlanDetails(data.data.plan_details);
+      setdata12(data.data1);
+      setdata123(data.data2);
       setWalletAddress(data.data.wallet_id);
     } catch (error) {
       console.error("Error fetching profile:", error);
@@ -369,7 +373,8 @@ const Dashboard = () => {
     localStorage.setItem("UserID", JSON.stringify(ID));
     window.location.reload();
   }
-
+  console.log("data12data12", data12);
+  console.log("data12data12", data123);
   return (
     <React.Fragment>
       {loading && <Loading />}
@@ -797,6 +802,7 @@ const Dashboard = () => {
                 <div className="privew_card_container_main">
                   {CardData.map((item, index) => (
                     <div className="relative privew_card_sub mx-2">
+                      <h1 className="text-light"> {(checkAmount(40) && data12.r20 > 3).toString()}</h1>
                       <div
                         key={index}
                         className={
