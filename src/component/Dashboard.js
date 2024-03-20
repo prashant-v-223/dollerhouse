@@ -50,8 +50,9 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(false);
   const sdk = useSDK();
 
-  const wallet_address = useAddress()
 
+  // Example usage:
+  const wallet_address = useAddress()
   const [walletAddress, setWalletAddress] = useState(wallet_address)
 
   const userDataReal = localStorage.getItem("UserID");
@@ -84,7 +85,9 @@ const Dashboard = () => {
     }
   };
   useEffect(() => {
-    user(walletAddress);
+    if (walletAddress !== null) {
+      user(walletAddress);
+    }
   }, [walletAddress]);
   const user1 = async (w) => {
     try {
@@ -227,7 +230,16 @@ const Dashboard = () => {
       console.error("contract call failure", err);
     }
   };
-
+  // Function to check if the amount is greater than 3 based on plan price
+  async function checkAmount11(itams, data12) {
+    if (itams?.plan_price == 20) {
+      return data12?.r20 > 3;
+    } else if (itams?.plan_price == 40) {
+      return data12?.r40 > 3;
+    } else if (itams?.plan_price == 100) {
+      return data12?.r100 > 3;
+    }
+  }
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
   };
@@ -344,15 +356,19 @@ const Dashboard = () => {
     fetchProfile(walletAddress);
   };
 
+
   // console.log(profileData);
   const checkAmount = (amount) => {
-    for (let i = 0; i < planDetails?.length; i++) {
-      if (planDetails[i].amount == amount) {
-        return true;
+    if (amount !== null) {
+      for (let i = 0; i < planDetails?.length; i++) {
+        if (planDetails[i].amount == amount) {
+          return true;
+        }
       }
     }
     return false;
   };
+
 
   const [totalInvestMent, setTotalInvestMent] = useState("")
 
@@ -373,12 +389,10 @@ const Dashboard = () => {
     localStorage.setItem("UserID", JSON.stringify(ID));
     window.location.reload();
   }
-  console.log("data12data12", data12);
-  console.log("data12data12", data123);
   return (
     <React.Fragment>
       {loading && <Loading />}
-      <div className={loading && "opacity_manage"}>
+      {data12?.r20 && <div className={loading && "opacity_manage"}>
         <div>
           {profilePopup && (
             <div className="profile_main_div relative">
@@ -429,8 +443,8 @@ const Dashboard = () => {
                   </div>
                 </div>
                 {/* <div className="connect_btn desktop_connect_button">
-            <ConnectWallet />
-          </div> */}
+              <ConnectWallet />
+            </div> */}
               </div>
             </div>
           </div>
@@ -501,7 +515,7 @@ const Dashboard = () => {
                             style={{ width: "180px", fontSize: "13.75px" }}
                           >
                             {`
-                       ${modifiedAddress1
+                        ${modifiedAddress1
                                 ? `Invited at ${formattedDate} by ${modifiedAddress1}`
                                 : "Invited 01.03.2021 By"
                               }`}
@@ -543,9 +557,9 @@ const Dashboard = () => {
                       <div className=" bgbnb">
                         <img src={bgbnb} />
                         {/* <div className="login_to_show">
-                      <p>BNB Balance</p>
-                      <h4 className="stacked_value">{bnbStakeValue ? parseFloat(bnbStakeValue).toFixed(4) : "0.00"} BNB</h4>
-                    </div> */}
+                        <p>BNB Balance</p>
+                        <h4 className="stacked_value">{bnbStakeValue ? parseFloat(bnbStakeValue).toFixed(4) : "0.00"} BNB</h4>
+                      </div> */}
                       </div>
                     </div>
                   </div>
@@ -660,22 +674,22 @@ const Dashboard = () => {
                           </div>
 
                           {/* <div className="pro_num">
-                      <h1>
-                        {result2 && result2 !== "NaN" ? result2 : "0.00"} MJC
-                      </h1>
-                      <p>
-                        <span className="toparrow">
-                          <i
-                            className="fa fa-long-arrow-up"
-                            aria-hidden="true"
-                          ></i>
-                        </span>
-                        {recentProfitMJC && recentProfitMJC !== "NaN"
-                          ? recentProfitMJC
-                          : "0.00"}{" "}
-                        MJC
-                      </p>
-                    </div> */}
+                        <h1>
+                          {result2 && result2 !== "NaN" ? result2 : "0.00"} MJC
+                        </h1>
+                        <p>
+                          <span className="toparrow">
+                            <i
+                              className="fa fa-long-arrow-up"
+                              aria-hidden="true"
+                            ></i>
+                          </span>
+                          {recentProfitMJC && recentProfitMJC !== "NaN"
+                            ? recentProfitMJC
+                            : "0.00"}{" "}
+                          MJC
+                        </p>
+                      </div> */}
                         </div>
                       </div>
                     </div>
@@ -799,10 +813,14 @@ const Dashboard = () => {
                   </h3>
                 </div>
 
-                <div className="privew_card_container_main">
-                  {CardData.map((item, index) => (
-                    <div className="relative privew_card_sub mx-2">
-                      <h1 className="text-light"> {(checkAmount(40) && data12.r20 > 3).toString()}</h1>
+                {/* <div className="privew_card_container_main">
+                  {CardData.map(async (item, index) => {
+                    let da = CardData.findIndex((el) => {
+                      return el.slotId == item.plan_price
+                    })
+                    let b = CardData[da + 1]
+                    return (<div className={`relative privew_card_sub mx-2`}>
+                      <h1 className="text-light"> {checkAmount11(item, data12) ? "A" : "B"}</h1>
                       <div
                         key={index}
                         className={
@@ -867,7 +885,96 @@ const Dashboard = () => {
                         ""
                       )}
                     </div>
-                  ))}
+                    )
+                  })
+                  }
+                </div> */}
+                <div className="privew_card_container_main">
+                  {CardData && CardData.map((item, index) => {
+
+                    let da = CardData?.findIndex((el) => {
+                      return el.slotId == item.plan_price
+                    })
+                    let b = CardData[da + 1]
+                    let isAmountGreaterThan3 = []
+                    if (item?.plan_price == 20) {
+                      isAmountGreaterThan3.push(data12?.r20 > 3);
+                    } else if (item?.plan_price == 40) {
+                      isAmountGreaterThan3.push(data12?.r40 > 3);
+                    } else if (item?.plan_price == 100) {
+                      isAmountGreaterThan3.push(data12?.r100 > 3);
+                    }
+                    // const isAmountGreaterThan3 = checkAmount11(item, data12);
+                    const showPreview = checkAmount(item.plan_price);
+                    const showPreview1 = checkAmount(b?.plan_price);
+                    console.log("isAmountGreaterThan3", isAmountGreaterThan3);
+                    return (<div className={`relative privew_card_sub mx-2 ${showPreview1 ? "B" : isAmountGreaterThan3[index] ? "bg-primary" : "B"}`}>
+                      <div
+                        key={index}
+                        className={
+                          checkAmount(item.plan_price) ? "" : "opacity_down"
+                        }
+                      >
+                        <div className="slot_title_and_price">
+                          <div className="slot_price">
+                            <h4>{item.slotName}</h4>
+                          </div>
+                          <div className="slot_price_carf_t">
+                            {/* <h4>{item.mainPrice}</h4>
+                            <p>
+                              <img
+                                src={UsdtIcon}
+                                className="usdt_icon_slot"
+                                alt="icon_usdt"
+                              />
+                            </p> */}
+                          </div>
+                        </div>
+                        <div className="slot_all_price_and_priviews">
+                          <div className="all_slot">
+                            <h5>{item.price1}</h5>
+                            <h5>{item.price2}</h5>
+                            <h5>{item.price3}</h5>
+                          </div>
+                          {checkAmount(item.plan_price) && (
+                            <div className="slot_privew_btn">
+                              <Link to={`/slot-${item.slotId}`}>
+                                Preview{" "}
+                                <span>
+                                  <img
+                                    src={privewupicon}
+                                    alt="upicons_privew"
+                                    className="upicons_privew"
+                                  />
+                                </span>
+                              </Link>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                      {!checkAmount(item.plan_price) ? (
+                        <div className="slot_privew_btn slot_privew_btn_center">
+                          <button
+                            onClick={() => {
+                              handleBuyPlan(item.plan_name, item.plan_price);
+                            }}
+                          >
+                            Upgrade
+                            <span>
+                              <img
+                                src={privewupicon}
+                                alt="upicons_privew"
+                                className="upicons_privew"
+                              />
+                            </span>
+                          </button>
+                        </div>
+                      ) : (
+                        ""
+                      )}
+                    </div>
+                    )
+                  })}
                 </div>
               </div>
             </div>
@@ -916,7 +1023,7 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div>}
     </React.Fragment>
   );
 };
