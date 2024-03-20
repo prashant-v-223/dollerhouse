@@ -341,7 +341,7 @@ const Registration = ({ id }) => {
 
             <div className="col-lg-6">
               <div
-                className="regis_right"
+                className="regis_right p-4"
                 style={{
                   backgroundImage: `url(${plashtfiny})`,
                   backgroundSize: "cover",

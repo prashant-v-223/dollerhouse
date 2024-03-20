@@ -149,7 +149,7 @@ const Landingpage = () => {
               <ConnectWallet />
 
               <button>
-                <button onClick={scrollToRegistration} className="wath_tut p-0">
+                <button onClick={scrollToRegistration} className="wath_tut p-0 m-0">
                   Join Doller House
                 </button>
               </button>
