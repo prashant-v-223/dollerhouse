@@ -155,26 +155,35 @@ const House1Plan = () => {
   const urlParams = new URLSearchParams(window.location.search);
   const planPrice = urlParams.get('plan_price');
   let planName;
+  let planName1;
   if (planPrice == '20') {
     planName = 'DH Plan 1';
+    planName1 = 'level 1';
   } else if (planPrice == '40') {
     planName = 'DH Plan 2';
+    planName1 = 'level 2';
   } else if (planPrice == '100') {
     planName = 'DH Plan 3';
+    planName1 = 'level 3';
   } else if (planPrice == '200') {
     planName = 'DH Plan 4';
+    planName1 = 'level 4';
   } else if (planPrice == '500') {
     planName = 'DH Plan 5';
+    planName1 = 'level 5';
   } else if (planPrice == '1000') {
     planName = 'DH Plan 6';
+    planName1 = 'level 6';
   } else if (planPrice == '2000') {
     planName = 'DH Plan 7';
+    planName1 = 'level 7';
   } else if (planPrice == '4000') {
     planName = 'DH Plan 8';
+    planName1 = 'level 8';
   }
 
-  const profitDetailsApi = (id) => {
-    const apiUrl = `https://calm-erin-moose-robe.cyclic.app/reward/get?userId=${id}`;
+  const profitDetailsApi = (UserID) => {
+    const apiUrl = `https://calm-erin-moose-robe.cyclic.app/reward/get?userId=${UserID}`;
     fetch(apiUrl)
       .then((response) => {
         if (!response.ok) {
@@ -187,11 +196,28 @@ const House1Plan = () => {
           data.data.house_reward?.filter((obj) => obj.plan_name == planName)
         );
         console.log(data);
+        const apiUrl1 = `https://calm-erin-moose-robe.cyclic.app/user/get-user?wallet_id=${data.data.refferal}`;
+        fetch(apiUrl1)
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+          })
+          .then((data) => {
+            console.log("user_id", data.data.user_id);
+            localStorage.setItem("UPlineUserID", JSON.stringify(data.data.user_id));
+
+          })
+          .catch((error) => {
+            console.error("Error fetching or processing data:", error);
+          });
       })
       .catch((error) => {
         console.error("Error fetching or processing data:", error);
       });
   };
+
 
   useEffect(() => {
     profitDetailsApi(UserID);
@@ -225,8 +251,11 @@ const House1Plan = () => {
   };
 
   const handleNewIdData = (user_id) => {
-    localStorage.setItem("UserID", JSON.stringify(user_id));
-    navigate("/dashboard");
+    if (user_id !== undefined) {
+
+      localStorage.setItem("UserID", JSON.stringify(user_id));
+      profitDetailsApi(user_id);
+    }
   };
 
   const [currentPageCircle, setCurrentPageCircle] = useState(0);
@@ -285,14 +314,15 @@ const House1Plan = () => {
               </div>
               <div className="center_contant_forsage">
                 <div className="forsgae_level_card">
-                  <div className="level_title">
-                    <h4>H.1</h4>
-                    <h1>
-                      {5}{" "}
-                      <span className="ml-2">
+                  <div className="level_title mx-3">
+                    <h5>{planName1}</h5>
+                    <h5 className="text-center">ID {localStorage.getItem("UserID")}</h5>
+                    <h5>
+                      5
+                      <span className="px-2">
                         USDT
                       </span>
-                    </h1>
+                    </h5>
                   </div>
                   {/* <Boxs box={box50} tableData={tableData} /> */}
                   <div className="circle_priveiw">
@@ -301,6 +331,7 @@ const House1Plan = () => {
                       if (item && item.status) {
                         return <h4 className={`${index === 3 ? "background_cyan" : ""} cursor-pointer bg-[#743b07]`}>
                           {item.user_id}
+                          {index === 3 && <FaArrowUp className="up_arrow" />}
                           {/* {<FaArrowUp className="up_arrow" />} */}
                         </h4>;
                       }

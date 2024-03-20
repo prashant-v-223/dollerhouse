@@ -1877,7 +1877,22 @@ img.welcome_benner_card {
     display: flex;
     flex-wrap: wrap;
   }
-
+  .circle_pre_1_3 h4 {
+    background: white;
+    color: black;
+    font-size: 14px;
+    display: inline-block;
+    min-width: 50px;
+    min-height: 50px;
+    padding: 22px 0px;
+    border-radius: 50%;
+    margin: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* margin: 0; */
+    padding: 0 !important;
+  }
   .teams_all_card2 {
     width: 100%;
     margin: 10px;

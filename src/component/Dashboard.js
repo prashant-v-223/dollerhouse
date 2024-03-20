@@ -39,6 +39,7 @@ const Dashboard = () => {
   const [profileData, setProfileData] = useState(null);
   const [data12, setdata12] = useState({});
   const [data123, setdata123] = useState({});
+  const [dataincome, setdataincome] = useState({});
   const [profilePopup, setProfilePopup] = useState(false);
   const [previewID, setPreviewID] = useState("");
 
@@ -321,11 +322,12 @@ const Dashboard = () => {
       setPlanDetails(data.data.plan_details);
       setdata12(data.data1);
       setdata123(data.data2);
+      setdataincome(data.data3);
       setWalletAddress(data.data.wallet_id);
     } catch (error) {
       console.error("Error fetching profile:", error);
     }
-  }; 
+  };
   const GetPlanDetail1 = async (main_user_id) => {
     try {
       const response = await fetch(
@@ -338,6 +340,7 @@ const Dashboard = () => {
       setPlanDetails(data.data.plan_details);
       setdata12(data.data1);
       setdata123(data.data2);
+      setdataincome(data.data3);
       setWalletAddress(data.data.wallet_id);
     } catch (error) {
       console.error("Error fetching profile:", error);
@@ -362,9 +365,13 @@ const Dashboard = () => {
     }
   };
   useEffect(() => {
-    fetchProfile(walletAddress?.toLowerCase());
-    GetPlanDetail(walletAddress?.toLowerCase());
-  }, [walletAddress]);
+    // if (walletAddress !== undefined) {
+    // fetchProfile(walletAddress?.toLowerCase());
+    // GetPlanDetail(walletAddress?.toLowerCase());
+    // } else {
+    GetPlanDetail1(UserID);
+    // }
+  }, [UserID]);
 
   const handleProfileFormSubmit = (e) => {
     e.preventDefault();
@@ -926,6 +933,7 @@ const Dashboard = () => {
                     } else if (item?.plan_price == 100) {
                       isAmountGreaterThan4.push(data123?.r100 > 0);
                     }
+                    console.log('h1' + item.slotId + "all");
                     const showPreview1 = checkAmount(b?.plan_price);
                     return (
                       <div className={`relative privew_card_sub mx-2 ${showPreview1 ? checkAmount(item.plan_price) ? "buy" : "bg-danger" : isAmountGreaterThan3[index] ? "bg-primary" : isAmountGreaterThan4[index] ? checkAmount(item.plan_price) ? "buy" : "bg-danger" : ""}
@@ -940,15 +948,10 @@ const Dashboard = () => {
                             <div className="slot_price">
                               <h4>{item.slotName}</h4>
                             </div>
-                            <div className="slot_price_carf_t">
-                              {/* <h4>{item.mainPrice}</h4>
-                            <p>
-                              <img
-                                src={UsdtIcon}
-                                className="usdt_icon_slot"
-                                alt="icon_usdt"
-                              />
-                            </p> */}
+                            <div className="slot_price_carf_t d-block">
+                              <h4 className="text-light"><b>{dataincome && dataincome['h1' + item.slotId + "all"] + dataincome['h15' + item.slotId + "all"] + dataincome['h5' + item.slotId + "all"]} USDT</b></h4>
+                              <h6 className="text-danger"><b>Missed Profits</b></h6>
+                              <h6 className="text-danger"><b>{dataincome && dataincome['h1' + item.slotId + "miss"] + dataincome['h15' + item.slotId + "miss"]} USDT</b></h6>
                             </div>
                           </div>
                           <div className="slot_all_price_and_priviews">

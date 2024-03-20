@@ -88,6 +88,33 @@ const House5Plan = () => {
 
   const userDataReal = localStorage.getItem("UserID");
   var UserID = JSON.parse(userDataReal);
+  let planName;
+  let planName1;
+  if (planPrice == '20') {
+    planName = 'DH Plan 1';
+    planName1 = 'level 1';
+  } else if (planPrice == '40') {
+    planName = 'DH Plan 2';
+    planName1 = 'level 2';
+  } else if (planPrice == '100') {
+    planName = 'DH Plan 3';
+    planName1 = 'level 3';
+  } else if (planPrice == '200') {
+    planName = 'DH Plan 4';
+    planName1 = 'level 4';
+  } else if (planPrice == '500') {
+    planName = 'DH Plan 5';
+    planName1 = 'level 5';
+  } else if (planPrice == '1000') {
+    planName = 'DH Plan 6';
+    planName1 = 'level 6';
+  } else if (planPrice == '2000') {
+    planName = 'DH Plan 7';
+    planName1 = 'level 7';
+  } else if (planPrice == '4000') {
+    planName = 'DH Plan 8';
+    planName1 = 'level 8';
+  }
 
   const [count, setCount] = useState(0);
   const [missedincome, setmissedincome] = useState(0);
@@ -159,6 +186,54 @@ const House5Plan = () => {
     fetchUserData(UserID, count);
     user1();
   }, [count, UserID]);
+
+
+  useEffect(() => {
+    profitDetailsApi(UserID);
+  }, []);
+  const profitDetailsApi = (UserID) => {
+    const apiUrl = `https://calm-erin-moose-robe.cyclic.app/reward/get?userId=${UserID}`;
+    fetch(apiUrl)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setData(
+          data.data.level_reward?.filter((obj) => obj.plan_name == planName)
+        );
+        console.log(data);
+        const apiUrl1 = `https://calm-erin-moose-robe.cyclic.app/user/get-user?wallet_id=${data.data.refferal}`;
+        fetch(apiUrl1)
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+          })
+          .then((data) => {
+            console.log("user_id", data.data.user_id);
+            localStorage.setItem("UPlineUserID", JSON.stringify(data.data.user_id));
+
+          })
+          .catch((error) => {
+            console.error("Error fetching or processing data:", error);
+          });
+      })
+      .catch((error) => {
+        console.error("Error fetching or processing data:", error);
+      });
+  };
+
+  const handleNewIdData = (user_id) => {
+    if (user_id !== undefined) {
+
+      localStorage.setItem("UserID", JSON.stringify(user_id));
+      profitDetailsApi(user_id);
+    }
+  };
   // useEffect(() => {
   //   window.location.reload();
   // }, [house5Plan1])
@@ -179,7 +254,8 @@ const House5Plan = () => {
     return (
       <div className="circle_preview_5_left">
         {memoizedHouse5Plan && memoizedHouse5Plan.length > 0 ? (
-          <div className="circle_pre_1_1">
+          <div className="circle_pre_1_1"
+            onClick={() => handleNewIdData(memoizedHouse5Plan[1]?.uid)}>
             <h4>
               {memoizedHouse5Plan[1]?.uid || 0}
             </h4>
@@ -195,7 +271,7 @@ const House5Plan = () => {
             const filteredData = house5Plan1[0]?.referBY
               .filter(item => item.refId === memoizedHouse5Plan?.[1]?.referred?.[index]);
             return (
-              <h4 key={index}>
+              <h4 key={index} onClick={() => handleNewIdData(filteredData[0]?.uid)}>
                 {filteredData?.length > 0 ? filteredData[0]?.uid : "0"}
               </h4>
             );
@@ -210,7 +286,7 @@ const House5Plan = () => {
               const filteredData = house5Plan1[0]?.referBY
                 .filter(item => item.refId === a?.[index]);
               return (
-                <h4 key={index1 + index}>
+                <h4 key={index1 + index} onClick={() => handleNewIdData(filteredData[0]?.uid)}>
                   {filteredData?.length > 0 ? filteredData[0]?.uid : "0"}
                 </h4>
               );
@@ -229,7 +305,7 @@ const House5Plan = () => {
                 const filteredData = house5Plan1[0]?.referBY
                   .filter(item => item.refId === b?.[0]?.referred?.[index]);
                 return (
-                  <h4 key={index2 + index1 + index}>
+                  <h4 key={index2 + index1 + index} onClick={() => handleNewIdData(filteredData[0]?.uid)}>
                     {filteredData?.length > 0 ? filteredData[0]?.uid : "0"}
                   </h4>
                 );
@@ -252,7 +328,7 @@ const House5Plan = () => {
                   const filteredData = house5Plan1[0]?.referBY
                     .filter(item => item.refId === c?.[0]?.referred?.[index]);
                   return (
-                    <h4 key={index3 + index2 + index1 + index}>
+                    <h4 key={index3 + index2 + index1 + index} onClick={() => handleNewIdData(filteredData[0]?.uid)}>
                       {filteredData?.length > 0 ? filteredData[0]?.uid : "0"}
                     </h4>
                   );
@@ -270,7 +346,7 @@ const House5Plan = () => {
       <div className="circle_preview_5_left">
         {memoizedHouse5Plan && memoizedHouse5Plan.length > 0 ? (
           <div className="circle_pre_1_1">
-            <h4>
+            <h4 onClick={() => handleNewIdData(memoizedHouse5Plan[0]?.uid || 0)}>
               {memoizedHouse5Plan[0]?.uid || 0}
             </h4>
           </div>
@@ -285,7 +361,7 @@ const House5Plan = () => {
             const filteredData = house5Plan1[0]?.referBY
               .filter(item => item.refId === memoizedHouse5Plan?.[0]?.referred?.[index]);
             return (
-              <h4 key={index}>
+              <h4 key={index} onClick={() => handleNewIdData(filteredData[0]?.uid)}>
                 {filteredData?.length > 0 ? filteredData[0]?.uid : "0"}
               </h4>
             );
@@ -300,7 +376,7 @@ const House5Plan = () => {
               const filteredData = house5Plan1[0]?.referBY
                 .filter(item => item.refId === a?.[index]);
               return (
-                <h4 key={index1 + index}>
+                <h4 key={index1 + index} onClick={() => handleNewIdData(filteredData[0]?.uid)}>
                   {filteredData?.length > 0 ? filteredData[0]?.uid : "0"}
                 </h4>
               );
@@ -319,7 +395,7 @@ const House5Plan = () => {
                 const filteredData = house5Plan1[0]?.referBY
                   .filter(item => item.refId === b?.[0]?.referred?.[index]);
                 return (
-                  <h4 key={index2 + index1 + index}>
+                  <h4 key={index2 + index1 + index} onClick={() => handleNewIdData(filteredData[0]?.uid)}>
                     {filteredData?.length > 0 ? filteredData[0]?.uid : "0"}
                   </h4>
                 );
@@ -390,7 +466,7 @@ const House5Plan = () => {
               <div className="center_contant_forsage">
                 <div className="forsgae_level_card">
                   <div className="level_title mx-3">
-                    <h5>H.5</h5>
+                    <h5>{planName1}</h5>
                     <h5 className="text-center">ID {localStorage.getItem("UserID")}</h5>
                     <h5>
                       5
