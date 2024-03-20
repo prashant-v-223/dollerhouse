@@ -916,8 +916,8 @@ const Dashboard = () => {
                     const showPreview = checkAmount(item.plan_price);
                     const showPreview1 = checkAmount(b?.plan_price);
                     console.log("isAmountGreaterThan3", isAmountGreaterThan3);
-                    return (<div className={`relative privew_card_sub mx-2`}>
-                      {/* ${showPreview1 ? "B" : isAmountGreaterThan3[index] ? "bg-primary" : isAmountGreaterThan3[index] ? "bg-danger" : ""} */}
+                    return (<div className={`relative privew_card_sub mx-2 ${showPreview1 ? "B" : isAmountGreaterThan3[index] ? "bg-primary" : isAmountGreaterThan3[index] ? "bg-danger" : ""}
+                    `}>
                       <div
                         key={index}
                         className={
