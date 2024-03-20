@@ -37,10 +37,6 @@ const Registration = ({ id }) => {
     confetti({});
   };
 
-  const handleTabClick = (tabId) => {
-    setActiveTab(tabId);
-  };
-
   const handleReferralChange = (event) => {
     setReferralCode(event.target.value);
   };
@@ -183,7 +179,7 @@ const Registration = ({ id }) => {
   const buyToken = async () => {
     setIsLoading(true);
     try {
-      let tierplan = ethers.utils.parseEther(selectedValue);
+      let tierplan = ethers.utils.parseEther("selectedValue");
       try {
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         const signer = provider.getSigner();
