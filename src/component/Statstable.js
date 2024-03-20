@@ -213,12 +213,12 @@ const Statstable = () => {
                             <MdContentCopy />
                           </button>
                         </td>
-                        <td>{item.amount} USDT</td>
+                        <td>{item.house_reward} USDT</td>
                         <td className="status_row">
                           {item.status ? (
-                            item.status
+                            <p className=" text-danger">{item.status}</p>
                           ) : (
-                            <p className="recieved_status">Received</p>
+                            <p className="" style={{ color: "greenyellow" }}>Received</p>
                           )}
                         </td>
                         <td>
