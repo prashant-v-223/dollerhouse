@@ -1,36 +1,20 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect, useRef } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import "./style.css";
-import roadmap1 from "../image/social.png";
-import roadmap2 from "../image/achievements.png";
-// import roadmap3 from '../image/bigRefferalСontest.png';
-import roadmap4 from "../image/games.png";
-import roadmap5 from "../image/customInvitePdf.png";
-import roadmap6 from "../image/maxqore.png";
-import roadmap7 from "../image/token.png";
-import img26tick from "../image/greentick.svg";
+import uset_img from "../image/uset_img.svg";
 import info27 from "../image/svg-image-27.svg";
 import svg31viewicon from "../image/svg-image-31.svg";
 import bluecircle from "../image/blue-blur.webp";
 import icon1 from "../image/icon3.svg";
-import icon2 from "../image/icon1.svg";
-import icon3 from "../image/icon2.svg";
 import logo from "../image/line.svg";
 import banner1 from '../image/dh-banner11.svg';
 import banner2 from '../image/dh-banner2.svg';
-import banner3 from '../image/dh-banner211.svg';
 import welcome_benner_card from "../image/1969222.svg"
 import svg_wallet_img from "../image/svg-image-23.svg"
 import imgsvg24 from "../image/svg-image-24.svg"
 import axios from "axios";
-import frx from "../image/bg.webp";
-import frx3 from "../image/bg33.webp";
-import frx2 from "../image/bg2.webp";
 import poket_img from "../image/line.svg";
-
-import bluesedo from "../image/gold-blur.png";
 import plashtfiny from "../image/gold-blur.png";
-import { Link } from "react-router-dom";
 import { useLogin } from "@thirdweb-dev/react";
 import {
   ConnectWallet,
@@ -47,6 +31,7 @@ import "react-toastify/dist/ReactToastify.css"; import { useParams } from 'react
 
 import Registration from "../component/Registration";
 const Landingpage = () => {
+  const registrationRef = useRef(null); // Reference to the Registration component
   const wallet_address = useAddress()
   const [showButton, setShowButton] = useState(true);
   let { id } = useParams();
@@ -61,6 +46,7 @@ const Landingpage = () => {
   }, [showButton]);
 
   const [previewID, setPreviewID] = useState("");
+  const [profileData, setprofileData] = useState({});
   const [userData, setUserData] = useState(null);
 
   const handleChange = (event) => {
@@ -69,8 +55,6 @@ const Landingpage = () => {
   const { contract } = useContract(
     "0x642ba5BEF7030FD665b671E12090268086EFF1eC"
   );
-
-
 
 
   const handleSearch = () => {
@@ -90,12 +74,11 @@ const Landingpage = () => {
         `https://odd-rose-sockeye-cap.cyclic.app/user/get-user?wallet_id=${wallet_address}`
       );
       console.log(response.data.data.user_id)
-      localStorage.setItem("UserID", JSON.stringify(response.data.data.user_id))
-      handleSearchDashboard()
-      setuserID("UserID", JSON.stringify(response.data.data.user_id));
+      setuserID(JSON.stringify(response.data.data.user_id));
+      setprofileData(response.data);
 
     } catch (err) {
-      //console.log(err);
+      console.log(err);
     }
   }
 
@@ -107,7 +90,9 @@ const Landingpage = () => {
   const handleSearchDashboard = async () => {
     navigate("/dashboard");
   }
-
+  const scrollToRegistration = () => {
+    registrationRef.current.scrollIntoView({ behavior: "smooth" });
+  };
   return (
     <div id="scrollToTopBtn" className="landingpage_main">
       <ToastContainer />
@@ -144,10 +129,10 @@ const Landingpage = () => {
             backgroundSize: "cover",
           }}
         >
-          <div className="register_left">
+          {userID === null ? <div className="register_left">
             <h1>Register on Dollar House platform</h1>
-            <p>
-              You can use this Wallet (...) to register as a new member. Watch a tutorial to learn more
+            <p style={{ wordWrap: "break-word" }}>
+              You can use this Wallet ({wallet_address}) to register as a new member. Watch a tutorial to learn more
             </p>
             <div className="join_bth">
 
@@ -162,19 +147,64 @@ const Landingpage = () => {
                 </button>
               } */}
               <ConnectWallet />
+
+              <button>
+                <button onClick={scrollToRegistration} className="wath_tut p-0">
+                  Join Doller House
+                </button>
+              </button>
               {/* <button>
                 <a href="/Registration" className="wath_tut">
                   Registration
                 </a>
               </button> */}
             </div>
-          </div>
+          </div> :
+            <div className="register_left">
+              <div className="id_user right_text d-block m-auto w-100 ">
+                <div className="d-flex align-items-end mt-4 " >
+                  <div className=" ">
+                    <img
+                      className="user_logo ml-0"
+                      src={uset_img}
+                      alt="uset_img"
+                      minwidth={130}
+                    />
+                    {profileData?.data?.profile !== null ? (
+                      <h1>
+                        {profileData?.data?.profile.username}
+                      </h1>
+                    ) : (
+                      <h1>User Name</h1>
+                    )}
+                    {/* <h4 className="text-light m-0">User Name</h4> */}
+                  </div>
+                  <div className="cursor-pointer profile_user_id table_id" >
+                    ID {userID}
+                  </div>
+                </div>
+              </div>
+              <p>
+                {wallet_address} is a member of  dollerhouse
+              </p>
+              <div className="join_bth">
+                <ConnectWallet className="my-2" />
+                <button className="my-2">
+                  <Link to="/dashboard" className="wath_tut">
+                    Return to you account
+                  </Link>
+                </button>
+              </div>
+            </div>
+          }
 
           <div className="register_right">
             <img src={poket_img} alt="pocket_img" className="poket_img" />
           </div>
         </div>
-        <Registration id={id} />
+        <div ref={registrationRef}>
+          <Registration id={id} />
+        </div>
         <div className="doller_house_owl_crousel">
           <div className="container">
             <div id="demo" class="carousel slide" data-ride="carousel">
@@ -499,7 +529,7 @@ const Landingpage = () => {
           </div>
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 

@@ -238,7 +238,7 @@ const Dashboard = () => {
   const handleSubmit = async (e) => {
     const formData = new FormData();
     formData.append("username", username);
-    formData.append("wallet_id", walletAddress.toLowerCase());
+    formData.append("wallet_id", walletAddress?.toLowerCase());
     formData.append("filename", "Test");
     try {
       const response = await axios.post(
