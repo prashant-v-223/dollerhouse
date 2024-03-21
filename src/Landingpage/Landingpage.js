@@ -475,17 +475,17 @@ const Landingpage = () => {
 
                 <div className='col-lg-4'>
                   <div className='menber_totla_title'>
-                    <h3>Members total <span className='forsage_info2'> <img src={info27} alt='Info' className='Info27' />  </span> </h3>
+                    <h3>Members total <span className='forsage_info2'>  </span> </h3>
 
-                    <h4>{data.data.totaluser || 0}</h4>
-                    <p><span className='toparrow'><i className="fa fa-long-arrow-up" aria-hidden="true"></i></span>{data.data.totaluserLast24h || 0}</p>
+                    <h4>{data?.data?.totaluser || 0}</h4>
+                    <p><span className='toparrow'><i className="fa fa-long-arrow-up" aria-hidden="true"></i></span>{data?.data?.totaluserLast24h || 0}</p>
                   </div>
 
                   <div className='menber_totla_title'>
-                    <h3>Members total <span className='forsage_info2'> <img src={info27} alt='Info' className='Info27' />  </span> </h3>
+                    <h3>Investment total <span className='forsage_info2'> </span> </h3>
                     <div className='busd busd2'>
-                      <h2>{data.data.totalAmountSum[0].totalAmount || 0}BUSD</h2>
-                      <h6>{data.data.totalAmountSum[0].totalInvestmentLast24h || 0}+ BUSD</h6>
+                      <h2>{data?.data?.totalAmountSum || 0} USD</h2>
+                      <h6>{data?.data?.totalInvestmentLast24h || 0}+ USD</h6>
                     </div>
 
                     <div className='busd'>
