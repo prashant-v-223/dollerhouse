@@ -201,10 +201,6 @@ const House5Plan = () => {
         return response.json();
       })
       .then((data) => {
-        setData(
-          data.data.level_reward?.filter((obj) => obj.plan_name == planName)
-        );
-        console.log(data);
         const apiUrl1 = `https://calm-erin-moose-robe.cyclic.app/user/get-user?wallet_id=${data.data.refferal}`;
         fetch(apiUrl1)
           .then((response) => {
