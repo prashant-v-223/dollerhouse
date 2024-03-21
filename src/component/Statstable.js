@@ -221,28 +221,62 @@ const Statstable = () => {
                           </p>
                         </td>
                         <td>
-                          <input type="checkbox" checked={(item.refferal.result.length !== 0)} />
+                          {(item.refferal.result.length !== 0).toString() === "true" ? <div className="bg-success " style={{
+                            width: 50, height: 50, borderRadius: "50%"
+                          }}></div> : <div className="bg-danger" style={{
+                            width: 50, height: 50, borderRadius: "50%"
+                          }}></div>}
                         </td>
                         <td>
-                          <input type="checkbox" checked={(item.refferal.result1.length !== 0)} />
+                          {(item.refferal.result1.length !== 0).toString() === "true" ? <div className="bg-success" style={{
+                            width: 50, height: 50, borderRadius: "50%"
+                          }}></div> : <div className="bg-danger" style={{
+                            width: 50, height: 50, borderRadius: "50%"
+                          }}></div>}
                         </td>
                         <td>
-                          <input type="checkbox" checked={(item.refferal.result2.length !== 0)} />
+                          {(item.refferal.result2.length !== 0).toString() === "true" ? <div className="bg-success" style={{
+                            width: 50, height: 50, borderRadius: "50%"
+                          }}></div> : <div className="bg-danger" style={{
+                            width: 50, height: 50, borderRadius: "50%"
+                          }}></div>}
                         </td>
                         <td>
-                          <input type="checkbox" checked={(item.refferal.result3.length !== 0)} />
+                          {(item.refferal.result3.length !== 0).toString() === "true" ? <div className="bg-success" style={{
+                            width: 50, height: 50, borderRadius: "50%"
+                          }}></div> : <div className="bg-danger" style={{
+                            width: 50, height: 50, borderRadius: "50%"
+                          }}></div>}
                         </td>
                         <td>
-                          <input type="checkbox" checked={(item.refferal.result4.length !== 0)} />
+
+                          {(item.refferal.result4.length !== 0).toString() === "true" ? <div className="bg-success" style={{
+                            width: 50, height: 50, borderRadius: "50%"
+                          }}></div> : <div className="bg-danger" style={{
+                            width: 50, height: 50, borderRadius: "50%"
+                          }}></div>}
                         </td>
                         <td>
-                          <input type="checkbox" checked={(item.refferal.result5.length !== 0)} />
+
+                          {(item.refferal.result5.length !== 0).toString() === "true" ? <div className="bg-success" style={{
+                            width: 50, height: 50, borderRadius: "50%"
+                          }}></div> : <div className="bg-danger" style={{
+                            width: 50, height: 50, borderRadius: "50%"
+                          }}></div>}
                         </td>
                         <td>
-                          {(item.refferal.result6.length !== 0).toString()}
+                          {(item.refferal.result6.length !== 0).toString() === "true" ? <div className="bg-success" style={{
+                            width: 50, height: 50, borderRadius: "50%"
+                          }}></div> : <div className="bg-danger" style={{
+                            width: 50, height: 50, borderRadius: "50%"
+                          }}></div>}
                         </td>
                         <td>
-                          {(item.refferal.result7.length !== 0).toString()}
+                          {(item.refferal.result7.length !== 0).toString() === "true" ? <div className="bg-success" style={{
+                            width: 50, height: 50, borderRadius: "50%"
+                          }}></div> : <div className="bg-danger" style={{
+                            width: 50, height: 50, borderRadius: "50%"
+                          }}></div>}
                         </td>
                         <td>
                           {item.refferal?.user1.refferal1Size}
