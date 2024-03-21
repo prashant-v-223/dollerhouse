@@ -193,7 +193,7 @@ const House1Plan = () => {
       })
       .then((data) => {
         setData(
-          data.data.house_reward?.filter((obj) => obj.plan_name == planName)
+          data.data[0].house_reward?.filter((obj) => obj.plan_name == planName)
         );
         console.log(data);
         const apiUrl1 = `https://calm-erin-moose-robe.cyclic.app/user/get-user?wallet_id=${data.data.refferal}`;
@@ -360,7 +360,7 @@ const House1Plan = () => {
                               className="userd_icon"
                             />
                           </span>
-                          {data.length}
+                          {data?.length}
                         </h5>
                       </div>
 

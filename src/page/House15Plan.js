@@ -150,42 +150,35 @@ const House15Plan = () => {
     planName1 = 'level 8';
   }
 
-  const profitDetailsApi = (UserID) => {
-    const apiUrl = `https://calm-erin-moose-robe.cyclic.app/reward/get?userId=${UserID}`;
-    fetch(apiUrl)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setData(
-          data.data.level_reward?.filter((obj) => obj.plan_name == planName)
-        );
-        console.log(data);
-        const apiUrl1 = `https://calm-erin-moose-robe.cyclic.app/user/get-user?wallet_id=${data.data.refferal}`;
-        fetch(apiUrl1)
-          .then((response) => {
-            if (!response.ok) {
-              throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            return response.json();
-          })
-          .then((data) => {
-            console.log("user_id", data.data.user_id);
-            localStorage.setItem("UPlineUserID", JSON.stringify(data.data.user_id));
+  const profitDetailsApi = async (UserID) => {
+    try {    const apiUrl = `https://calm-erin-moose-robe.cyclic.app/reward/get?userId=${UserID}`;
 
-          })
-          .catch((error) => {
-            console.error("Error fetching or processing data:", error);
-          });
-      })
-      .catch((error) => {
-        console.error("Error fetching or processing data:", error);
-      });
+      const response = await fetch(apiUrl);
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      const responseData = await response.json();
+      console.log("response", responseData.data[0]);
+      
+      setData(
+        responseData.data[0].refferal.level_reward?.filter((obj) => obj.plan_name == planName)
+      );
+  
+      console.log(responseData);
+      
+      const apiUrl1 = `https://calm-erin-moose-robe.cyclic.app/user/get-user?wallet_id=${responseData.data.refferal}`;
+      
+      const response1 = await fetch(apiUrl1);
+      if (!response1.ok) {
+        throw new Error(`HTTP error! Status: ${response1.status}`);
+      }
+      const responseData1 = await response1.json();
+      console.log("user_id", responseData1.data.user_id);
+      localStorage.setItem("UPlineUserID", JSON.stringify(responseData1.data.user_id));
+    } catch (error) {
+      console.error("Error fetching or processing data:", error);
+    }
   };
-
   console.log("data", data)
 
   useEffect(() => {

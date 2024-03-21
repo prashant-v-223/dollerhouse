@@ -114,7 +114,6 @@ const Dashboard = () => {
       console.log(response.data.data.createdAt);
       setRefferal(response.data.data.parent_details.wallet_id);
       user1(response.data.data.parent_details.wallet_id);
-      fetchProfile(response.data.data.parent_details.wallet_id);
       setUser_id(response.data.data.user_id);
       console.log("response.data.data.parent_details.wallet_id", response.data.data.parent_details.wallet_id);
     } catch (err) {
@@ -392,6 +391,8 @@ const Dashboard = () => {
     // GetPlanDetail(walletAddress?.toLowerCase());
     // } else {
     GetPlanDetail1(UserID);
+    
+    fetchProfile(UserID);
     // }
   }, [UserID]);
 

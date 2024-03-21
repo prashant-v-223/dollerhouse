@@ -247,12 +247,13 @@ const House5Plan = () => {
   }
   const leftsaid = () => {
     console.log("memoizedHouse5Plan", memoizedHouse5Plan);
+
     return (
       <div className="circle_preview_5_left">
         {memoizedHouse5Plan && memoizedHouse5Plan.length > 0 ? (
           <div className="circle_pre_1_1"
             onClick={() => handleNewIdData(memoizedHouse5Plan[1]?.uid)}>
-            <h4>
+            <h4 className={memoizedHouse5Plan[1]?.mainId !== house5Plan1[0]?.refId ? memoizedHouse5Plan[1]?.mainId === house5Plan1[0]?.mainId ? `bg-warning` : `bg-light` : `bg-danger`}>
               {memoizedHouse5Plan[1]?.uid || 0}
             </h4>
           </div>
@@ -266,8 +267,10 @@ const House5Plan = () => {
           {[1, 2].map((el, index) => {
             const filteredData = house5Plan1[0]?.referBY
               .filter(item => item.refId === memoizedHouse5Plan?.[1]?.referred?.[index]);
+
+            const filteredData1 = filteredData?.filter(item => item.mainId === house5Plan1[0]?.refId); const filteredData2 = filteredData?.filter(item => item.mainId === house5Plan1[0]?.mainId);
             return (
-              <h4 key={index} onClick={() => handleNewIdData(filteredData[0]?.uid)}>
+              <h4 key={index} className={filteredData1?.length <= 0 ? filteredData2?.length !== 0 ? `bg-warning` : `bg-light` : `bg-danger`} onClick={() => handleNewIdData(filteredData[0]?.uid)}>
                 {filteredData?.length > 0 ? filteredData[0]?.uid : "0"}
               </h4>
             );
@@ -281,8 +284,11 @@ const House5Plan = () => {
                 .filter(item => item.refId === memoizedHouse5Plan?.[1]?.referred?.[index1])?.[0]?.referred;
               const filteredData = house5Plan1[0]?.referBY
                 .filter(item => item.refId === a?.[index]);
-              return (
-                <h4 key={index1 + index} onClick={() => handleNewIdData(filteredData[0]?.uid)}>
+
+
+              const filteredData1 = filteredData?.filter(item => item.mainId === house5Plan1[0]?.refId);
+              const filteredData2 = filteredData?.filter(item => item.mainId === house5Plan1[0]?.mainId); return (
+                <h4 key={index1 + index} className={filteredData1?.length <= 0 ? filteredData2?.length !== 0 ? `bg-warning` : `bg-light` : `bg-danger`} onClick={() => handleNewIdData(filteredData[0]?.uid)}>
                   {filteredData?.length > 0 ? filteredData[0]?.uid : "0"}
                 </h4>
               );
@@ -300,8 +306,10 @@ const House5Plan = () => {
                   .filter(item => item.refId === a?.[index1]);
                 const filteredData = house5Plan1[0]?.referBY
                   .filter(item => item.refId === b?.[0]?.referred?.[index]);
+                const filteredData1 = filteredData?.filter(item => item.mainId === house5Plan1[0]?.refId);
+                const filteredData2 = filteredData?.filter(item => item.mainId === house5Plan1[0]?.mainId);
                 return (
-                  <h4 key={index2 + index1 + index} onClick={() => handleNewIdData(filteredData[0]?.uid)}>
+                  <h4 key={index2 + index1 + index} className={filteredData1?.length <= 0 ? filteredData2?.length !== 0 ? `bg-warning` : `bg-light` : `bg-danger`} onClick={() => handleNewIdData(filteredData[0]?.uid)}>
                     {filteredData?.length > 0 ? filteredData[0]?.uid : "0"}
                   </h4>
                 );
@@ -323,8 +331,11 @@ const House5Plan = () => {
                     .filter(item => item.refId === b?.[0]?.referred?.[index1]);
                   const filteredData = house5Plan1[0]?.referBY
                     .filter(item => item.refId === c?.[0]?.referred?.[index]);
+
+                  const filteredData1 = filteredData?.filter(item => item.mainId === house5Plan1[0]?.refId);
+                  const filteredData2 = filteredData?.filter(item => item.mainId === house5Plan1[0]?.mainId);
                   return (
-                    <h4 key={index3 + index2 + index1 + index} onClick={() => handleNewIdData(filteredData[0]?.uid)}>
+                    <h4 key={index3 + index2 + index1 + index} className={filteredData1?.length <= 0 ? filteredData2?.length !== 0 ? `bg-warning` : `bg-light` : `bg-danger`} onClick={() => handleNewIdData(filteredData[0]?.uid)}>
                       {filteredData?.length > 0 ? filteredData[0]?.uid : "0"}
                     </h4>
                   );
@@ -341,8 +352,9 @@ const House5Plan = () => {
     return (
       <div className="circle_preview_5_left">
         {memoizedHouse5Plan && memoizedHouse5Plan.length > 0 ? (
-          <div className="circle_pre_1_1">
-            <h4 onClick={() => handleNewIdData(memoizedHouse5Plan[0]?.uid || 0)}>
+          <div className="circle_pre_1_1"
+            onClick={() => handleNewIdData(memoizedHouse5Plan[0]?.uid)}>
+            <h4 className={memoizedHouse5Plan[0]?.mainId !== house5Plan1[0]?.refId ? memoizedHouse5Plan[1]?.mainId === house5Plan1[0]?.mainId ? `bg-warning` : `bg-light` : `bg-danger`}>
               {memoizedHouse5Plan[0]?.uid || 0}
             </h4>
           </div>
@@ -356,8 +368,12 @@ const House5Plan = () => {
           {[1, 2].map((el, index) => {
             const filteredData = house5Plan1[0]?.referBY
               .filter(item => item.refId === memoizedHouse5Plan?.[0]?.referred?.[index]);
+
+            const filteredData1 = filteredData?.filter(item => item.mainId === house5Plan1[0]?.refId);
+            const filteredData2 = filteredData?.filter(item => item.mainId === house5Plan1[0]?.mainId);
+            memoizedHouse5Plan[1]?.mainId === house5Plan1[0]?.mainId ? `bg-warning` : `bg-light`
             return (
-              <h4 key={index} onClick={() => handleNewIdData(filteredData[0]?.uid)}>
+              <h4 key={index} className={filteredData1?.length <= 0 ? filteredData2?.length !== 0 ? `bg-warning` : `bg-light` : `bg-danger`} onClick={() => handleNewIdData(filteredData[0]?.uid)}>
                 {filteredData?.length > 0 ? filteredData[0]?.uid : "0"}
               </h4>
             );
@@ -371,8 +387,10 @@ const House5Plan = () => {
                 .filter(item => item.refId === memoizedHouse5Plan?.[0]?.referred?.[index1])?.[0]?.referred;
               const filteredData = house5Plan1[0]?.referBY
                 .filter(item => item.refId === a?.[index]);
+              const filteredData1 = filteredData?.filter(item => item.mainId === house5Plan1[0]?.refId);
+              const filteredData2 = filteredData?.filter(item => item.mainId === house5Plan1[0]?.mainId);
               return (
-                <h4 key={index1 + index} onClick={() => handleNewIdData(filteredData[0]?.uid)}>
+                <h4 key={index1 + index} className={filteredData1?.length <= 0 ? filteredData2?.length !== 0 ? `bg-warning` : `bg-light` : `bg-danger`} onClick={() => handleNewIdData(filteredData[0]?.uid)}>
                   {filteredData?.length > 0 ? filteredData[0]?.uid : "0"}
                 </h4>
               );
@@ -390,8 +408,11 @@ const House5Plan = () => {
                   .filter(item => item.refId === a?.[index1]);
                 const filteredData = house5Plan1[0]?.referBY
                   .filter(item => item.refId === b?.[0]?.referred?.[index]);
+                const filteredData1 = filteredData?.filter(item => item.mainId === house5Plan1[0]?.refId);
+                const filteredData2 = filteredData?.filter(item => item.mainId === house5Plan1[0]?.mainId);
+
                 return (
-                  <h4 key={index2 + index1 + index} onClick={() => handleNewIdData(filteredData[0]?.uid)}>
+                  <h4 key={index2 + index1 + index} className={filteredData1?.length <= 0 ? filteredData2?.length !== 0 ? `bg-warning` : `bg-light` : `bg-danger`} onClick={() => handleNewIdData(filteredData[0]?.uid)}>
                     {filteredData?.length > 0 ? filteredData[0]?.uid : "0"}
                   </h4>
                 );
@@ -413,8 +434,11 @@ const House5Plan = () => {
                     .filter(item => item.refId === b?.[0]?.referred?.[index1]);
                   const filteredData = house5Plan1[0]?.referBY
                     .filter(item => item.refId === c?.[0]?.referred?.[index]);
+                  const filteredData1 = filteredData?.filter(item => item.mainId === house5Plan1[0]?.refId);
+                  const filteredData2 = filteredData?.filter(item => item.mainId === house5Plan1[0]?.mainId);
+
                   return (
-                    <h4 key={index3 + index2 + index1 + index}>
+                    <h4 key={index3 + index2 + index1 + index} className={filteredData1?.length <= 0 ? filteredData2?.length !== 0 ? `bg-warning` : `bg-light` : `bg-danger`} onClick={() => handleNewIdData(filteredData[0]?.uid)}>
                       {filteredData?.length > 0 ? filteredData[0]?.uid : "0"}
                     </h4>
                   );
