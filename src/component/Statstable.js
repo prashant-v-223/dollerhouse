@@ -144,9 +144,9 @@ const Statstable = () => {
     if (typeof str !== "string" || str.length <= 30) {
       return str;
     }
-    const before = str.substring(0, 7);
+    const before = str.substring(0, 15);
     const after = str.substring(35); // Remove 30 characters and take the rest
-    const replacedMiddle = ".".repeat(5); // Replace 30 characters with 5 asterisks
+    const replacedMiddle = ".".repeat(9); // Replace 30 characters with 5 asterisks
     return before + replacedMiddle + after;
   }
   const copyToClipboard = (invited_member_id) => {
@@ -171,13 +171,9 @@ const Statstable = () => {
           <table className="table">
             <thead>
               <tr>
-                <th>Type</th>
-                <th>User ID</th>
                 <th>Wallet Address</th>
-                <th>Amount</th>
-                <th>Status</th>
                 <th>User ID</th>
-                <th>Time</th>
+                <th className="text-center">Time</th>
               </tr>
             </thead>
             <tbody>
@@ -186,14 +182,6 @@ const Statstable = () => {
                   .map((item, index) => {
                     return (
                       <tr key={index}>
-                        <td>
-                          <img
-                            src="/static/media/svg-image-23.aa0930be96db08ffc8e973487f0567fb.svg"
-                            alt="wallet"
-                            className="wallet_icon_last"
-                          />
-                        </td>
-                        <td>{item.plan_name}</td>
                         <td>
                           {removeAndReplaceMiddleCharacters(
                             item.invited_member_id
@@ -208,14 +196,7 @@ const Statstable = () => {
                             <MdContentCopy />
                           </button>
                         </td>
-                        <td>{item.house_reward} USDT</td>
-                        <td className="status_row">
-                          {item.status ? (
-                            <p className=" text-danger">{item.status}</p>
-                          ) : (
-                            <p className="" style={{ color: "greenyellow" }}>Received</p>
-                          )}
-                        </td>
+
                         <td>
                           <p
                             onClick={() => {
@@ -226,7 +207,7 @@ const Statstable = () => {
                             ID{item.user_id}
                           </p>
                         </td>
-                        <td>
+                        <td className="text-center">
                           {new Date(item.Time).toLocaleString("en-IN", {
                             timeZone: "Asia/Kolkata",
                           })}
