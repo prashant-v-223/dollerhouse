@@ -46,11 +46,10 @@ const PartnersTable = () => {
         return response.json();
       })
       .then((data) => {
-        setLevelRewards(data.data.refferal.level_reward);
-        setTableData(data.data.refferal.house_reward);
-        setHouseRewards(data.data.refferal.house_reward);
+        setLevelRewards(data.data[0].refferal.level_reward);
+        setTableData(data.data[0].refferal.house_reward);
+        setHouseRewards(data.data[0].refferal.house_reward);
 
-        console.log(data);
       })
       .catch((error) => {
         console.error("Error fetching or processing data:", error);
