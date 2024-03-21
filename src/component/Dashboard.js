@@ -394,6 +394,9 @@ const Dashboard = () => {
   const datashow = (dataincome, slotId) => {
     return dataincome && dataincome['h1' + slotId + "all"] + dataincome['h15' + slotId + "all"] + dataincome['innerAmountSum' + slotId]
   };
+  const missdatashow = (dataincome, slotId) => {
+    return dataincome && dataincome['h1' + slotId + "miss"] + dataincome['h15' + slotId + "miss"]
+  };
 
 
   const [totalInvestMent, setTotalInvestMent] = useState("")
@@ -955,7 +958,7 @@ const Dashboard = () => {
                               <div className="slot_price_carf_t d-block">
                                 <h4 className="text-light"><b>{datashow(dataincome, item.slotId)} USDT</b></h4>
                                 <h6 className="text-danger"><b>Missed Profits</b></h6>
-                                <h6 className="text-danger"><b>{dataincome && dataincome['h1' + item.slotId + "miss"] + dataincome['h15' + item.slotId + "miss"]} USDT</b></h6>
+                                <h6 className="text-danger"><b>{missdatashow(dataincome, item.slotId)} USDT</b></h6>
                               </div>
                             </div>
                             <div className="slot_all_price_and_priviews">
