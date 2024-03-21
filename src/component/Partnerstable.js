@@ -23,7 +23,7 @@ const PartnersTable = () => {
   const user = async (profitDetailsApi) => {
     try {
       const response = await axios.get(
-        `https://calm-erin-moose-robe.cyclic.app/user/get-user?wallet_id=${address}`
+        `http://localhost:3100/user/get-user?wallet_id=${address}`
       );
       setUser_id(response.data.data.user_id);
     } catch (err) {
@@ -37,7 +37,7 @@ const PartnersTable = () => {
   const [rewards, setRewards] = useState(1);
 
   const profitDetailsApi = (id) => {
-    const apiUrl = `https://calm-erin-moose-robe.cyclic.app/reward/get?userId=${id}`;
+    const apiUrl = `http://localhost:3100/reward/get?userId=${id}`;
     fetch(apiUrl)
       .then((response) => {
         if (!response.ok) {
@@ -236,15 +236,11 @@ const PartnersTable = () => {
                       return (
                         <tr key={index}>
                           <td>
-                            {item.status ? (
-                              <img src="/up-arrow.png" style={{ width: "30px" }} />
-                            ) : (
-                              <img
-                                src="/static/media/svg-image-23.aa0930be96db08ffc8e973487f0567fb.svg"
-                                alt="wallet"
-                                className="wallet_icon_last"
-                              />
-                            )}
+                            <img
+                              src="/static/media/svg-image-23.aa0930be96db08ffc8e973487f0567fb.svg"
+                              alt="wallet"
+                              className="wallet_icon_last"
+                            />
                           </td>
                           <td>{item.plan_name}</td>
                           <td>

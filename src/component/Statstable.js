@@ -32,7 +32,7 @@ const Statstable = () => {
   const navigate = useNavigate();
 
   const profitDetailsApi = (id) => {
-    const apiUrl = `https://calm-erin-moose-robe.cyclic.app/reward/get?userId=${id}`;
+    const apiUrl = `http://localhost:3100/reward/get?userId=${id}`;
     fetch(apiUrl)
       .then((response) => {
         if (!response.ok) {
@@ -41,7 +41,7 @@ const Statstable = () => {
         return response.json();
       })
       .then((data) => {
-        setTableData(data.data.house_reward);
+        setTableData(data.data);
         console.log(data);
       })
       .catch((error) => {
@@ -171,9 +171,19 @@ const Statstable = () => {
           <table className="table">
             <thead>
               <tr>
+                <th>#Sr No.</th>
                 <th>Wallet Address</th>
                 <th>User ID</th>
-                <th className="text-center">Time</th>
+                <th className="text-center">20$ slot</th>
+                <th className="text-center">40$ slot</th>
+                <th className="text-center">100$ slot</th>
+                <th className="text-center">200$ slot</th>
+                <th className="text-center">500$ slot</th>
+                <th className="text-center">1000$ slot</th>
+                <th className="text-center">2000$ slot</th>
+                <th className="text-center">4000$ slot</th>
+                <th className="text-center">direct joiner</th>
+                <th className="text-center">time</th>
               </tr>
             </thead>
             <tbody>
@@ -183,13 +193,16 @@ const Statstable = () => {
                     return (
                       <tr key={index}>
                         <td>
+                          {index + 1}
+                        </td>
+                        <td>
                           {removeAndReplaceMiddleCharacters(
-                            item.invited_member_id
+                            item.refferal.wallet_id
                           )}
                           <button
                             className="copy_button_table"
                             onClick={() => {
-                              copyToClipboard(item.invited_member_id);
+                              copyToClipboard(item.refferal.wallet_id);
                             }}
                           >
                             {" "}
@@ -204,11 +217,38 @@ const Statstable = () => {
                             }}
                             className="link_table text-center  link_table2 table_id"
                           >
-                            ID{item.user_id}
+                            ID{item.refferal?.user1?.user_id}
                           </p>
                         </td>
+                        <td>
+                          {(item.refferal.result.length !== 0).toString()}
+                        </td>
+                        <td>
+                          {(item.refferal.result1.length !== 0).toString()}
+                        </td>
+                        <td>
+                          {(item.refferal.result2.length !== 0).toString()}
+                        </td>
+                        <td>
+                          {(item.refferal.result3.length !== 0).toString()}
+                        </td>
+                        <td>
+                          {(item.refferal.result4.length !== 0).toString()}
+                        </td>
+                        <td>
+                          {(item.refferal.result5.length !== 0).toString()}
+                        </td>
+                        <td>
+                          {(item.refferal.result6.length !== 0).toString()}
+                        </td>
+                        <td>
+                          {(item.refferal.result7.length !== 0).toString()}
+                        </td>
+                        <td>
+                          {item.refferal?.user1.refferal1}
+                        </td>
                         <td className="text-center">
-                          {new Date(item.Time).toLocaleString("en-IN", {
+                          {new Date(item.refferal?.user1?.createdAt).toLocaleString("en-IN", {
                             timeZone: "Asia/Kolkata",
                           })}
                         </td>
