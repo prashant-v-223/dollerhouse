@@ -172,7 +172,7 @@ const Statstable = () => {
             <thead>
               <tr>
                 <th>Type</th>
-                <th>Plan Name</th>
+                <th>User ID</th>
                 <th>Wallet Address</th>
                 <th>Amount</th>
                 <th>Status</th>

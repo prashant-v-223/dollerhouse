@@ -135,7 +135,6 @@ const Registration = ({ id }) => {
       });
       if (response.ok) {
         user();
-        navigate("/dashboard");
       }
     } catch (error) {
       console.error("Error fetching user details:", error);
@@ -210,13 +209,10 @@ const Registration = ({ id }) => {
       const response = await axios.get(
         `https://calm-erin-moose-robe.cyclic.app/user/get-user?wallet_id=${address}`
       );
-
-      if (response.ok) {
-        localStorage.setItem("UserID", JSON.stringify(response.data.data.user_id));
-        navigate("/dashboard");
-      }
+      localStorage.setItem("UserID", JSON.stringify(response.data.data.user_id));
+      navigate("/dashboard");
     } catch (err) {
-      //console.log(err);
+      console.log(err);
     }
   };
 
