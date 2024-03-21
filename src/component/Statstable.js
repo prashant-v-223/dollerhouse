@@ -221,22 +221,22 @@ const Statstable = () => {
                           </p>
                         </td>
                         <td>
-                          {(item.refferal.result.length !== 0).toString()}
+                          <input type="checkbox" checked={(item.refferal.result.length !== 0)} />
                         </td>
                         <td>
-                          {(item.refferal.result1.length !== 0).toString()}
+                          <input type="checkbox" checked={(item.refferal.result1.length !== 0)} />
                         </td>
                         <td>
-                          {(item.refferal.result2.length !== 0).toString()}
+                          <input type="checkbox" checked={(item.refferal.result2.length !== 0)} />
                         </td>
                         <td>
-                          {(item.refferal.result3.length !== 0).toString()}
+                          <input type="checkbox" checked={(item.refferal.result3.length !== 0)} />
                         </td>
                         <td>
-                          {(item.refferal.result4.length !== 0).toString()}
+                          <input type="checkbox" checked={(item.refferal.result4.length !== 0)} />
                         </td>
                         <td>
-                          {(item.refferal.result5.length !== 0).toString()}
+                          <input type="checkbox" checked={(item.refferal.result5.length !== 0)} />
                         </td>
                         <td>
                           {(item.refferal.result6.length !== 0).toString()}
