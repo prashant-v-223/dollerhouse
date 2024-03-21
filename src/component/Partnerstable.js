@@ -46,9 +46,9 @@ const PartnersTable = () => {
         return response.json();
       })
       .then((data) => {
-        setLevelRewards(data.data.level_reward);
-        setTableData(data.data.house_reward);
-        setHouseRewards(data.data.house_reward);
+        setLevelRewards(data.data.refferal.level_reward);
+        setTableData(data.data.refferal.house_reward);
+        setHouseRewards(data.data.refferal.house_reward);
 
         console.log(data);
       })
@@ -365,7 +365,7 @@ const PartnersTable = () => {
             ""
           )}
 
-          {tableData.length > 10 && (
+          {tableData?.length > 10 && (
             <div className="flex pagination_postion justify-end ">
               <div className="pagination-container flex space-between space-x-5">
                 <button
