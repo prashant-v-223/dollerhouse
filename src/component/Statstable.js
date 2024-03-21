@@ -245,7 +245,7 @@ const Statstable = () => {
                           {(item.refferal.result7.length !== 0).toString()}
                         </td>
                         <td>
-                          {item.refferal?.user1.refferal1}
+                          {item.refferal?.user1.refferal1Size}
                         </td>
                         <td className="text-center">
                           {new Date(item.refferal?.user1?.createdAt).toLocaleString("en-IN", {
