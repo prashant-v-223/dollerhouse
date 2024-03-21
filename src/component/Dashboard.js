@@ -609,7 +609,8 @@ const Dashboard = () => {
                       // }}
                       >
                         <p className="card_title">Direct Team</p>
-                        <h1>{profitDetails ? profitDetails?.directTeam : 0}</h1>
+
+                        <h1>{profitDetails && profitDetails?.recentTeam}</h1>
                         <div className="part_green_down">
                           <div className="down_green">
                             <p>
@@ -620,6 +621,7 @@ const Dashboard = () => {
                                   aria-hidden="true"
                                 ></i>
                               </span>
+                              {profitDetails ? profitDetails?.total_team : 0}
                             </p>
                           </div>
 
@@ -641,7 +643,7 @@ const Dashboard = () => {
                       // }}
                       >
                         <p className="card_title">Total Team</p>
-                        <h1>{profitDetails && profitDetails?.recentTeam}</h1>
+                        <h1>{profitDetails ? profitDetails?.directTeam : 0}</h1>
                         <div className="part_green_down">
                           <div className="down_green">
                             <p>
@@ -652,7 +654,6 @@ const Dashboard = () => {
                                   aria-hidden="true"
                                 ></i>
                               </span>
-                              {profitDetails ? profitDetails?.total_team : 0}
                             </p>
                           </div>
 
