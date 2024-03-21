@@ -144,9 +144,9 @@ const Statstable = () => {
     if (typeof str !== "string" || str.length <= 30) {
       return str;
     }
-    const before = str.substring(0, 15);
+    const before = str.substring(0, 7);
     const after = str.substring(35); // Remove 30 characters and take the rest
-    const replacedMiddle = ".".repeat(9); // Replace 30 characters with 5 asterisks
+    const replacedMiddle = ".".repeat(7); // Replace 30 characters with 5 asterisks
     return before + replacedMiddle + after;
   }
   const copyToClipboard = (invited_member_id) => {
@@ -222,60 +222,60 @@ const Statstable = () => {
                         </td>
                         <td>
                           {(item.refferal.result.length !== 0).toString() === "true" ? <div className="bg-success " style={{
-                            width: 50, height: 50, borderRadius: "50%"
+                            width: 35, height: 35, borderRadius: "50%"
                           }}></div> : <div className="bg-danger" style={{
-                            width: 50, height: 50, borderRadius: "50%"
+                            width: 35, height: 35, borderRadius: "50%"
                           }}></div>}
                         </td>
                         <td>
                           {(item.refferal.result1.length !== 0).toString() === "true" ? <div className="bg-success" style={{
-                            width: 50, height: 50, borderRadius: "50%"
+                            width: 35, height: 35, borderRadius: "50%"
                           }}></div> : <div className="bg-danger" style={{
-                            width: 50, height: 50, borderRadius: "50%"
+                            width: 35, height: 35, borderRadius: "50%"
                           }}></div>}
                         </td>
                         <td>
                           {(item.refferal.result2.length !== 0).toString() === "true" ? <div className="bg-success" style={{
-                            width: 50, height: 50, borderRadius: "50%"
+                            width: 35, height: 35, borderRadius: "50%"
                           }}></div> : <div className="bg-danger" style={{
-                            width: 50, height: 50, borderRadius: "50%"
+                            width: 35, height: 35, borderRadius: "50%"
                           }}></div>}
                         </td>
                         <td>
                           {(item.refferal.result3.length !== 0).toString() === "true" ? <div className="bg-success" style={{
-                            width: 50, height: 50, borderRadius: "50%"
+                            width: 35, height: 35, borderRadius: "50%"
                           }}></div> : <div className="bg-danger" style={{
-                            width: 50, height: 50, borderRadius: "50%"
+                            width: 35, height: 35, borderRadius: "50%"
                           }}></div>}
                         </td>
                         <td>
 
                           {(item.refferal.result4.length !== 0).toString() === "true" ? <div className="bg-success" style={{
-                            width: 50, height: 50, borderRadius: "50%"
+                            width: 35, height: 35, borderRadius: "50%"
                           }}></div> : <div className="bg-danger" style={{
-                            width: 50, height: 50, borderRadius: "50%"
+                            width: 35, height: 35, borderRadius: "50%"
                           }}></div>}
                         </td>
                         <td>
 
                           {(item.refferal.result5.length !== 0).toString() === "true" ? <div className="bg-success" style={{
-                            width: 50, height: 50, borderRadius: "50%"
+                            width: 35, height: 35, borderRadius: "50%"
                           }}></div> : <div className="bg-danger" style={{
-                            width: 50, height: 50, borderRadius: "50%"
+                            width: 35, height: 35, borderRadius: "50%"
                           }}></div>}
                         </td>
                         <td>
                           {(item.refferal.result6.length !== 0).toString() === "true" ? <div className="bg-success" style={{
-                            width: 50, height: 50, borderRadius: "50%"
+                            width: 35, height: 35, borderRadius: "50%"
                           }}></div> : <div className="bg-danger" style={{
-                            width: 50, height: 50, borderRadius: "50%"
+                            width: 35, height: 35, borderRadius: "50%"
                           }}></div>}
                         </td>
                         <td>
                           {(item.refferal.result7.length !== 0).toString() === "true" ? <div className="bg-success" style={{
-                            width: 50, height: 50, borderRadius: "50%"
+                            width: 35, height: 35, borderRadius: "50%"
                           }}></div> : <div className="bg-danger" style={{
-                            width: 50, height: 50, borderRadius: "50%"
+                            width: 35, height: 35, borderRadius: "50%"
                           }}></div>}
                         </td>
                         <td>
