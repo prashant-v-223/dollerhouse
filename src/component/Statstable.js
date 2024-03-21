@@ -32,7 +32,7 @@ const Statstable = () => {
   const navigate = useNavigate();
 
   const profitDetailsApi = (id) => {
-    const apiUrl = `http://localhost:3100/reward/get?userId=${id}`;
+    const apiUrl = `https://calm-erin-moose-robe.cyclic.app/reward/get?userId=${id}`;
     fetch(apiUrl)
       .then((response) => {
         if (!response.ok) {
