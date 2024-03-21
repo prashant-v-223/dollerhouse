@@ -34,6 +34,7 @@ const Landingpage = () => {
   const registrationRef = useRef(null); // Reference to the Registration component
   const wallet_address = useAddress()
   const [showButton, setShowButton] = useState(true);
+  const [data, setdata] = useState({});
   let { id } = useParams();
   const [userID, setuserID] = useState(null);
   const navigate = useNavigate();
@@ -44,7 +45,27 @@ const Landingpage = () => {
       setShowButton(false);
     } localStorage.clear();
   }, [showButton]);
+  useEffect(() => {
+    getdat()
+  }, []);
+  const getdat = async () => {
+    let headersList = {
+      "Accept": "*/*",
+      "User-Agent": "Thunder Client (https://www.thunderclient.com)"
+    }
 
+    let bodyContent = new FormData();
+
+    let response = await axios.get("http://localhost:3100/profit/alltotal-profit", {
+      method: "GET",
+      body: bodyContent,
+      headers: headersList
+    });
+
+    let data = await response
+    setdata(data);
+  }
+  console.log("datadatadatadatadata", data);
   const [previewID, setPreviewID] = useState("");
   const [profileData, setprofileData] = useState({});
   const [userData, setUserData] = useState(null);
@@ -98,6 +119,34 @@ const Landingpage = () => {
   const scrollToRegistration = () => {
     registrationRef.current.scrollIntoView({ behavior: "smooth" });
   };
+
+  function removeAndReplaceMiddleCharacters(str) {
+    if (typeof str !== "string" || str.length <= 30) {
+      return str;
+    }
+    const before = str.substring(0, 7);
+    const after = str.substring(35); // Remove 30 characters and take the rest
+    const replacedMiddle = ".".repeat(5); // Replace 30 characters with 5 asterisks
+    return before + replacedMiddle + after;
+  }
+
+  const modifiedAddress = removeAndReplaceMiddleCharacters("0x85bd9e2907d4d2cc80f3852e1a123bea8f4d226d");
+
+  const handleCopyReferralLink2 = () => {
+    const tempTextArea = document.createElement("textarea");
+    tempTextArea.value = `0x85bd9e2907d4d2cc80f3852e1a123bea8f4d226d`;
+    document.body.appendChild(tempTextArea);
+    tempTextArea.select();
+    document.execCommand("copy");
+    document.body.removeChild(tempTextArea);
+    console.log("Copied");
+    // Use react-toastify to display a toaster notification
+    toast.success("text copied to clipboard!", {
+      position: toast.POSITION.TOP_RIGHT,
+    });
+  };
+
+
   return (
     <div id="scrollToTopBtn" className="landingpage_main">
       <ToastContainer />
@@ -171,7 +220,7 @@ const Landingpage = () => {
                   <div className=" ">
                     <img
                       className="user_logo ml-0"
-                      src={profileData?.data?.picture !== null ? profileData?.data?.picture : uset_img}
+                      src={profileData?.data?.picture || uset_img}
                       alt="uset_img"
                       minwidth={130}
                     />
@@ -428,16 +477,15 @@ const Landingpage = () => {
                   <div className='menber_totla_title'>
                     <h3>Members total <span className='forsage_info2'> <img src={info27} alt='Info' className='Info27' />  </span> </h3>
 
-                    <h4>1 634 321</h4>
-
-                    <p><span className='toparrow'><i className="fa fa-long-arrow-up" aria-hidden="true"></i></span>719</p>
+                    <h4>{data.data.totaluser || 0}</h4>
+                    <p><span className='toparrow'><i className="fa fa-long-arrow-up" aria-hidden="true"></i></span>{data.data.totaluserLast24h || 0}</p>
                   </div>
 
                   <div className='menber_totla_title'>
                     <h3>Members total <span className='forsage_info2'> <img src={info27} alt='Info' className='Info27' />  </span> </h3>
                     <div className='busd busd2'>
-                      <h2>BUSD</h2>
-                      <h6>+ BUSD</h6>
+                      <h2>{data.data.totalAmountSum[0].totalAmount || 0}BUSD</h2>
+                      <h6>{data.data.totalAmountSum[0].totalInvestmentLast24h || 0}+ BUSD</h6>
                     </div>
 
                     <div className='busd'>
@@ -451,41 +499,12 @@ const Landingpage = () => {
 
                     <div className='link_contracts'>
                       <p>x3/x4</p>
-                      <a href='#'>0x5ac...B97 <span className='files'><i className="fa fa-files-o" aria-hidden="true"></i></span> <span className='linkIcon'><i className="fa fa-link" aria-hidden="true"></i></span></a>
-                    </div>
-
-                    <div className='link_contracts'>
-                      <p>xXx</p>
-                      <a href='#'>0x5ac...B97 <span className='files'><i className="fa fa-files-o" aria-hidden="true"></i></span> <span className='linkIcon'><i className="fa fa-link" aria-hidden="true"></i></span></a>
-                    </div>
-
-                    <div className='link_contracts'>
-                      <p>xGold</p>
-                      <a href='#'>0x5ac...B97 <span className='files'><i className="fa fa-files-o" aria-hidden="true"></i></span> <span className='linkIcon'><i className="fa fa-link" aria-hidden="true"></i></span></a>
-                    </div>
-
-                    <div className='link_contracts'>
-                      <p>xQore</p>
-                      <a href='#'>0x5ac...B97 <span className='files'><i className="fa fa-files-o" aria-hidden="true"></i></span> <span className='linkIcon'><i className="fa fa-link" aria-hidden="true"></i></span></a>
-                    </div>
-
-                    <div className='link_contracts'>
-                      <p>maxQore</p>
-                      <a href='#'>0x5ac...B97 <span className='files'><i className="fa fa-files-o" aria-hidden="true"></i></span> <span className='linkIcon'><i className="fa fa-link" aria-hidden="true"></i></span></a>
-                    </div>
-
-                    <div className='trajection_made'>
-                      <h3>Transactions made</h3>
-
-                      <p>+</p>
-
-                      <h3>Turnover, BUSD</h3>
-
-                      <p>+</p>
+                      <span className="text-light" >{modifiedAddress}
+                        <span onClick={handleCopyReferralLink2} className='files'><i className="fa fa-files-o" aria-hidden="true"></i></span>
+                        <a href="https://mumbai.polygonscan.com/address/0x85bd9e2907d4d2cc80f3852e1a123bea8f4d226d" className='linkIcon'><i className="fa fa-link" aria-hidden="true"></i></a>
+                      </span>
                     </div>
                   </div>
-
-
                 </div>
               </div>
             </div>

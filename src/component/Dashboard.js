@@ -114,6 +114,7 @@ const Dashboard = () => {
       console.log(response.data.data.createdAt);
       setRefferal(response.data.data.parent_details.wallet_id);
       user1(response.data.data.parent_details.wallet_id);
+      fetchProfile(response.data.data.parent_details.wallet_id);
       setUser_id(response.data.data.user_id);
       console.log("response.data.data.parent_details.wallet_id", response.data.data.parent_details.wallet_id);
     } catch (err) {
@@ -152,6 +153,7 @@ const Dashboard = () => {
         `https://calm-erin-moose-robe.cyclic.app/profit/total-profit?userId=${main_user_id}`
       );
       setProfitDetails(response.data.data);
+      console.log("response.data", response.data.data);
     } catch (err) {
       //console.log(err);
     }
@@ -534,17 +536,23 @@ const Dashboard = () => {
                   <div className="col-lg-6 profile-section">
                     <div className="personal_user_left">
                       <div className="unknowuser_img d-block m-auto">
-                        <img
+                        {profileData?.data?.picture !== undefined ? <img
                           onClick={() => {
                             setProfilePopup(!profilePopup);
                           }}
                           className="user_logo  ml-0 ml-md-4"
-                          src={profileData?.data?.picture !== null ? profileData?.data?.picture : uset_img}
+                          src={profileData?.data?.picture || uset_img}
                           alt="uset_img"
                           minwidth={130}
-                        />
-
-                        {/* <img onClick={()=> setIsModalOpen(true)} className="edit_icon" src="/pen.png" /> */}
+                        /> : <img
+                          onClick={() => {
+                            setProfilePopup(!profilePopup);
+                          }}
+                          className="user_logo  ml-0 ml-md-4"
+                          src={profileData?.data?.picture || uset_img}
+                          alt="uset_img"
+                          minwidth={130}
+                        />}
                       </div>
                       <div className="id_user right_text d-block m-auto w-100 px-2 px-md-4">
                         <div className="d-flex justify-content-between mt-4" >
