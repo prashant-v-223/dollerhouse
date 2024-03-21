@@ -188,14 +188,6 @@ const SlotDetail = () => {
                     <h4>House 1 plan</h4>
                   </div>
                   <div className="slot_price_carf_t">
-                    <h4>15.00 </h4>
-                    <p>
-                      <img
-                        src={UsdtIcon}
-                        className="usdt_icon_slot"
-                        alt="icon_usdt"
-                      />
-                    </p>
                   </div>
                 </div>
                 <div className="slot_all_price_and_priviews">
@@ -222,14 +214,7 @@ const SlotDetail = () => {
                     <h4>House 5 plan</h4>
                   </div>
                   <div className="slot_price_carf_t">
-                    <h4>500.00 </h4>
-                    <p>
-                      <img
-                        src={UsdtIcon}
-                        className="usdt_icon_slot"
-                        alt="icon_usdt"
-                      />
-                    </p>
+                  
                   </div>
                 </div>
                 <div className="slot_all_price_and_priviews">
@@ -256,14 +241,7 @@ const SlotDetail = () => {
                     <h4>House 15 plan</h4>
                   </div>
                   <div className="slot_price_carf_t">
-                    <h4>80.00 </h4>
-                    <p>
-                      <img
-                        src={UsdtIcon}
-                        className="usdt_icon_slot"
-                        alt="icon_usdt"
-                      />
-                    </p>
+                  
                   </div>
                 </div>
                 <div className="slot_all_price_and_priviews">
