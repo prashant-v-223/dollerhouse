@@ -50,8 +50,41 @@ const Dashboard = () => {
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const sdk = useSDK();
+  function fileToBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        resolve(reader.result);
+      };
+
+      reader.onerror = (error) => {
+        reject(error);
+      };
+
+      reader.readAsDataURL(file);
+    });
+  }
 
 
+  const GetPlanDetail1 = async (main_user_id) => {
+    try {
+      const response = await fetch(
+        `https://calm-erin-moose-robe.cyclic.app/plan/get-plan?userid=${main_user_id}`
+      );
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const data = await response.json();
+      setPlanDetails(data.data.plan_details);
+      setdata12(data.data1);
+      setdata123(data.data2);
+      setdataincome(data.data3);
+      setWalletAddress(data.data.wallet_id);
+    } catch (error) {
+      console.error("Error fetching profile:", error);
+    }
+  };
   // Example usage:
   const wallet_address = useAddress()
   const [walletAddress, setWalletAddress] = useState(wallet_address)
@@ -90,6 +123,7 @@ const Dashboard = () => {
   useEffect(() => {
     if (walletAddress !== null) {
       user(walletAddress);
+      fetchProfile(walletAddress);
     }
   }, [walletAddress]);
   const user1 = async (w) => {
@@ -247,23 +281,27 @@ const Dashboard = () => {
     setUsername(e.target.value);
   };
 
-  const handleFileChange = (e) => {
+  const handleFileChange = async (e) => {
     console.log(e.target.files);
-    setFile(e.target.files[0]);
+    const base64String = await fileToBase64(e.target.files[0]);
+    console.log(base64String)
+    setFile(base64String);
   };
 
   const handleSubmit = async (e) => {
-    const formData = new FormData();
-    formData.append("username", username);
-    formData.append("wallet_id", walletAddress?.toLowerCase());
-    formData.append("filename", "Test");
     try {
+      const requestBody = {
+        username: username,
+        wallet_id: wallet_id,
+        filename: file
+      };
+
       const response = await axios.post(
         "https://calm-erin-moose-robe.cyclic.app/profile/upload",
-        formData,
+        requestBody,
         {
           headers: {
-            "Content-Type": "multipart/form-data",
+            "Content-Type": "application/json",
           },
         }
       );
@@ -328,24 +366,6 @@ const Dashboard = () => {
       console.error("Error fetching profile:", error);
     }
   };
-  const GetPlanDetail1 = async (main_user_id) => {
-    try {
-      const response = await fetch(
-        `https://calm-erin-moose-robe.cyclic.app/plan/get-plan?userid=${main_user_id}`
-      );
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      const data = await response.json();
-      setPlanDetails(data.data.plan_details);
-      setdata12(data.data1);
-      setdata123(data.data2);
-      setdataincome(data.data3);
-      setWalletAddress(data.data.wallet_id);
-    } catch (error) {
-      console.error("Error fetching profile:", error);
-    }
-  };
 
 
   // fetch Profile Data
@@ -373,10 +393,37 @@ const Dashboard = () => {
     // }
   }, [UserID]);
 
-  const handleProfileFormSubmit = (e) => {
+  const handleProfileFormSubmit = async (e) => {
     e.preventDefault();
-    handleSubmit();
-    fetchProfile(walletAddress);
+    try {
+      const requestBody = {
+        username: username,
+        wallet_id: walletAddress,
+        filename: file
+      };
+
+      const response = await axios.post(
+        "https://calm-erin-moose-robe.cyclic.app/profile/upload",
+        requestBody,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log(response.data);
+      fetchProfile(walletAddress);
+      toast.success("Profile Submitted", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+      setProfilePopup(false);
+      setMessage("Profile picture uploaded successfully!");
+    } catch (error) {
+      console.error("Error uploading profile picture: ", error);
+      console.log("get-profileget-profileget-profile", wallet);
+      setMessage("Error uploading profile picture. Please try again.");
+    }
+    // fetchProfile(walletAddress);
   };
 
 
@@ -492,7 +539,7 @@ const Dashboard = () => {
                             setProfilePopup(!profilePopup);
                           }}
                           className="user_logo  ml-0 ml-md-4"
-                          src={uset_img}
+                          src={profileData?.data?.picture !== null ? profileData?.data?.picture : uset_img}
                           alt="uset_img"
                           minwidth={130}
                         />

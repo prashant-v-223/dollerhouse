@@ -171,7 +171,7 @@ const Landingpage = () => {
                   <div className=" ">
                     <img
                       className="user_logo ml-0"
-                      src={uset_img}
+                      src={profileData?.data?.picture !== null ? profileData?.data?.picture : uset_img}
                       alt="uset_img"
                       minwidth={130}
                     />
