@@ -391,6 +391,9 @@ const Dashboard = () => {
     }
     return false;
   };
+  const datashow = (dataincome, slotId) => {
+    return dataincome && dataincome['h1' + slotId + "all"] + dataincome['h15' + slotId + "all"] + dataincome['innerAmountSum' + slotId]
+  };
 
 
   const [totalInvestMent, setTotalInvestMent] = useState("")
@@ -933,71 +936,73 @@ const Dashboard = () => {
                     } else if (item?.plan_price == 100) {
                       isAmountGreaterThan4.push(data123?.r100 > 0);
                     }
-                    console.log('h1' + item.slotId + "all");
+                    console.log(dataincome['h1' + item.slotId + "all"], 'h1' + item.slotId + "all");
                     const showPreview1 = checkAmount(b?.plan_price);
-                    return (
-                      <div className={`relative privew_card_sub mx-2 ${showPreview1 ? checkAmount(item.plan_price) ? "buy" : "bg-danger" : isAmountGreaterThan3[index] ? "bg-primary" : isAmountGreaterThan4[index] ? checkAmount(item.plan_price) ? "buy" : "bg-danger" : ""}
+                    if (dataincome['h1' + item.slotId + "all"] !== undefined) {
+                      return (
+                        <div className={`relative privew_card_sub mx-2 ${showPreview1 ? checkAmount(item.plan_price) ? "buy" : "bg-danger" : isAmountGreaterThan3[index] ? "bg-primary" : isAmountGreaterThan4[index] ? checkAmount(item.plan_price) ? "buy" : "bg-danger" : ""}
                     `}>
-                        <div
-                          key={index}
-                          className={
-                            checkAmount(item.plan_price) ? "" : "opacity_down"
-                          }
-                        >
-                          <div className="slot_title_and_price">
-                            <div className="slot_price">
-                              <h4>{item.slotName}</h4>
-                            </div>
-                            <div className="slot_price_carf_t d-block">
-                              <h4 className="text-light"><b>{dataincome && dataincome['h1' + item.slotId + "all"] + dataincome['h15' + item.slotId + "all"] + dataincome['h5' + item.slotId + "all"]} USDT</b></h4>
-                              <h6 className="text-danger"><b>Missed Profits</b></h6>
-                              <h6 className="text-danger"><b>{dataincome && dataincome['h1' + item.slotId + "miss"] + dataincome['h15' + item.slotId + "miss"]} USDT</b></h6>
-                            </div>
-                          </div>
-                          <div className="slot_all_price_and_priviews">
-                            <div className="all_slot">
-                              <h5>{item.price1}</h5>
-                              <h5>{item.price2}</h5>
-                              <h5>{item.price3}</h5>
-                            </div>
-                            {checkAmount(item.plan_price) && (
-                              <div className="slot_privew_btn">
-                                <Link to={`/slot-${item.slotId}`}>
-                                  Preview{" "}
-                                  <span>
-                                    <img
-                                      src={privewupicon}
-                                      alt="upicons_privew"
-                                      className="upicons_privew"
-                                    />
-                                  </span>
-                                </Link>
+                          <div
+                            key={index}
+                            className={
+                              checkAmount(item.plan_price) ? "" : "opacity_down"
+                            }
+                          >
+                            <div className="slot_title_and_price">
+                              <div className="slot_price">
+                                <h4>{item.slotName}</h4>
                               </div>
-                            )}
+                              <div className="slot_price_carf_t d-block">
+                                <h4 className="text-light"><b>{datashow(dataincome, item.slotId)} USDT</b></h4>
+                                <h6 className="text-danger"><b>Missed Profits</b></h6>
+                                <h6 className="text-danger"><b>{dataincome && dataincome['h1' + item.slotId + "miss"] + dataincome['h15' + item.slotId + "miss"]} USDT</b></h6>
+                              </div>
+                            </div>
+                            <div className="slot_all_price_and_priviews">
+                              <div className="all_slot">
+                                <h5>{item.price1}</h5>
+                                <h5>{item.price2}</h5>
+                                <h5>{item.price3}</h5>
+                              </div>
+                              {checkAmount(item.plan_price) && (
+                                <div className="slot_privew_btn">
+                                  <Link to={`/slot-${item.slotId}`}>
+                                    Preview{" "}
+                                    <span>
+                                      <img
+                                        src={privewupicon}
+                                        alt="upicons_privew"
+                                        className="upicons_privew"
+                                      />
+                                    </span>
+                                  </Link>
+                                </div>
+                              )}
+                            </div>
                           </div>
+                          {!checkAmount(item.plan_price) ? (
+                            <div className="slot_privew_btn slot_privew_btn_center">
+                              <button
+                                onClick={() => {
+                                  handleBuyPlan(item.plan_name, item.plan_price);
+                                }}
+                              >
+                                Upgrade
+                                <span>
+                                  <img
+                                    src={privewupicon}
+                                    alt="upicons_privew"
+                                    className="upicons_privew"
+                                  />
+                                </span>
+                              </button>
+                            </div>
+                          ) : (
+                            ""
+                          )}
                         </div>
-                        {!checkAmount(item.plan_price) ? (
-                          <div className="slot_privew_btn slot_privew_btn_center">
-                            <button
-                              onClick={() => {
-                                handleBuyPlan(item.plan_name, item.plan_price);
-                              }}
-                            >
-                              Upgrade
-                              <span>
-                                <img
-                                  src={privewupicon}
-                                  alt="upicons_privew"
-                                  className="upicons_privew"
-                                />
-                              </span>
-                            </button>
-                          </div>
-                        ) : (
-                          ""
-                        )}
-                      </div>
-                    )
+                      )
+                    }
                   })}
                 </div>
               </div>
