@@ -83,7 +83,12 @@ const Landingpage = () => {
   }
 
   useEffect(() => {
-    GetUserId(wallet_address)
+    if (wallet_address === undefined) {
+      setuserID(null);
+      setprofileData({});
+    } else {
+      GetUserId(wallet_address)
+    }
   }, [wallet_address])
 
 

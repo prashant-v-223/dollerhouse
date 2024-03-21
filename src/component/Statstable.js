@@ -60,17 +60,13 @@ const Statstable = () => {
   };
 
   const handleSearch = () => {
-    if (address) {
-      profitDetailsApi(previewID);
-      localStorage.setItem("UserID", JSON.stringify(previewID));
-    }
+    profitDetailsApi(previewID);
+    localStorage.setItem("UserID", JSON.stringify(previewID));
   };
 
   useEffect(() => {
-    if (address) {
-      user();
-      profitDetailsApi(userIDReal);
-    }
+    user();
+    profitDetailsApi(userIDReal);
   }, [address]);
 
   const itemsPerPage = 10;
@@ -187,7 +183,6 @@ const Statstable = () => {
             <tbody>
               {displayedtableData.length > 0 ? (
                 displayedtableData
-                  .sort((a, b) => new Date(b.Time) - new Date(a.Time)) // Sort by date in descending order
                   .map((item, index) => {
                     return (
                       <tr key={index}>
