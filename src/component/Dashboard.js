@@ -931,6 +931,16 @@ const Dashboard = () => {
                       isAmountGreaterThan3.push(data12?.r40 > 3);
                     } else if (item?.plan_price == 100) {
                       isAmountGreaterThan3.push(data12?.r100 > 3);
+                    } else if (item?.plan_price == 200) {
+                      isAmountGreaterThan3.push(data123?.r200 > 0);
+                    } else if (item?.plan_price == 500) {
+                      isAmountGreaterThan3.push(data123?.r500 > 0);
+                    } else if (item?.plan_price == 1000) {
+                      isAmountGreaterThan3.push(data123?.r1000 > 0);
+                    } else if (item?.plan_price == 2000) {
+                      isAmountGreaterThan3.push(data123?.r2000 > 0);
+                    } else if (item?.plan_price == 4000) {
+                      isAmountGreaterThan3.push(data123?.r4000 > 0);
                     }
                     if (item?.plan_price == 20) {
                       isAmountGreaterThan4.push(data123?.r20 > 0);
@@ -938,12 +948,22 @@ const Dashboard = () => {
                       isAmountGreaterThan4.push(data123?.r40 > 0);
                     } else if (item?.plan_price == 100) {
                       isAmountGreaterThan4.push(data123?.r100 > 0);
+                    } else if (item?.plan_price == 200) {
+                      isAmountGreaterThan4.push(data123?.r200 > 0);
+                    } else if (item?.plan_price == 500) {
+                      isAmountGreaterThan4.push(data123?.r500 > 0);
+                    } else if (item?.plan_price == 1000) {
+                      isAmountGreaterThan4.push(data123?.r1000 > 0);
+                    } else if (item?.plan_price == 2000) {
+                      isAmountGreaterThan4.push(data123?.r2000 > 0);
+                    } else if (item?.plan_price == 4000) {
+                      isAmountGreaterThan4.push(data123?.r4000 > 0);
                     }
                     console.log(dataincome['h1' + item.slotId + "all"], 'h1' + item.slotId + "all");
                     const showPreview1 = checkAmount(b?.plan_price);
                     if (dataincome['h1' + item.slotId + "all"] !== undefined) {
                       return (
-                        <div className={`relative privew_card_sub mx-2 ${showPreview1 ? checkAmount(item.plan_price) ? "buy" : "bg-danger" : isAmountGreaterThan3[index] ? "bg-primary" : isAmountGreaterThan4[index] ? checkAmount(item.plan_price) ? "buy" : "bg-danger" : ""}
+                        <div className={`relative privew_card_sub mx-2 ${showPreview1 ? checkAmount(item.plan_price) ? "buy" : "ERR" : isAmountGreaterThan3[index] ? "ERR2" : isAmountGreaterThan4[index] ? checkAmount(item.plan_price) ? "buy" : "ERR" : ""}
                     `}>
                           <div
                             key={index}
@@ -955,11 +975,16 @@ const Dashboard = () => {
                               <div className="slot_price">
                                 <h4>{item.slotName}</h4>
                               </div>
-                              <div className="slot_price_carf_t d-block">
+                              {checkAmount(item.plan_price) ? <div className="slot_price_carf_t d-block">
                                 <h4 className="text-light"><b>{datashow(dataincome, item.slotId)} USDT</b></h4>
-                                <h6 className="text-danger"><b>Missed Profits</b></h6>
-                                <h6 className="text-danger"><b>{missdatashow(dataincome, item.slotId)} USDT</b></h6>
-                              </div>
+                              </div> : <>
+                                <div className="slot_price_carf_t d-block">
+                                  <h4 className="text-light"><b>{datashow(dataincome, item.slotId)} USDT</b></h4>
+                                  <h6 className="text-danger"><b>Missed Profits</b></h6>
+                                  <h6 className="text-danger"><b>{missdatashow(dataincome, item.slotId)} USDT</b></h6>
+                                </div>
+                              </>
+                              }
                             </div>
                             <div className="slot_all_price_and_priviews">
                               <div className="all_slot">

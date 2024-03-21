@@ -217,7 +217,7 @@ const Statstable = () => {
                             }}
                             className="link_table text-center  link_table2 table_id"
                           >
-                            ID{item.refferal?.user1?.user_id}
+                            ID{item.refferal?.user_id}
                           </p>
                         </td>
                         <td>
