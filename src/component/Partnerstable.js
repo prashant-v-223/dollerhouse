@@ -46,9 +46,9 @@ const PartnersTable = () => {
         return response.json();
       })
       .then((data) => {
-        setLevelRewards(data.data[0].refferal.level_reward);
-        setTableData(data.data[0].refferal.house_reward);
-        setHouseRewards(data.data[0].refferal.house_reward);
+        setLevelRewards(data.data[0].level_reward);
+        setTableData(data.data[0].house_reward);
+        setHouseRewards(data.data[0].house_reward);
 
       })
       .catch((error) => {
