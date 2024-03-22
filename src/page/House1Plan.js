@@ -18,6 +18,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { LiaRecycleSolid } from "react-icons/lia";
 
 import {
   ConnectWallet,
@@ -329,22 +330,26 @@ const House1Plan = () => {
                     {Array.from({ length: 4 }).map((_, index) => {
                       const item = maindata && maindata[index]; // Ignore data at index 0
                       if (item && item.status) {
-                        return <h4 className={`${index === 3 ? "background_cyan" : ""} cursor-pointer bg-[#743b07]`}>
+                        return <h4 className={`${item.status ? item.status === "missed" ? "background_cyan" : "background_cyan1" : ""} cursor-pointer bg-[#743b07]`}>
                           {item.user_id}
-                          {index === 3 && <FaArrowUp className="up_arrow" />}
+                          {item.status === "missed" && <FaArrowUp className="up_arrow" />}
+                          {item.status === "missed Reword" && <FaArrowUp className="up_arrow" style={{
+                            color: "red"
+                          }} />}
                           {/* {<FaArrowUp className="up_arrow" />} */}
                         </h4>;
+                      } else {
+                        return (
+                          <h4
+                            className={`${index === 3 ? "background_cyan" : ""} cursor-pointer bg-[#743b07]`}
+                            onClick={() => handleNewIdData(item?.user_id)}
+                            key={index}
+                          >
+                            {item ? item.user_id : ""}
+                            {index === 3 && <FaArrowUp className="up_arrow" />}
+                          </h4>
+                        );
                       }
-                      return (
-                        <h4
-                          className={`${index === 3 ? "background_cyan" : ""} cursor-pointer bg-[#743b07]`}
-                          onClick={() => handleNewIdData(item?.user_id)}
-                          key={index}
-                        >
-                          {item ? item.user_id : ""}
-                          {index === 3 && <FaArrowUp className="up_arrow" />}
-                        </h4>
-                      );
                     })}
                   </div>
 
@@ -419,10 +424,15 @@ const House1Plan = () => {
                         <tr key={index}>
                           <td>
                             {item.status ? (
-                              <img
-                                src="/up-arrow.png"
-                                className="wallet_icon_last upline_arrow"
-                              />
+                              item.status !== "missed" ? <FaArrowUp className="ml-1" style={{
+                                color: item.status !== "missed" ? "red" : "green",
+                                fontSize: "28px"
+                              }} />
+                                :
+                                <LiaRecycleSolid className="" style={{
+                                  color: item.status !== "missed" ? "red" : "green",
+                                  fontSize: "36px", fontWeight: 600
+                                }} />
                             ) : (
                               <img
                                 src={svg_wallet_img}
@@ -431,7 +441,7 @@ const House1Plan = () => {
                               />
                             )}
                           </td>
-                          <td>{item.plan_name}</td>
+                          <td>{planName1}</td>
                           <td>
                             <span className="table_id">ID{item.user_id}</span>
                           </td>

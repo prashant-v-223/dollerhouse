@@ -3126,6 +3126,10 @@ span.inactive {
   position: relative;
 }
 
+.background_cyan1 {
+  border: 3px solid red !important ;
+  position: relative;
+}
 .up_arrow {
   position: absolute;
   top: -31px;
