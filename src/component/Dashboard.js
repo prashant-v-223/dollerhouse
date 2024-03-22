@@ -391,7 +391,7 @@ const Dashboard = () => {
     // GetPlanDetail(walletAddress?.toLowerCase());
     // } else {
     GetPlanDetail1(UserID);
-    
+
     fetchProfile(UserID);
     // }
   }, [UserID]);
@@ -988,18 +988,18 @@ const Dashboard = () => {
                     } else if (item?.plan_price == 100) {
                       isAmountGreaterThan3.push(data12?.r100 > 3);
                     } else if (item?.plan_price == 200) {
-                      isAmountGreaterThan3.push(data123?.r200 > 0);
+                      isAmountGreaterThan3.push(data123?.r200 > 3);
                     } else if (item?.plan_price == 500) {
-                      isAmountGreaterThan3.push(data123?.r500 > 0);
+                      isAmountGreaterThan3.push(data123?.r500 > 3);
                     } else if (item?.plan_price == 1000) {
-                      isAmountGreaterThan3.push(data123?.r1000 > 0);
+                      isAmountGreaterThan3.push(data123?.r1000 > 3);
                     } else if (item?.plan_price == 2000) {
-                      isAmountGreaterThan3.push(data123?.r2000 > 0);
+                      isAmountGreaterThan3.push(data123?.r2000 > 3);
                     } else if (item?.plan_price == 4000) {
-                      isAmountGreaterThan3.push(data123?.r4000 > 0);
+                      isAmountGreaterThan3.push(data123?.r4000 > 3);
                     }
                     if (item?.plan_price == 20) {
-                      isAmountGreaterThan4.push(data123?.r20 > 0);
+                      isAmountGreaterThan4.push(!true);
                     } else if (item?.plan_price == 40) {
                       isAmountGreaterThan4.push(data123?.r40 > 0);
                     } else if (item?.plan_price == 100) {
@@ -1015,78 +1015,75 @@ const Dashboard = () => {
                     } else if (item?.plan_price == 4000) {
                       isAmountGreaterThan4.push(data123?.r4000 > 0);
                     }
-                    console.log(dataincome['h1' + item.slotId + "all"], 'h1' + item.slotId + "all");
                     const showPreview1 = checkAmount(b?.plan_price);
-                    if (dataincome['h1' + item.slotId + "all"] !== undefined) {
-                      return (
-                        <div className={`relative privew_card_sub mx-2 ${showPreview1 ? checkAmount(item.plan_price) ? "buy" : "ERR" : isAmountGreaterThan3[index] ? "ERR2" : isAmountGreaterThan4[index] ? checkAmount(item.plan_price) ? "buy" : "ERR" : ""}
+                    return (
+                      <div className={`relative privew_card_sub mx-2 ${showPreview1 ? checkAmount(item.plan_price) ? "buy" : "" : isAmountGreaterThan3[index] ? "ERR2" : isAmountGreaterThan4[index] ? checkAmount(item.plan_price) ? "buy" : "ERR" : ""}
                     `}>
-                          <div
-                            key={index}
-                            className={
-                              checkAmount(item.plan_price) ? "" : "opacity_down"
-                            }
-                          >
-                            <div className="slot_title_and_price">
-                              <div className="slot_price">
-                                <h4>{item.slotName}</h4>
-                              </div>
-                              {checkAmount(item.plan_price) ? <div className="slot_price_carf_t d-block">
+                        <div
+                          key={index}
+                          className={
+                            checkAmount(item.plan_price) ? "" : "opacity_down"
+                          }
+                        >
+                          <div className="slot_title_and_price">
+                            <div className="slot_price">
+                              <h4>{item.slotName}</h4>
+                            </div>
+                            {checkAmount(item.plan_price) ? <div className="slot_price_carf_t d-block">
+                              <h4 className="text-light"><b>{datashow(dataincome, item.slotId)} USDT</b></h4>
+                            </div> : <>
+                              <div className="slot_price_carf_t d-block">
                                 <h4 className="text-light"><b>{datashow(dataincome, item.slotId)} USDT</b></h4>
-                              </div> : <>
-                                <div className="slot_price_carf_t d-block">
-                                  <h4 className="text-light"><b>{datashow(dataincome, item.slotId)} USDT</b></h4>
-                                  <h6 className="text-danger"><b>Missed Profits</b></h6>
-                                  <h6 className="text-danger"><b>{missdatashow(dataincome, item.slotId)} USDT</b></h6>
-                                </div>
-                              </>
-                              }
-                            </div>
-                            <div className="slot_all_price_and_priviews">
-                              <div className="all_slot">
-                                <h5>{item.price1}</h5>
-                                <h5>{item.price2}</h5>
-                                <h5>{item.price3}</h5>
+                                <h6 className="text-danger"><b>Missed Profits</b></h6>
+                                <h6 className="text-danger"><b>{missdatashow(dataincome, item.slotId)} USDT</b></h6>
                               </div>
-                              {checkAmount(item.plan_price) && (
-                                <div className="slot_privew_btn">
-                                  <Link to={`/slot-${item.slotId}`}>
-                                    Preview{" "}
-                                    <span>
-                                      <img
-                                        src={privewupicon}
-                                        alt="upicons_privew"
-                                        className="upicons_privew"
-                                      />
-                                    </span>
-                                  </Link>
-                                </div>
-                              )}
-                            </div>
+                            </>
+                            }
                           </div>
-                          {!checkAmount(item.plan_price) ? (
-                            <div className="slot_privew_btn slot_privew_btn_center">
-                              <button
-                                onClick={() => {
-                                  handleBuyPlan(item.plan_name, item.plan_price);
-                                }}
-                              >
-                                Upgrade
-                                <span>
-                                  <img
-                                    src={privewupicon}
-                                    alt="upicons_privew"
-                                    className="upicons_privew"
-                                  />
-                                </span>
-                              </button>
+                          <div className="slot_all_price_and_priviews">
+                            <div className="all_slot">
+                              <h5>{item.price1}</h5>
+                              <h5>{item.price2}</h5>
+                              <h5>{item.price3}</h5>
                             </div>
-                          ) : (
-                            ""
-                          )}
+                            {checkAmount(item.plan_price) && (
+                              <div className="slot_privew_btn">
+                                <Link to={`/slot-${item.slotId}`}>
+                                  Preview{" "}
+                                  <span>
+                                    <img
+                                      src={privewupicon}
+                                      alt="upicons_privew"
+                                      className="upicons_privew"
+                                    />
+                                  </span>
+                                </Link>
+                              </div>
+                            )}
+                          </div>
                         </div>
-                      )
-                    }
+                        {!checkAmount(item.plan_price) ? (
+                          <div className="slot_privew_btn slot_privew_btn_center">
+                            <button
+                              onClick={() => {
+                                handleBuyPlan(item.plan_name, item.plan_price);
+                              }}
+                            >
+                              Upgrade
+                              <span>
+                                <img
+                                  src={privewupicon}
+                                  alt="upicons_privew"
+                                  className="upicons_privew"
+                                />
+                              </span>
+                            </button>
+                          </div>
+                        ) : (
+                          ""
+                        )}
+                      </div>
+                    )
                   })}
                 </div>
               </div>

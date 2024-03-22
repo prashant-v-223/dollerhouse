@@ -67,7 +67,7 @@ export const CardData = [
       slotName: "2000$ Slot",
       slotId: "2000",
       plan_name: "DH Plan 7",
-      plan_price: "1000",
+      plan_price: "2000",
     },
     {
       mainPrice: "2000",
