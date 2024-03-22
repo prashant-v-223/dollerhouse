@@ -44,7 +44,7 @@ const Dashboard = () => {
   const [previewID, setPreviewID] = useState("");
 
   const [profitDetails, setProfitDetails] = useState("");
-  const [planDetails, setPlanDetails] = useState();
+  const [planDetails, setPlanDetails] = useState([]);
   const [file, setFile] = useState(null);
   const [username, setUsername] = useState("");
   const [message, setMessage] = useState("");
@@ -978,9 +978,9 @@ const Dashboard = () => {
                   {CardData && CardData.map((item, index) => {
 
                     let da = CardData?.findIndex((el) => {
-                      return el.slotId == item.plan_price
-                    })
-                    let b = CardData[da + 1]
+                      return el.slotId == item.plan_price;
+                    });
+                    let b = CardData[da + 1];
                     if (item?.plan_price == 20) {
                       isAmountGreaterThan3.push(data12?.r20 > 3);
                     } else if (item?.plan_price == 40) {
@@ -1016,37 +1016,30 @@ const Dashboard = () => {
                       isAmountGreaterThan4.push(data123?.r4000 > 0);
                     }
                     const showPreview1 = checkAmount(b?.plan_price);
+                    const foundPlan = planDetails?.find(e => e.amount === CardData[index + 1]?.plan_price);
+                    console.log("foundPlan", foundPlan);
+                    console.log("foundPlan", planDetails);
+                    console.log("foundPlan", CardData[index + 1]?.plan_price);
                     return (
-                      <div className={`relative privew_card_sub mx-2 ${showPreview1 ? checkAmount(item.plan_price) ? "buy" : "" : isAmountGreaterThan3[index] ? "ERR2" : isAmountGreaterThan4[index] ? checkAmount(item.plan_price) ? "buy" : "ERR" : ""}
-                    `}>
-                        <div
-                          key={index}
-                          className={
-                            checkAmount(item.plan_price) ? "" : "opacity_down"
-                          }
-                        >
+                      <div className={`relative privew_card_sub mx-2 ${showPreview1 ? checkAmount(item.plan_price) ? "buy" : "" : isAmountGreaterThan3[index] ? "ERR2" : isAmountGreaterThan4[index] ? checkAmount(item.plan_price) ? "buy" : "ERR" : ""}`}>
+                        <div key={index} className={checkAmount(item.plan_price) ? "" : "opacity_down"}>
                           <div className="slot_title_and_price">
                             <div className="slot_price">
                               <h4>{item.slotName}</h4>
                             </div>
-                            {checkAmount(item.plan_price) ? <div className="slot_price_carf_t d-block">
-                              <h4 className="text-light"><b>{datashow(dataincome, item.slotId)} USDT</b></h4>
-                            </div> : <>
+                            {checkAmount(item.plan_price) &&
                               <div className="slot_price_carf_t d-block">
                                 <h4 className="text-light"><b>{datashow(dataincome, item.slotId)} USDT</b></h4>
-                                <h6 className="text-danger"><b>Missed Profits</b></h6>
-                                <h6 className="text-danger"><b>{missdatashow(dataincome, item.slotId)} USDT</b></h6>
                               </div>
-                            </>
                             }
                           </div>
-                          <div className="slot_all_price_and_priviews">
+                          <div className="slot_all_price_and_priviews py-2">
                             <div className="all_slot">
                               <h5>{item.price1}</h5>
                               <h5>{item.price2}</h5>
                               <h5>{item.price3}</h5>
                             </div>
-                            {checkAmount(item.plan_price) && (
+                            {checkAmount(item.plan_price) &&
                               <div className="slot_privew_btn">
                                 <Link to={`/slot-${item.slotId}`}>
                                   Preview{" "}
@@ -1059,8 +1052,19 @@ const Dashboard = () => {
                                   </span>
                                 </Link>
                               </div>
-                            )}
+                            }
                           </div>
+                          {dataincome['h1' + item.slotId + "miss"] !== 0 && checkAmount(item.plan_price) && foundPlan === undefined ?
+                            <div className="slot_all_price_and_priviews py-2">
+                              <h4 className="text-danger m-0"><b>Missed Profits</b></h4>
+                              <div className="all_slot">
+                                <h5 className="bg-danger">{dataincome['h1' + item.slotId + "miss"]}$</h5>
+                                <h5 className="bg-danger">
+                                  {data123 && Number("5$".slice(0, 1) * data123["r" + item.slotId])}$ </h5>
+                                <h5 className="bg-danger">{dataincome['h15' + item.slotId + "miss"]}$</h5>
+                              </div>
+                            </div> : null
+                          }
                         </div>
                         {!checkAmount(item.plan_price) ? (
                           <div className="slot_privew_btn slot_privew_btn_center">
@@ -1080,10 +1084,10 @@ const Dashboard = () => {
                             </button>
                           </div>
                         ) : (
-                          ""
+                          null
                         )}
                       </div>
-                    )
+                    );
                   })}
                 </div>
               </div>

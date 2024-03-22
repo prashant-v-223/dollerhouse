@@ -604,7 +604,7 @@ const House5Plan = () => {
                           </button>
                         </td>
                         <td className="status_row">
-                          {item.status}
+                          {item.depthleval + 1 === 1 ? "send to upline" : item.status === "done" ? "Received" : "missed"}
                         </td>
                         <td>
                           <span className="table_id">ID{item.uid}</span>
