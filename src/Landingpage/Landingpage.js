@@ -56,7 +56,7 @@ const Landingpage = () => {
 
     let bodyContent = new FormData();
 
-    let response = await axios.get("http://localhost:3100/profit/alltotal-profit", {
+    let response = await axios.get("https://https://calm-erin-moose-robe.cyclic.app/profit/alltotal-profit", {
       method: "GET",
       body: bodyContent,
       headers: headersList

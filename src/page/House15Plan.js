@@ -151,23 +151,24 @@ const House15Plan = () => {
   }
 
   const profitDetailsApi = async (UserID) => {
-    try {    const apiUrl = `https://calm-erin-moose-robe.cyclic.app/reward/get?userId=${UserID}`;
+    try {
+      const apiUrl = `https://calm-erin-moose-robe.cyclic.app/reward/get?userId=${UserID}`;
 
       const response = await fetch(apiUrl);
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
       const responseData = await response.json();
-      console.log("response", responseData.data[0]);
-      
+      console.log("response", responseData.data[0].level_reward);
+
       setData(
-        responseData.data[0].refferal.level_reward?.filter((obj) => obj.plan_name == planName)
+        responseData.data[0].level_reward?.filter((obj) => obj.plan_name == planName)
       );
-  
+
       console.log(responseData);
-      
+
       const apiUrl1 = `https://calm-erin-moose-robe.cyclic.app/user/get-user?wallet_id=${responseData.data.refferal}`;
-      
+
       const response1 = await fetch(apiUrl1);
       if (!response1.ok) {
         throw new Error(`HTTP error! Status: ${response1.status}`);
@@ -195,7 +196,7 @@ const House15Plan = () => {
   function calculateTotalLevelRewards(data) {
     let total = 0;
     for (let i = 0; i < data?.length; i++) {
-      if (data[i].status !== "missed") {
+      if (data[i].status !== "missed" && data[i].status !== "missed Reword") {
         total += data[i].reward;
       }
     }
@@ -309,7 +310,7 @@ const House15Plan = () => {
                           const item = maindata && maindata[index];
                           return (
                             <h4
-                              className={`${item && item.status == "missed"
+                              className={`${item && item.status !== undefined
                                 ? "background_cyan_bilkul"
                                 : ""
                                 } cursor-pointer bg-[#743b07]`}
