@@ -371,7 +371,6 @@ const House5Plan = () => {
 
             const filteredData1 = filteredData?.filter(item => item.mainId === house5Plan1[0]?.refId);
             const filteredData2 = filteredData?.filter(item => item.mainId === house5Plan1[0]?.mainId);
-            memoizedHouse5Plan[1]?.mainId === house5Plan1[0]?.mainId ? `bg-warning` : `bg-light`
             return (
               <h4 key={index} className={filteredData1?.length <= 0 ? filteredData2?.length !== 0 ? `bg-warning` : `bg-light` : `bg-danger`} onClick={() => handleNewIdData(filteredData[0]?.uid)}>
                 {filteredData?.length > 0 ? filteredData[0]?.uid : "0"}
