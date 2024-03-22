@@ -289,35 +289,35 @@ const Dashboard = () => {
     setFile(base64String);
   };
 
-  const handleSubmit = async (e) => {
-    try {
-      const requestBody = {
-        username: username,
-        wallet_id: wallet_id,
-        filename: file
-      };
+  // const handleSubmit = async (e) => {
+  //   try {
+  //     const requestBody = {
+  //       username: username,
+  //       wallet_id: wallet_id,
+  //       filename: file
+  //     };
 
-      const response = await axios.post(
-        "https://calm-erin-moose-robe.cyclic.app/profile/upload",
-        requestBody,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      console.log(response.data);
-      fetchProfile(walletAddress);
-      toast.success("Profile Submitted", {
-        position: toast.POSITION.TOP_RIGHT,
-      });
-      setProfilePopup(false);
-      setMessage("Profile picture uploaded successfully!");
-    } catch (error) {
-      console.error("Error uploading profile picture: ", error);
-      setMessage("Error uploading profile picture. Please try again.");
-    }
-  };
+  //     const response = await axios.post(
+  //       "https://calm-erin-moose-robe.cyclic.app/profile/upload",
+  //       requestBody,
+  //       {
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //       }
+  //     );
+  //     console.log(response.data);
+  //     fetchProfile(walletAddress);
+  //     toast.success("Profile Submitted", {
+  //       position: toast.POSITION.TOP_RIGHT,
+  //     });
+  //     setProfilePopup(false);
+  //     setMessage("Profile picture uploaded successfully!");
+  //   } catch (error) {
+  //     console.error("Error uploading profile picture: ", error);
+  //     setMessage("Error uploading profile picture. Please try again.");
+  //   }
+  // };
 
   const handleCopyReferralLink = () => {
     const tempTextArea = document.createElement("textarea");
@@ -423,7 +423,6 @@ const Dashboard = () => {
       setMessage("Profile picture uploaded successfully!");
     } catch (error) {
       console.error("Error uploading profile picture: ", error);
-      console.log("get-profileget-profileget-profile", wallet);
       setMessage("Error uploading profile picture. Please try again.");
     }
     // fetchProfile(walletAddress);
