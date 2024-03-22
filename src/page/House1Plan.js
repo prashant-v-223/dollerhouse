@@ -438,7 +438,9 @@ const House1Plan = () => {
                           <td className="text-center">{item.house_reward}</td>
                           <td className="status_row">
                             {item.status ? (
-                              <p className="text-success">Recycle</p>
+                              item.status == "missed" ?
+                                <p className="text-success">Recycle</p> :
+                                <p className="text-danger">missed</p>
                             ) : (
                               <p className="recieved_status">Received</p>
                             )}
