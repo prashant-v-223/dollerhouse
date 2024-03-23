@@ -311,7 +311,7 @@ const House15Plan = () => {
                           return (
                             <h4
                               className={`${item && item.status !== undefined
-                                ? "background_cyan_bilkul"
+                                ? ""
                                 : ""
                                 } cursor-pointer bg-[#743b07]`}
                               key={index}
@@ -399,12 +399,7 @@ const House15Plan = () => {
                       .map((item, index) => (
                         <tr key={index}>
                           <td>
-                            {item.status ? (
-                              <img
-                                src="/up-arrow.png"
-                                className="wallet_icon_last upline_arrow"
-                              />
-                            ) : (
+                            {(
                               <img
                                 src={svg_wallet_img}
                                 alt="wallet"
@@ -417,7 +412,7 @@ const House15Plan = () => {
                             <span className="table_id">ID{item.user_id}</span>
                           </td>
                           <td className="text-center">{item.amount}</td>
-                          <td className="text-center">{item.status ? `Sent to Upline` : item.reward}</td>
+                          <td className="text-center">{item.reward}</td>
                           <td className="text-center">
                             {item.invited_member_id.slice(0, 4)}...{" "}
                             {item.invited_member_id.slice(-4)}
