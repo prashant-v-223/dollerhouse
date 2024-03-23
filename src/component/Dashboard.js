@@ -1054,7 +1054,7 @@ const Dashboard = () => {
                               </div>
                             }
                           </div>
-                          {isAmountGreaterThan4[index] &&
+                          {!checkAmount(item.plan_price) &&
                             <div className="slot_all_price_and_priviews py-2">
                               <h4 className="text-danger m-0"><b>Missed Profits</b></h4>
                               <div className="all_slot">
