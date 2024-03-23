@@ -1054,7 +1054,7 @@ const Dashboard = () => {
                               </div>
                             }
                           </div>
-                          {dataincome['h1' + item.slotId + "miss"] !== 0 && checkAmount(item.plan_price) && foundPlan === undefined ?
+                          {isAmountGreaterThan4[index] &&
                             <div className="slot_all_price_and_priviews py-2">
                               <h4 className="text-danger m-0"><b>Missed Profits</b></h4>
                               <div className="all_slot">
@@ -1063,7 +1063,7 @@ const Dashboard = () => {
                                   {data123 && Number("5$".slice(0, 1) * data123["r" + item.slotId])}$ </h5>
                                 <h5 className="bg-danger">{dataincome['h15' + item.slotId + "miss"]}$</h5>
                               </div>
-                            </div> : null
+                            </div>
                           }
                         </div>
                         {!checkAmount(item.plan_price) ? (
