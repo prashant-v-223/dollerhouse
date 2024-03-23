@@ -126,7 +126,7 @@ const House5Plan = () => {
   const user1 = async (w) => {
     try {
       const response = await axios.get(
-        `https://calm-erin-moose-robe.cyclic.app/user/get-user?wallet_id=${UserID}`
+        `https://kind-cyan-drill-cap.cyclic.app/user/get-user?wallet_id=${UserID}`
       );
 
       setUser_id1(response.data.data.user_id);
@@ -138,7 +138,7 @@ const House5Plan = () => {
   const fetchUserData = async (UserID, leval) => {
     try {
       const response = await fetch(
-        `https://calm-erin-moose-robe.cyclic.app/team/leval5-member/${UserID}/${leval}/${planPrice}`
+        `https://kind-cyan-drill-cap.cyclic.app/team/leval5-member/${UserID}/${leval}/${planPrice}`
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -169,7 +169,7 @@ const House5Plan = () => {
   const fetchUserDataSingle = async (id) => {
     try {
       const response = await fetch(
-        `https://calm-erin-moose-robe.cyclic.app/team/single-member?userId=${id}`
+        `https://kind-cyan-drill-cap.cyclic.app/team/single-member?userId=${id}`
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -192,7 +192,7 @@ const House5Plan = () => {
     profitDetailsApi(UserID);
   }, []);
   const profitDetailsApi = (UserID) => {
-    const apiUrl = `https://calm-erin-moose-robe.cyclic.app/reward/get?userId=${UserID}`;
+    const apiUrl = `https://kind-cyan-drill-cap.cyclic.app/reward/get?userId=${UserID}`;
     fetch(apiUrl)
       .then((response) => {
         if (!response.ok) {
@@ -201,7 +201,7 @@ const House5Plan = () => {
         return response.json();
       })
       .then((data) => {
-        const apiUrl1 = `https://calm-erin-moose-robe.cyclic.app/user/get-user?wallet_id=${data.data.refferal}`;
+        const apiUrl1 = `https://kind-cyan-drill-cap.cyclic.app/user/get-user?wallet_id=${data.data.refferal}`;
         fetch(apiUrl1)
           .then((response) => {
             if (!response.ok) {

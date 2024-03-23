@@ -152,7 +152,7 @@ const House15Plan = () => {
 
   const profitDetailsApi = async (UserID) => {
     try {
-      const apiUrl = `https://calm-erin-moose-robe.cyclic.app/reward/get?userId=${UserID}`;
+      const apiUrl = `https://kind-cyan-drill-cap.cyclic.app/reward/get?userId=${UserID}`;
 
       const response = await fetch(apiUrl);
       if (!response.ok) {
@@ -167,7 +167,7 @@ const House15Plan = () => {
 
       console.log(responseData);
 
-      const apiUrl1 = `https://calm-erin-moose-robe.cyclic.app/user/get-user?wallet_id=${responseData.data.refferal}`;
+      const apiUrl1 = `https://kind-cyan-drill-cap.cyclic.app/user/get-user?wallet_id=${responseData.data.refferal}`;
 
       const response1 = await fetch(apiUrl1);
       if (!response1.ok) {

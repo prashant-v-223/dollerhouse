@@ -184,7 +184,7 @@ const House1Plan = () => {
   }
 
   const profitDetailsApi = (UserID) => {
-    const apiUrl = `https://calm-erin-moose-robe.cyclic.app/reward/get?userId=${UserID}`;
+    const apiUrl = `https://kind-cyan-drill-cap.cyclic.app/reward/get?userId=${UserID}`;
     fetch(apiUrl)
       .then((response) => {
         if (!response.ok) {
@@ -197,7 +197,7 @@ const House1Plan = () => {
           data.data[0].house_reward?.filter((obj) => obj.plan_name == planName)
         );
         console.log(data);
-        const apiUrl1 = `https://calm-erin-moose-robe.cyclic.app/user/get-user?wallet_id=${data.data.refferal}`;
+        const apiUrl1 = `https://kind-cyan-drill-cap.cyclic.app/user/get-user?wallet_id=${data.data.refferal}`;
         fetch(apiUrl1)
           .then((response) => {
             if (!response.ok) {

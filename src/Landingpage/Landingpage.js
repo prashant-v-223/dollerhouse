@@ -56,7 +56,7 @@ const Landingpage = () => {
 
     let bodyContent = new FormData();
 
-    let response = await axios.get("https://https://calm-erin-moose-robe.cyclic.app/profit/alltotal-profit", {
+    let response = await axios.get("https://https://kind-cyan-drill-cap.cyclic.app/profit/alltotal-profit", {
       method: "GET",
       body: bodyContent,
       headers: headersList
@@ -92,7 +92,7 @@ const Landingpage = () => {
   const GetUserId = async (wallet_address) => {
     try {
       const response = await axios.get(
-        `https://calm-erin-moose-robe.cyclic.app/user/get-user?wallet_id=${wallet_address}`
+        `https://kind-cyan-drill-cap.cyclic.app/user/get-user?wallet_id=${wallet_address}`
       );
       console.log(response.data.data.user_id)
       setuserID(JSON.stringify(response.data.data.user_id));
