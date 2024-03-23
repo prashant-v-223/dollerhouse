@@ -1061,7 +1061,6 @@ const Dashboard = () => {
                                 <h5 className="bg-danger">{dataincome['h1' + item.slotId + "miss"]}$</h5>
                                 <h5 className="bg-danger">
                                   {data123 && Number("5$".slice(0, 1) * data123["r" + item.slotId])}$ </h5>
-                                <h5 className="bg-danger">{dataincome['h15' + item.slotId + "miss"]}$</h5>
                               </div>
                             </div>
                           }
