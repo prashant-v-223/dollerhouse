@@ -196,9 +196,7 @@ const House15Plan = () => {
   function calculateTotalLevelRewards(data) {
     let total = 0;
     for (let i = 0; i < data?.length; i++) {
-      if (data[i].status !== "missed" && data[i].status !== "missed Reword") {
-        total += data[i].reward;
-      }
+      total += data[i].reward;
     }
     return total;
   }
