@@ -531,8 +531,7 @@ const Dashboard = () => {
       dataincome &&
       dataincome["h1" + slotId + "all"] +
       dataincome["h15" + slotId + "all"] +
-      dataincome["innerAmountSum" + slotId] -
-      dataincome["h1" + slotId + "miss"]
+      dataincome["innerAmountSum" + slotId]
     );
   };
   const missdatashow = (dataincome, slotId) => {
@@ -859,7 +858,7 @@ const Dashboard = () => {
                             {profitDetails &&
                               (
                                 (profitDetails?.overAllProfit /
-                                planDetails21?.profit) *
+                                  planDetails21?.profit) *
                                 100
                               ).toFixed(4)}
                             %
