@@ -236,7 +236,7 @@ const House1Plan = () => {
   function calculateTotalHouseRewards(data) {
     let total = 0;
     for (let i = 0; i < data?.length; i++) {
-      if (data[i].status !== "missed") {
+      if (data[i].status !== "missed" && data[i].status !== "missed Reword") {
         total += data[i].house_reward;
       }
     }
@@ -344,13 +344,12 @@ const House1Plan = () => {
                       if (item && item.status) {
                         return (
                           <h4
-                            className={`${
-                              item.status
+                            className={`${item.status
                                 ? item.status === "missed"
                                   ? "background_cyan"
                                   : "background_cyan1"
                                 : ""
-                            } cursor-pointer bg-[#743b07]`}
+                              } cursor-pointer bg-[#743b07]`}
                           >
                             {item.user_id}
                             {item.status === "missed" && (
@@ -370,9 +369,8 @@ const House1Plan = () => {
                       } else {
                         return (
                           <h4
-                            className={`${
-                              index === 3 ? "background_cyan" : ""
-                            } cursor-pointer bg-[#743b07] `}
+                            className={`${index === 3 ? "background_cyan" : ""
+                              } cursor-pointer bg-[#743b07] `}
                             onClick={() => handleNewIdData(item?.user_id)}
                             key={index}
                           >
