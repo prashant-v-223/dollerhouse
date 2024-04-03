@@ -38,15 +38,12 @@ const House1Plan = () => {
   const navigate = useNavigate();
   const [tableData, setTableData] = useState("");
 
-
   const [previewID, setPreviewID] = useState("");
   const [userData, setUserData] = useState(null);
 
   const handleChange = (event) => {
     setPreviewID(event.target.value);
   };
-
-
 
   // Retrieve data from localStorage
 
@@ -154,37 +151,37 @@ const House1Plan = () => {
   var UserID = JSON.parse(UserIDReal);
 
   const urlParams = new URLSearchParams(window.location.search);
-  const planPrice = urlParams.get('plan_price');
+  const planPrice = urlParams.get("plan_price");
   let planName;
   let planName1;
-  if (planPrice == '20') {
-    planName = 'DH Plan 1';
-    planName1 = 'level 1';
-  } else if (planPrice == '40') {
-    planName = 'DH Plan 2';
-    planName1 = 'level 2';
-  } else if (planPrice == '100') {
-    planName = 'DH Plan 3';
-    planName1 = 'level 3';
-  } else if (planPrice == '200') {
-    planName = 'DH Plan 4';
-    planName1 = 'level 4';
-  } else if (planPrice == '500') {
-    planName = 'DH Plan 5';
-    planName1 = 'level 5';
-  } else if (planPrice == '1000') {
-    planName = 'DH Plan 6';
-    planName1 = 'level 6';
-  } else if (planPrice == '2000') {
-    planName = 'DH Plan 7';
-    planName1 = 'level 7';
-  } else if (planPrice == '4000') {
-    planName = 'DH Plan 8';
-    planName1 = 'level 8';
+  if (planPrice == "20") {
+    planName = "DH Plan 1";
+    planName1 = "level 1";
+  } else if (planPrice == "40") {
+    planName = "DH Plan 2";
+    planName1 = "level 2";
+  } else if (planPrice == "100") {
+    planName = "DH Plan 3";
+    planName1 = "level 3";
+  } else if (planPrice == "200") {
+    planName = "DH Plan 4";
+    planName1 = "level 4";
+  } else if (planPrice == "500") {
+    planName = "DH Plan 5";
+    planName1 = "level 5";
+  } else if (planPrice == "1000") {
+    planName = "DH Plan 6";
+    planName1 = "level 6";
+  } else if (planPrice == "2000") {
+    planName = "DH Plan 7";
+    planName1 = "level 7";
+  } else if (planPrice == "4000") {
+    planName = "DH Plan 8";
+    planName1 = "level 8";
   }
 
   const profitDetailsApi = (UserID) => {
-    const apiUrl = `https://kind-cyan-drill-cap.cyclic.app/reward/get?userId=${UserID}`;
+    const apiUrl = `https://dollerhouse111.onrender.com/reward/get?userId=${UserID}`;
     fetch(apiUrl)
       .then((response) => {
         if (!response.ok) {
@@ -196,33 +193,45 @@ const House1Plan = () => {
         setData(
           data.data[0].house_reward?.filter((obj) => obj.plan_name == planName)
         );
-        console.log(data);
-        const apiUrl1 = `https://kind-cyan-drill-cap.cyclic.app/user/get-user?wallet_id=${data.data.refferal}`;
-        fetch(apiUrl1)
-          .then((response) => {
-            if (!response.ok) {
-              throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            return response.json();
-          })
-          .then((data) => {
-            console.log("user_id", data.data.user_id);
-            localStorage.setItem("UPlineUserID", JSON.stringify(data.data.user_id));
-
-          })
-          .catch((error) => {
-            console.error("Error fetching or processing data:", error);
-          });
       })
       .catch((error) => {
         console.error("Error fetching or processing data:", error);
       });
   };
 
-
   useEffect(() => {
     profitDetailsApi(UserID);
+    GetPlanDetail(UserID);
   }, []);
+
+  const GetPlanDetail = async (UserID) => {
+    try {
+      const response = await fetch(
+        `https://dollerhouse111.onrender.com/plan/get-plan?userid=${UserID}`
+      );
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const dataNew = await response.json();
+      const apiUrl1 = `https://dollerhouse111.onrender.com/user/get-user?wallet_id=${dataNew.data.refferal}`;
+      fetch(apiUrl1)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then((data) => {
+          console.log("user_id", data.data.user_id);
+          localStorage.setItem(
+            "UPlineUserID",
+            JSON.stringify(data.data.user_id)
+          );
+        });
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   function calculateTotalHouseRewards(data) {
     let total = 0;
@@ -253,9 +262,8 @@ const House1Plan = () => {
 
   const handleNewIdData = (user_id) => {
     if (user_id !== undefined) {
-
       localStorage.setItem("UserID", JSON.stringify(user_id));
-      profitDetailsApi(user_id);
+      window.location.reload();
     }
   };
 
@@ -302,9 +310,14 @@ const House1Plan = () => {
               </div>
             </div>
 
-            <div className="d-flex w-100 justify-content-center">
+            <div
+              onClick={() => {
+                handleNewIdData(localStorage.getItem("UPlineUserID"));
+              }}
+              className="d-flex w-100 justify-content-center cursor-pointer"
+            >
               <div className="forsgae_level_card m-auto d-block d-flex w-100 justify-content-center">
-                <h4> UPLINE ID {localStorage.getItem("UPlineUserID")}</h4>
+                <h4> Upline Id {localStorage.getItem("UPlineUserID")}</h4>
               </div>
             </div>
             <div className="forsage_prive_center_btn">
@@ -317,12 +330,11 @@ const House1Plan = () => {
                 <div className="forsgae_level_card">
                   <div className="level_title mx-3">
                     <h5>{planName1}</h5>
-                    <h5 className="text-center">ID {localStorage.getItem("UserID")}</h5>
+                    <h5 className="text-center">
+                      ID {localStorage.getItem("UserID")}
+                    </h5>
                     <h5>
-                      5
-                      <span className="px-2">
-                        USDT
-                      </span>
+                      5<span className="px-2">USDT</span>
                     </h5>
                   </div>
                   {/* <Boxs box={box50} tableData={tableData} /> */}
@@ -330,18 +342,37 @@ const House1Plan = () => {
                     {Array.from({ length: 4 }).map((_, index) => {
                       const item = maindata && maindata[index]; // Ignore data at index 0
                       if (item && item.status) {
-                        return <h4 className={`${item.status ? item.status === "missed" ? "background_cyan" : "background_cyan1" : ""} cursor-pointer bg-[#743b07]`}>
-                          {item.user_id}
-                          {item.status === "missed" && <FaArrowUp className="up_arrow" />}
-                          {item.status === "missed Reword" && <FaArrowUp className="up_arrow" style={{
-                            color: "red"
-                          }} />}
-                          {/* {<FaArrowUp className="up_arrow" />} */}
-                        </h4>;
+                        return (
+                          <h4
+                            className={`${
+                              item.status
+                                ? item.status === "missed"
+                                  ? "background_cyan"
+                                  : "background_cyan1"
+                                : ""
+                            } cursor-pointer bg-[#743b07]`}
+                          >
+                            {item.user_id}
+                            {item.status === "missed" && (
+                              <FaArrowUp className="up_arrow" />
+                            )}
+                            {item.status === "missed Reword" && (
+                              <FaArrowUp
+                                className="up_arrow"
+                                style={{
+                                  color: "red",
+                                }}
+                              />
+                            )}
+                            {/* {<FaArrowUp className="up_arrow" />} */}
+                          </h4>
+                        );
                       } else {
                         return (
                           <h4
-                            className={`${index === 3 ? "background_cyan" : ""} cursor-pointer bg-[#743b07]`}
+                            className={`${
+                              index === 3 ? "background_cyan" : ""
+                            } cursor-pointer bg-[#743b07] `}
                             onClick={() => handleNewIdData(item?.user_id)}
                             key={index}
                           >
@@ -353,7 +384,7 @@ const House1Plan = () => {
                     })}
                   </div>
 
-                  <div className="cycle_name">
+                  <div className="cycle_name px-5">
                     <div className="cycle_name_left">
                       <div className="partners">
                         <p>Partners</p>
@@ -388,10 +419,7 @@ const House1Plan = () => {
                       <p>Total revenue</p>
                       <h1>
                         {totalHouseRewards}.00{" "}
-                        {" "}
-                        <span className="ml-2">
-                          USDT
-                        </span>
+                        <span className="ml-2">USDT</span>
                       </h1>
                       {/* <span><img src={img4} alt='user_icon' className='userd_icon' /></span> */}
                     </div>
@@ -424,15 +452,30 @@ const House1Plan = () => {
                         <tr key={index}>
                           <td>
                             {item.status ? (
-                              item.status !== "missed" ? <FaArrowUp className="ml-1" style={{
-                                color: item.status !== "missed" ? "red" : "green",
-                                fontSize: "28px"
-                              }} />
-                                :
-                                <LiaRecycleSolid className="" style={{
-                                  color: item.status !== "missed" ? "red" : "green",
-                                  fontSize: "36px", fontWeight: 600
-                                }} />
+                              item.status !== "missed" ? (
+                                <FaArrowUp
+                                  className="ml-1"
+                                  style={{
+                                    color:
+                                      item.status !== "missed"
+                                        ? "red"
+                                        : "green",
+                                    fontSize: "28px",
+                                  }}
+                                />
+                              ) : (
+                                <LiaRecycleSolid
+                                  className=""
+                                  style={{
+                                    color:
+                                      item.status !== "missed"
+                                        ? "red"
+                                        : "green",
+                                    fontSize: "36px",
+                                    fontWeight: 600,
+                                  }}
+                                />
+                              )
                             ) : (
                               <img
                                 src={svg_wallet_img}
@@ -448,9 +491,11 @@ const House1Plan = () => {
                           <td className="text-center">{item.house_reward}</td>
                           <td className="status_row">
                             {item.status ? (
-                              item.status == "missed" ?
-                                <p className="text-success">Recycle</p> :
+                              item.status == "missed" ? (
+                                <p className="text-success">Recycle</p>
+                              ) : (
                                 <p className="text-danger">missed</p>
+                              )
                             ) : (
                               <p className="recieved_status">Received</p>
                             )}

@@ -16,7 +16,7 @@ img.wallet_icon_last {
   font-family: "Plus Jakarta Sans";
   color: white;
   background: #cb61008a !important;
-  padding: 6px 16px !important;
+  padding: 10px 16px !important;
   border-radius: 31px !important;
 }
 
@@ -220,4 +220,18 @@ img.wallet_icon_last {
     margin: 0;
     margin-right: 13px;
   }
+}
+
+
+
+.bg-danger{
+  background-color: #ff6262 !important;
+}
+
+iframe#webpack-dev-server-client-overlay{
+  display: none !important;
+}
+
+.ERR > .opacity_down {
+  opacity: 1 !important;
 }

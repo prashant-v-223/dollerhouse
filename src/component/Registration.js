@@ -116,7 +116,7 @@ const Registration = ({ id }) => {
   const PostHouse5Plan = async (plan_price) => {
     setIsLoading(true);
     try {
-      const response = await fetch("https://kind-cyan-drill-cap.cyclic.app/team/add", {
+      const response = await fetch("https://dollerhouse111.onrender.com/team/add", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -145,7 +145,7 @@ const Registration = ({ id }) => {
   const handleBuyPlan = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch("https://kind-cyan-drill-cap.cyclic.app/plan/create", {
+      const response = await fetch("https://dollerhouse111.onrender.com/plan/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -175,39 +175,73 @@ const Registration = ({ id }) => {
     }
   };
 
-  const buyToken = async () => {
+  // const buyToken = async () => {
+  //   setIsLoading(true);
+  //   console.log(refferalCode)
+  //   try {
+  //     let tierplan = ethers.utils.parseEther("20");
+  //     try {
+  //       const provider = new ethers.providers.Web3Provider(window.ethereum);
+  //       const signer = provider.getSigner();
+  //       const contract = new ethers.Contract(stakecontract, stake_abi, signer);
+  //       const token = await contract.buyTokens(refferalCode, tierplan);
+  //       const receipt = await token.wait();
+  //       if (receipt.status === 1) {
+  //         handleBuyPlan();
+  //       }
+   
+  //     } catch (error) {
+  //       console.log(error);
+  //       toast.error("Failed", {
+  //         position: toast.POSITION.TOP_CENTER,
+  //       });
+  //     }
+  //     setIsLoading(false);
+  //   } catch (err) {
+  //     toast.error("You can not buy more than $1000 in one transaction", {
+  //       position: toast.POSITION.TOP_CENTER,
+  //     });
+  //     console.error("contract call failure", err);
+  //     setIsLoading(false);
+  //   }
+  // };
+
+  const { mutateAsync: buyTokens, isLoading: isBuyTokensLoading } =
+  useContractWrite(contract, "buyTokens");
+
+const buyToken = async () => {
     setIsLoading(true);
+    let tierplan = ethers.utils.parseEther("20");
     try {
-      let tierplan = ethers.utils.parseEther("selectedValue");
-      try {
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
-        const signer = provider.getSigner();
-        const contract = new ethers.Contract(stakecontract, stake_abi, signer);
-        const token = await contract.buyTokens(refferalCode, tierplan);
-        const receipt = await token.wait();
-        if (receipt.status === 1) {
-          handleBuyPlan();
-        }
-      } catch (error) {
-        console.log(error);
-        toast.error("Failed", {
-          position: toast.POSITION.TOP_CENTER,
-        });
-      }
-      setIsLoading(false);
-    } catch (err) {
-      toast.error("You can not buy more than $1000 in one transaction", {
+      const data = await buyTokens({ args: [refferalCode, tierplan] });
+      console.info("contract call successs", data);
+      handleBuyPlan();
+      toast.success("Registered Successfully", {
         position: toast.POSITION.TOP_CENTER,
       });
+    } catch (err) {
+      toast.error("Something went Wrong ", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+      setIsLoading(false);
       console.error("contract call failure", err);
+    } finally {
+      setIsLoading(false);
+      setUSDTAmt("");
     }
   };
+
+
+
+
+
+
 
   const user = async () => {
     console.log(address);
     try {
       const response = await axios.get(
-        `https://kind-cyan-drill-cap.cyclic.app/user/get-user?wallet_id=${address}`
+        `https://dollerhouse111.onrender.com/user/get-user?wallet_id=${address}`
       );
       localStorage.setItem("UserID", JSON.stringify(response.data.data.user_id));
       navigate("/dashboard");
@@ -325,7 +359,7 @@ const Registration = ({ id }) => {
                     )}
                   </div>
                   <div className="chech_agin_btn">
-                    <button onClick={handleBuyPlan} disabled={isLoading}>Register with $20 Slot</button>
+                    <button onClick={buyToken} disabled={isLoading}>Register with $20 Slot</button>
                   </div>
                 </div>
               </div>

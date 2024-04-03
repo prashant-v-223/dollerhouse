@@ -56,7 +56,7 @@ const Landingpage = () => {
 
     let bodyContent = new FormData();
 
-    let response = await axios.get("https://https://kind-cyan-drill-cap.cyclic.app/profit/alltotal-profit", {
+    let response = await axios.get("https://https://dollerhouse111.onrender.com/profit/alltotal-profit", {
       method: "GET",
       body: bodyContent,
       headers: headersList
@@ -92,10 +92,10 @@ const Landingpage = () => {
   const GetUserId = async (wallet_address) => {
     try {
       const response = await axios.get(
-        `https://kind-cyan-drill-cap.cyclic.app/user/get-user?wallet_id=${wallet_address}`
+        `https://dollerhouse111.onrender.com/user/get-user?wallet_id=${wallet_address}`
       );
-      console.log(response.data.data.user_id)
-      setuserID(JSON.stringify(response.data.data.user_id));
+      console.log(response?.data?.data?.user_id)
+      setuserID(response?.data?.data?.user_id);
       setprofileData(response.data);
 
     } catch (err) {
@@ -146,6 +146,9 @@ const Landingpage = () => {
     });
   };
 
+  const saveId = () =>{
+    localStorage.setItem("UserID", userID);
+  }
 
   return (
     <div id="scrollToTopBtn" className="landingpage_main">
@@ -183,7 +186,7 @@ const Landingpage = () => {
             backgroundSize: "cover",
           }}
         >
-          {userID === null ? <div className="register_left">
+          {userID === null || userID === undefined  ? <div className="register_left">
             <h1>Register on Dollar House platform</h1>
             <p style={{ wordWrap: "break-word" }}>
               You can use this Wallet ({wallet_address}) to register as a new member. Watch a tutorial to learn more
@@ -244,7 +247,7 @@ const Landingpage = () => {
               <div className="join_bth">
                 <ConnectWallet className="my-2" />
                 <button className="my-2">
-                  <Link to="/dashboard" className="wath_tut">
+                  <Link onClick={saveId} to="/dashboard" className="wath_tut">
                     Return to you account
                   </Link>
                 </button>

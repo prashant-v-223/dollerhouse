@@ -41,9 +41,6 @@ const House15Plan = () => {
     "0x0ECBBF0D46E13cC4fffdf14AbC39D8332c89Ad8b"
   );
 
-
-
-
   const itemsPerPage = 10;
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -121,38 +118,38 @@ const House15Plan = () => {
   var UserID = JSON.parse(userDataReal);
 
   const urlParams = new URLSearchParams(window.location.search);
-  const planPrice = urlParams.get('plan_price');
+  const planPrice = urlParams.get("plan_price");
   let planName;
   let planName1;
-  if (planPrice == '20') {
-    planName = 'DH Plan 1';
-    planName1 = 'level 1';
-  } else if (planPrice == '40') {
-    planName = 'DH Plan 2';
-    planName1 = 'level 2';
-  } else if (planPrice == '100') {
-    planName = 'DH Plan 3';
-    planName1 = 'level 3';
-  } else if (planPrice == '200') {
-    planName = 'DH Plan 4';
-    planName1 = 'level 4';
-  } else if (planPrice == '500') {
-    planName = 'DH Plan 5';
-    planName1 = 'level 5';
-  } else if (planPrice == '1000') {
-    planName = 'DH Plan 6';
-    planName1 = 'level 6';
-  } else if (planPrice == '2000') {
-    planName = 'DH Plan 7';
-    planName1 = 'level 7';
-  } else if (planPrice == '4000') {
-    planName = 'DH Plan 8';
-    planName1 = 'level 8';
+  if (planPrice == "20") {
+    planName = "DH Plan 1";
+    planName1 = "level 1";
+  } else if (planPrice == "40") {
+    planName = "DH Plan 2";
+    planName1 = "level 2";
+  } else if (planPrice == "100") {
+    planName = "DH Plan 3";
+    planName1 = "level 3";
+  } else if (planPrice == "200") {
+    planName = "DH Plan 4";
+    planName1 = "level 4";
+  } else if (planPrice == "500") {
+    planName = "DH Plan 5";
+    planName1 = "level 5";
+  } else if (planPrice == "1000") {
+    planName = "DH Plan 6";
+    planName1 = "level 6";
+  } else if (planPrice == "2000") {
+    planName = "DH Plan 7";
+    planName1 = "level 7";
+  } else if (planPrice == "4000") {
+    planName = "DH Plan 8";
+    planName1 = "level 8";
   }
 
   const profitDetailsApi = async (UserID) => {
     try {
-      const apiUrl = `https://kind-cyan-drill-cap.cyclic.app/reward/get?userId=${UserID}`;
+      const apiUrl = `https://dollerhouse111.onrender.com/reward/get?userId=${UserID}`;
 
       const response = await fetch(apiUrl);
       if (!response.ok) {
@@ -162,35 +159,60 @@ const House15Plan = () => {
       console.log("response", responseData.data[0].level_reward);
 
       setData(
-        responseData.data[0].level_reward?.filter((obj) => obj.plan_name == planName)
+        responseData.data[0].level_reward?.filter(
+          (obj) => obj.plan_name == planName
+        )
       );
-
-      console.log(responseData);
-
-      const apiUrl1 = `https://kind-cyan-drill-cap.cyclic.app/user/get-user?wallet_id=${responseData.data.refferal}`;
-
-      const response1 = await fetch(apiUrl1);
-      if (!response1.ok) {
-        throw new Error(`HTTP error! Status: ${response1.status}`);
-      }
-      const responseData1 = await response1.json();
-      console.log("user_id", responseData1.data.user_id);
-      localStorage.setItem("UPlineUserID", JSON.stringify(responseData1.data.user_id));
     } catch (error) {
       console.error("Error fetching or processing data:", error);
     }
   };
-  console.log("data", data)
+  console.log("data", data);
 
   useEffect(() => {
     profitDetailsApi(UserID);
+    GetPlanDetail(UserID);
   }, []);
+
+  const [parentId, setParentId] = useState(null)
+  const GetPlanDetail = async (UserID) => {
+    try {
+      const response = await fetch(
+        `https://dollerhouse111.onrender.com/plan/get-plan?userid=${UserID}`
+      );
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const dataNew = await response.json();
+      const apiUrl1 = `https://dollerhouse111.onrender.com/user/get-user?wallet_id=${dataNew.data.refferal}`;
+      fetch(apiUrl1)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then((data) => {
+          console.log("user_id", data.data.user_id);
+          localStorage.setItem(
+            "UPlineUserID",
+            JSON.stringify(data.data.user_id)
+          );
+          setParentId(data.data.user_id)
+        });
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const handleNewIdData = (user_id) => {
     if (user_id !== undefined) {
-
       localStorage.setItem("UserID", JSON.stringify(user_id));
-      profitDetailsApi(user_id);
+      if (parentId !== null ) {
+        localStorage.setItem("UPlineUserID", JSON.stringify(parentId));
+       
+      }
+      window.location.reload();
     }
   };
   function calculateTotalLevelRewards(data) {
@@ -262,15 +284,19 @@ const House15Plan = () => {
                 <h3>
                   {" "}
                   <span>Dollar house 15 </span> Plan
-
                 </h3>
                 <p>You can view the details of your House 15 Plan </p>
               </div>
             </div>
 
-            <div className="d-flex w-100 justify-content-center">
+            <div
+              onClick={() => {
+                handleNewIdData(localStorage.getItem("UPlineUserID"));
+              }}
+              className="d-flex w-100 justify-content-center cursor-pointer"
+            >
               <div className="forsgae_level_card m-auto d-block d-flex w-100 justify-content-center">
-                <h4> UPLINE ID {localStorage.getItem("UPlineUserID")}</h4>
+                <h4> Upline Id {localStorage.getItem("UPlineUserID")}</h4>
               </div>
             </div>
             <div className="forsage_prive_center_btn">
@@ -283,12 +309,12 @@ const House15Plan = () => {
                 <div className="forsgae_level_card">
                   <div className="level_title mx-3">
                     <h5>{planName1}</h5>
-                    <h5 className="text-center">ID {localStorage.getItem("UserID")}</h5>
+                    <h5 className="text-center">
+                      ID {localStorage.getItem("UserID")}
+                    </h5>
                     <h5>
                       10
-                      <span className="px-2">
-                        USDT
-                      </span>
+                      <span className="px-2">USDT</span>
                     </h5>
                   </div>
                   <div
@@ -308,10 +334,9 @@ const House15Plan = () => {
                           const item = maindata && maindata[index];
                           return (
                             <h4
-                              className={`${item && item.status !== undefined
-                                ? ""
-                                : ""
-                                } cursor-pointer bg-[#743b07]`}
+                              className={`${
+                                item && item.status !== undefined ? "" : ""
+                              } cursor-pointer bg-[#743b07]`}
                               key={index}
                               onClick={() => handleNewIdData(item?.user_id)}
                             >
@@ -323,7 +348,7 @@ const House15Plan = () => {
                     </div>
                   </div>
 
-                  <div className="cycle_name">
+                  <div className="cycle_name px-5">
                     <div className="cycle_name_left">
                       <div className="partners">
                         <p>Partners</p>
@@ -397,13 +422,13 @@ const House15Plan = () => {
                       .map((item, index) => (
                         <tr key={index}>
                           <td>
-                            {(
+                            {
                               <img
                                 src={svg_wallet_img}
                                 alt="wallet"
                                 className="wallet_icon_last "
                               />
-                            )}
+                            }
                           </td>
                           <td>{item.plan_name}</td>
                           <td>

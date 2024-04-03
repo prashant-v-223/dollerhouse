@@ -10,6 +10,7 @@ import { useTable } from "@nextui-org/react";
 import { MdContentCopy } from "react-icons/md";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { CardData } from "./CardData.js";
 const PartnersTable = () => {
   // Retrieve data from localStorage
 
@@ -23,7 +24,7 @@ const PartnersTable = () => {
   const user = async (profitDetailsApi) => {
     try {
       const response = await axios.get(
-        `https://kind-cyan-drill-cap.cyclic.app/user/get-user?wallet_id=${address}`
+        `https://dollerhouse111.onrender.com/user/get-user?wallet_id=${address}`
       );
       setUser_id(response.data.data.user_id);
     } catch (err) {
@@ -34,10 +35,11 @@ const PartnersTable = () => {
 
   const [levelRewards, setLevelRewards] = useState(null);
   const [houseRewards, setHouseRewards] = useState(null);
+  const [houseRewards123, setHouseRewards123] = useState([]);
   const [rewards, setRewards] = useState(1);
 
   const profitDetailsApi = (id) => {
-    const apiUrl = `https://kind-cyan-drill-cap.cyclic.app/reward/get?userId=${id}`;
+    const apiUrl = `https://dollerhouse111.onrender.com/reward/get?userId=${id}`;
     fetch(apiUrl)
       .then((response) => {
         if (!response.ok) {
@@ -55,6 +57,14 @@ const PartnersTable = () => {
         console.error("Error fetching or processing data:", error);
       });
   };
+  const profitDetailsApi1112 = async (id) => {
+    let response = await fetch(`https://dollerhouse111.onrender.com/team/leval5-membe22/${id}`, {
+      method: "GET",
+    });
+
+    let data = await response.text();
+    setHouseRewards123(JSON.parse(data));
+  };
 
   const [previewID, setPreviewID] = useState("");
   const handleChange = (event) => {
@@ -71,6 +81,7 @@ const PartnersTable = () => {
   useEffect(() => {
     user();
     profitDetailsApi(userIDReal);
+    profitDetailsApi1112(userIDReal);
   }, [address]);
 
   const itemsPerPage = 10;
@@ -200,7 +211,16 @@ const PartnersTable = () => {
                 setRewards(1);
               }}
             >
-              Level Rewards
+              H-1
+            </button>
+            <button
+              className={`${rewards === 3 ? "background_change" : ""
+                } bg-orange-500 py-1 px-2 filter_button text-white rounded-sm`}
+              onClick={() => {
+                setRewards(3);
+              }}
+            >
+              H-5
             </button>
             <button
               className={`${rewards === 2 ? "background_change" : ""
@@ -209,7 +229,7 @@ const PartnersTable = () => {
                 setRewards(2);
               }}
             >
-              House Rewards
+              H-15
             </button>
           </div>
 
@@ -221,6 +241,7 @@ const PartnersTable = () => {
                   <th>Plan Name</th>
                   <th>Wallet Address</th>
                   <th>Reward</th>
+                  <th>Status</th>
                   <th>Level</th>
                   <th>User ID</th>
                   <th>Time</th>
@@ -235,11 +256,15 @@ const PartnersTable = () => {
                       return (
                         <tr key={index}>
                           <td>
-                            <img
-                              src="/static/media/svg-image-23.aa0930be96db08ffc8e973487f0567fb.svg"
-                              alt="wallet"
-                              className="wallet_icon_last"
-                            />
+                            {item.status ? (
+                              <img src="/up-arrow.png" style={{ width: "30px" }} />
+                            ) : (
+                              <img
+                                src="/static/media/svg-image-23.aa0930be96db08ffc8e973487f0567fb.svg"
+                                alt="wallet"
+                                className="wallet_icon_last"
+                              />
+                            )}
                           </td>
                           <td>{item.plan_name}</td>
                           <td>
@@ -256,8 +281,15 @@ const PartnersTable = () => {
                               <MdContentCopy />
                             </button>
                           </td>
-
                           <td>{item.reward} USDT</td>
+                          <td className="status_row">
+                            {item.status ? (
+                              item.status !== "missed Reword" ?
+                                "Sent to Upline" : "missed"
+                            ) : (
+                              <p className="recieved_status">Received</p>
+                            )}
+                          </td>
                           <td className="text-center">{item.level}</td>
                           <td>
                             <p
@@ -332,7 +364,8 @@ const PartnersTable = () => {
                           <td>{item.house_reward} USDT</td>
                           <td className="status_row">
                             {item.status ? (
-                              "Sent to Upline"
+                              item.status !== "missed Reword" ?
+                                "Sent to Upline" : "missed"
                             ) : (
                               <p className="recieved_status">Received</p>
                             )}
@@ -342,7 +375,7 @@ const PartnersTable = () => {
                               onClick={() => {
                                 handleRedirect(item.user_id);
                               }}
-                              className="link_table link_table2 table_id"
+                              className="link_table text-center cursor-pointer link_table2 table_id"
                             >
                               ID{item.user_id}
                             </p>
@@ -363,8 +396,133 @@ const PartnersTable = () => {
           ) : (
             ""
           )}
-
-          {tableData?.length > 10 && (
+          {rewards == 3 && <table className="table">
+            <thead>
+              <tr>
+                <th>Type</th>
+                <th>Plan Name</th>
+                <th>Wallet Address</th>
+                <th>Status</th>
+                <th>Reward</th>
+                <th>Level</th>
+                <th>User ID</th>
+                <th>Time</th>
+              </tr>
+            </thead>
+            <tbody>
+              {houseRewards123?.data &&
+                houseRewards123?.data?.map((el, i) => {
+                  return houseRewards123?.data[i].userdata[0]?.missedusers?.map((elE, iDEX) => {
+                    return (
+                      <tr key={iDEX}>
+                        <td>
+                          <img
+                            src="/static/media/svg-image-23.aa0930be96db08ffc8e973487f0567fb.svg"
+                            alt="wallet"
+                            className="wallet_icon_last"
+                          />
+                        </td>
+                        <td>DH PLAN {" "} {i + 1}</td>
+                        <td>
+                          {removeAndReplaceMiddleCharacters(
+                            elE?.refId
+                          )}{" "}
+                          <button
+                            className="copy_button_table pdding_remove_copy_button"
+                            onClick={() => {
+                              copyToClipboard(elE?.refId);
+                            }}
+                          >
+                            {" "}
+                            <MdContentCopy />
+                          </button>
+                        </td>
+                        <td>
+                          {Number(CardData[i]["price1"].replace(/\$/g, '')) * elE?.depthleval + 1 === 1 ? 0 : elE?.depthleval + 1 === 2 ? 10 / 100 : elE?.depthleval + 1 === 3 ? 20 / 100 : elE?.depthleval + 1 === 4 ? 20 / 100 : 50 / 100}
+                        </td>
+                        <td className="status_row">
+                          <p className="recieved_status">Received</p>
+                        </td>
+                        <td>
+                          {elE?.depthleval + 1}
+                        </td>
+                        <td>
+                          <p
+                            onClick={() => {
+                              handleRedirect(elE?.uid);
+                            }}
+                            className="link_table text-center cursor-pointer link_table2 table_id"
+                          >
+                            ID{elE?.uid}
+                          </p>
+                        </td>
+                        <td>
+                          {new Date(elE?.createdAt).toLocaleString("en-IN", {
+                            timeZone: "Asia/Kolkata",
+                          })}
+                        </td>
+                      </tr>
+                    )
+                  })
+                })
+              }
+              {houseRewards123?.data &&
+                houseRewards123?.data?.map((el, i) => {
+                  return houseRewards123?.data[i].missedUser?.map((elE, iDEX) => {
+                    return (<tr key={iDEX}>
+                      <td>
+                        <img
+                          src="/static/media/svg-image-23.aa0930be96db08ffc8e973487f0567fb.svg"
+                          alt="wallet"
+                          className="wallet_icon_last"
+                        />
+                      </td>
+                      <td>DH PLAN {" "} {i + 1}</td>
+                      <td>
+                        {removeAndReplaceMiddleCharacters(
+                          elE?.refId
+                        )}{" "}
+                        <button
+                          className="copy_button_table pdding_remove_copy_button"
+                          onClick={() => {
+                            copyToClipboard(elE?.refId);
+                          }}
+                        >
+                          {" "}
+                          <MdContentCopy />
+                        </button>
+                      </td>
+                      <td className="">
+                        {Number(iDEX + 1 <= 2 ? CardData[i]["price1"].replace(/\$/g, '') * 0 / 100 : iDEX + 1 <= 6 ? CardData[i]["price1"].replace(/\$/g, '') * 10 / 100 : iDEX + 1 <= 14 ? CardData[i]["price1"].replace(/\$/g, '') * 20 / 100 : iDEX + 1 <= 30 ? CardData[i]["price1"].replace(/\$/g, '') * 20 / 100 : CardData[i]["price1"].replace(/\$/g, '') * 50 / 100)}
+                      </td>
+                      <td className="status_row">
+                        missed
+                      </td>
+                      <td>
+                        -
+                      </td>
+                      <td>
+                        <p
+                          onClick={() => {
+                          }}
+                          className="link_table text-center cursor-pointer link_table2 table_id"
+                        >
+                          ID{elE?.uid}
+                        </p>
+                      </td>
+                      <td>
+                        {new Date(elE?.createdAt).toLocaleString("en-IN", {
+                          timeZone: "Asia/Kolkata",
+                        })}
+                      </td>
+                    </tr>
+                    )
+                  })
+                })
+              }
+            </tbody>
+          </table>}
+          {/* {tableData?.length > 10 && (
             <div className="flex pagination_postion justify-end ">
               <div className="pagination-container flex space-between space-x-5">
                 <button
@@ -386,7 +544,7 @@ const PartnersTable = () => {
                 </button>
               </div>
             </div>
-          )}
+          )} */}
         </div>
       </div>
       {/* </div> */}

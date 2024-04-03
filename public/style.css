@@ -658,13 +658,16 @@ img.green_cricle_img {
 span.toparrow {
   font-size: 11px;
   margin-right: 5px;
+  margin-top: 6px;
 }
 
 .pro_num p {
-  color: white;
   --tw-text-opacity: 1;
   font-family: "Plus Jakarta Sans" !important;
   font-size: 20px;
+  display: flex;
+  gap: 6px;
+  color: green;
 }
 
 .pro_num {
@@ -1673,7 +1676,7 @@ img.welcome_benner_card {
   font-size: 12px;
   display: inline-block;
   width: 25px;
-  height: 25px;
+  height: 21px;
   padding: 0px;
   border-radius: 50%;
   margin: 1px;
