@@ -248,8 +248,8 @@ const PartnersTable = () => {
                 </tr>
               </thead>
               <tbody>
-                {levelRewards?.length > 0 ? (
-                  levelRewards
+                {houseRewards?.length > 0 ? (
+                  houseRewards
                     .sort((a, b) => new Date(b.Time) - new Date(a.Time)) // Sort by date in descending order
                     .filter((item) => item.level == 1) // Filter data where item.level is 1
                     .map((item, index) => {
@@ -327,8 +327,8 @@ const PartnersTable = () => {
                 </tr>
               </thead>
               <tbody>
-                {houseRewards?.length > 0 ? (
-                  houseRewards
+                {levelRewards?.length > 0 ? (
+                 levelRewards 
                     .sort((a, b) => new Date(b.Time) - new Date(a.Time)) // Sort by date in descending order
                     .map((item, index) => {
                       return (
