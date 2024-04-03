@@ -313,7 +313,6 @@ const PartnersTable = () => {
                   <th>Plan Name</th>
                   <th>Wallet Address</th>
                   <th>Reward</th>
-                  <th>status</th>
                   <th>leval</th>
                   <th>User ID</th>
                   <th>Time</th>
@@ -350,14 +349,6 @@ const PartnersTable = () => {
                             </button>
                           </td>
                           <td>{item.reward} USDT</td>
-                          <td className="status_row">
-                            {item.status ? (
-                              item.status !== "missed Reword" ?
-                                "Sent to Upline" : "missed"
-                            ) : (
-                              <p className="recieved_status">Received</p>
-                            )}
-                          </td>
                           <td className="text-center">{item.level}</td>
                           <td>
                             <p
