@@ -1081,7 +1081,7 @@ const Dashboard = () => {
                                 <div className="all_slot">
                                   <h5 className="bg-danger">{dataincome['h1' + item.slotId + "miss"]}$</h5>
                                   <h5 className="bg-danger">
-                                    {data123 && Number(data123["r" + item.slotId]) <= 0 ? 0 : Number(data123["r" + item.slotId])}$ </h5>
+                                    {data123 && Number(price2 - 2 * data123["r" + item.slotId]) <= 0 ? 0 : Number(price2 - 2 * data123["r" + item.slotId])}$ </h5>
                                 </div>
                               </div> : null : null
                             }
