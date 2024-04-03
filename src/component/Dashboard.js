@@ -117,7 +117,7 @@ const Dashboard = () => {
 
   let isAmountGreaterThan3 = [];
   let isAmountGreaterThan4 = [];
-  
+
   const user = async (e) => {
     try {
       const response = await axios.get(
@@ -291,7 +291,7 @@ const Dashboard = () => {
   // };
 
   const { mutateAsync: buyTokens, isLoading: isBuyTokensLoading } =
-  useContractWrite(contract, "buyTokens");
+    useContractWrite(contract, "buyTokens");
 
   const buyToken = async (plan_name, plan_price) => {
     let tierplan = ethers.utils.parseEther(plan_price);
@@ -490,9 +490,9 @@ const Dashboard = () => {
 
   const checkAccess = () => {
     let highestAmount = 20;
-  
+
     for (let i = 0; i < planDetails?.length; i++) {
-      const currentAmount = planDetails[i].amount; 
+      const currentAmount = planDetails[i].amount;
       if (currentAmount == 20) {
         highestAmount = 40;
       } else if (currentAmount == 40 && highestAmount != 100) {
@@ -509,7 +509,7 @@ const Dashboard = () => {
         highestAmount = 4000;
       }
     }
-    
+
     return highestAmount.toString();
   };
 
@@ -517,8 +517,8 @@ const Dashboard = () => {
     return (
       dataincome &&
       dataincome["h1" + slotId + "all"] +
-        dataincome["h15" + slotId + "all"] +
-        dataincome["innerAmountSum" + slotId]
+      dataincome["h15" + slotId + "all"] +
+      dataincome["innerAmountSum" + slotId]
     );
   };
   const missdatashow = (dataincome, slotId) => {
@@ -558,31 +558,31 @@ const Dashboard = () => {
 
   const isAccess =
     wallet_address?.toLowerCase() == walletAddress?.toLowerCase();
-  
-    const [userData24, setUserData24] = useState("")
-  
-      useEffect(() => {
-        const fetchData24 = async () => {
-          try {
-            const response = await fetch(`https://dollerhouse111.onrender.com/user/user-details?wallet_id=${walletAddress}`);
-            if (!response.ok) {
-              throw new Error('Network response was not ok');
-            }
-            const data = await response.json();
-            setUserData24(data);
-          
-          } catch (error) {
-            console.error('Error fetching data:', error);
-          }
-        };
-    
-        fetchData24();
 
-      }, [walletAddress]);
-    
+  const [userData24, setUserData24] = useState("")
+
+  useEffect(() => {
+    const fetchData24 = async () => {
+      try {
+        const response = await fetch(`https://dollerhouse111.onrender.com/user/user-details?wallet_id=${walletAddress}`);
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        setUserData24(data);
+
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData24();
+
+  }, [walletAddress]);
 
 
-    
+
+
   return (
     <React.Fragment>
       {BuyTokenLoading && <Loading />}
@@ -726,11 +726,10 @@ const Dashboard = () => {
                               style={{ width: "180px", fontSize: "13.75px" }}
                             >
                               {`
-                        ${
-                          modifiedAddress1
-                            ? `Invited at ${formattedDate} by ${modifiedAddress1}`
-                            : "Invited 01.03.2021 By"
-                        }`}
+                        ${modifiedAddress1
+                                  ? `Invited at ${formattedDate} by ${modifiedAddress1}`
+                                  : "Invited 01.03.2021 By"
+                                }`}
                             </span>
                             <span style={{ marginTop: "22px" }}>
                               {refferal && (
@@ -865,7 +864,7 @@ const Dashboard = () => {
                                   : 0}
                               </h1>
                               <p>
-                              <h4>{userData24?.data?.team_members_in_last_24Hours}</h4>
+                                <h4>{userData24?.data?.team_members_in_last_24Hours}</h4>
                                 <span className="toparrow">
                                   <i
                                     className="fa fa-long-arrow-up"
@@ -996,121 +995,121 @@ const Dashboard = () => {
                     </h3>
                   </div>
                   <div className="privew_card_container_main">
-                  {CardData && CardData.map((item, index) => {
+                    {CardData && CardData.map((item, index) => {
 
-                    let da = CardData?.findIndex((el) => {
-                      return el.slotId == item.plan_price;
-                    });
-                    let price2 = Number(item.price2.replace(/\$/g, ''))
-                    let b = CardData[da + 1];
-                    if (item?.plan_price == 20) {
-                      isAmountGreaterThan3.push(data12?.r20 > 3);
-                    } else if (item?.plan_price == 40) {
-                      isAmountGreaterThan3.push(data12?.r40 > 3);
-                    } else if (item?.plan_price == 100) {
-                      isAmountGreaterThan3.push(data12?.r100 > 3);
-                    } else if (item?.plan_price == 200) {
-                      isAmountGreaterThan3.push(data123?.r200 > 3);
-                    } else if (item?.plan_price == 500) {
-                      isAmountGreaterThan3.push(data123?.r500 > 3);
-                    } else if (item?.plan_price == 1000) {
-                      isAmountGreaterThan3.push(data123?.r1000 > 3);
-                    } else if (item?.plan_price == 2000) {
-                      isAmountGreaterThan3.push(data123?.r2000 > 3);
-                    } else if (item?.plan_price == 4000) {
-                      isAmountGreaterThan3.push(data123?.r4000 > 3);
-                    }
-                    if (item?.plan_price == 20) {
-                      isAmountGreaterThan4.push(!true);
-                    } else if (item?.plan_price == 40) {
-                      isAmountGreaterThan4.push(data123?.r40 > 0);
-                    } else if (item?.plan_price == 100) {
-                      isAmountGreaterThan4.push(data123?.r100 > 0);
-                    } else if (item?.plan_price == 200) {
-                      isAmountGreaterThan4.push(data123?.r200 > 0);
-                    } else if (item?.plan_price == 500) {
-                      isAmountGreaterThan4.push(data123?.r500 > 0);
-                    } else if (item?.plan_price == 1000) {
-                      isAmountGreaterThan4.push(data123?.r1000 > 0);
-                    } else if (item?.plan_price == 2000) {
-                      isAmountGreaterThan4.push(data123?.r2000 > 0);
-                    } else if (item?.plan_price == 4000) {
-                      isAmountGreaterThan4.push(data123?.r4000 > 0);
-                    }
-                    const showPreview1 = checkAmount(b?.plan_price);
-                    const foundPlan = planDetails?.find(e => e.amount === CardData[index + 1]?.plan_price);
-                    console.log("foundPlan", foundPlan);
-                    console.log("foundPlan", planDetails);
-                    console.log("foundPlan", CardData[index + 1]?.plan_price);
-                    return (
-                      <div className={`relative privew_card_sub mx-2 ${showPreview1 ? checkAmount(item.plan_price) ? "buy" : "" : isAmountGreaterThan3[index] ? "ERR2" : isAmountGreaterThan4[index] ? checkAmount(item.plan_price) ? "buy" : "ERR" : ""}`}>
-                        <div key={index} className={checkAmount(item.plan_price) ? "" : "opacity_down"}>
-                          <div className="slot_title_and_price">
-                            <div className="slot_price">
-                              <h4>{item.slotName}</h4>
-                            </div>
-                            {checkAmount(item.plan_price) &&
-                              <div className="slot_price_carf_t d-block">
-                                <h4 className="text-light"><b>{datashow(dataincome, item.slotId)} USDT</b></h4>
+                      let da = CardData?.findIndex((el) => {
+                        return el.slotId == item.plan_price;
+                      });
+                      let price2 = Number(item.price2.replace(/\$/g, ''))
+                      let b = CardData[da + 1];
+                      if (item?.plan_price == 20) {
+                        isAmountGreaterThan3.push(data12?.r20 > 3);
+                      } else if (item?.plan_price == 40) {
+                        isAmountGreaterThan3.push(data12?.r40 > 3);
+                      } else if (item?.plan_price == 100) {
+                        isAmountGreaterThan3.push(data12?.r100 > 3);
+                      } else if (item?.plan_price == 200) {
+                        isAmountGreaterThan3.push(data123?.r200 > 3);
+                      } else if (item?.plan_price == 500) {
+                        isAmountGreaterThan3.push(data123?.r500 > 3);
+                      } else if (item?.plan_price == 1000) {
+                        isAmountGreaterThan3.push(data123?.r1000 > 3);
+                      } else if (item?.plan_price == 2000) {
+                        isAmountGreaterThan3.push(data123?.r2000 > 3);
+                      } else if (item?.plan_price == 4000) {
+                        isAmountGreaterThan3.push(data123?.r4000 > 3);
+                      }
+                      if (item?.plan_price == 20) {
+                        isAmountGreaterThan4.push(!true);
+                      } else if (item?.plan_price == 40) {
+                        isAmountGreaterThan4.push(data123?.r40 > 0);
+                      } else if (item?.plan_price == 100) {
+                        isAmountGreaterThan4.push(data123?.r100 > 0);
+                      } else if (item?.plan_price == 200) {
+                        isAmountGreaterThan4.push(data123?.r200 > 0);
+                      } else if (item?.plan_price == 500) {
+                        isAmountGreaterThan4.push(data123?.r500 > 0);
+                      } else if (item?.plan_price == 1000) {
+                        isAmountGreaterThan4.push(data123?.r1000 > 0);
+                      } else if (item?.plan_price == 2000) {
+                        isAmountGreaterThan4.push(data123?.r2000 > 0);
+                      } else if (item?.plan_price == 4000) {
+                        isAmountGreaterThan4.push(data123?.r4000 > 0);
+                      }
+                      const showPreview1 = checkAmount(b?.plan_price);
+                      const foundPlan = planDetails?.find(e => e.amount === CardData[index + 1]?.plan_price);
+                      console.log("foundPlan", foundPlan);
+                      console.log("foundPlan", planDetails);
+                      console.log("foundPlan", CardData[index + 1]?.plan_price);
+                      return (
+                        <div className={`relative privew_card_sub mx-2 ${showPreview1 ? checkAmount(item.plan_price) ? "buy" : "" : isAmountGreaterThan3[index] ? "ERR2" : isAmountGreaterThan4[index] ? checkAmount(item.plan_price) ? "buy" : "ERR" : ""}`}>
+                          <div key={index} className={checkAmount(item.plan_price) ? "" : "opacity_down"}>
+                            <div className="slot_title_and_price">
+                              <div className="slot_price">
+                                <h4>{item.slotName}</h4>
                               </div>
-                            }
-                          </div>
-                          <div className="slot_all_price_and_priviews py-2">
-                            <div className="all_slot">
-                              <h5>{item.price1}</h5>
-                              <h5>{item.price2}</h5>
-                              <h5>{item.price3}</h5>
+                              {checkAmount(item.plan_price) &&
+                                <div className="slot_price_carf_t d-block">
+                                  <h4 className="text-light"><b>{datashow(dataincome, item.slotId)} USDT</b></h4>
+                                </div>
+                              }
                             </div>
-                            {checkAmount(item.plan_price) &&
-                              <div className="slot_privew_btn">
-                                <Link to={`/slot-${item.slotId}`}>
-                                  Preview{" "}
-                                  <span>
-                                    <img
-                                      src={privewupicon}
-                                      alt="upicons_privew"
-                                      className="upicons_privew"
-                                    />
-                                  </span>
-                                </Link>
-                              </div>
-                            }
-                          </div>
-                          {dataincome['h1' + item.slotId + "miss"] > 0 ? !checkAmount(CardData[index + 1]?.plan_price) ?
                             <div className="slot_all_price_and_priviews py-2">
-                              <h4 className="text-danger m-0"><b>Missed Profits </b></h4>
                               <div className="all_slot">
-                                <h5 className="bg-danger">{dataincome['h1' + item.slotId + "miss"]}$</h5>
-                                <h5 className="bg-danger">
-                                  {data123 && Number(price2 * data123["r" + item.slotId])}$ </h5>
+                                <h5>{item.price1}</h5>
+                                <h5>{item.price2}</h5>
+                                <h5>{item.price3}</h5>
                               </div>
-                            </div> : null : null
-                          }
-                        </div>
-                        {!checkAmount(item.plan_price) ? (
-                          <div className="slot_privew_btn slot_privew_btn_center">
-                            <button
-                              onClick={() => {
-                                handleBuyPlan(item.plan_name, item.plan_price);
-                              }}
-                            >
-                              Upgrade
-                              <span>
-                                <img
-                                  src={privewupicon}
-                                  alt="upicons_privew"
-                                  className="upicons_privew"
-                                />
-                              </span>
-                            </button>
+                              {checkAmount(item.plan_price) &&
+                                <div className="slot_privew_btn">
+                                  <Link to={`/slot-${item.slotId}`}>
+                                    Preview{" "}
+                                    <span>
+                                      <img
+                                        src={privewupicon}
+                                        alt="upicons_privew"
+                                        className="upicons_privew"
+                                      />
+                                    </span>
+                                  </Link>
+                                </div>
+                              }
+                            </div>
+                            {dataincome['h1' + item.slotId + "miss"] > 0 ? !checkAmount(CardData[index + 1]?.plan_price) ?
+                              <div className="slot_all_price_and_priviews py-2">
+                                <h4 className="text-danger m-0"><b>Missed Profits </b></h4>
+                                <div className="all_slot">
+                                  <h5 className="bg-danger">{dataincome['h1' + item.slotId + "miss"]}$</h5>
+                                  <h5 className="bg-danger">
+                                    {data123 && Number(price2 - 2 * data123["r" + item.slotId]) <= 0 ? 0 : Number(price2 - 2 * data123["r" + item.slotId])}$ </h5>
+                                </div>
+                              </div> : null : null
+                            }
                           </div>
-                        ) : (
-                          null
-                        )}
-                      </div>
-                    );
-                  })}
-                </div>
+                          {!checkAmount(item.plan_price) ? (
+                            <div className="slot_privew_btn slot_privew_btn_center">
+                              <button
+                                onClick={() => {
+                                  handleBuyPlan(item.plan_name, item.plan_price);
+                                }}
+                              >
+                                Upgrade
+                                <span>
+                                  <img
+                                    src={privewupicon}
+                                    alt="upicons_privew"
+                                    className="upicons_privew"
+                                  />
+                                </span>
+                              </button>
+                            </div>
+                          ) : (
+                            null
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
               </div>
 
