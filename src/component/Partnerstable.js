@@ -404,6 +404,7 @@ const PartnersTable = () => {
               {houseRewards123?.data &&
                 houseRewards123?.data?.map((el, i) => {
                   return houseRewards123?.data[i].userdata[0]?.missedusers?.map((elE, iDEX) => {
+                    let a = elE?.depthleval + 1 === 1 ? 0 : elE?.depthleval + 1 === 2 ? CardData[i]["price1"].replace(/\$/g, '') * 10 / 100 : elE?.depthleval + 1 === 3 ? CardData[i]["price1"].replace(/\$/g, '') * 20 / 100 : elE?.depthleval + 1 === 4 ? CardData[i]["price1"].replace(/\$/g, '') * 20 / 100 : CardData[i]["price1"].replace(/\$/g, '') * 50 / 100
                     return (
                       <tr key={iDEX}>
                         <td>
@@ -432,7 +433,7 @@ const PartnersTable = () => {
                           {elE?.depthleval + 1 === 1 ? 0 : elE?.depthleval + 1 === 2 ? CardData[i]["price1"].replace(/\$/g, '') * 10 / 100 : elE?.depthleval + 1 === 3 ? CardData[i]["price1"].replace(/\$/g, '') * 20 / 100 : elE?.depthleval + 1 === 4 ? CardData[i]["price1"].replace(/\$/g, '') * 20 / 100 : CardData[i]["price1"].replace(/\$/g, '') * 50 / 100}
                         </td>
                         <td className="status_row">
-                          <p className="recieved_status">{elE?.depthleval + 1 === 1 ? 0 : elE?.depthleval + 1 === 2 ? CardData[i]["price1"].replace(/\$/g, '') * 10 / 100 : elE?.depthleval + 1 === 3 ? CardData[i]["price1"].replace(/\$/g, '') * 20 / 100 : elE?.depthleval + 1 === 4 ? CardData[i]["price1"].replace(/\$/g, '') * 20 / 100 : CardData[i]["price1"].replace(/\$/g, '') * 50 / 100 === 0 ? "send to upline" : "Received"}</p>
+                          <p className="recieved_status">{a === 0 ? "send to upline" : "Received"}</p>
                         </td>
                         <td>
                           {elE?.depthleval + 1}
