@@ -859,7 +859,7 @@ const Dashboard = () => {
                             {profitDetails &&
                               (
                                 (profitDetails?.overAllProfit /
-                                  totalInvestMent) *
+                                planDetails21?.profit) *
                                 100
                               ).toFixed(4)}
                             %
