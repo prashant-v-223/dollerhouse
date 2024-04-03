@@ -240,6 +240,7 @@ const PartnersTable = () => {
                   <th>Type</th>
                   <th>Plan Name</th>
                   <th>Wallet Address</th>
+                  <th>status</th>
                   <th>Reward</th>
                   <th>User ID</th>
                   <th>Time</th>
@@ -279,7 +280,14 @@ const PartnersTable = () => {
                               <MdContentCopy />
                             </button>
                           </td>
-
+                          <td className="status_row">
+                            {item.status ? (
+                              item.status !== "missed Reword" ?
+                                "Sent to Upline" : "missed"
+                            ) : (
+                              <p className="recieved_status">Received</p>
+                            )}
+                          </td>
                           <td>{item.house_reward} USDT</td>
                           <td>
                             <p
@@ -349,6 +357,7 @@ const PartnersTable = () => {
                             </button>
                           </td>
                           <td>{item.reward} USDT</td>
+                          
                           <td className="text-center">{item.level}</td>
                           <td>
                             <p
