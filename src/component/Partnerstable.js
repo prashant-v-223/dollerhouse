@@ -313,6 +313,8 @@ const PartnersTable = () => {
                   <th>Plan Name</th>
                   <th>Wallet Address</th>
                   <th>Reward</th>
+                  <th>status</th>
+                  <th>leval</th>
                   <th>User ID</th>
                   <th>Time</th>
                 </tr>
