@@ -66,7 +66,17 @@ const Dashboard = () => {
     });
   }
 
-
+  function calculateFinalAmount(baseAmount, baseAmount2) {
+    let finalAmount = 0;
+    console.log("d1d1d1", baseAmount);
+    console.log("d1d1d1", baseAmount2);
+    for (let index = 0; index <= baseAmount; index++) {
+      let d1 = index <= 2 ? 0 : index <= 6 ? 10 : index <= 14 ? 20 : index <= 30 ? 20 : 50
+      console.log("d1d1d1", d1);
+      finalAmount += baseAmount2 * d1 / 100
+    }
+    return finalAmount;
+  }
   const { contract } = useContract(
     "0x642ba5BEF7030FD665b671E12090268086EFF1eC"
   );
@@ -518,7 +528,9 @@ const Dashboard = () => {
       dataincome &&
       dataincome["h1" + slotId + "all"] +
       dataincome["h15" + slotId + "all"] +
-      dataincome["innerAmountSum" + slotId]
+      dataincome["innerAmountSum" + slotId] -
+      dataincome["h1" + slotId + "miss"] -
+      dataincome["h15" + slotId + "miss"]
     );
   };
   const missdatashow = (dataincome, slotId) => {
@@ -1081,7 +1093,8 @@ const Dashboard = () => {
                                 <div className="all_slot">
                                   <h5 className="bg-danger">{dataincome['h1' + item.slotId + "miss"]}$</h5>
                                   <h5 className="bg-danger">
-                                    {data123 && Number(price2 - 2 * data123["r" + item.slotId]) <= 0 ? 0 : Number(price2 - 2 * data123["r" + item.slotId])}$ </h5>
+                                    {/* {data123 && Number(price2 - 2 * data123["r" + item.slotId]) <= 0 ? 0 : Number(price2 - 2 * data123["r" + item.slotId])}$ </h5> */}
+                                    {data123 && calculateFinalAmount(data123["r" + item.slotId], price2)}$ </h5>
                                 </div>
                               </div> : null : null
                             }
