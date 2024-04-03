@@ -363,12 +363,7 @@ const PartnersTable = () => {
 
                           <td>{item.house_reward} USDT</td>
                           <td className="status_row">
-                            {item.status ? (
-                              item.status !== "missed Reword" ?
-                                "Sent to Upline" : "missed"
-                            ) : (
-                              <p className="recieved_status">Received</p>
-                            )}
+                            <p className="recieved_status">Received</p>
                           </td>
                           <td>
                             <p
