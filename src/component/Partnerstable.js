@@ -438,7 +438,7 @@ const PartnersTable = () => {
                           </button>
                         </td>
                         <td>
-                          {Number(CardData[i]["price1"].replace(/\$/g, '')) * elE?.depthleval + 1 === 1 ? 0 : elE?.depthleval + 1 === 2 ? 10 / 100 : elE?.depthleval + 1 === 3 ? 20 / 100 : elE?.depthleval + 1 === 4 ? 20 / 100 : 50 / 100}
+                          {elE?.depthleval + 1 === 1 ? 0 : elE?.depthleval + 1 === 2 ? CardData[i]["price1"].replace(/\$/g, '') * 10 / 100 : elE?.depthleval + 1 === 3 ? CardData[i]["price1"].replace(/\$/g, '') * 20 / 100 : elE?.depthleval + 1 === 4 ? CardData[i]["price1"].replace(/\$/g, '') * 20 / 100 : CardData[i]["price1"].replace(/\$/g, '') * 50 / 100}
                         </td>
                         <td className="status_row">
                           <p className="recieved_status">Received</p>
