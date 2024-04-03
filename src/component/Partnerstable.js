@@ -241,8 +241,78 @@ const PartnersTable = () => {
                   <th>Plan Name</th>
                   <th>Wallet Address</th>
                   <th>Reward</th>
-                  <th>Status</th>
-                  <th>Level</th>
+                  <th>User ID</th>
+                  <th>Time</th>
+                </tr>
+              </thead>
+              <tbody>
+                {houseRewards?.length > 0 ? (
+                  houseRewards
+                    .sort((a, b) => new Date(b.Time) - new Date(a.Time)) // Sort by date in descending order
+                    .map((item, index) => {
+                      return (
+                        <tr key={index}>
+                          <td>
+
+                            {item.status ? (
+                              <img src="/up-arrow.png" style={{ width: "30px" }} />
+                            ) : (
+                              <img
+                                src="/static/media/svg-image-23.aa0930be96db08ffc8e973487f0567fb.svg"
+                                alt="wallet"
+                                className="wallet_icon_last"
+                              />
+                            )}
+                          </td>
+                          <td>{item.plan_name}</td>
+                          <td>
+                            {removeAndReplaceMiddleCharacters(
+                              item.invited_member_id
+                            )}{" "}
+                            <button
+                              className="copy_button_table pdding_remove_copy_button"
+                              onClick={() => {
+                                copyToClipboard(item.invited_member_id);
+                              }}
+                            >
+                              {" "}
+                              <MdContentCopy />
+                            </button>
+                          </td>
+
+                          <td>{item.house_reward} USDT</td>
+                          <td>
+                            <p
+                              onClick={() => {
+                                handleRedirect(item.user_id);
+                              }}
+                              className="link_table text-center cursor-pointer link_table2 table_id"
+                            >
+                              ID{item.user_id}
+                            </p>
+                          </td>
+                          <td>
+                            {new Date(item.Time).toLocaleString("en-IN", {
+                              timeZone: "Asia/Kolkata",
+                            })}
+                          </td>
+                        </tr>
+                      );
+                    })
+                ) : (
+                  <h1 className="nodata_h">No data found!</h1>
+                )}
+
+              </tbody>
+            </table>
+          ) : rewards == 2 ? (
+            <table className="table">
+              <thead>
+                <tr>
+                  <th>Type</th>
+                  <th>Plan Name</th>
+                  <th>Wallet Address</th>
+                  <th>Reward</th>
                   <th>User ID</th>
                   <th>Time</th>
                 </tr>
@@ -256,15 +326,11 @@ const PartnersTable = () => {
                       return (
                         <tr key={index}>
                           <td>
-                            {item.status ? (
-                              <img src="/up-arrow.png" style={{ width: "30px" }} />
-                            ) : (
-                              <img
-                                src="/static/media/svg-image-23.aa0930be96db08ffc8e973487f0567fb.svg"
-                                alt="wallet"
-                                className="wallet_icon_last"
-                              />
-                            )}
+                            <img
+                              src="/static/media/svg-image-23.aa0930be96db08ffc8e973487f0567fb.svg"
+                              alt="wallet"
+                              className="wallet_icon_last"
+                            />
                           </td>
                           <td>{item.plan_name}</td>
                           <td>
@@ -291,72 +357,6 @@ const PartnersTable = () => {
                             )}
                           </td>
                           <td className="text-center">{item.level}</td>
-                          <td>
-                            <p
-                              onClick={() => {
-                                handleRedirect(item.user_id);
-                              }}
-                              className="link_table text-center cursor-pointer link_table2 table_id"
-                            >
-                              ID{item.user_id}
-                            </p>
-                          </td>
-                          <td>
-                            {new Date(item.Time).toLocaleString("en-IN", {
-                              timeZone: "Asia/Kolkata",
-                            })}
-                          </td>
-                        </tr>
-                      );
-                    })
-                ) : (
-                  <h1 className="nodata_h">No data found!</h1>
-                )}
-              </tbody>
-            </table>
-          ) : rewards == 2 ? (
-            <table className="table">
-              <thead>
-                <tr>
-                  <th>Type</th>
-                  <th>Plan Name</th>
-                  <th>Wallet Address</th>
-                  <th>Reward</th>
-                  <th>User ID</th>
-                  <th>Time</th>
-                </tr>
-              </thead>
-              <tbody>
-                {houseRewards?.length > 0 ? (
-                  houseRewards
-                    .sort((a, b) => new Date(b.Time) - new Date(a.Time)) // Sort by date in descending order
-                    .map((item, index) => {
-                      return (
-                        <tr key={index}>
-                          <td>
-                            <img
-                              src="/static/media/svg-image-23.aa0930be96db08ffc8e973487f0567fb.svg"
-                              alt="wallet"
-                              className="wallet_icon_last"
-                            />
-                          </td>
-                          <td>{item.plan_name}</td>
-                          <td>
-                            {removeAndReplaceMiddleCharacters(
-                              item.invited_member_id
-                            )}{" "}
-                            <button
-                              className="copy_button_table pdding_remove_copy_button"
-                              onClick={() => {
-                                copyToClipboard(item.invited_member_id);
-                              }}
-                            >
-                              {" "}
-                              <MdContentCopy />
-                            </button>
-                          </td>
-
-                          <td>{item.house_reward} USDT</td>
                           <td>
                             <p
                               onClick={() => {
