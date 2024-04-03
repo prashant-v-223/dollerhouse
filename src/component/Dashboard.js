@@ -45,6 +45,7 @@ const Dashboard = () => {
   const wallet_address = useAddress();
   const [profitDetails, setProfitDetails] = useState("");
   const [planDetails, setPlanDetails] = useState([]);
+  const [planDetails21, setPlanDetails21] = useState(null);
   const [file, setFile] = useState(null);
   const [username, setUsername] = useState("");
   const [message, setMessage] = useState("");
@@ -421,6 +422,7 @@ const Dashboard = () => {
       setdata12(data.data1);
       setdata123(data.data2);
       setdataincome(data.data3);
+      setPlanDetails21(data.data4);
       setWalletAddress(data.data.wallet_id);
     } catch (error) {
       console.error("Error fetching profile:", error);
@@ -529,8 +531,7 @@ const Dashboard = () => {
       dataincome["h1" + slotId + "all"] +
       dataincome["h15" + slotId + "all"] +
       dataincome["innerAmountSum" + slotId] -
-      dataincome["h1" + slotId + "miss"] -
-      dataincome["h15" + slotId + "miss"]
+      dataincome["h1" + slotId + "miss"]
     );
   };
   const missdatashow = (dataincome, slotId) => {
@@ -871,8 +872,8 @@ const Dashboard = () => {
                           <div className="Profits-number">
                             <div className="pro_num">
                               <h1>
-                                {profitDetails
-                                  ? profitDetails?.overAllProfit
+                                {planDetails21
+                                  ? planDetails21?.allpro
                                   : 0}
                               </h1>
                               <p>
@@ -1087,11 +1088,11 @@ const Dashboard = () => {
                                 </div>
                               }
                             </div>
-                            {dataincome['h1' + item.slotId + "all"] - dataincome['h1' + item.slotId + "miss"] > 0 ? !checkAmount(CardData[index + 1]?.plan_price) ?
+                            {dataincome['h1' + item.slotId + "miss"] > 0 ? !checkAmount(CardData[index + 1]?.plan_price) ?
                               <div className="slot_all_price_and_priviews py-2">
                                 <h4 className="text-danger m-0"><b>Missed Profits </b></h4>
                                 <div className="all_slot">
-                                  <h5 className="bg-danger">{dataincome['h1' + item.slotId + "all"] - dataincome['h1' + item.slotId + "miss"]}$</h5>
+                                  <h5 className="bg-danger">{dataincome['h1' + item.slotId + "miss"]}$</h5>
                                   <h5 className="bg-danger">
                                     {data123 && calculateFinalAmount(data123["r" + item.slotId], price2)}$ </h5>
                                 </div>
