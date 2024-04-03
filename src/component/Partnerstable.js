@@ -334,15 +334,13 @@ const PartnersTable = () => {
                       return (
                         <tr key={index}>
                           <td>
-                            {item.status ? (
-                              <img src="/up-arrow.png" style={{ width: "30px" }} />
-                            ) : (
+                        
                               <img
                                 src="/static/media/svg-image-23.aa0930be96db08ffc8e973487f0567fb.svg"
                                 alt="wallet"
                                 className="wallet_icon_last"
                               />
-                            )}
+                            
                           </td>
                           <td>{item.plan_name}</td>
                           <td>
