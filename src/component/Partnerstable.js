@@ -322,7 +322,6 @@ const PartnersTable = () => {
                   <th>Plan Name</th>
                   <th>Wallet Address</th>
                   <th>Reward</th>
-                  <th>Status</th>
                   <th>User ID</th>
                   <th>Time</th>
                 </tr>
@@ -362,9 +361,6 @@ const PartnersTable = () => {
                           </td>
 
                           <td>{item.house_reward} USDT</td>
-                          <td className="status_row">
-                            <p className="recieved_status">Received</p>
-                          </td>
                           <td>
                             <p
                               onClick={() => {
