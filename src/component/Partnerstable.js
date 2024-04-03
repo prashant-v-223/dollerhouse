@@ -402,8 +402,8 @@ const PartnersTable = () => {
                 <th>Type</th>
                 <th>Plan Name</th>
                 <th>Wallet Address</th>
-                <th>Status</th>
                 <th>Reward</th>
+                <th>Status</th>
                 <th>Level</th>
                 <th>User ID</th>
                 <th>Time</th>
