@@ -45,7 +45,7 @@ const Dashboard = () => {
   const wallet_address = useAddress();
   const [profitDetails, setProfitDetails] = useState("");
   const [planDetails, setPlanDetails] = useState([]);
-  const [planDetails21, setPlanDetails21] = useState(null);
+  const [planDetails21, setPlanDetails21] = useState({});
   const [file, setFile] = useState(null);
   const [username, setUsername] = useState("");
   const [message, setMessage] = useState("");
@@ -102,6 +102,7 @@ const Dashboard = () => {
       setPlanDetails(data.data.plan_details);
       setdata12(data.data1);
       setdata123(data.data2);
+      setPlanDetails21(data.data4);
       setdataincome(data.data3);
       setWalletAddress(data.data.wallet_id);
     } catch (error) {
@@ -594,7 +595,7 @@ const Dashboard = () => {
   }, [walletAddress]);
 
 
-
+  console.log("planDetails21planDetails21planDetails21", planDetails21);
 
   return (
     <React.Fragment>
@@ -872,9 +873,9 @@ const Dashboard = () => {
                           <div className="Profits-number">
                             <div className="pro_num">
                               <h1>
-                                {planDetails21
-                                  ? planDetails21?.allpro
-                                  : 0}
+                                {
+                                  planDetails21?.profit
+                                }
                               </h1>
                               <p>
                                 <h4>{userData24?.data?.team_members_in_last_24Hours}</h4>
