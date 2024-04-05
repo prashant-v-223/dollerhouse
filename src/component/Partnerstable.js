@@ -265,7 +265,7 @@ const PartnersTable = () => {
                               />
                             )}
                           </td>
-                          <td>{item.plan_name}</td>
+                          <td>{item.plan_name.replace("DH Plan", "Leval")}</td>
                           <td>
                             {removeAndReplaceMiddleCharacters(
                               item.invited_member_id
@@ -321,7 +321,6 @@ const PartnersTable = () => {
                   <th>Plan Name</th>
                   <th>Wallet Address</th>
                   <th>Reward</th>
-                  <th>leval</th>
                   <th>User ID</th>
                   <th>Time</th>
                 </tr>
@@ -341,7 +340,7 @@ const PartnersTable = () => {
                               className="wallet_icon_last"
                             />
                           </td>
-                          <td>{item.plan_name}</td>
+                          <td>{item.plan_name.replace("DH Plan", "Leval")}</td>
                           <td>
                             {removeAndReplaceMiddleCharacters(
                               item.invited_member_id
@@ -357,8 +356,6 @@ const PartnersTable = () => {
                             </button>
                           </td>
                           <td>{item.reward} USDT</td>
-                          
-                          <td className="text-center">{item.level}</td>
                           <td>
                             <p
                               onClick={() => {
@@ -391,9 +388,8 @@ const PartnersTable = () => {
                 <th>Type</th>
                 <th>Plan Name</th>
                 <th>Wallet Address</th>
+                <th>status</th>
                 <th>Reward</th>
-                <th>Status</th>
-                <th>Level</th>
                 <th>User ID</th>
                 <th>Time</th>
               </tr>
@@ -412,7 +408,7 @@ const PartnersTable = () => {
                             className="wallet_icon_last"
                           />
                         </td>
-                        <td>DH PLAN {" "} {i + 1}</td>
+                        <td>Leval {i + 1}</td>
                         <td>
                           {removeAndReplaceMiddleCharacters(
                             elE?.refId
@@ -426,16 +422,13 @@ const PartnersTable = () => {
                             {" "}
                             <MdContentCopy />
                           </button>
+                        </td>  <td className="status_row">
+                          <p className="recieved_status">{a === 0 ? "send to upline" : "Received"}</p>
                         </td>
                         <td>
                           {elE?.depthleval + 1 === 1 ? 0 : elE?.depthleval + 1 === 2 ? CardData[i]["price1"].replace(/\$/g, '') * 10 / 100 : elE?.depthleval + 1 === 3 ? CardData[i]["price1"].replace(/\$/g, '') * 20 / 100 : elE?.depthleval + 1 === 4 ? CardData[i]["price1"].replace(/\$/g, '') * 20 / 100 : CardData[i]["price1"].replace(/\$/g, '') * 50 / 100}
                         </td>
-                        <td className="status_row">
-                          <p className="recieved_status">{a === 0 ? "send to upline" : "Received"}</p>
-                        </td>
-                        <td>
-                          {elE?.depthleval + 1}
-                        </td>
+
                         <td>
                           <p
                             onClick={() => {
@@ -467,7 +460,7 @@ const PartnersTable = () => {
                           className="wallet_icon_last"
                         />
                       </td>
-                      <td>DH PLAN {" "} {i + 1}</td>
+                      <td>Leval {" "} {i + 1}</td>
                       <td>
                         {removeAndReplaceMiddleCharacters(
                           elE?.refId
@@ -482,14 +475,12 @@ const PartnersTable = () => {
                           <MdContentCopy />
                         </button>
                       </td>
-                      <td className="">
-                        {Number(iDEX + 1 <= 2 ? CardData[i]["price1"].replace(/\$/g, '') * 0 / 100 : iDEX + 1 <= 6 ? CardData[i]["price1"].replace(/\$/g, '') * 10 / 100 : iDEX + 1 <= 14 ? CardData[i]["price1"].replace(/\$/g, '') * 20 / 100 : iDEX + 1 <= 30 ? CardData[i]["price1"].replace(/\$/g, '') * 20 / 100 : CardData[i]["price1"].replace(/\$/g, '') * 50 / 100)}
-                      </td>
+
+
                       <td className="status_row">
                         missed
-                      </td>
-                      <td>
-                        -
+                      </td>   <td className="">
+                        {Number(iDEX + 1 <= 2 ? CardData[i]["price1"].replace(/\$/g, '') * 0 / 100 : iDEX + 1 <= 6 ? CardData[i]["price1"].replace(/\$/g, '') * 10 / 100 : iDEX + 1 <= 14 ? CardData[i]["price1"].replace(/\$/g, '') * 20 / 100 : iDEX + 1 <= 30 ? CardData[i]["price1"].replace(/\$/g, '') * 20 / 100 : CardData[i]["price1"].replace(/\$/g, '') * 50 / 100)}
                       </td>
                       <td>
                         <p
