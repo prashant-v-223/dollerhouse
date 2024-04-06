@@ -1099,14 +1099,20 @@ const Dashboard = () => {
                               </div> : null : null
                             }
                           </div>
-                          {!checkAmount(item.plan_price) ? (
+                          {!checkAmount(item.plan_price) && (
                             <div className="slot_privew_btn slot_privew_btn_center">
                               <button
-                                onClick={() => {
-                                  handleBuyPlan(item.plan_name, item.plan_price);
-                                }}
+                                disabled={item.plan_price !== checkAccess()}
+                                onClick={() =>
+                                  isAccess
+                                    ? buyToken(
+                                      item.plan_name,
+                                      item.plan_price
+                                    )
+                                    : NotAllowed()
+                                }
                               >
-                                Upgrade
+                                Upgrade {checkAccess}
                                 <span>
                                   <img
                                     src={privewupicon}
@@ -1115,10 +1121,7 @@ const Dashboard = () => {
                                   />
                                 </span>
                               </button>
-                            </div>
-                          ) : (
-                            null
-                          )}
+                            </div>)}
                         </div>
                       );
                     })}
