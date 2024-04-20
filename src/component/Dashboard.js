@@ -92,6 +92,7 @@ const Dashboard = () => {
 
   const GetPlanDetail1 = async (main_user_id) => {
     try {
+      setLoading(true);
       const response = await fetch(
         ` https://dollerhouse111.onrender.com/plan/get-plan?userid=${main_user_id}`
       );
@@ -105,6 +106,7 @@ const Dashboard = () => {
       setPlanDetails21(data.data4);
       setdataincome(data.data3);
       setWalletAddress(data.data.wallet_id);
+      setLoading(!true);
     } catch (error) {
       console.error("Error fetching profile:", error);
     }
@@ -132,6 +134,7 @@ const Dashboard = () => {
 
   const user = async (e) => {
     try {
+      setLoading(true);
       const response = await axios.get(
         ` https://dollerhouse111.onrender.com/user/get-user?wallet_id=${e}`
       );
@@ -142,6 +145,7 @@ const Dashboard = () => {
       setRefferal(response.data.data.parent_details.wallet_id);
       user1(response.data.data.parent_details.wallet_id);
       setUser_id(response.data.data.user_id);
+      setLoading(!true);
       console.log(
         "response.data.data.parent_details.wallet_id",
         response.data.data.parent_details.wallet_id
@@ -177,7 +181,7 @@ const Dashboard = () => {
   const month = dateTime.getMonth() + 1; // Month is zero-indexed
   const year = dateTime.getFullYear();
   const formattedDate = `${day}-${month}-${year}`;
-
+  console.log("BuyTokenLoading", loading);
   // Profit Details by ID
   const profitDetailsApi = async (main_user_id) => {
     try {
@@ -211,9 +215,8 @@ const Dashboard = () => {
 
   let ref = "0x7a343FF69aE56cb8bf799dCBedACfe41a1434162";
   const handleBuyPlan = async (plan_name, plan_price) => {
-    setBuyTokenLoading(true)
     try {
-      //console.log("Inside try block")
+      setLoading(true);
       const response = await fetch(" https://dollerhouse111.onrender.com/plan/create", {
         method: "POST",
         headers: {
@@ -231,6 +234,7 @@ const Dashboard = () => {
           ],
         }),
       });
+      setLoading(!true);
       PostHouse5Plan(plan_price);
     } catch (error) {
       console.error("Error fetching user details:", error);
@@ -307,7 +311,7 @@ const Dashboard = () => {
 
   const buyToken = async (plan_name, plan_price) => {
     // let tierplan = ethers.utils.parseEther(plan_price);
-    setBuyTokenLoading(true);
+    setLoading(true);
     try {
       //   const data = await buyTokens({ args: [refferal, tierplan] });
       //   console.info("contract call successs", data);
@@ -319,7 +323,7 @@ const Dashboard = () => {
       //   toast.error("Something went Wrong ", {
       //     position: toast.POSITION.TOP_CENTER,
       //   });
-      setBuyTokenLoading(false);
+      setLoading(false);
       console.error("contract call failure", err);
     } finally {
       setBuyTokenLoading(false);
@@ -598,7 +602,7 @@ const Dashboard = () => {
 
   return (
     <React.Fragment>
-      {BuyTokenLoading && <Loading />}
+      {loading === true && <Loading />}
       {
         <div className={loading && "opacity_manage"}>
           <div>
@@ -1101,24 +1105,27 @@ const Dashboard = () => {
                           </div>
                           {!checkAmount(item.plan_price) && (
                             <div className="slot_privew_btn slot_privew_btn_center">
-                              <button
-                                disabled={item.plan_price !== checkAccess()}
-                                onClick={() =>
-                                  buyToken(
-                                    item.plan_name,
-                                    item.plan_price
-                                  )
-                                }
-                              >
-                                Upgrade {checkAccess}
-                                <span>
-                                  <img
-                                    src={privewupicon}
-                                    alt="upicons_privew"
-                                    className="upicons_privew"
-                                  />
-                                </span>
-                              </button>
+                              {!loading ?
+                                <button
+                                  onClick={() =>
+                                    buyToken(
+                                      item.plan_name,
+                                      item.plan_price
+                                    )
+                                  }
+                                >
+                                  Upgrade {checkAccess}
+                                  <span>
+                                    <img
+                                      src={privewupicon}
+                                      alt="upicons_privew"
+                                      className="upicons_privew"
+                                    />
+                                  </span>
+                                </button> : <button>
+                                  loding...
+                                </button>
+                              }
                             </div>)}
                         </div>
                       );
