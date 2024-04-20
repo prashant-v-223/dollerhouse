@@ -48,7 +48,7 @@ const Registration = ({ id }) => {
   const address = useAddress();
 
   const { contract } = useContract(
-    "0x642ba5BEF7030FD665b671E12090268086EFF1eC"
+    "0x01e974064E32DD5B6C439902010ae62f11b500e0"
   );
   const { data: cunWalletBal, isLoading: isCunWalletBalLoading } =
     useTokenBalance(contract, address);
