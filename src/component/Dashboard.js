@@ -1088,7 +1088,7 @@ const Dashboard = () => {
                                 </div>
                               }
                             </div>
-                            {dataincome['h1' + item.slotId + "miss"] > 0 ? !checkAmount(CardData[index + 1]?.plan_price) ?
+                            {/* {dataincome['h1' + item.slotId + "miss"] > 0 ? !checkAmount(CardData[index + 1]?.plan_price) ?
                               <div className="slot_all_price_and_priviews py-2">
                                 <h4 className="text-danger m-0"><b>Missed Profits </b></h4>
                                 <div className="all_slot">
@@ -1097,7 +1097,25 @@ const Dashboard = () => {
                                     {data123 && calculateFinalAmount(data123["r" + item.slotId], price2)}$ </h5>
                                 </div>
                               </div> : null : null
-                            }
+                            } */}
+                            {isAmountGreaterThan3[index] ? !checkAmount(CardData[index + 1]?.plan_price) ?
+                              <div className="slot_all_price_and_priviews py-2">
+                                <h4 className="text-danger m-0"><b>Missed Profits </b></h4>
+                                <div className="all_slot">
+                                  <h5 className="bg-danger">{dataincome['h1' + item.slotId + "miss"]}$</h5>
+                                  <h5 className="bg-danger">
+                                    {data123 && calculateFinalAmount(data123["r" + item.slotId], price2)}$ </h5>
+                                </div>
+                              </div> : null
+                              : isAmountGreaterThan4[index] ? checkAmount(item.plan_price) ? null : !checkAmount(CardData[index + 1]?.plan_price) ?
+                                <div className="slot_all_price_and_priviews py-2">
+                                  <h4 className="text-danger m-0"><b>Missed Profits </b></h4>
+                                  <div className="all_slot">
+                                    <h5 className="bg-danger">{dataincome['h1' + item.slotId + "miss"]}$</h5>
+                                    <h5 className="bg-danger">
+                                      {data123 && calculateFinalAmount(data123["r" + item.slotId], price2)}$ </h5>
+                                  </div>
+                                </div> : null : ""}
                           </div>
                           {!checkAmount(item.plan_price) && (
                             <div className="slot_privew_btn slot_privew_btn_center">
