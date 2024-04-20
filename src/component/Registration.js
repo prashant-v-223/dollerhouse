@@ -59,7 +59,7 @@ const Registration = ({ id }) => {
   const { data: checkApproval, isLoading: isApprovalLoading } = useContractRead(
     USDTContract,
     "allowance",
-    [address, "0x642ba5BEF7030FD665b671E12090268086EFF1eC"]
+    [address, "0x01e974064E32DD5B6C439902010ae62f11b500e0"]
   );
 
   const ApprovedValue = checkApproval
@@ -90,7 +90,7 @@ const Registration = ({ id }) => {
   const approveTokens = async () => {
     setIsLoading(true);
     try {
-      let spender = "0x5C2Db6D26D5A86392777368bFED9A8f1afC87A4F"; //contract address
+      let spender = "0x01e974064E32DD5B6C439902010ae62f11b500e0"; //contract address
       let approveAmount = ethers.utils.parseEther(approveAmt);
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       const signer = provider.getSigner();
@@ -178,33 +178,56 @@ const Registration = ({ id }) => {
   const { mutateAsync: buyTokens, isLoading: isBuyTokensLoading } =
     useContractWrite(contract, "buyTokens");
 
-    const buyToken = async () => {
+    // const buyToken = async () => {
+    //   setIsLoading(true);
+    //   try {
+    //     let tierplan = ethers.utils.parseEther("20");
+    //     try {
+    //       const provider = new ethers.providers.Web3Provider(window.ethereum);
+    //       const signer = provider.getSigner();
+    //       const contract = new ethers.Contract(stakecontract, stake_abi, signer);
+    //       const token = await contract.buyTokens(refferalCode, tierplan);
+    //       const receipt = await token.wait();
+    //       if (receipt.status === 1) {
+    //         handleBuyPlan();
+    //       }
+    //     } catch (error) {
+    //       console.log(error);
+    //       toast.error("Failed", {
+    //         position: toast.POSITION.TOP_CENTER,
+    //       });
+    //     }
+    //     setIsLoading(false);
+    //   } catch (err) {
+    //     toast.error("You can not buy more than $1000 in one transaction", {
+    //       position: toast.POSITION.TOP_CENTER,
+    //     });
+    //     console.error("contract call failure", err);
+    //   }
+    // };
+
+
+    const buyToken = async (plan_name, plan_price) => {
+      let tierplan = ethers.utils.parseEther("20");
       setIsLoading(true);
       try {
-        let tierplan = ethers.utils.parseEther("selectedValue");
-        try {
-          const provider = new ethers.providers.Web3Provider(window.ethereum);
-          const signer = provider.getSigner();
-          const contract = new ethers.Contract(stakecontract, stake_abi, signer);
-          const token = await contract.buyTokens(refferalCode, tierplan);
-          const receipt = await token.wait();
-          if (receipt.status === 1) {
-            handleBuyPlan();
-          }
-        } catch (error) {
-          console.log(error);
-          toast.error("Failed", {
-            position: toast.POSITION.TOP_CENTER,
-          });
-        }
-        setIsLoading(false);
-      } catch (err) {
-        toast.error("You can not buy more than $1000 in one transaction", {
+        const data = await buyTokens({ args: [refferalCode, tierplan] });
+        console.info("contract call successs", data);
+        handleBuyPlan(plan_name, plan_price);
+        toast.success((`Successfully Registered`), {
           position: toast.POSITION.TOP_CENTER,
         });
+      } catch (err) {
+        toast.error("Something went Wrong ", {
+          position: toast.POSITION.TOP_CENTER,
+        });
+        setIsLoading(false);
         console.error("contract call failure", err);
+      } finally {
+        setBuyTokenLoading(false);
       }
     };
+  
   
 
 

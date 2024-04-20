@@ -1,4 +1,4 @@
-export const stakecontract = "0x642ba5BEF7030FD665b671E12090268086EFF1eC";
+export const stakecontract = "0x01e974064E32DD5B6C439902010ae62f11b500e0";
 export const stake_abi = [
   {
     inputs: [
@@ -141,7 +141,7 @@ export const stake_abi = [
           { internalType: "uint256", name: "tier", type: "uint256" },
           { internalType: "address", name: "referrer", type: "address" },
         ],
-        internalType: "struct Staking.UserBuy[]",
+        internalType: "struct dollarhouse.UserBuy[]",
         name: "",
         type: "tuple[]",
       },
@@ -199,6 +199,18 @@ export const stake_abi = [
     type: "function",
   },
   {
+    inputs: [
+      { internalType: "address[]", name: "_addresses", type: "address[]" },
+      { internalType: "uint256[]", name: "_percentages", type: "uint256[]" },
+      { internalType: "address", name: "_user", type: "address" },
+      { internalType: "uint256", name: "_tier", type: "uint256" },
+    ],
+    name: "transferSecondSlotRewards",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
     inputs: [],
     name: "usdtToken",
     outputs: [{ internalType: "contract ERC20", name: "", type: "address" }],
@@ -230,6 +242,13 @@ export const stake_abi = [
     name: "userRewards",
     outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
     stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "withdrawUSDT",
+    outputs: [],
+    stateMutability: "nonpayable",
     type: "function",
   },
 ];
