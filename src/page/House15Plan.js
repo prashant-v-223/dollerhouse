@@ -208,9 +208,9 @@ const House15Plan = () => {
   const handleNewIdData = (user_id) => {
     if (user_id !== undefined) {
       localStorage.setItem("UserID", JSON.stringify(user_id));
-      if (parentId !== null ) {
+      if (parentId !== null) {
         localStorage.setItem("UPlineUserID", JSON.stringify(parentId));
-       
+
       }
       window.location.reload();
     }
@@ -334,9 +334,8 @@ const House15Plan = () => {
                           const item = maindata && maindata[index];
                           return (
                             <h4
-                              className={`${
-                                item && item.status !== undefined ? "" : ""
-                              } cursor-pointer bg-[#743b07]`}
+                              className={`${item && item.status !== undefined ? "" : ""
+                                } cursor-pointer bg-[#743b07]`}
                               key={index}
                               onClick={() => handleNewIdData(item?.user_id)}
                             >
@@ -360,6 +359,7 @@ const House15Plan = () => {
                               className="userd_icon"
                             />
                           </span>
+                          {data.length + 1}
                           {/* {Number(result50)} */}
                         </h5>
                       </div>
