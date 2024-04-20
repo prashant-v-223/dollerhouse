@@ -1104,12 +1104,10 @@ const Dashboard = () => {
                               <button
                                 disabled={item.plan_price !== checkAccess()}
                                 onClick={() =>
-                                  isAccess
-                                    ? buyToken(
-                                      item.plan_name,
-                                      item.plan_price
-                                    )
-                                    : NotAllowed()
+                                  buyToken(
+                                    item.plan_name,
+                                    item.plan_price
+                                  )
                                 }
                               >
                                 Upgrade {checkAccess}
