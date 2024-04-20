@@ -329,7 +329,6 @@ const PartnersTable = () => {
                 {levelRewards?.length > 0 ? (
                   levelRewards
                     .sort((a, b) => new Date(b.Time) - new Date(a.Time)) // Sort by date in descending order
-                    .filter((item) => item.level == 1) // Filter data where item.level is 1
                     .map((item, index) => {
                       return (
                         <tr key={index}>
