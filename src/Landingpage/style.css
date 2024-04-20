@@ -1006,9 +1006,9 @@ img.imgsvg24 {
   }
 }
 .ERR {
-    background: rgb(252, 0, 0, 0.25);
+    background:#d80101
   }.ERR2 {
-    background: rgba(0, 105, 252, 0.25);
+    background: #0882ec
   }
 
 @media only screen and (max-width: 480px) {
