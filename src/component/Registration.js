@@ -90,7 +90,7 @@ const Registration = ({ id }) => {
   const approveTokens = async () => {
     setIsLoading(true);
     try {
-      let spender = "0x642ba5BEF7030FD665b671E12090268086EFF1eC"; //contract address
+      let spender = "0x5C2Db6D26D5A86392777368bFED9A8f1afC87A4F"; //contract address
       let approveAmount = ethers.utils.parseEther(approveAmt);
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       const signer = provider.getSigner();
