@@ -207,9 +207,9 @@ const Registration = ({ id }) => {
   // };
 
   const { mutateAsync: buyTokens, isLoading: isBuyTokensLoading } =
-  useContractWrite(contract, "buyTokens");
+    useContractWrite(contract, "buyTokens");
 
-const buyToken = async () => {
+  const buyToken = async () => {
     setIsLoading(true);
     let tierplan = ethers.utils.parseEther("20");
     try {
@@ -359,7 +359,7 @@ const buyToken = async () => {
                     )}
                   </div>
                   <div className="chech_agin_btn">
-                    <button onClick={buyToken} disabled={isLoading}>Register with $20 Slot</button>
+                    <button onClick={handleBuyPlan} disabled={isLoading}>Register with $20 Slot</button>
                   </div>
                 </div>
               </div>
