@@ -79,14 +79,14 @@ const Dashboard = () => {
     return finalAmount;
   }
   const { contract } = useContract(
-    "0x642ba5BEF7030FD665b671E12090268086EFF1eC"
+    "0x01e974064E32DD5B6C439902010ae62f11b500e0"
   );
 
   const { data: cunWalletBal, isLoading: isCunWalletBalLoading } =
     useTokenBalance(contract, wallet_address);
 
   const { contract: USDTContract } = useContract(
-    "0x0ECBBF0D46E13cC4fffdf14AbC39D8332c89Ad8b"
+    "0x5C2Db6D26D5A86392777368bFED9A8f1afC87A4F"
   );
 
 
