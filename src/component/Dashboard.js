@@ -306,19 +306,19 @@ const Dashboard = () => {
     useContractWrite(contract, "buyTokens");
 
   const buyToken = async (plan_name, plan_price) => {
-    let tierplan = ethers.utils.parseEther(plan_price);
+    // let tierplan = ethers.utils.parseEther(plan_price);
     setBuyTokenLoading(true);
     try {
-      const data = await buyTokens({ args: [refferal, tierplan] });
-      console.info("contract call successs", data);
+      //   const data = await buyTokens({ args: [refferal, tierplan] });
+      //   console.info("contract call successs", data);
       handleBuyPlan(plan_name, plan_price);
-      toast.success((`Successfully Upgraded for ${plan_price}$`), {
-        position: toast.POSITION.TOP_CENTER,
-      });
+      //   toast.success((`Successfully Upgraded for ${plan_price}$`), {
+      //     position: toast.POSITION.TOP_CENTER,
+      //   });
     } catch (err) {
-      toast.error("Something went Wrong ", {
-        position: toast.POSITION.TOP_CENTER,
-      });
+      //   toast.error("Something went Wrong ", {
+      //     position: toast.POSITION.TOP_CENTER,
+      //   });
       setBuyTokenLoading(false);
       console.error("contract call failure", err);
     } finally {
