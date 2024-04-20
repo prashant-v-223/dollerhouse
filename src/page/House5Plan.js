@@ -88,34 +88,43 @@ const House5Plan = () => {
 
   const userDataReal = localStorage.getItem("UserID");
   var UserID = JSON.parse(userDataReal);
+
   let planName;
   let planName1;
-  if (planPrice == '20') {
-    planName = 'DH Plan 1';
-    planName1 = 'level 1';
-  } else if (planPrice == '40') {
-    planName = 'DH Plan 2';
-    planName1 = 'level 2';
-  } else if (planPrice == '100') {
-    planName = 'DH Plan 3';
-    planName1 = 'level 3';
-  } else if (planPrice == '200') {
-    planName = 'DH Plan 4';
-    planName1 = 'level 4';
-  } else if (planPrice == '500') {
-    planName = 'DH Plan 5';
-    planName1 = 'level 5';
-  } else if (planPrice == '1000') {
-    planName = 'DH Plan 6';
-    planName1 = 'level 6';
-  } else if (planPrice == '2000') {
-    planName = 'DH Plan 7';
-    planName1 = 'level 7';
-  } else if (planPrice == '4000') {
-    planName = 'DH Plan 8';
-    planName1 = 'level 8';
+  let planName2;
+  if (planPrice == "20") {
+    planName = "DH Plan 1";
+    planName1 = "level 1";
+    planName2 = 5
+  } else if (planPrice == "40") {
+    planName = "DH Plan 2";
+    planName1 = "level 2";
+    planName2 = 10
+  } else if (planPrice == "100") {
+    planName = "DH Plan 3";
+    planName1 = "level 3";
+    planName2 = 30
+  } else if (planPrice == "200") {
+    planName = "DH Plan 4";
+    planName2 = 60
+    planName1 = "level 4";
+  } else if (planPrice == "500") {
+    planName = "DH Plan 5";
+    planName1 = "level 5";
+    planName2 = 120
+  } else if (planPrice == "1000") {
+    planName = "DH Plan 6";
+    planName1 = "level 6";
+    planName2 = 250
+  } else if (planPrice == "2000") {
+    planName = "DH Plan 7";
+    planName1 = "level 7";
+    planName2 = 500
+  } else if (planPrice == "4000") {
+    planName = "DH Plan 8";
+    planName1 = "level 8";
+    planName2 = 1000
   }
-
   const [count, setCount] = useState(0);
   const [missedincome, setmissedincome] = useState(0);
   const [house5Plan, setHouse5Plan] = useState([]);
@@ -224,7 +233,7 @@ const House5Plan = () => {
       });
   };
 
-   
+
   const [parentId, setParentId] = useState(null)
   const GetPlanDetail = async (UserID) => {
     try {
@@ -260,9 +269,9 @@ const House5Plan = () => {
   const handleNewIdData = (user_id) => {
     if (user_id !== undefined) {
       localStorage.setItem("UserID", JSON.stringify(user_id));
-      if (parentId !== null ) {
+      if (parentId !== null) {
         localStorage.setItem("UPlineUserID", JSON.stringify(parentId));
-       
+
       }
       window.location.reload();
     }
@@ -291,7 +300,7 @@ const House5Plan = () => {
         {memoizedHouse5Plan && memoizedHouse5Plan.length > 0 ? (
           <div className="circle_pre_1_1 cursor-pointer"
             onClick={() => handleNewIdData(memoizedHouse5Plan[1]?.uid)}>
-            <h4  className={memoizedHouse5Plan[1]?.mainId !== house5Plan1[0]?.refId ? memoizedHouse5Plan[1]?.mainId === house5Plan1[0]?.mainId ? `bg-warning` : `bg-light` : `bg-danger`}>
+            <h4 className={memoizedHouse5Plan[1]?.mainId !== house5Plan1[0]?.refId ? memoizedHouse5Plan[1]?.mainId === house5Plan1[0]?.mainId ? `bg-warning` : `bg-light` : `bg-danger`}>
               {memoizedHouse5Plan[1]?.uid || 0}
             </h4>
           </div>
@@ -386,7 +395,7 @@ const House5Plan = () => {
     );
   }
 
-  const handleNewData= ()=>{
+  const handleNewData = () => {
     console.log("clicked")
   }
 
@@ -396,7 +405,7 @@ const House5Plan = () => {
         {memoizedHouse5Plan && memoizedHouse5Plan.length > 0 ? (
           <div className="circle_pre_1_1"
             onClick={() => handleNewIdData(memoizedHouse5Plan[0]?.uid)}>
-            <h4  className={memoizedHouse5Plan[0]?.mainId !== house5Plan1[0]?.refId ? memoizedHouse5Plan[1]?.mainId === house5Plan1[0]?.mainId ? `bg-warning cursor-pointer` : `bg-light cursor-pointer` : `bg-danger cursor-pointer`}>
+            <h4 className={memoizedHouse5Plan[0]?.mainId !== house5Plan1[0]?.refId ? memoizedHouse5Plan[1]?.mainId === house5Plan1[0]?.mainId ? `bg-warning cursor-pointer` : `bg-light cursor-pointer` : `bg-danger cursor-pointer`}>
               {memoizedHouse5Plan[0]?.uid || 0}
             </h4>
           </div>
@@ -532,7 +541,7 @@ const House5Plan = () => {
                     <h5>{planName1}</h5>
                     <h5 className="text-center">ID {localStorage.getItem("UserID")}</h5>
                     <h5>
-                      5
+                      {planName2}
                       <span className="px-2">
                         USDT
                       </span>
@@ -570,7 +579,7 @@ const House5Plan = () => {
                               alt="user_icon"
                               className="userd_icon"
                             />
-                          </span>{count }
+                          </span>{count}
                           {/* {Number(result50)} */}
                         </h5>
                       </div>

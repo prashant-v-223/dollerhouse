@@ -154,31 +154,41 @@ const House1Plan = () => {
   const planPrice = urlParams.get("plan_price");
   let planName;
   let planName1;
+  let planName2;
   if (planPrice == "20") {
     planName = "DH Plan 1";
     planName1 = "level 1";
+    planName2 = 5
   } else if (planPrice == "40") {
     planName = "DH Plan 2";
     planName1 = "level 2";
+    planName2 = 10
   } else if (planPrice == "100") {
     planName = "DH Plan 3";
     planName1 = "level 3";
+    planName2 = 30
   } else if (planPrice == "200") {
     planName = "DH Plan 4";
+    planName2 = 60
     planName1 = "level 4";
   } else if (planPrice == "500") {
     planName = "DH Plan 5";
     planName1 = "level 5";
+    planName2 = 120
   } else if (planPrice == "1000") {
     planName = "DH Plan 6";
     planName1 = "level 6";
+    planName2 = 250
   } else if (planPrice == "2000") {
     planName = "DH Plan 7";
     planName1 = "level 7";
+    planName2 = 500
   } else if (planPrice == "4000") {
     planName = "DH Plan 8";
     planName1 = "level 8";
+    planName2 = 1000
   }
+
 
   const profitDetailsApi = (UserID) => {
     const apiUrl = ` https://dollerhouse111.onrender.com/reward/get?userId=${UserID}`;
@@ -334,7 +344,7 @@ const House1Plan = () => {
                       ID {localStorage.getItem("UserID")}
                     </h5>
                     <h5>
-                      5<span className="px-2">USDT</span>
+                      {planName2}<span className="px-2">USDT</span>
                     </h5>
                   </div>
                   {/* <Boxs box={box50} tableData={tableData} /> */}
@@ -345,10 +355,10 @@ const House1Plan = () => {
                         return (
                           <h4
                             className={`${item.status
-                                ? item.status === "missed"
-                                  ? "background_cyan"
-                                  : "background_cyan1"
-                                : ""
+                              ? item.status === "missed"
+                                ? "background_cyan"
+                                : "background_cyan1"
+                              : ""
                               } cursor-pointer bg-[#743b07]`}
                           >
                             {item.user_id}

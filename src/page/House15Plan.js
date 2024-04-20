@@ -121,30 +121,39 @@ const House15Plan = () => {
   const planPrice = urlParams.get("plan_price");
   let planName;
   let planName1;
+  let planName2;
   if (planPrice == "20") {
     planName = "DH Plan 1";
     planName1 = "level 1";
+    planName2 = 10
   } else if (planPrice == "40") {
     planName = "DH Plan 2";
     planName1 = "level 2";
+    planName2 = 20
   } else if (planPrice == "100") {
     planName = "DH Plan 3";
     planName1 = "level 3";
+    planName2 = 40
   } else if (planPrice == "200") {
     planName = "DH Plan 4";
+    planName2 = 80
     planName1 = "level 4";
   } else if (planPrice == "500") {
     planName = "DH Plan 5";
     planName1 = "level 5";
+    planName2 = 260
   } else if (planPrice == "1000") {
     planName = "DH Plan 6";
     planName1 = "level 6";
+    planName2 = 500
   } else if (planPrice == "2000") {
     planName = "DH Plan 7";
     planName1 = "level 7";
+    planName2 = 1000
   } else if (planPrice == "4000") {
     planName = "DH Plan 8";
     planName1 = "level 8";
+    planName2 = 2000
   }
 
   const profitDetailsApi = async (UserID) => {
@@ -313,7 +322,7 @@ const House15Plan = () => {
                       ID {localStorage.getItem("UserID")}
                     </h5>
                     <h5>
-                      10
+                      {planName2}
                       <span className="px-2">USDT</span>
                     </h5>
                   </div>
@@ -359,7 +368,7 @@ const House15Plan = () => {
                               className="userd_icon"
                             />
                           </span>
-                          {data.length + 1}
+                          {data.length}
                           {/* {Number(result50)} */}
                         </h5>
                       </div>
