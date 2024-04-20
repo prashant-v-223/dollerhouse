@@ -570,7 +570,7 @@ const House5Plan = () => {
                               alt="user_icon"
                               className="userd_icon"
                             />
-                          </span>{count + 1}
+                          </span>{count }
                           {/* {Number(result50)} */}
                         </h5>
                       </div>

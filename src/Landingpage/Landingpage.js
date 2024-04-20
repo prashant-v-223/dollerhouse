@@ -146,7 +146,7 @@ const Landingpage = () => {
     });
   };
 
-  const saveId = () =>{
+  const saveId = () => {
     localStorage.setItem("UserID", userID);
   }
 
@@ -186,7 +186,7 @@ const Landingpage = () => {
             backgroundSize: "cover",
           }}
         >
-          {userID === null || userID === undefined  ? <div className="register_left">
+          {userID === null || userID === undefined ? <div className="register_left">
             <h1>Register on Dollar House platform</h1>
             <p style={{ wordWrap: "break-word" }}>
               You can use this Wallet ({wallet_address}) to register as a new member. Watch a tutorial to learn more
@@ -302,7 +302,7 @@ const Landingpage = () => {
           </div>
 
           <div className="wallwte_input">
-            <div className="wall_left">
+            <div className="wall_left w-100">
               <p>Enter User ID</p>
 
               <div className="previw_input_btn ">
@@ -318,187 +318,33 @@ const Landingpage = () => {
                 </a>
               </div>
             </div>
-            <div className="wall_right">
+            {/* <div className="wall_right">
               <p>Don’t know any ID?</p>
               <button><Link to="/dashboard">Check demo</Link></button>
-            </div>
+            </div> */}
           </div>
         </div>
 
         <div className='recent activity'>
           <div className='container'>
             <div className='forsage_title'>
-              <h2>Platform recent activity</h2>
-              <span className='forsage_info2'> <img src={info27} alt='Info' className='Info27' />  </span>
+              <h2>Recent Activity</h2>
+              <span className='forsage_info2 px-1'>
+                <img src={info27} alt='Info' className='Info27' />
+              </span>
             </div>
 
             <div className='platfroms'>
               <div className='row'>
-                <div className='col-lg-8'>
-                  <div className='seemore'>
-                    <div className='view_Section_blank'>
-                      <div className="busd_line_semore_btn">
-                        <div className="wallwrt_id_busd">
-                          <img src={svg_wallet_img} alt="wallet" className="wallet_icon_last"></img>
-                          <p>ID 16541527</p>
-                          <h5> <span className="color_gry"> + </span> 20 BUSD <span className="color_gry">in</span> <spam className="color_orage">X4</spam></h5>
-                        </div>
-
-                        <div className="11_minit">
-                          <h4><img src={imgsvg24} alt="img" className="imgsvg24" />11 minute</h4>
-                        </div>
-                      </div>
-
-                      <div className="busd_line_semore_btn">
-                        <div className="wallwrt_id_busd">
-                          <img src={svg_wallet_img} alt="wallet" className="wallet_icon_last"></img>
-                          <p>ID 16541527</p>
-                          <h5> <span className="color_gry"> + </span> 20 BUSD <span className="color_gry">in</span> <spam className="color_orage">X4</spam></h5>
-                        </div>
-
-                        <div className="11_minit">
-                          <h4><img src={imgsvg24} alt="img" className="imgsvg24" />11 minute</h4>
-                        </div>
-                      </div>
-
-                      <div className="busd_line_semore_btn">
-                        <div className="wallwrt_id_busd">
-                          <img src={svg_wallet_img} alt="wallet" className="wallet_icon_last"></img>
-                          <p>ID 16541527</p>
-                          <h5> <span className="color_gry"> + </span> 20 BUSD <span className="color_gry">in</span> <spam className="color_orage">X4</spam></h5>
-                        </div>
-
-                        <div className="11_minit">
-                          <h4><img src={imgsvg24} alt="img" className="imgsvg24" />11 minute</h4>
-                        </div>
-                      </div>
-
-                      <div className="busd_line_semore_btn">
-                        <div className="wallwrt_id_busd">
-                          <img src={svg_wallet_img} alt="wallet" className="wallet_icon_last"></img>
-                          <p>ID 16541527</p>
-                          <h5> <span className="color_gry"> + </span> 20 BUSD <span className="color_gry">in</span> <spam className="color_orage">X4</spam></h5>
-                        </div>
-
-                        <div className="11_minit">
-                          <h4><img src={imgsvg24} alt="img" className="imgsvg24" />11 minute</h4>
-                        </div>
-                      </div>
-
-                      <div className="busd_line_semore_btn">
-                        <div className="wallwrt_id_busd">
-                          <img src={svg_wallet_img} alt="wallet" className="wallet_icon_last"></img>
-                          <p>ID 16541527</p>
-                          <h5> <span className="color_gry"> + </span> 20 BUSD <span className="color_gry">in</span> <spam className="color_orage">X4</spam></h5>
-                        </div>
-
-                        <div className="11_minit">
-                          <h4><img src={imgsvg24} alt="img" className="imgsvg24" />11 minute</h4>
-                        </div>
-                      </div>
-
-                      <div className="busd_line_semore_btn">
-                        <div className="wallwrt_id_busd">
-                          <img src={svg_wallet_img} alt="wallet" className="wallet_icon_last"></img>
-                          <p>ID 16541527</p>
-                          <h5> <span className="color_gry"> + </span> 20 BUSD <span className="color_gry">in</span> <spam className="color_orage">X4</spam></h5>
-                        </div>
-
-                        <div className="11_minit">
-                          <h4><img src={imgsvg24} alt="img" className="imgsvg24" />11 minute</h4>
-                        </div>
-                      </div>
-
-                      <div className="busd_line_semore_btn">
-                        <div className="wallwrt_id_busd">
-                          <img src={svg_wallet_img} alt="wallet" className="wallet_icon_last"></img>
-                          <p>ID 16541527</p>
-                          <h5> <span className="color_gry"> + </span> 20 BUSD <span className="color_gry">in</span> <spam className="color_orage">X4</spam></h5>
-                        </div>
-
-                        <div className="11_minit">
-                          <h4><img src={imgsvg24} alt="img" className="imgsvg24" />11 minute</h4>
-                        </div>
-                      </div>
-
-                      <div className="busd_line_semore_btn">
-                        <div className="wallwrt_id_busd">
-                          <img src={svg_wallet_img} alt="wallet" className="wallet_icon_last"></img>
-                          <p>ID 16541527</p>
-                          <h5> <span className="color_gry"> + </span> 20 BUSD <span className="color_gry">in</span> <spam className="color_orage">X4</spam></h5>
-                        </div>
-
-                        <div className="11_minit">
-                          <h4><img src={imgsvg24} alt="img" className="imgsvg24" />11 minute</h4>
-                        </div>
-                      </div>
-
-                      <div className="busd_line_semore_btn">
-                        <div className="wallwrt_id_busd">
-                          <img src={svg_wallet_img} alt="wallet" className="wallet_icon_last"></img>
-                          <p>ID 16541527</p>
-                          <h5> <span className="color_gry"> + </span> 20 BUSD <span className="color_gry">in</span> <spam className="color_orage">X4</spam></h5>
-                        </div>
-
-                        <div className="11_minit">
-                          <h4><img src={imgsvg24} alt="img" className="imgsvg24" />11 minute</h4>
-                        </div>
-                      </div>
-
-                      <div className="busd_line_semore_btn">
-                        <div className="wallwrt_id_busd">
-                          <img src={svg_wallet_img} alt="wallet" className="wallet_icon_last"></img>
-                          <p>ID 16541527</p>
-                          <h5> <span className="color_gry"> + </span> 20 BUSD <span className="color_gry">in</span> <spam className="color_orage">X4</spam></h5>
-                        </div>
-
-                        <div className="11_minit">
-                          <h4><img src={imgsvg24} alt="img" className="imgsvg24" />11 minute</h4>
-                        </div>
-                      </div>
-
-                      <div className="busd_line_semore_btn">
-                        <div className="wallwrt_id_busd">
-                          <img src={svg_wallet_img} alt="wallet" className="wallet_icon_last"></img>
-                          <p>ID 16541527</p>
-                          <h5> <span className="color_gry"> + </span> 20 BUSD <span className="color_gry">in</span> <spam className="color_orage">X4</spam></h5>
-                        </div>
-
-                        <div className="11_minit">
-                          <h4><img src={imgsvg24} alt="img" className="imgsvg24" />11 minute</h4>
-                        </div>
-                      </div>
-                    </div>
-                    <div className='seemore_btn'>
-                      <button> <span><img src={svg31viewicon} alt='svg31viewicon' className='svg31viewicon' />
-                      </span> See more </button>
-                    </div>
-                  </div>
-                </div>
-
-                <div className='col-lg-4'>
+                <div className='col-lg-12'>
                   <div className='menber_totla_title'>
                     <h3>Members total <span className='forsage_info2'>  </span> </h3>
 
                     <h4>{data?.data?.totaluser || 0}</h4>
                     <p><span className='toparrow'><i className="fa fa-long-arrow-up" aria-hidden="true"></i></span>{data?.data?.totaluserLast24h || 0}</p>
                   </div>
-
-                  <div className='menber_totla_title'>
-                    <h3>Investment total <span className='forsage_info2'> </span> </h3>
-                    <div className='busd busd2'>
-                      <h2>{data?.data?.totalAmountSum || 0} USD</h2>
-                      <h6>{data?.data?.totalInvestmentLast24h || 0}+ USD</h6>
-                    </div>
-
-                    <div className='busd'>
-                      <h2>BNB</h2>
-                      <h6>+ BNB</h6>
-                    </div>
-                  </div>
-
                   <div className='link_section_all'>
-                    <h3>Forsage BUSD Contracts</h3>
+                    <h3>Doller House BUSD Contracts</h3>
 
                     <div className='link_contracts'>
                       <p>x3/x4</p>
