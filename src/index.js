@@ -12,14 +12,14 @@ import {
 } from "@thirdweb-dev/react";
 import { ChainId } from "@thirdweb-dev/sdk";
 
-const chainId = ChainId.Mumbai;
+const chainId = ChainId.BinanceSmartChainTestnet;
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Router>
    <ThirdwebProvider
       supportedWallets={[metamaskWallet(), coinbaseWallet(), walletConnect()]}
-      activeChain="mumbai"
-      clientId="c5c449ea568c764befd7f07dac04f539"
+      activeChain={97}
+      clientId="05b562387d7b3a4ad7ab03cd69484bdf"
     >
      <App />
     </ThirdwebProvider>
