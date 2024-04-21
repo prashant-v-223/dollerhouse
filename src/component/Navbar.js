@@ -12,7 +12,7 @@ import logo from "../image/logoMain.png";
 import iconnft from "../image/svg-image-11.svg"
 import { Button } from "rsuite";
 
-const Navbar = () => {
+const Navbar = ({ actuvetab }) => {
   const storedData = localStorage.getItem("userData");
   const userDataLocal = JSON.parse(storedData);
   const userIDs = localStorage.getItem("userID");
@@ -99,53 +99,34 @@ const Navbar = () => {
 
           <div className="sid_menus_all">
             <div className="priviewld"></div>
-            <Link className="active" to="/dashboard">
+            <Link className={actuvetab === "Dashboard" ? "active" : ""} to="/dashboard">
               <span className="iconnav">
                 <img className="iconnav" src={icon3} alt="icon" />
               </span>
               Dashboard
             </Link>
-            <Link to="/upgrade">
+            <Link to="/upgrade" className={actuvetab === "upgrade" ? "active" : ""}>
               <span className="iconnav">
                 <img className="iconnav" src={icon3} alt="icon" />
               </span>
               Upgrade
             </Link>
-            <div className="dropdown .dropdown2_a">
-              <Link onClick={toggleDropdown} className="dropd_a" id="tems">
-                <span className="iconnav">
-                  <img className="iconnav" src={icon4} alt="icon" />
-                </span>{" "}
-                Team
-                <span className="arrow_down">
-                  {" "}
-                  <i className="fa fa-angle-down" aria-hidden="true"></i>{" "}
-                </span>
-                <span className="arrow_top">
-                  {" "}
-                  <i className="fa fa-angle-up" aria-hidden="true"></i>{" "}
-                </span>
-              </Link>
 
-              <div className="menu_dropdown menu_mobile_drop">
-                <Link className="dropdown-item" to="/partners">
-                  {" "}
-                  <span className="iconnav">
-                    <img className="iconnav" src={icon5} alt="icon" />
-                  </span>
-                  Partners
-                </Link>
-                {/* <Link className="dropdown-item" to="/"> <span className='iconnav'><img className="iconnav" src={icon6} alt='icon' /></span>Links</Link> */}
-                <Link className="dropdown-item" to="/stats">
-                  {" "}
-                  <span className="iconnav">
-                    <img className="iconnav" src={icon7} alt="icon" />
-                  </span>
-                  Stats
-                </Link>
-              </div>
-            </div>
-
+            <Link className={actuvetab === "Partners" ? "active" : ""} to="/partners" >
+              {" "}
+              <span className="iconnav">
+                <img className="iconnav" src={icon5} alt="icon" />
+              </span>
+              Partners
+            </Link>
+            {/* <Link className="dropdown-item" to="/"> <span className='iconnav'><img className="iconnav" src={icon6} alt='icon' /></span>Links</Link> */}
+            <Link className={actuvetab === "Stats" ? "active" : ""} to="/stats">
+              {" "}
+              <span className="iconnav">
+                <img className="iconnav" src={icon7} alt="icon" />
+              </span>
+              Stats
+            </Link>
             {/* <Link to="/Registration">
               {" "}
               <span className="iconnav">

@@ -663,7 +663,7 @@ const Dashboard = () => {
                 </div>
               </div>
             </div>
-            <Navbar />
+            <Navbar actuvetab={"Dashboard"} />
             <ToastContainer />
             <div className="content">
               <div className="container">

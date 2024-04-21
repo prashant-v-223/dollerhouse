@@ -38,7 +38,7 @@ function Tranfer() {
     }
     return (
         <>
-            <Navbar />
+            <Navbar actuvetab={"upgrade"} />
             <div className="content">
                 <table className="table p-4">
                     <thead>

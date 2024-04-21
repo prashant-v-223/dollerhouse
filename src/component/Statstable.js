@@ -164,7 +164,7 @@ const Statstable = () => {
 
   return (
     <React.Fragment>
-      <Navbar />
+      <Navbar actuvetab={"Partners"} />
       <ToastContainer />
       <div className="content">
         <div className="tabls table_margin_top">

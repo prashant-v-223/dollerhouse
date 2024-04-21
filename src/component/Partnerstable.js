@@ -187,7 +187,7 @@ const PartnersTable = () => {
 
   return (
     <React.Fragment>
-      <Navbar />
+      <Navbar  actuvetab={"Stats"}/>
       <ToastContainer />
       <div className="content">
         <div className="container">
