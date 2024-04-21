@@ -745,7 +745,7 @@ const Dashboard = () => {
                               {`
                         ${modifiedAddress1
                                   ? `Invited at ${formattedDate} `
-                                  : "Invited 01.03.2021 By"
+                                  : "Invited 01.03.2021"
                                 }`}
                             </span>
                             <span style={{ marginTop: "22px" }}>

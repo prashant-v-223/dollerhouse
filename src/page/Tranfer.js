@@ -36,46 +36,49 @@ function Tranfer() {
         return before + replacedMiddle + after;
     }
     return (
-        <div>
-            <table className="table">
-                <thead>
-                    <tr>
-                        <th>Type</th>
-                        <th>Plan Name</th>
-                        <th>Amount</th>
-                        <th>Time</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {profitDetails?.length > 0 ? (
-                        profitDetails
-                            .sort((a, b) => new Date(b.Time) - new Date(a.Time)) // Sort by date in descending order
-                            .map((item, index) => {
-                                return (
-                                    <tr key={index}>
-                                        <td>
-                                            <img
-                                                src="/static/media/svg-image-23.aa0930be96db08ffc8e973487f0567fb.svg"
-                                                alt="wallet"
-                                                className="wallet_icon_last"
-                                            />
-                                        </td>
-                                        <td>{item.plan_name.replace("DH Plan", "Leval")}</td>
-                                        <td>{item.amount} USDT</td>
-                                        <td>
-                                            {new Date(item.Time).toLocaleString("en-IN", {
-                                                timeZone: "Asia/Kolkata",
-                                            })}
-                                        </td>
-                                    </tr>
-                                );
-                            })
-                    ) : (
-                        <h1 className="nodata_h">No data found!</h1>
-                    )}
-                </tbody>
-            </table>
-        </div>
+        <>
+            <Navbar />
+            <div className="content">
+                <table className="table p-4">
+                    <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Plan Name</th>
+                            <th>Amount</th>
+                            <th>Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {profitDetails?.length > 0 ? (
+                            profitDetails
+                                .sort((a, b) => new Date(b.Time) - new Date(a.Time)) // Sort by date in descending order
+                                .map((item, index) => {
+                                    return (
+                                        <tr key={index}>
+                                            <td>
+                                                <img
+                                                    src="/static/media/svg-image-23.aa0930be96db08ffc8e973487f0567fb.svg"
+                                                    alt="wallet"
+                                                    className="wallet_icon_last"
+                                                />
+                                            </td>
+                                            <td>{item.plan_name.replace("DH Plan", "Leval")}</td>
+                                            <td>{item.amount} USDT</td>
+                                            <td>
+                                                {new Date(item.Time).toLocaleString("en-IN", {
+                                                    timeZone: "Asia/Kolkata",
+                                                })}
+                                            </td>
+                                        </tr>
+                                    );
+                                })
+                        ) : (
+                            <h1 className="nodata_h">No data found!</h1>
+                        )}
+                    </tbody>
+                </table>
+            </div>
+        </>
     )
 }
 
