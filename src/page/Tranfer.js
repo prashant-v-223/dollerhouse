@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { MdContentCopy } from "react-icons/md";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Navbar from '../component/Navbar';
 
 function Tranfer() {
     const userDataReal = localStorage.getItem("UserID");
