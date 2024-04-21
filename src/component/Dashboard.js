@@ -804,16 +804,20 @@ const Dashboard = () => {
                           <p className="card_title">Direct Team</p>
 
                           <h1>{profitDetails && profitDetails?.recentTeam}</h1>
-                          <p>
-                            <h4>
-                              {profitDetails ? profitDetails?.total_team : 0}</h4>
-                            <span className="toparrow">
-                              <i
-                                className="fa fa-long-arrow-up"
-                                aria-hidden="true"
-                              ></i>
-                            </span>
-                          </p>
+                          <div className="">
+                            <div className="down_green">
+                              <p className="text-green-500">
+                                {" "}
+                                <span className="toparrow">
+                                  <i
+                                    className="fa fa-long-arrow-up"
+                                    aria-hidden="true"
+                                  ></i>
+                                </span>
+                                {profitDetails ? profitDetails?.total_team : 0}
+                              </p>
+                            </div>
+                          </div>
                         </div>
 
                         <div className="teams_all_card teams_all_card2">
@@ -821,16 +825,19 @@ const Dashboard = () => {
                           <h1>
                             {profitDetails ? profitDetails?.directTeam : 0}
                           </h1>
-                          <p>
-                            <h4>
-                              {profitDetails ? profitDetails?.directTeam112 : 0}</h4>
-                            <span className="toparrow">
-                              <i
-                                className="fa fa-long-arrow-up"
-                                aria-hidden="true"
-                              ></i>
-                            </span>
-                          </p>
+                          <div className="">
+                            <div className="down_green">
+                              <p className="text-green-500">
+                                <span className="toparrow">
+                                  <i
+                                    className="fa fa-long-arrow-up"
+                                    aria-hidden="true"
+                                  ></i>
+                                </span>
+                                {profitDetails ? profitDetails?.directTeam112 : 0}
+                              </p>
+                            </div>
+                          </div>
                         </div>
 
                         <div className="teams_all_card teams_all_card2">
