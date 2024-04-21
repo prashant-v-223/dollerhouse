@@ -192,21 +192,20 @@ const Landingpage = () => {
           }}>
             <img src={poket_img} alt="pocket_img" className="poket_img" />
           </div>
-          <div>
+          <div style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center"
+          }}>
             {userID === null || userID === undefined ? <div className="register_left w-100">
               <h1 className="text-center"> Welcome to Dollar House </h1>
-
-              <div className="join_bth m-auto d-block">
-                <ConnectWallet />
+              <br />
+              <div className="join_bth d-block m-auto mt-4">
+                <ConnectWallet className="d-block m-auto" />
                 <br />
-                <button onClick={scrollToRegistration} className="wath_tut p-0 m-0">
+                <button onClick={scrollToRegistration} className="wath_tut d-block m-auto">
                   Join Doller House
                 </button>
-                {/* <button>
-                <a href="/Registration" className="wath_tut">
-                  Registration
-                </a>
-              </button> */}
               </div>
             </div> :
               <div className="register_left w-100">
