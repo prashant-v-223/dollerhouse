@@ -184,77 +184,69 @@ const Landingpage = () => {
           style={{
             backgroundImage: `url(${plashtfiny})`,
             backgroundSize: "cover",
+            justifyContent: 'space-around'
           }}
         >
-          {userID === null || userID === undefined ? <div className="register_left">
-            <h1>Register on Dollar House platform</h1>
-            <p style={{ wordWrap: "break-word" }}>
-              You can use this Wallet ({wallet_address}) to register as a new member. Watch a tutorial to learn more
-            </p>
-            <div className="join_bth">
+          <div className="register_right" style={{
+            transform: "scaleX(-1)"
+          }}>
+            <img src={poket_img} alt="pocket_img" className="poket_img" />
+          </div>
+          <div>
+            {userID === null || userID === undefined ? <div className="register_left w-100">
+              <h1 className="text-center"> Welcome to Dollar House </h1>
 
-              {/* {userID === null ?
-                <button>
-                  <a href="/Registration" className="join_btn">
-                    Sign In
-                  </a>
-                </button> :
-                <button onClick={handleSearchDashboard}>
-                  Dashboard
-                </button>
-              } */}
-              <ConnectWallet />
-
-              <button>
+              <div className="join_bth">
+                <ConnectWallet />
+                <br />
                 <button onClick={scrollToRegistration} className="wath_tut p-0 m-0">
                   Join Doller House
                 </button>
-              </button>
-              {/* <button>
+                {/* <button>
                 <a href="/Registration" className="wath_tut">
                   Registration
                 </a>
               </button> */}
-            </div>
-          </div> :
-            <div className="register_left">
-              <div className="id_user right_text d-block m-auto w-100 ">
-                <div className="d-flex align-items-end mt-4 " >
-                  <div className=" ">
-                    <img
-                      className="user_logo ml-0"
-                      src={profileData?.data?.picture || uset_img}
-                      alt="uset_img"
-                      minwidth={130}
-                    />
-                    {profileData?.data?.profile !== null ? (
-                      <h1>
-                        {profileData?.data?.profile.username}
-                      </h1>
-                    ) : (
-                      <h1>User Name</h1>
-                    )}
-                    {/* <h4 className="text-light m-0">User Name</h4> */}
-                  </div>
-                  <div className="cursor-pointer profile_user_id table_id" >
-                    ID {userID}
+              </div>
+            </div> :
+              <div className="register_left w-100">
+                <div className="id_user right_text d-block m-auto w-100 ">
+                  <div className="d-flex align-items-end mt-4 " >
+                    <div className=" ">
+                      <img
+                        className="user_logo ml-0"
+                        src={profileData?.data?.picture || uset_img}
+                        alt="uset_img"
+                        minwidth={130}
+                      />
+                      {profileData?.data?.profile !== null ? (
+                        <h1>
+                          {profileData?.data?.profile.username}
+                        </h1>
+                      ) : (
+                        <h1>User Name</h1>
+                      )}
+                      {/* <h4 className="text-light m-0">User Name</h4> */}
+                    </div>
+                    <div className="cursor-pointer profile_user_id table_id" >
+                      ID {userID}
+                    </div>
                   </div>
                 </div>
+                <p>
+                  {wallet_address} is a member of  dollerhouse
+                </p>
+                <div className="join_bth">
+                  <ConnectWallet className="my-2" />
+                  <button className="my-2">
+                    <Link onClick={saveId} to="/dashboard" className="wath_tut">
+                      Return to you account
+                    </Link>
+                  </button>
+                </div>
               </div>
-              <p>
-                {wallet_address} is a member of  dollerhouse
-              </p>
-              <div className="join_bth">
-                <ConnectWallet className="my-2" />
-                <button className="my-2">
-                  <Link onClick={saveId} to="/dashboard" className="wath_tut">
-                    Return to you account
-                  </Link>
-                </button>
-              </div>
-            </div>
-          }
-
+            }
+          </div>
           <div className="register_right">
             <img src={poket_img} alt="pocket_img" className="poket_img" />
           </div>
