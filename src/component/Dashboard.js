@@ -303,7 +303,7 @@ const Dashboard = () => {
   //       position: toast.POSITION.TOP_CENTER,
   //     });
   //     console.error("contract call failure", err);
-  //   }buyToken
+  //   }
   // };
 
   const { mutateAsync: buyTokens, isLoading: isBuyTokensLoading } =
