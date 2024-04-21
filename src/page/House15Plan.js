@@ -368,7 +368,7 @@ const House15Plan = () => {
                               className="userd_icon"
                             />
                           </span>
-                          {data.length}
+                          {localStorage.getItem("total") ? localStorage.getItem("total") : 0}
                           {/* {Number(result50)} */}
                         </h5>
                       </div>

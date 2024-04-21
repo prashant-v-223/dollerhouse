@@ -566,7 +566,7 @@ const House5Plan = () => {
                               className="userd_icon"
                             />
                           </span>
-                          {house5Plan1[0]?.referBY.length}
+                          {localStorage.getItem("total") ? localStorage.getItem("total") : 0}
                         </h5>
                       </div>
 

@@ -189,6 +189,7 @@ const Dashboard = () => {
         ` https://dollerhouse111.onrender.com/profit/total-profit?userId=${main_user_id}`
       );
       setProfitDetails(response.data.data);
+      localStorage.setItem("total", response.data.data.recentTeam || 0);
       console.log("response.data", response.data.data);
     } catch (err) {
       //console.log(err);
