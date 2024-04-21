@@ -743,7 +743,7 @@ const Dashboard = () => {
                             >
                               {`
                         ${modifiedAddress1
-                                  ? `Invited at ${formattedDate} by ${modifiedAddress1}`
+                                  ? `Invited at ${formattedDate}`
                                   : "Invited 01.03.2021 By"
                                 }`}
                             </span>
