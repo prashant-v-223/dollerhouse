@@ -350,7 +350,7 @@ const Dashboard = () => {
 
   const handleFileChange = async (e) => {
     console.log(e.target.files);
-    const base64String = await (e.target.files[0]);
+    const base64String = await fileToBase64(e.target.files[0]);
     console.log(base64String);
     setFile(base64String);
   };
@@ -464,17 +464,18 @@ const Dashboard = () => {
   const handleProfileFormSubmit = async (e) => {
     e.preventDefault();
     try {
-      let requestBody = new FormData();
-      requestBody.append("username", username);
-      requestBody.append("wallet_id", walletAddress);
-      requestBody.append("filename", file);
+      const requestBody = {
+        username: username,
+        wallet_id: walletAddress,
+        filename: file,
+      };
 
       const response = await axios.post(
-        "http://localhost:3100/profile/upload",
+        " https://dollerhouse111.onrender.com/profile/upload",
         requestBody,
         {
           headers: {
-            "Accept": "*/*",
+            "Content-Type": "application/json",
           },
         }
       );
@@ -743,7 +744,7 @@ const Dashboard = () => {
                             >
                               {`
                         ${modifiedAddress1
-                                  ? `Invited at ${formattedDate}`
+                                  ? `Invited at ${formattedDate} `
                                   : "Invited 01.03.2021 By"
                                 }`}
                             </span>
