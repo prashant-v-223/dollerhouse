@@ -470,7 +470,7 @@ const Dashboard = () => {
       requestBody.append("filename", file);
 
       const response = await axios.post(
-        " https://dollerhouse111.onrender.com/profile/upload",
+        "http://localhost:3100/profile/upload",
         requestBody,
         {
           headers: {
