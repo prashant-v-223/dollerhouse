@@ -146,7 +146,7 @@ const Navbar = () => {
               </div>
             </div>
 
-            <Link to="/Registration">
+            {/* <Link to="/Registration">
               {" "}
               <span className="iconnav">
                 <img className="iconnav" src={icon8} alt="icon" />
@@ -168,7 +168,7 @@ const Navbar = () => {
                 <img className="iconnav" src={iconnft} alt="icon" />
               </span>
               NFTs
-            </Link>
+            </Link> */}
 
             <Link className="mobile_search_field_link">
               <div className="input_btn mobile_search_field">
