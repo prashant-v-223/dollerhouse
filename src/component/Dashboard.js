@@ -310,7 +310,7 @@ const Dashboard = () => {
     useContractWrite(contract, "buyTokens");
 
   const buyToken = async (plan_name, plan_price) => {
-    // let tierplan = ethers.utils.parseEther(plan_price);
+    let tierplan = ethers.utils.parseEther(plan_price);
     setLoading(true);
     try {
       const data = await buyTokens({ args: [refferal, tierplan] });

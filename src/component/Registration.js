@@ -224,7 +224,7 @@ const Registration = ({ id }) => {
         setIsLoading(false);
         console.error("contract call failure", err);
       } finally {
-        setBuyTokenLoading(false);
+        setIsLoading(false);
       }
     };
   
