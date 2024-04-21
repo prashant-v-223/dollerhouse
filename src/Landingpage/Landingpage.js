@@ -328,17 +328,16 @@ const Landingpage = () => {
             <div className='platfroms'>
               <div className='row'>
                 <div className='col-lg-12'>
-                  <div className='menber_totla_title'>
-                    <h3>Members total <span className='forsage_info2'>  </span> </h3>
+                  {/* <div className='menber_totla_title'> */}
+                  {/* <h3>Members total <span className='forsage_info2'>  </span> </h3> */}
 
-                    <h4>{data?.data?.totaluser || 0}</h4>
-                    <p><span className='toparrow'><i className="fa fa-long-arrow-up" aria-hidden="true"></i></span>{data?.data?.totaluserLast24h || 0}</p>
-                  </div>
+                  {/* <h4>{data?.data?.totaluser || 0}</h4>
+                    <p><span className='toparrow'><i className="fa fa-long-arrow-up" aria-hidden="true"></i></span>{data?.data?.totaluserLast24h || 0}</p> */}
+                  {/* </div> */}
                   <div className='link_section_all'>
-                    <h3>Doller House BUSD Contracts</h3>
+                    <h3>Doller House Contracts</h3>
 
                     <div className='link_contracts'>
-                      <p>x3/x4</p>
                       <span className="text-light" >{modifiedAddress}
                         <span onClick={handleCopyReferralLink2} className='files'><i className="fa fa-files-o" aria-hidden="true"></i></span>
                         <a href="https://mumbai.polygonscan.com/address/0x85bd9e2907d4d2cc80f3852e1a123bea8f4d226d" className='linkIcon'><i className="fa fa-link" aria-hidden="true"></i></a>
