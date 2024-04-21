@@ -105,7 +105,12 @@ const Navbar = () => {
               </span>
               Dashboard
             </Link>
-
+            <Link to="/Tranfer">
+              <span className="iconnav">
+                <img className="iconnav" src={icon3} alt="icon" />
+              </span>
+              Tranfer
+            </Link>
             <div className="dropdown .dropdown2_a">
               <Link onClick={toggleDropdown} className="dropd_a" id="tems">
                 <span className="iconnav">

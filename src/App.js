@@ -10,6 +10,7 @@ import Statstable from './component/Statstable';
 import Partnerstable from './component/Partnerstable';
 import SlotDetail from './DetailPages/SlotDetail';
 import House5Plan from './page/House5Plan'
+import Tranfer from './page/Tranfer';
 const App = () => {
   return (
     <div>
@@ -36,6 +37,7 @@ const App = () => {
           <Route path="/Dashboard" element={<Dashboard />} />
           <Route path="/Registration" element={<Registration />} />
           <Route path="/stats" element={<Partnerstable />} />
+          <Route path="/Tranfer" element={<Tranfer />} />
           <Route path="/partners" element={<Statstable />} />
         </Routes>
       </React.Fragment>
