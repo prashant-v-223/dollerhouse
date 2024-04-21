@@ -37,7 +37,7 @@ const App = () => {
           <Route path="/Dashboard" element={<Dashboard />} />
           <Route path="/Registration" element={<Registration />} />
           <Route path="/stats" element={<Partnerstable />} />
-          <Route path="/Tranfer" element={<Tranfer />} />
+          <Route path="/upgrade" element={<Tranfer />} />
           <Route path="/partners" element={<Statstable />} />
         </Routes>
       </React.Fragment>
