@@ -151,7 +151,7 @@ const Registration = ({ id }) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          wallet_id: address?.length > 10 ? address?.toLowerCase() : address,
+          wallet_id: address?.toLowerCase(),
           refferal: refferalCode.toLowerCase(),
           plan_details: [
             {
@@ -208,24 +208,24 @@ const Registration = ({ id }) => {
 
 
   const buyToken = async (plan_name, plan_price) => {
-    // let tierplan = ethers.utils.parseEther("20");
-    // setIsLoading(true);
-    // try {
-    //   const data = await buyTokens({ args: [refferalCode, tierplan] });
-    //   console.info("contract call successs", data);
-    handleBuyPlan(plan_name, plan_price);
-    //   toast.success((`Successfully Registered`), {
-    //     position: toast.POSITION.TOP_CENTER,
-    //   });
-    // } catch (err) {
-    //   toast.error("Something went Wrong ", {
-    //     position: toast.POSITION.TOP_CENTER,
-    //   });
-    //   setIsLoading(false);
-    //   console.error("contract call failure", err);
-    // } finally {
-    //   setIsLoading(false);
-    // }
+    let tierplan = ethers.utils.parseEther("20");
+    setIsLoading(true);
+    try {
+      const data = await buyTokens({ args: [refferalCode, tierplan] });
+      console.info("contract call successs", data);
+      handleBuyPlan(plan_name, plan_price);
+      toast.success((`Successfully Registered`), {
+        position: toast.POSITION.TOP_CENTER,
+      });
+    } catch (err) {
+      toast.error("Something went Wrong ", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+      setIsLoading(false);
+      console.error("contract call failure", err);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
 
