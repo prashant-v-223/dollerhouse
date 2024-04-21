@@ -349,7 +349,6 @@ const Landingpage = () => {
             </div>
           </div>
         </div>
-
         <div className="need_help_section">
           <h1>Need help with using the platform?</h1>
           <p>Get qualified support from Dollar House experts via online chat</p>
