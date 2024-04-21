@@ -196,7 +196,7 @@ const Landingpage = () => {
             {userID === null || userID === undefined ? <div className="register_left w-100">
               <h1 className="text-center"> Welcome to Dollar House </h1>
 
-              <div className="join_bth">
+              <div className="join_bth m-auto d-block">
                 <ConnectWallet />
                 <br />
                 <button onClick={scrollToRegistration} className="wath_tut p-0 m-0">
