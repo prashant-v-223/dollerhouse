@@ -313,22 +313,22 @@ const Dashboard = () => {
   const buyToken = async (plan_name, plan_price) => {
     let tierplan = ethers.utils.parseEther(plan_price);
     setLoading(true);
-    try {
-      const data = await buyTokens({ args: [refferal, tierplan] });
-      console.info("contract call successs", data);
-      handleBuyPlan(plan_name, plan_price);
-      toast.success((`Successfully Upgraded for ${plan_price}$`), {
-        position: toast.POSITION.TOP_CENTER,
-      });
-    } catch (err) {
-      toast.error("Something went Wrong ", {
-        position: toast.POSITION.TOP_CENTER,
-      });
-      setLoading(false);
-      console.error("contract call failure", err);
-    } finally {
-      setBuyTokenLoading(false);
-    }
+    // try {
+    //   const data = await buyTokens({ args: [refferal, tierplan] });
+    //   console.info("contract call successs", data);
+    handleBuyPlan(plan_name, plan_price);
+    //   toast.success((`Successfully Upgraded for ${plan_price}$`), {
+    //     position: toast.POSITION.TOP_CENTER,
+    //   });
+    // } catch (err) {
+    //   toast.error("Something went Wrong ", {
+    //     position: toast.POSITION.TOP_CENTER,
+    //   });
+    //   setLoading(false);
+    //   console.error("contract call failure", err);
+    // } finally {
+    //   setBuyTokenLoading(false);
+    // }
   };
 
 

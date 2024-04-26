@@ -187,7 +187,7 @@ const PartnersTable = () => {
 
   return (
     <React.Fragment>
-      <Navbar  actuvetab={"Stats"}/>
+      <Navbar actuvetab={"Stats"} />
       <ToastContainer />
       <div className="content">
         <div className="container">
@@ -396,7 +396,8 @@ const PartnersTable = () => {
             <tbody>
               {houseRewards123?.data &&
                 houseRewards123?.data?.map((el, i) => {
-                  return houseRewards123?.data[i].userdata[0]?.missedusers?.map((elE, iDEX) => {
+                  console.log("houseRewards123?.data[i].missedusers", houseRewards123?.data[i]?.missedusers);
+                  return houseRewards123?.data[i]?.missedusers?.map((elE, iDEX) => {
                     let a = elE?.depthleval + 1 === 1 ? 0 : elE?.depthleval + 1 === 2 ? CardData[i]["price1"].replace(/\$/g, '') * 10 / 100 : elE?.depthleval + 1 === 3 ? CardData[i]["price1"].replace(/\$/g, '') * 20 / 100 : elE?.depthleval + 1 === 4 ? CardData[i]["price1"].replace(/\$/g, '') * 20 / 100 : CardData[i]["price1"].replace(/\$/g, '') * 50 / 100
                     return (
                       <tr key={iDEX}>
@@ -450,7 +451,7 @@ const PartnersTable = () => {
               }
               {houseRewards123?.data &&
                 houseRewards123?.data?.map((el, i) => {
-                  return houseRewards123?.data[i].missedUser?.map((elE, iDEX) => {
+                  return houseRewards123?.data[i]?.missedUser?.map((elE, iDEX) => {
                     return (<tr key={iDEX}>
                       <td>
                         <img

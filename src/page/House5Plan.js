@@ -588,7 +588,7 @@ const House5Plan = () => {
                     <div className="Total_revenue">
                       <p>Total revenue</p>
                       <h1>
-                        {sumtotal(house5Plan2?.slice(0, 60))}
+                        {sumtotal(house5Plan2)}
                         <span className="pl-3">
                           USDT
                         </span>
@@ -623,7 +623,8 @@ const House5Plan = () => {
                 </thead>
                 <tbody>
                   {house5Plan2 &&
-                    house5Plan2?.sort((a, b) => {
+                    house5Plan2.sort((a, b) => {
+                      // Assuming house5Plan is an array of objects with a property 'createdAt'
                       return new Date(a.createdAt) - new Date(b.createdAt);
                     })?.map((item, index) => {
                       let parse = item.depthleval + 1 === 1 ? 0 : item.depthleval + 1 === 2 ? 10 : item.depthleval + 1 === 3 ? 20 : item.depthleval + 1 === 4 ? 20 : item.depthleval + 1 === 5 ? 50 : 0
@@ -660,7 +661,7 @@ const House5Plan = () => {
                           </button>
                         </td>
                         <td className="status_row">
-                          {item.depthleval + 1 === 1 ? "send to upline" : item.status === "done" ? "Received" : "missed"}
+                          {item.depthleval + 1 === 1 ? "send to upline" : item.status === "done" ? "Received" : item.status}
                         </td>
                         <td>
                           <span className="table_id">ID{item.uid}</span>
