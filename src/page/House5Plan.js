@@ -168,7 +168,7 @@ const House5Plan = () => {
     // Your logic to calculate the value of house5Plan goes here
     const sortedArray = house5Plan && [...house5Plan].sort((a, b) => {
       // Assuming house5Plan is an array of objects with a property 'creactetime'
-      return a.uid - b.uid;
+      return new Date(a.createdAt) - new Date(b.createdAt);
     });
 
     return sortedArray;
@@ -623,7 +623,9 @@ const House5Plan = () => {
                 </thead>
                 <tbody>
                   {house5Plan2 &&
-                    house5Plan2?.map((item, index) => {
+                    house5Plan2?.sort((a, b) => {
+                      return new Date(a.createdAt) - new Date(b.createdAt);
+                    })?.map((item, index) => {
                       let parse = item.depthleval + 1 === 1 ? 0 : item.depthleval + 1 === 2 ? 10 : item.depthleval + 1 === 3 ? 20 : item.depthleval + 1 === 4 ? 20 : item.depthleval + 1 === 5 ? 50 : 0
                       return (<tr key={index}>
                         <td>
@@ -640,7 +642,8 @@ const House5Plan = () => {
                             />
                           )}
                         </td>
-                        <td>                          {item.depthleval + 1}
+                        <td>
+                          {item.depthleval + 1}
                         </td>
                         <td>{planPrice}</td>
                         <td>{planPrice == 20 ? 5 * parse / 100 : planPrice == 40 ? 10 * parse / 100 : planPrice == 100 ? 30 * parse / 100 : 60 * parse / 100}</td>
