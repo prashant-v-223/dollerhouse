@@ -447,6 +447,8 @@ const Dashboard = () => {
       }
       const data = await response.json();
       setProfileData(data);
+      setLoading(!true);
+
     } catch (error) {
       console.error("Error fetching profile:", error);
     }
@@ -579,27 +581,24 @@ const Dashboard = () => {
 
   const [userData24, setUserData24] = useState("")
 
-  useEffect(() => {
-    const fetchData24 = async () => {
-      try {
-        const response = await fetch(` https://dollerhouse111.onrender.com/user/user-details?wallet_id=${walletAddress}`);
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const data = await response.json();
-        setUserData24(data);
+  // useEffect(() => {
+  // const fetchData24 = async () => {
+  //   try {
+  //     const response = await fetch(` https://dollerhouse111.onrender.com/user/user-details?wallet_id=${walletAddress}`);
+  //     if (!response.ok) {
+  //       throw new Error('Network response was not ok');
+  //     }
+  //     const data = await response.json();
+  //     setUserData24(data);
 
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
+  //   } catch (error) {
+  //     console.error('Error fetching data:', error);
+  //   }
+  // };
 
-    fetchData24();
+  // fetchData24();
+  // }, [walletAddress]);
 
-  }, [walletAddress]);
-
-
-  console.log("planDetails21planDetails21planDetails21", planDetails21);
 
   return (
     <React.Fragment>

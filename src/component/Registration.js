@@ -204,7 +204,7 @@ const Registration = ({ id }) => {
   //     });
   //     console.error("contract call failure", err);
   //   }
-  // };
+  // }; 
 
 
   const buyToken = async (plan_name, plan_price) => {
