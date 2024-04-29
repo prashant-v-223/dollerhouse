@@ -819,7 +819,6 @@ const Dashboard = () => {
                             </div>
                           </div>
                         </div>
-
                         <div className="teams_all_card teams_all_card2">
                           <p className="card_title">Total Team</p>
                           <h1>
@@ -839,8 +838,7 @@ const Dashboard = () => {
                             </div>
                           </div>
                         </div>
-
-                        <div className="teams_all_card teams_all_card2">
+                        {/* <div className="teams_all_card teams_all_card2">
                           <p className="card_title">Ratio</p>
                           <h1 className="text-green-500">
                             {profitDetails &&
@@ -851,9 +849,8 @@ const Dashboard = () => {
                               ).toFixed(4)}
                             %
                           </h1>
-                        </div>
+                        </div> */}
                       </div>
-
                       <div className="card_section2_right">
                         <div className="teams_all_card teams_all_card3">
                           <p className="card_title">Over All Profit</p>
