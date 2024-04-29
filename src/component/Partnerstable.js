@@ -163,7 +163,7 @@ const PartnersTable = () => {
   };
 
   function removeAndReplaceMiddleCharacters(str) {
-    if (typeof str !== "string" || str.length <= 30) {
+    if (typeof str !== "string" || str.length <= 20) {
       return str;
     }
     const before = str.substring(0, 7);
@@ -238,12 +238,12 @@ const PartnersTable = () => {
               <thead>
                 <tr>
                   <th>Type</th>
+                  <th>Time</th>
                   <th>Plan Name</th>
                   <th>Wallet Address</th>
                   <th>status</th>
                   <th>Reward</th>
                   <th>User ID</th>
-                  <th>Time</th>
                 </tr>
               </thead>
               <tbody>
@@ -264,6 +264,11 @@ const PartnersTable = () => {
                                 className="wallet_icon_last"
                               />
                             )}
+                          </td>
+                          <td>
+                            {new Date(item.Time).toLocaleString("en-IN", {
+                              timeZone: "Asia/Kolkata",
+                            })}
                           </td>
                           <td>{item.plan_name.replace("DH Plan", "Leval")}</td>
                           <td>
@@ -299,11 +304,6 @@ const PartnersTable = () => {
                               ID{item.user_id}
                             </p>
                           </td>
-                          <td>
-                            {new Date(item.Time).toLocaleString("en-IN", {
-                              timeZone: "Asia/Kolkata",
-                            })}
-                          </td>
                         </tr>
                       );
                     })
@@ -318,11 +318,11 @@ const PartnersTable = () => {
               <thead>
                 <tr>
                   <th>Type</th>
+                  <th>Time</th>
                   <th>Plan Name</th>
                   <th>Wallet Address</th>
                   <th>Reward</th>
                   <th>User ID</th>
-                  <th>Time</th>
                 </tr>
               </thead>
               <tbody>
@@ -338,6 +338,11 @@ const PartnersTable = () => {
                               alt="wallet"
                               className="wallet_icon_last"
                             />
+                          </td>
+                          <td>
+                            {new Date(item.Time).toLocaleString("en-IN", {
+                              timeZone: "Asia/Kolkata",
+                            })}
                           </td>
                           <td>{item.plan_name.replace("DH Plan", "Leval")}</td>
                           <td>
@@ -365,11 +370,6 @@ const PartnersTable = () => {
                               ID{item.user_id}
                             </p>
                           </td>
-                          <td>
-                            {new Date(item.Time).toLocaleString("en-IN", {
-                              timeZone: "Asia/Kolkata",
-                            })}
-                          </td>
                         </tr>
                       );
                     })
@@ -385,12 +385,12 @@ const PartnersTable = () => {
             <thead>
               <tr>
                 <th>Type</th>
+                <th>Time</th>
                 <th>Plan Name</th>
                 <th>Wallet Address</th>
                 <th>status</th>
                 <th>Reward</th>
                 <th>User ID</th>
-                <th>Time</th>
               </tr>
             </thead>
             <tbody>
@@ -407,6 +407,11 @@ const PartnersTable = () => {
                             alt="wallet"
                             className="wallet_icon_last"
                           />
+                        </td>
+                        <td>
+                          {new Date(elE?.createdAt).toLocaleString("en-IN", {
+                            timeZone: "Asia/Kolkata",
+                          })}
                         </td>
                         <td>Leval {i + 1}</td>
                         <td>
@@ -439,11 +444,6 @@ const PartnersTable = () => {
                             ID{elE?.uid}
                           </p>
                         </td>
-                        <td>
-                          {new Date(elE?.createdAt).toLocaleString("en-IN", {
-                            timeZone: "Asia/Kolkata",
-                          })}
-                        </td>
                       </tr>
                     )
                   })
@@ -460,6 +460,11 @@ const PartnersTable = () => {
                           className="wallet_icon_last"
                         />
                       </td>
+                      <td>
+                        {new Date(elE?.createdAt).toLocaleString("en-IN", {
+                          timeZone: "Asia/Kolkata",
+                        })}
+                      </td>
                       <td>Leval {" "} {i + 1}</td>
                       <td>
                         {removeAndReplaceMiddleCharacters(
@@ -475,11 +480,10 @@ const PartnersTable = () => {
                           <MdContentCopy />
                         </button>
                       </td>
-
-
                       <td className="status_row">
                         missed
-                      </td>   <td className="">
+                      </td>
+                      <td className="">
                         {Number(iDEX + 1 <= 2 ? CardData[i]["price1"].replace(/\$/g, '') * 0 / 100 : iDEX + 1 <= 6 ? CardData[i]["price1"].replace(/\$/g, '') * 10 / 100 : iDEX + 1 <= 14 ? CardData[i]["price1"].replace(/\$/g, '') * 20 / 100 : iDEX + 1 <= 30 ? CardData[i]["price1"].replace(/\$/g, '') * 20 / 100 : CardData[i]["price1"].replace(/\$/g, '') * 50 / 100)}
                       </td>
                       <td>
@@ -491,11 +495,6 @@ const PartnersTable = () => {
                           ID{elE?.uid}
                         </p>
                       </td>
-                      <td>
-                        {new Date(elE?.createdAt).toLocaleString("en-IN", {
-                          timeZone: "Asia/Kolkata",
-                        })}
-                      </td>
                     </tr>
                     )
                   })
@@ -503,32 +502,8 @@ const PartnersTable = () => {
               }
             </tbody>
           </table>}
-          {/* {tableData?.length > 10 && (
-            <div className="flex pagination_postion justify-end ">
-              <div className="pagination-container flex space-between space-x-5">
-                <button
-                  onClick={() => handlePageChange(currentPage - 1)}
-                  disabled={currentPage === 1}
-                >
-                  Previous
-                </button>
-
-                <div className="page-numbers  flex space-x-2">
-                  {renderPageNumbers()}
-                </div>
-
-                <button
-                  onClick={() => handlePageChange(currentPage + 1)}
-                  disabled={currentPage === 10}
-                >
-                  Next
-                </button>
-              </div>
-            </div>
-          )} */}
         </div>
       </div>
-      {/* </div> */}
     </React.Fragment>
   );
 };
