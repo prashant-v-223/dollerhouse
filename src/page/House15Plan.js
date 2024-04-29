@@ -356,7 +356,7 @@ const House15Plan = () => {
                     </div>
                   </div>
 
-                  <div className="cycle_name px-5">
+                  <div className="cycle_name  px-md-5">
                     <div className="cycle_name_left">
                       <div className="partners">
                         <p>Partners</p>

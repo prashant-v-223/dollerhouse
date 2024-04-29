@@ -56,7 +56,7 @@ img.greenBg2 {
 }
 
 .forsgae_level_card {
-    padding: 18px;
+    padding: 8px 4px;
 }
 
 .cycle_name {
@@ -206,6 +206,7 @@ img.greenBg2 {
         display: flex;
         align-items: center;
         justify-content: center;
+        font-size: 12;
     }
 
     .Total_revenue {
