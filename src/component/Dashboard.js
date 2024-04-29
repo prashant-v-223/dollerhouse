@@ -740,7 +740,7 @@ const Dashboard = () => {
                           >
                             <span
                               className="id_bg id_user_top parent_address "
-                              style={{ width: "180px", fontSize: "13.75px" }}
+                              style={{ width: "134px", fontSize: "13.75px" }}
                             >
                               {`
                         ${modifiedAddress1
