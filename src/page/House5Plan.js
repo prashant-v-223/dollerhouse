@@ -1,21 +1,13 @@
 import React, { useEffect, useMemo, useState } from "react";
 import img6 from "../image/svg-image-6.svg";
-import img8 from "../image/svg-image-8.svg";
-import img4 from "../image/svg-image-4.svg";
-import tiffanysedo from "../image/blue-blur.png";
 import Navbar from "../component/Navbar";
 import { FaRegCopy } from "react-icons/fa";
-import img1 from "../image/line.svg";
-import PriviewId from "../component/PriviewId";
 import svg_wallet_img from "../image/svg-image-23.svg";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { MdContentCopy } from "react-icons/md";
 import "./style.css";
 import { ethers } from "ethers";
 import criclesimg from "../image/cycles.svg";
-import UsdtIcon from "../image/tether-usdt-seeklogo1.svg";
-
 import { Link } from "react-router-dom";
 import {
   ConnectWallet,
@@ -26,7 +18,6 @@ import {
   useContractRead,
   useContractWrite,
 } from "@thirdweb-dev/react";
-import Boxs from "./Boxs";
 import axios from "axios";
 
 const House5Plan = () => {
@@ -65,7 +56,6 @@ const House5Plan = () => {
     "0x0ECBBF0D46E13cC4fffdf14AbC39D8332c89Ad8b"
   );
 
-  const numberOfElements = 10; // Change this to the desired number of elements
   const { data: getThePlansCount, isLoading: isPlanCountLoading } =
     useContractRead(contract, "getThePlanCount", [
       wallet_address,
@@ -156,9 +146,9 @@ const House5Plan = () => {
       // setHouse5Plan(data?.data);
       setmissedincome(data?.missedincometotal || 0)
       console.log("data?.datadata?.datadata?.data", data?.data1[0].missedusers);
-      setHouse5Plan(data?.data);
-      setHouse5Plan2(data?.userdata.missedusers);
-      setHouse5Plan1(data?.data1);
+      setHouse5Plan(data?.data ? data?.data : []);
+      setHouse5Plan2(data?.userdata.missedusers ? data?.userdata.missedusers : []);
+      setHouse5Plan1(data?.data1 ? data?.data1 : []);
       setColor(data?.color);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -175,23 +165,11 @@ const House5Plan = () => {
   }, [house5Plan, count]);
   console.log("house5Plan1[0]?.referBY", house5Plan1);
   const [house5PlanSingle, setHouse5PlanSingle] = useState(null);
-  const fetchUserDataSingle = async (id) => {
-    try {
-      const response = await fetch(
-        `https://dollerhouse111.onrender.com/team/single-member?userId=${id}`
-      );
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      const data = await response.json();
-
-      setHouse5PlanSingle(data?.data.refferal_details);
-      setWalletAddress(data?.data.wallet_id);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
   useEffect(() => {
+    setmissedincome(0)
+    setHouse5Plan([]);
+    setHouse5Plan2([]);
+    setHouse5Plan1([]);
     fetchUserData(UserID, count);
     user1();
   }, [count, UserID]);
@@ -315,7 +293,8 @@ const House5Plan = () => {
             const filteredData = house5Plan1[0]?.referBY
               .filter(item => item.refId === memoizedHouse5Plan?.[1]?.referred?.[index]);
 
-            const filteredData1 = filteredData?.filter(item => item.mainId === house5Plan1[0]?.refId); const filteredData2 = filteredData?.filter(item => item.mainId === house5Plan1[0]?.mainId);
+            const filteredData1 = filteredData?.filter(item => item.mainId === house5Plan1[0]?.refId);
+            const filteredData2 = filteredData?.filter(item => item.mainId === house5Plan1[0]?.mainId);
             return (
               <h4 key={index} className={filteredData1?.length <= 0 ? filteredData2?.length !== 0 ? `bg-warning cursor-pointer` : `bg-light cursor-pointer` : `bg-danger cursor-pointer`} onClick={() => handleNewIdData(filteredData[0]?.uid)}>
                 {filteredData?.length > 0 ? filteredData[0]?.uid : "0"}
