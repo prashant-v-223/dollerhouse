@@ -116,7 +116,7 @@ const Registration = ({ id }) => {
   const PostHouse5Plan = async (plan_price) => {
     setIsLoading(true);
     try {
-      const response = await fetch("https://dollerhouse111.onrender.com//team/add", {
+      const response = await fetch("https://dollerhouse111.onrender.com/team/add", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -145,7 +145,7 @@ const Registration = ({ id }) => {
   const handleBuyPlan = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch("https://dollerhouse111.onrender.com//plan/create", {
+      const response = await fetch("https://dollerhouse111.onrender.com/plan/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

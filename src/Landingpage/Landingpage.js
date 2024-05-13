@@ -56,7 +56,7 @@ const Landingpage = () => {
 
     let bodyContent = new FormData();
 
-    let response = await axios.get("https://https://dollerhouse111.onrender.com//profit/alltotal-profit", {
+    let response = await axios.get("https://https://dollerhouse111.onrender.com/profit/alltotal-profit", {
       method: "GET",
       body: bodyContent,
       headers: headersList

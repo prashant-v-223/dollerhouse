@@ -219,7 +219,7 @@ const Dashboard = () => {
     try {
       console.log(modifiedAddress);
       setLoading(true);
-      const response = await fetch("https://dollerhouse111.onrender.com//plan/create", {
+      const response = await fetch("https://dollerhouse111.onrender.com/plan/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -247,7 +247,7 @@ const Dashboard = () => {
   // const PostHouse5Plan = async (plan_price) => {
   //   setBuyTokenLoading(true)
   //   try {
-  //     const response = await fetch("https://dollerhouse111.onrender.com//team/add", {
+  //     const response = await fetch("https://dollerhouse111.onrender.com/team/add", {
   //       method: "POST",
   //       headers: {
   //         "Content-Type": "application/json",
@@ -363,7 +363,7 @@ const Dashboard = () => {
   //     };
 
   //     const response = await axios.post(
-  //       "https://dollerhouse111.onrender.com//profile/upload",
+  //       "https://dollerhouse111.onrender.com/profile/upload",
   //       requestBody,
   //       {
   //         headers: {
@@ -472,7 +472,7 @@ const Dashboard = () => {
       };
 
       const response = await axios.post(
-        "https://dollerhouse111.onrender.com//profile/upload",
+        "https://dollerhouse111.onrender.com/profile/upload",
         requestBody,
         {
           headers: {
@@ -582,7 +582,7 @@ const Dashboard = () => {
   // useEffect(() => {
   // const fetchData24 = async () => {
   //   try {
-  //     const response = await fetch(`https://dollerhouse111.onrender.com//user/user-details?wallet_id=${walletAddress}`);
+  //     const response = await fetch(`https://dollerhouse111.onrender.com/user/user-details?wallet_id=${walletAddress}`);
   //     if (!response.ok) {
   //       throw new Error('Network response was not ok');
   //     }
