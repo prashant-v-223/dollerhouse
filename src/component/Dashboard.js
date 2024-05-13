@@ -94,7 +94,7 @@ const Dashboard = () => {
     try {
       setLoading(true);
       const response = await fetch(
-       `https://dollerhouse111.onrender.com/plan/get-plan?userid=${main_user_id}`
+        `https://dollerhouse111.onrender.com/plan/get-plan?userid=${main_user_id}`
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -136,7 +136,7 @@ const Dashboard = () => {
     try {
       setLoading(true);
       const response = await axios.get(
-       `https://dollerhouse111.onrender.com/user/get-user?wallet_id=${e}`
+        `https://dollerhouse111.onrender.com/user/get-user?wallet_id=${e}`
       );
 
       console.log(response.data.data);
@@ -163,7 +163,7 @@ const Dashboard = () => {
   const user1 = async (w) => {
     try {
       const response = await axios.get(
-       `https://dollerhouse111.onrender.com/user/get-user?wallet_id=${w}`
+        `https://dollerhouse111.onrender.com/user/get-user?wallet_id=${w}`
       );
 
       setUser_id1(response.data.data.user_id);
@@ -186,7 +186,7 @@ const Dashboard = () => {
   const profitDetailsApi = async (main_user_id) => {
     try {
       const response = await axios.get(
-       `https://dollerhouse111.onrender.com/profit/total-profit?userId=${main_user_id}`
+        `https://dollerhouse111.onrender.com/profit/total-profit?userId=${main_user_id}`
       );
       setProfitDetails(response.data.data);
       localStorage.setItem("total", response.data.data.recentTeam || 0);
@@ -272,62 +272,61 @@ const Dashboard = () => {
   //   }
   // };
 
-  // const buyToken = async (plan_name, plan_price) => {
-  //   setBuyTokenLoading(true);
-  //   console.log(plan_name, plan_price);
+  const buyToken = async (plan_name, plan_price) => {
+    setBuyTokenLoading(true);
+    console.log(plan_name, plan_price);
+    try {
+      let tierplan = ethers.utils.parseEther(plan_price);
+      try {
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const signer = provider.getSigner();
+        const contract = new ethers.Contract(stakecontract, stake_abi, signer);
+        const token = await contract.buyTokens(ref, tierplan);
+        console.log(token);
+        const receipt = await token.wait();
+        if (receipt.status === 1) {
+          handleBuyPlan(plan_name, plan_price);
+          toast.success(`Registration Successfull for ${plan_price}$`, {
+            position: toast.POSITION.TOP_CENTER,
+          });
+        }
+        setBuyTokenLoading(false);
+      } catch (error) {
+        console.log(error);
+        toast.error("Failed", {
+          position: toast.POSITION.TOP_CENTER,
+        });
 
-  //   try {
-  //     let tierplan = ethers.utils.parseEther(plan_price);
-  //     try {
-  //       const provider = new ethers.providers.Web3Provider(window.ethereum);
-  //       const signer = provider.getSigner();
-  //       const contract = new ethers.Contract(stakecontract, stake_abi, signer);
-  //       const token = await contract.buyTokens(ref, tierplan);
-  //       console.log(token);
-  //       const receipt = await token.wait();
-  //       if (receipt.status === 1) {
-  //         handleBuyPlan(plan_name, plan_price);
-  //         toast.success(`Registration Successfull for ${plan_price}$`, {
-  //           position: toast.POSITION.TOP_CENTER,
-  //         });
-  //       }
-  //       setBuyTokenLoading(false);
-  //     } catch (error) {
-  //       console.log(error);
-  //       toast.error("Failed", {
-  //         position: toast.POSITION.TOP_CENTER,
-  //       });
-
-  //     }
-  //     setBuyTokenLoading(false);
-  //   } catch (err) {
-  //     setBuyTokenLoading(false);
-  //     toast.error("You can not buy more than $1000 in one transaction", {
-  //       position: toast.POSITION.TOP_CENTER,
-  //     });
-  //     console.error("contract call failure", err);
-  //   }
-  // };
+      }
+      setBuyTokenLoading(false);
+    } catch (err) {
+      setBuyTokenLoading(false);
+      toast.error("You can not buy more than $1000 in one transaction", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+      console.error("contract call failure", err);
+    }
+  };
 
   const { mutateAsync: buyTokens, isLoading: isBuyTokensLoading } =
     useContractWrite(contract, "buyTokens");
 
-  const buyToken = async (plan_name, plan_price) => {
-    // let tierplan = ethers.utils.parsescesss", data);
-    handleBuyPlan(plan_name, plan_price);
-    //   toast.success((`Successfully Upgraded for ${plan_price}$`), {
-    //     position: toast.POSITION.TOP_CENTER,
-    //   });
-    // } catch (err) {
-    //   toast.error("Something went Wrong ", {
-    //     position: toast.POSITION.TOP_CENTER,
-    //   });
-    //   setLoading(false);
-    //   console.error("contract call failure", err);
-    // } finally {
-    //   setBuyTokenLoading(false);
-    // }
-  };
+  // const buyToken = async (plan_name, plan_price) => {
+  // let tierplan = ethers.utils.parsescesss", data);
+  // handleBuyPlan(plan_name, plan_price);
+  //   toast.success((`Successfully Upgraded for ${plan_price}$`), {
+  //     position: toast.POSITION.TOP_CENTER,
+  //   });
+  // } catch (err) {
+  //   toast.error("Something went Wrong ", {
+  //     position: toast.POSITION.TOP_CENTER,
+  //   });
+  //   setLoading(false);
+  //   console.error("contract call failure", err);
+  // } finally {
+  //   setBuyTokenLoading(false);
+  // }
+  // };
 
 
 
@@ -416,7 +415,7 @@ const Dashboard = () => {
   const GetPlanDetail = async (main_user_id) => {
     try {
       const response = await fetch(
-       `https://dollerhouse111.onrender.com/plan/get-plan?wallet_id=${main_user_id}`
+        `https://dollerhouse111.onrender.com/plan/get-plan?wallet_id=${main_user_id}`
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -438,7 +437,7 @@ const Dashboard = () => {
   const fetchProfile = async (wallet) => {
     try {
       const response = await fetch(
-       `https://dollerhouse111.onrender.com/profile/get-profile?wallet_id=${wallet}`
+        `https://dollerhouse111.onrender.com/profile/get-profile?wallet_id=${wallet}`
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");
