@@ -94,7 +94,7 @@ const Dashboard = () => {
     try {
       setLoading(true);
       const response = await fetch(
-        `https://dollerhouse111.onrender.com/plan/get-plan?userid=${main_user_id}`
+       `https://dollerhouse111.onrender.com/plan/get-plan?userid=${main_user_id}`
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -136,7 +136,7 @@ const Dashboard = () => {
     try {
       setLoading(true);
       const response = await axios.get(
-        `https://dollerhouse111.onrender.com/user/get-user?wallet_id=${e}`
+       `https://dollerhouse111.onrender.com/user/get-user?wallet_id=${e}`
       );
 
       console.log(response.data.data);
@@ -163,7 +163,7 @@ const Dashboard = () => {
   const user1 = async (w) => {
     try {
       const response = await axios.get(
-        `https://dollerhouse111.onrender.com/user/get-user?wallet_id=${w}`
+       `https://dollerhouse111.onrender.com/user/get-user?wallet_id=${w}`
       );
 
       setUser_id1(response.data.data.user_id);
@@ -186,7 +186,7 @@ const Dashboard = () => {
   const profitDetailsApi = async (main_user_id) => {
     try {
       const response = await axios.get(
-        `https://dollerhouse111.onrender.com/profit/total-profit?userId=${main_user_id}`
+       `https://dollerhouse111.onrender.com/profit/total-profit?userId=${main_user_id}`
       );
       setProfitDetails(response.data.data);
       localStorage.setItem("total", response.data.data.recentTeam || 0);
@@ -217,15 +217,17 @@ const Dashboard = () => {
   let ref = "0x7a343FF69aE56cb8bf799dCBedACfe41a1434162";
   const handleBuyPlan = async (plan_name, plan_price) => {
     try {
+      console.log(modifiedAddress);
       setLoading(true);
-      const response = await fetch("https://dollerhouse111.onrender.com/plan/create", {
+      const response = await fetch("http://localhost:3100/plan/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
           wallet_id: walletAddress,
-          refferal: refferal,
+          refferalId: refferal,
+          amount: plan_price,
           plan_details: [
             {
               amount: plan_price,
@@ -236,39 +238,39 @@ const Dashboard = () => {
         }),
       });
       setLoading(!true);
-      PostHouse5Plan(plan_price);
-    } catch (error) {
-      console.error("Error fetching user details:", error);
-    }
-  };
-
-  const PostHouse5Plan = async (plan_price) => {
-    setBuyTokenLoading(true)
-    try {
-      const response = await fetch("https://dollerhouse111.onrender.com/team/add", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          wallet_id: walletAddress,
-          refferal_id: ref,
-          amount: plan_price,
-        }),
-      });
-      const data = await response.json();
-      console.log(data);
-      setBuyTokenLoading(false)
-      toast.success("Tokens Bought Successfully", {
-        position: toast.POSITION.TOP_CENTER,
-      });
-
       window.location.reload();
     } catch (error) {
       console.error("Error fetching user details:", error);
-      setBuyTokenLoading(false)
     }
   };
+
+  // const PostHouse5Plan = async (plan_price) => {
+  //   setBuyTokenLoading(true)
+  //   try {
+  //     const response = await fetch("http://localhost:3100/team/add", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         wallet_id: walletAddress,
+  //         refferal_id: ref,
+  //         amount: plan_price,
+  //       }),
+  //     });
+  //     const data = await response.json();
+  //     console.log(data);
+  //     setBuyTokenLoading(false)
+  //     toast.success("Tokens Bought Successfully", {
+  //       position: toast.POSITION.TOP_CENTER,
+  //     });
+
+  //     window.location.reload();
+  //   } catch (error) {
+  //     console.error("Error fetching user details:", error);
+  //     setBuyTokenLoading(false)
+  //   }
+  // };
 
   // const buyToken = async (plan_name, plan_price) => {
   //   setBuyTokenLoading(true);
@@ -311,24 +313,20 @@ const Dashboard = () => {
     useContractWrite(contract, "buyTokens");
 
   const buyToken = async (plan_name, plan_price) => {
-    let tierplan = ethers.utils.parseEther(plan_price);
-    setLoading(true);
-    try {
-      const data = await buyTokens({ args: [refferal, tierplan] });
-      console.info("contract call successs", data);
-      handleBuyPlan(plan_name, plan_price);
-      toast.success((`Successfully Upgraded for ${plan_price}$`), {
-        position: toast.POSITION.TOP_CENTER,
-      });
-    } catch (err) {
-      toast.error("Something went Wrong ", {
-        position: toast.POSITION.TOP_CENTER,
-      });
-      setLoading(false);
-      console.error("contract call failure", err);
-    } finally {
-      setBuyTokenLoading(false);
-    }
+    // let tierplan = ethers.utils.parsescesss", data);
+    handleBuyPlan(plan_name, plan_price);
+    //   toast.success((`Successfully Upgraded for ${plan_price}$`), {
+    //     position: toast.POSITION.TOP_CENTER,
+    //   });
+    // } catch (err) {
+    //   toast.error("Something went Wrong ", {
+    //     position: toast.POSITION.TOP_CENTER,
+    //   });
+    //   setLoading(false);
+    //   console.error("contract call failure", err);
+    // } finally {
+    //   setBuyTokenLoading(false);
+    // }
   };
 
 
@@ -365,7 +363,7 @@ const Dashboard = () => {
   //     };
 
   //     const response = await axios.post(
-  //       "https://dollerhouse111.onrender.com/profile/upload",
+  //       "http://localhost:3100/profile/upload",
   //       requestBody,
   //       {
   //         headers: {
@@ -418,7 +416,7 @@ const Dashboard = () => {
   const GetPlanDetail = async (main_user_id) => {
     try {
       const response = await fetch(
-        `https://dollerhouse111.onrender.com/plan/get-plan?wallet_id=${main_user_id}`
+       `https://dollerhouse111.onrender.com/plan/get-plan?wallet_id=${main_user_id}`
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -440,7 +438,7 @@ const Dashboard = () => {
   const fetchProfile = async (wallet) => {
     try {
       const response = await fetch(
-        `https://dollerhouse111.onrender.com/profile/get-profile?wallet_id=${wallet}`
+       `https://dollerhouse111.onrender.com/profile/get-profile?wallet_id=${wallet}`
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -474,7 +472,7 @@ const Dashboard = () => {
       };
 
       const response = await axios.post(
-        "https://dollerhouse111.onrender.com/profile/upload",
+        "http://localhost:3100/profile/upload",
         requestBody,
         {
           headers: {
@@ -584,7 +582,7 @@ const Dashboard = () => {
   // useEffect(() => {
   // const fetchData24 = async () => {
   //   try {
-  //     const response = await fetch(`https://dollerhouse111.onrender.com/user/user-details?wallet_id=${walletAddress}`);
+  //     const response = await fetch(`http://localhost:3100/user/user-details?wallet_id=${walletAddress}`);
   //     if (!response.ok) {
   //       throw new Error('Network response was not ok');
   //     }

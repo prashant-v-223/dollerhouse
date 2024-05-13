@@ -125,7 +125,7 @@ const House5Plan = () => {
   const user1 = async (w) => {
     try {
       const response = await axios.get(
-        `https://dollerhouse111.onrender.com/user/get-user?wallet_id=${UserID}`
+       `https://dollerhouse111.onrender.com/user/get-user?wallet_id=${UserID}`
       );
 
       setUser_id1(response.data.data.user_id);
@@ -137,7 +137,7 @@ const House5Plan = () => {
   const fetchUserData = async (UserID, leval) => {
     try {
       const response = await fetch(
-        `https://dollerhouse111.onrender.com/team/leval5-member/${UserID}/${leval}/${planPrice}`
+       `https://dollerhouse111.onrender.com/team/leval5-member/${UserID}/${leval}/${planPrice}`
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -180,7 +180,7 @@ const House5Plan = () => {
     GetPlanDetail(UserID)
   }, []);
   const profitDetailsApi = (UserID) => {
-    const apiUrl = `https://dollerhouse111.onrender.com/reward/get?userId=${UserID}`;
+    const apiUrl =`https://dollerhouse111.onrender.com/reward/get?userId=${UserID}`;
     fetch(apiUrl)
       .then((response) => {
         if (!response.ok) {
@@ -189,7 +189,7 @@ const House5Plan = () => {
         return response.json();
       })
       .then((data) => {
-        const apiUrl1 = `https://dollerhouse111.onrender.com/user/get-user?wallet_id=${data.data.refferal}`;
+        const apiUrl1 =`https://dollerhouse111.onrender.com/user/get-user?wallet_id=${data.data.refferal}`;
         fetch(apiUrl1)
           .then((response) => {
             if (!response.ok) {
@@ -216,13 +216,13 @@ const House5Plan = () => {
   const GetPlanDetail = async (UserID) => {
     try {
       const response = await fetch(
-        `https://dollerhouse111.onrender.com/plan/get-plan?userid=${UserID}`
+       `https://dollerhouse111.onrender.com/plan/get-plan?userid=${UserID}`
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
       const dataNew = await response.json();
-      const apiUrl1 = `https://dollerhouse111.onrender.com/user/get-user?wallet_id=${dataNew.data.refferal}`;
+      const apiUrl1 =`https://dollerhouse111.onrender.com/user/get-user?wallet_id=${dataNew.data.refferal}`;
       fetch(apiUrl1)
         .then((response) => {
           if (!response.ok) {
@@ -278,7 +278,7 @@ const House5Plan = () => {
         {memoizedHouse5Plan && memoizedHouse5Plan.length > 0 ? (
           <div className="circle_pre_1_1 cursor-pointer"
             onClick={() => handleNewIdData(memoizedHouse5Plan[1]?.uid)}>
-            <h4 className={memoizedHouse5Plan[1]?.mainId !== house5Plan1[0]?.refId ? memoizedHouse5Plan[1]?.mainId === house5Plan1[0]?.mainId ? `bg-warning` : `bg-light` : `bg-danger`}>
+            <h4 className={memoizedHouse5Plan[1]?.mainId !== house5Plan1[0]?.refId ? memoizedHouse5Plan[1]?.mainId === house5Plan1[0]?.mainId ? `bg-warning` : `bg-danger` : `bg-light`}>
               {memoizedHouse5Plan[1]?.uid || 0}
             </h4>
           </div>
@@ -296,7 +296,7 @@ const House5Plan = () => {
             const filteredData1 = filteredData?.filter(item => item.mainId === house5Plan1[0]?.refId);
             const filteredData2 = filteredData?.filter(item => item.mainId === house5Plan1[0]?.mainId);
             return (
-              <h4 key={index} className={filteredData1?.length <= 0 ? filteredData2?.length !== 0 ? `bg-warning cursor-pointer` : `bg-light cursor-pointer` : `bg-danger cursor-pointer`} onClick={() => handleNewIdData(filteredData[0]?.uid)}>
+              <h4 key={index} className={filteredData1?.length <= 0 ? filteredData2?.length !== 0 ? `bg-danger cursor-pointer` : `bg-light cursor-pointer` : `bg-warning cursor-pointer`} onClick={() => handleNewIdData(filteredData[0]?.uid)}>
                 {filteredData?.length > 0 ? filteredData[0]?.uid : "0"}
               </h4>
             );
@@ -314,7 +314,7 @@ const House5Plan = () => {
 
               const filteredData1 = filteredData?.filter(item => item.mainId === house5Plan1[0]?.refId);
               const filteredData2 = filteredData?.filter(item => item.mainId === house5Plan1[0]?.mainId); return (
-                <h4 key={index1 + index} className={filteredData1?.length <= 0 ? filteredData2?.length !== 0 ? `bg-warning cursor-pointer` : `bg-light cursor-pointer` : `bg-danger cursor-pointer`} onClick={() => handleNewIdData(filteredData[0]?.uid)}>
+                <h4 key={index1 + index} className={filteredData1?.length <= 0 ? filteredData2?.length !== 0 ? `bg-danger cursor-pointer` : `bg-light cursor-pointer` : `bg-warning cursor-pointer`} onClick={() => handleNewIdData(filteredData[0]?.uid)}>
                   {filteredData?.length > 0 ? filteredData[0]?.uid : "0"}
                 </h4>
               );
@@ -335,7 +335,7 @@ const House5Plan = () => {
                 const filteredData1 = filteredData?.filter(item => item.mainId === house5Plan1[0]?.refId);
                 const filteredData2 = filteredData?.filter(item => item.mainId === house5Plan1[0]?.mainId);
                 return (
-                  <h4 key={index2 + index1 + index} className={filteredData1?.length <= 0 ? filteredData2?.length !== 0 ? `bg-warning cursor-pointer` : `bg-light cursor-pointer` : `bg-danger cursor-pointer`} onClick={() => handleNewIdData(filteredData[0]?.uid)}>
+                  <h4 key={index2 + index1 + index} className={filteredData1?.length <= 0 ? filteredData2?.length !== 0 ? `bg-danger cursor-pointer` : `bg-light cursor-pointer` : `bg-warning cursor-pointer`} onClick={() => handleNewIdData(filteredData[0]?.uid)}>
                     {filteredData?.length > 0 ? filteredData[0]?.uid : "0"}
                   </h4>
                 );
@@ -361,7 +361,7 @@ const House5Plan = () => {
                   const filteredData1 = filteredData?.filter(item => item.mainId === house5Plan1[0]?.refId);
                   const filteredData2 = filteredData?.filter(item => item.mainId === house5Plan1[0]?.mainId);
                   return (
-                    <h4 key={index3 + index2 + index1 + index} className={filteredData1?.length <= 0 ? filteredData2?.length !== 0 ? `bg-warning cursor-pointer` : `bg-light cursor-pointer` : `bg-danger cursor-pointer`} onClick={() => handleNewIdData(filteredData[0]?.uid)}>
+                    <h4 key={index3 + index2 + index1 + index} className={filteredData1?.length <= 0 ? filteredData2?.length !== 0 ? `bg-danger cursor-pointer` : `bg-light cursor-pointer` : `bg-warning cursor-pointer`} onClick={() => handleNewIdData(filteredData[0]?.uid)}>
                       {filteredData?.length > 0 ? filteredData[0]?.uid : "0"}
                     </h4>
                   );
@@ -384,7 +384,7 @@ const House5Plan = () => {
         {memoizedHouse5Plan && memoizedHouse5Plan.length > 0 ? (
           <div className="circle_pre_1_1"
             onClick={() => handleNewIdData(memoizedHouse5Plan[0]?.uid)}>
-            <h4 className={memoizedHouse5Plan[0]?.mainId !== house5Plan1[0]?.refId ? memoizedHouse5Plan[1]?.mainId === house5Plan1[0]?.mainId ? `bg-warning cursor-pointer` : `bg-light cursor-pointer` : `bg-danger cursor-pointer`}>
+            <h4 className={memoizedHouse5Plan[0]?.mainId !== house5Plan1[0]?.refId ? memoizedHouse5Plan[1]?.mainId === house5Plan1[0]?.mainId ? `bg-warning cursor-pointer` : `bg-danger cursor-pointer` : `bg-light cursor-pointer`}>
               {memoizedHouse5Plan[0]?.uid || 0}
             </h4>
           </div>
@@ -402,7 +402,7 @@ const House5Plan = () => {
             const filteredData1 = filteredData?.filter(item => item.mainId === house5Plan1[0]?.refId);
             const filteredData2 = filteredData?.filter(item => item.mainId === house5Plan1[0]?.mainId);
             return (
-              <h4 key={index} className={filteredData1?.length <= 0 ? filteredData2?.length !== 0 ? `bg-warning cursor-pointer` : `bg-light cursor-pointer` : `bg-danger cursor-pointer`} onClick={() => handleNewIdData(filteredData[0]?.uid)}>
+              <h4 key={index} className={filteredData1?.length <= 0 ? filteredData2?.length !== 0 ? `bg-danger cursor-pointer` : `bg-light cursor-pointer` : `bg-warning cursor-pointer`} onClick={() => handleNewIdData(filteredData[0]?.uid)}>
                 {filteredData?.length > 0 ? filteredData[0]?.uid : "0"}
               </h4>
             );
@@ -419,7 +419,7 @@ const House5Plan = () => {
               const filteredData1 = filteredData?.filter(item => item.mainId === house5Plan1[0]?.refId);
               const filteredData2 = filteredData?.filter(item => item.mainId === house5Plan1[0]?.mainId);
               return (
-                <h4 key={index1 + index} className={filteredData1?.length <= 0 ? filteredData2?.length !== 0 ? `bg-warning cursor-pointer` : `bg-light cursor-pointer` : `bg-danger cursor-pointer`} onClick={() => handleNewIdData(filteredData[0]?.uid)}>
+                <h4 key={index1 + index} className={filteredData1?.length <= 0 ? filteredData2?.length !== 0 ? `bg-danger cursor-pointer` : `bg-light cursor-pointer` : `bg-warning cursor-pointer`} onClick={() => handleNewIdData(filteredData[0]?.uid)}>
                   {filteredData?.length > 0 ? filteredData[0]?.uid : "0"}
                 </h4>
               );
@@ -441,7 +441,7 @@ const House5Plan = () => {
                 const filteredData2 = filteredData?.filter(item => item.mainId === house5Plan1[0]?.mainId);
 
                 return (
-                  <h4 key={index2 + index1 + index} className={filteredData1?.length <= 0 ? filteredData2?.length !== 0 ? `bg-warning cursor-pointer` : `bg-light cursor-pointer` : `bg-danger cursor-pointer`} onClick={() => handleNewIdData(filteredData[0]?.uid)}>
+                  <h4 key={index2 + index1 + index} className={filteredData1?.length <= 0 ? filteredData2?.length !== 0 ? `bg-danger cursor-pointer` : `bg-light cursor-pointer` : `bg-warning cursor-pointer`} onClick={() => handleNewIdData(filteredData[0]?.uid)}>
                     {filteredData?.length > 0 ? filteredData[0]?.uid : "0"}
                   </h4>
                 );
@@ -467,7 +467,7 @@ const House5Plan = () => {
                   const filteredData2 = filteredData?.filter(item => item.mainId === house5Plan1[0]?.mainId);
 
                   return (
-                    <h4 key={index3 + index2 + index1 + index} className={filteredData1?.length <= 0 ? filteredData2?.length !== 0 ? `bg-warning cursor-pointer` : `bg-light cursor-pointer` : `bg-danger cursor-pointer`} onClick={() => handleNewIdData(filteredData[0]?.uid)}>
+                    <h4 key={index3 + index2 + index1 + index} className={filteredData1?.length <= 0 ? filteredData2?.length !== 0 ? `bg-danger cursor-pointer` : `bg-light cursor-pointer` : `bg-warning cursor-pointer`} onClick={() => handleNewIdData(filteredData[0]?.uid)}>
                       {filteredData?.length > 0 ? filteredData[0]?.uid : "0"}
                     </h4>
                   );
@@ -487,6 +487,20 @@ const House5Plan = () => {
         <ToastContainer />
       </div>
       <Navbar />
+      <div
+        className="fixed top-0 right-0 w-full h-full z-0"
+        style={{
+          backgroundImage: `url("https://busd.forsage.io/blurs/levels/blue-blur.png")`,
+          backgroundRepeat: "round",
+          backgroundSize: 'cover',
+          position: "fixed",
+          right: "0",
+          top: "0",
+          width: "100%",
+          height: "100%",
+      }
+        }
+      ></div>
       <div className="content">
         <div className="container">
           <div className="forsgae1_main">

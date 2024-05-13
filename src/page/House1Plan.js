@@ -191,7 +191,7 @@ const House1Plan = () => {
 
 
   const profitDetailsApi = (UserID) => {
-    const apiUrl = `https://dollerhouse111.onrender.com/reward/get?userId=${UserID}`;
+    const apiUrl =`https://dollerhouse111.onrender.com/reward/get?userId=${UserID}`;
     fetch(apiUrl)
       .then((response) => {
         if (!response.ok) {
@@ -217,13 +217,13 @@ const House1Plan = () => {
   const GetPlanDetail = async (UserID) => {
     try {
       const response = await fetch(
-        `https://dollerhouse111.onrender.com/plan/get-plan?userid=${UserID}`
+       `https://dollerhouse111.onrender.com/plan/get-plan?userid=${UserID}`
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
       const dataNew = await response.json();
-      const apiUrl1 = `https://dollerhouse111.onrender.com/user/get-user?wallet_id=${dataNew.data.refferal}`;
+      const apiUrl1 =`https://dollerhouse111.onrender.com/user/get-user?wallet_id=${dataNew.data.refferal}`;
       fetch(apiUrl1)
         .then((response) => {
           if (!response.ok) {
@@ -307,6 +307,21 @@ const House1Plan = () => {
         <ToastContainer />
       </div>
       <Navbar />
+      
+      <div
+        className="fixed top-0 right-0 w-full h-full z-0"
+        style={{
+          backgroundImage: `url("https://busd.forsage.io/blurs/levels/green-blur.png")`,
+          backgroundRepeat: "round",
+          backgroundSize: 'cover',
+          position: "fixed",
+          right: "0",
+          top: "0",
+          width: "100%",
+          height: "100%",
+      }
+        }
+      ></div>
       <div className="content">
         <div className="container">
           <div className="forsgae1_main">

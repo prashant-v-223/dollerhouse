@@ -1133,7 +1133,11 @@ img.userd_icon {
 
 .forsgae_level_card {
   width: 100%;
-  background-image: linear-gradient(#151718, #242526, #2a2929);
+  background: radial-gradient(
+    circle,
+    rgb(64 96 255) 30%,
+    rgb(64 106 255 / 93%) 60%
+  );
   color: white;
   border: 1px solid #2a2929;
   padding: 30px 5px;
@@ -2111,6 +2115,13 @@ img.welcome_benner_card {
 
   .sid_menus_all {
     margin-top: 20px !important;
+    display: block;
+    height: 404px;
+    background-color: rgba(0, 0, 0, 0.8) !important;
+    width: 95%;
+    margin: 2.5%;
+    padding: 3%;
+    border-radius: 13px;
   }
 
   img.logoimg_priview {
@@ -2144,9 +2155,9 @@ img.welcome_benner_card {
   }
 
   button.bars {
-    background: #0e0f10;
     border: none;
-    color: white;
+    background: none;
+    color: #000;
     font-size: 25px;
   }
 
@@ -2173,8 +2184,11 @@ img.welcome_benner_card {
     width: 100%;
     display: flex;
     justify-content: space-between;
-    background-color: #0e0f10;
+    background-color: rgb(167 158 158 / 70%) !important;
     padding: 12px;
+    border-radius: 12px;
+    margin: 3%;
+    width: 94%;
   }
 
   .sidebar_menu {
@@ -2183,7 +2197,6 @@ img.welcome_benner_card {
     top: 0;
     /* z-index: 99999; */
     padding: 0;
-    background-color: #0b0c0c;
   }
 
   .sidebar a {
