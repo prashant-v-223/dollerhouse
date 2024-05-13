@@ -58,7 +58,7 @@ const PartnersTable = () => {
       });
   };
   const profitDetailsApi1112 = async (id) => {
-    let response = await fetch(`http://localhost:3100/team/leval5-membe22/${id}`, {
+    let response = await fetch(`https://dollerhouse111.onrender.com//team/leval5-membe22/${id}`, {
       method: "GET",
     });
 
