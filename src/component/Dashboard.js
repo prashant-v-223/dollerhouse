@@ -32,6 +32,7 @@ import { ethers } from "ethers";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Loading from "./Loading.js";
+import { UsdtContract, usdt_abi } from "./usdt.js";
 
 const Dashboard = () => {
   const [BuyTokenLoading, setBuyTokenLoading] = useState(false);
@@ -79,7 +80,7 @@ const Dashboard = () => {
     return finalAmount;
   }
   const { contract } = useContract(
-    "0x01e974064E32DD5B6C439902010ae62f11b500e0"
+    "0x95535a6c46343bf08deb7ec5f56e3a32e77b7b80"
   );
 
   const { data: cunWalletBal, isLoading: isCunWalletBalLoading } =
@@ -271,33 +272,92 @@ const Dashboard = () => {
   //     setBuyTokenLoading(false)
   //   }
   // };
+  const approveTokens = async (approveAmt) => {
+    console.log("dddd===>>>", approveAmt);
+    setBuyTokenLoading(true);
+    try {
+      let spender = "0x95535a6c46343bf08deb7ec5f56e3a32e77b7b80"; //contract address
+      let approveAmount = ethers.utils.parseEther(approveAmt);
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const signer = provider.getSigner();
+      const contract = new ethers.Contract(UsdtContract, usdt_abi, signer);
+      const token = await contract.approve(spender, approveAmount.toString(), {
+        gasLimit: 80000,
+      });
+      const receipt = await token.wait();
+      if (receipt.status === 1) {
+        buyToken()
+        toast.success("Successfully approved tokens!", {
+          position: toast.POSITION.TOP_CENTER,
+        });
+      }
+      setBuyTokenLoading(false);
+    } catch (error) {
+      setBuyTokenLoading(false);
+      toast.error("Failed", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+    }
+  };
 
+  const contractAddress = '0x95535a6c46343bf08deb7ec5f56e3a32e77b7b80';
+  const abi = [
+    // Your contract's ABI
+    "function Register(uint256 amount) public returns (bool)"
+  ];
   const buyToken = async (plan_name, plan_price) => {
     setBuyTokenLoading(true);
     console.log(plan_name, plan_price);
     try {
-      let tierplan = ethers.utils.parseEther(plan_price);
-      try {
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
-        const signer = provider.getSigner();
-        const contract = new ethers.Contract(stakecontract, stake_abi, signer);
-        const token = await contract.buyTokens(ref, tierplan);
-        console.log(token);
-        const receipt = await token.wait();
-        if (receipt.status === 1) {
-          handleBuyPlan(plan_name, plan_price);
-          toast.success(`Registration Successfull for ${plan_price}$`, {
+      let tierplan = ethers.utils.parseEther(40);
+      await approveTokens(tierplan).then(async () => {
+        try {
+          await window.ethereum.request({ method: 'eth_requestAccounts' });
+
+          // Create a new Web3Provider
+          const provider = new ethers.providers.Web3Provider(window.ethereum);
+
+          // Get the signer
+          const signer = provider.getSigner();
+
+          // Create a contract instance
+          const contract = new ethers.Contract(contractAddress, abi, signer);
+
+          // Convert amount to a BigNumber
+          const tx = await contract.Register(tierplan);
+
+          // Wait for the transaction to be mined
+          const receipt = await tx.wait();
+          console.log("receiptreceiptreceiptreceiptreceiptreceiptreceiptreceiptreceipt", receipt);
+          await handleBuyPlan(plan_name, plan_price);
+        } catch (error) {
+          console.log(error);
+          toast.error("Failed", {
             position: toast.POSITION.TOP_CENTER,
           });
         }
-        setBuyTokenLoading(false);
-      } catch (error) {
-        console.log(error);
-        toast.error("Failed", {
-          position: toast.POSITION.TOP_CENTER,
-        });
+      })
+      // try {
+      //   const provider = new ethers.providers.Web3Provider(window.ethereum);
+      //   const signer = provider.getSigner();
+      //   const contract = new ethers.Contract(stakecontract, stake_abi, signer);
+      //   const token = await contract.buyTokens(ref, tierplan);
+      //   console.log(token);
+      //   const receipt = await token.wait();
+      //   if (receipt.status === 1) {
+      //     handleBuyPlan(plan_name, plan_price);
+      //     toast.success(`Registration Successfull for ${plan_price}$`, {
+      //       position: toast.POSITION.TOP_CENTER,
+      //     });
+      //   }
+      //   setBuyTokenLoading(false);
+      // } catch (error) {
+      //   console.log(error);
+      //   toast.error("Failed", {
+      //     position: toast.POSITION.TOP_CENTER,
+      //   });
 
-      }
+      // }
       setBuyTokenLoading(false);
     } catch (err) {
       setBuyTokenLoading(false);

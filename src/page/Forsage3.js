@@ -92,7 +92,7 @@ useEffect(()=>{
 
 
   const { contract } = useContract(
-    "0x01e974064E32DD5B6C439902010ae62f11b500e0"
+    "0x95535a6c46343bf08deb7ec5f56e3a32e77b7b80"
   );
   const { contract: USDTContract } = useContract(
     "0xb8105200336560A6E0f3E3EA3A7515AbB341E3e46"
