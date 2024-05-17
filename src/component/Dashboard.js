@@ -80,7 +80,7 @@ const Dashboard = () => {
     return finalAmount;
   }
   const { contract } = useContract(
-    "0x095D069E01ACa045F4b5f7a3ecc5fF5A257Bf932"
+    "0x81F5C1C9A5C75D0F28C65162476E650FA4434D39"
   );
 
   const { data: cunWalletBal, isLoading: isCunWalletBalLoading } =
@@ -215,7 +215,7 @@ const Dashboard = () => {
   const modifiedAddress = removeAndReplaceMiddleCharacters(walletAddress);
   const modifiedAddress1 = removeAndReplaceMiddleCharacters(refferal);
 
-  let ref = "0x7a343FF69aE56cb8bf799dCBedACfe41a1434162";
+  let ref = "0x5ed0e08e0b27f2fce526f55a1aad641e328b740c";
   const handleBuyPlan = async (plan_name, plan_price) => {
     try {
       console.log(modifiedAddress);
@@ -273,7 +273,7 @@ const Dashboard = () => {
   //   }
   // };
   
-  const contractAddress = '0x095D069E01ACa045F4b5f7a3ecc5fF5A257Bf932';
+  const contractAddress = '0x81F5C1C9A5C75D0F28C65162476E650FA4434D39';
   const abi = [
     {
       "inputs": [
@@ -736,7 +736,7 @@ const Dashboard = () => {
     console.log("dddd===>>>", plan_price);
     setBuyTokenLoading(true);
     try {
-      let spender = "0x095D069E01ACa045F4b5f7a3ecc5fF5A257Bf932"; //contract address
+      let spender = "0x81F5C1C9A5C75D0F28C65162476E650FA4434D39"; //contract address
       let approveAmount = ethers.utils.parseEther(plan_price);
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       const signer = provider.getSigner();
@@ -746,7 +746,7 @@ const Dashboard = () => {
       });
       const receipt = await token.wait();
       if (receipt.status === 1) {
-        buyToken()
+        buyToken(plan_name, plan_price)
         toast.success("Successfully approved tokens!", {
           position: toast.POSITION.TOP_CENTER,
         });
@@ -773,8 +773,9 @@ const Dashboard = () => {
       const signer = provider.getSigner();
 
       const contract = new ethers.Contract(contractAddress, abi, signer);
-      let num = Number(plan_price * 10 ** 18)
-      const tx = await contract.Register(ref, num.toString());
+      let num = Number(plan_price)
+      console.log("plan_price");
+      const tx = await contract.Register(ref, "20000000000000000000");
 
       const receipt = await tx.wait();
       console.log("receipt", receipt);

@@ -5,7 +5,7 @@ const RegisterComponent = () => {
   const [amount, setAmount] = useState('');
   const [status, setStatus] = useState('');
 
-  const contractAddress = '0x095D069E01ACa045F4b5f7a3ecc5fF5A257Bf932';
+  const contractAddress = '0x81F5C1C9A5C75D0F28C65162476E650FA4434D39';
   const abi = [
     // Your contract's ABI
     "function Register(uint256 amount) public returns (bool)"

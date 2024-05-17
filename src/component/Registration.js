@@ -49,7 +49,7 @@ const Registration = ({ id }) => {
   const address = useAddress();
 
   const { contract } = useContract(
-    "0x095D069E01ACa045F4b5f7a3ecc5fF5A257Bf932"
+    "0x81F5C1C9A5C75D0F28C65162476E650FA4434D39"
   );
   const { data: cunWalletBal, isLoading: isCunWalletBalLoading } =
     useTokenBalance(contract, address);
@@ -60,7 +60,7 @@ const Registration = ({ id }) => {
   const { data: checkApproval, isLoading: isApprovalLoading } = useContractRead(
     USDTContract,
     "allowance",
-    [address, "0x095D069E01ACa045F4b5f7a3ecc5fF5A257Bf932"]
+    [address, "0x81F5C1C9A5C75D0F28C65162476E650FA4434D39"]
   );
 
   const ApprovedValue = checkApproval
@@ -92,7 +92,7 @@ const Registration = ({ id }) => {
     console.log("dddd===>>>");
     setIsLoading(true);
     try {
-      let spender = "0x095D069E01ACa045F4b5f7a3ecc5fF5A257Bf932"; //contract address
+      let spender = "0x81F5C1C9A5C75D0F28C65162476E650FA4434D39"; //contract address
       let approveAmount = ethers.utils.parseEther(approveAmt);
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       const signer = provider.getSigner();
@@ -181,7 +181,7 @@ const Registration = ({ id }) => {
 
   const { mutateAsync: lpi8i6, isLoading: isBuyTokensLoading } =
     useContractWrite(contract, "buyTokens");
-  const contractAddress = '0x095D069E01ACa045F4b5f7a3ecc5fF5A257Bf932';
+  const contractAddress = '0x81F5C1C9A5C75D0F28C65162476E650FA4434D39';
   const abi = [
     {
       "inputs": [
