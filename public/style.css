@@ -412,7 +412,8 @@ div.content {
   margin-left: 240px;
   padding: 1px 16px;
   height: auto;
-  background: #000000;
+  position: relative;
+  z-index: 99999;
 }
 
 @media screen and (max-width: 700px) {

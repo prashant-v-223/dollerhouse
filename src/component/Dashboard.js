@@ -80,7 +80,7 @@ const Dashboard = () => {
     return finalAmount;
   }
   const { contract } = useContract(
-    "0x95535a6c46343bf08deb7ec5f56e3a32e77b7b80"
+    "0x095D069E01ACa045F4b5f7a3ecc5fF5A257Bf932"
   );
 
   const { data: cunWalletBal, isLoading: isCunWalletBalLoading } =
@@ -276,7 +276,7 @@ const Dashboard = () => {
     console.log("dddd===>>>", approveAmt);
     setBuyTokenLoading(true);
     try {
-      let spender = "0x95535a6c46343bf08deb7ec5f56e3a32e77b7b80"; //contract address
+      let spender = "0x095D069E01ACa045F4b5f7a3ecc5fF5A257Bf932"; //contract address
       let approveAmount = ethers.utils.parseEther(approveAmt);
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       const signer = provider.getSigner();
@@ -300,7 +300,7 @@ const Dashboard = () => {
     }
   };
 
-  const contractAddress = '0x95535a6c46343bf08deb7ec5f56e3a32e77b7b80';
+  const contractAddress = '0x095D069E01ACa045F4b5f7a3ecc5fF5A257Bf932';
   const abi = [
     // Your contract's ABI
     "function Register(uint256 amount) public returns (bool)"

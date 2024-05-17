@@ -49,7 +49,7 @@ const Registration = ({ id }) => {
   const address = useAddress();
 
   const { contract } = useContract(
-    "0x95535a6c46343bf08deb7ec5f56e3a32e77b7b80"
+    "0x095D069E01ACa045F4b5f7a3ecc5fF5A257Bf932"
   );
   const { data: cunWalletBal, isLoading: isCunWalletBalLoading } =
     useTokenBalance(contract, address);
@@ -60,7 +60,7 @@ const Registration = ({ id }) => {
   const { data: checkApproval, isLoading: isApprovalLoading } = useContractRead(
     USDTContract,
     "allowance",
-    [address, "0x95535a6c46343bf08deb7ec5f56e3a32e77b7b80"]
+    [address, "0x095D069E01ACa045F4b5f7a3ecc5fF5A257Bf932"]
   );
 
   const ApprovedValue = checkApproval
@@ -92,7 +92,7 @@ const Registration = ({ id }) => {
     console.log("dddd===>>>");
     setIsLoading(true);
     try {
-      let spender = "0x95535a6c46343bf08deb7ec5f56e3a32e77b7b80"; //contract address
+      let spender = "0x095D069E01ACa045F4b5f7a3ecc5fF5A257Bf932"; //contract address
       let approveAmount = ethers.utils.parseEther(approveAmt);
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       const signer = provider.getSigner();
@@ -169,6 +169,7 @@ const Registration = ({ id }) => {
       if (response.ok) {
         setIsLoading(false);
         window.location.reload();
+        navigate("/dashboard");
       } else {
         console.error("Error:", response.statusText);
       }
@@ -180,90 +181,491 @@ const Registration = ({ id }) => {
 
   const { mutateAsync: lpi8i6, isLoading: isBuyTokensLoading } =
     useContractWrite(contract, "buyTokens");
-  const contractAddress = '0x95535a6c46343bf08deb7ec5f56e3a32e77b7b80';
+  const contractAddress = '0x095D069E01ACa045F4b5f7a3ecc5fF5A257Bf932';
   const abi = [
-    // Your contract's ABI
-    "function Register(uint256 amount) public returns (bool)"
-  ];
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_usdtTokenAddress",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "_adminWallet",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_transactionFee",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "previousOwner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "OwnershipTransferred",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_a",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "_c",
+          "type": "address"
+        }
+      ],
+      "name": "D",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "LevelCountUsers",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "LevelUsers",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "Parent",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_referrer",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_tier",
+          "type": "uint256"
+        }
+      ],
+      "name": "Register",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "TransactionFee",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_userid",
+          "type": "uint256"
+        },
+        {
+          "internalType": "string",
+          "name": "_level",
+          "type": "string"
+        },
+        {
+          "internalType": "address",
+          "name": "_useraddress",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_amount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bool",
+          "name": "_active",
+          "type": "bool"
+        }
+      ],
+      "name": "adddata",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "adminWallet",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_newadmin",
+          "type": "address"
+        }
+      ],
+      "name": "changeadmin",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_newtoken",
+          "type": "address"
+        }
+      ],
+      "name": "changetoken",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "_level",
+          "type": "string"
+        }
+      ],
+      "name": "getdata",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "userid",
+              "type": "uint256"
+            },
+            {
+              "internalType": "string",
+              "name": "level",
+              "type": "string"
+            },
+            {
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "user",
+              "type": "address"
+            },
+            {
+              "internalType": "bool",
+              "name": "status",
+              "type": "bool"
+            }
+          ],
+          "internalType": "struct DataAdd.history[]",
+          "name": "",
+          "type": "tuple[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_useraddress",
+          "type": "address"
+        }
+      ],
+      "name": "getuser",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "userid",
+              "type": "uint256"
+            },
+            {
+              "internalType": "string",
+              "name": "level",
+              "type": "string"
+            },
+            {
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "user",
+              "type": "address"
+            },
+            {
+              "internalType": "bool",
+              "name": "status",
+              "type": "bool"
+            }
+          ],
+          "internalType": "struct DataAdd.history[]",
+          "name": "",
+          "type": "tuple[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "isuse",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "renounceOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "transferOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "usdtToken",
+      "outputs": [
+        {
+          "internalType": "contract IERC20",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "userCount",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "userRewards",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "stateMutability": "payable",
+      "type": "receive"
+    }
+  ]
   const buyToken = async (plan_name, plan_price) => {
     setIsLoading(true);
     try {
       let tierplan = ethers.utils.parseEther("20");
-      // Request account access
+
       await window.ethereum.request({ method: 'eth_requestAccounts' });
 
-      // Create a new Web3Provider
       const provider = new ethers.providers.Web3Provider(window.ethereum);
 
-      // Get the signer
       const signer = provider.getSigner();
 
-      // Create a contract instance
       const contract = new ethers.Contract(contractAddress, abi, signer);
 
-      // Convert amount to a BigNumber
-      const tx = await contract.Register(tierplan);
+      const tx = await contract.Register(refferalCode, "20000000000000000000");
 
-      // Wait for the transaction to be mined
       const receipt = await tx.wait();
-      if (receipt.status === 1) {
-        handleBuyPlan(plan_name, plan_price);
-      }
+      console.log("receipt", receipt);
+      handleBuyPlan(plan_name, plan_price);
     } catch (error) {
-      console.log(error);
+      console.log("errorerror", error);
+      console.log("refferalCode", refferalCode);
       toast.error("Failed", {
         position: toast.POSITION.TOP_CENTER,
       });
     }
-    // setIsLoading(true);
-    // try {
-    //   let tierplan = ethers.utils.parseEther("20");
-    //   try {
-    //     const provider = new ethers.providers.Web3Provider(window.ethereum);
-    //     const signer = provider.getSigner();
-    //     const contract = new ethers.Contract(stakecontract, stake_abi, signer);
-    //     const token = await contract.Register(20);
-    //     const receipt = await token.wait();
-    //     if (receipt.status === 1) {
-    //       // handleBuyPlan(plan_name, plan_price);
-    //     }
-    //   } catch (error) {
-    //     console.log(error);
-    //     toast.error("Failed", {
-    //       position: toast.POSITION.TOP_CENTER,
-    //     });
-    //   }
-    //   setIsLoading(false);
-    // } catch (err) {
-    //   toast.error("You can not buy more than $1000 in one transaction", {
-    //     position: toast.POSITION.TOP_CENTER,
-    //   });
-    //   console.error("contract call failure", err);
-    // }
   };
-
-
-  // const buyToken = async (plan_name, plan_price) => {
-  //   let tierplan = ethers.utils.parseEther("20");
-  //   setIsLoading(true);
-  //   // try {
-  //   //   const data = await buyTokens({ args: [refferalCode, tierplan] });
-  //   //   console.info("contract call successs", data);
-  //   handleBuyPlan(plan_name, plan_price);
-  //   //   toast.success((`Successfully Registered`), {
-  //   //     position: toast.POSITION.TOP_CENTER,
-  //   //   });
-  //   // } catch (err) {
-  //   //   toast.error("Something went Wrong ", {
-  //   //     position: toast.POSITION.TOP_CENTER,
-  //   //   });
-  //   //   setIsLoading(false);
-  //   //   console.error("contract call failure", err);
-  //   // } finally {
-  //   //   setIsLoading(false);
-  //   // }
-  // };
-
 
 
 
@@ -394,7 +796,7 @@ const Registration = ({ id }) => {
                     )}
                   </div>
                   <div className="chech_agin_btn">
-                    <button onClick={buyToken} disabled={isLoading}>Register with $20 Slot</button>
+                    <button onClick={handleBuyPlan} disabled={isLoading}>Register with $20 Slot</button>
                   </div>
                 </div>
               </div>

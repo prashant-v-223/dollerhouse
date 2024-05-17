@@ -93,7 +93,7 @@ const Forsage1 = () => {
 
 
   const { contract } = useContract(
-    "0x95535a6c46343bf08deb7ec5f56e3a32e77b7b80"
+    "0x095D069E01ACa045F4b5f7a3ecc5fF5A257Bf932"
   );
   const { contract: USDTContract } = useContract(
     "0x0ECBBF0D46E13cC4fffdf14AbC39D8332c89Ad8b"
