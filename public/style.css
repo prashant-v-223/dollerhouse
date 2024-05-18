@@ -492,7 +492,7 @@ i.fa.fa-user-circle-o {
 .personal_user {
   width: 100%;
   display: inline-block;
-  margin-top: 108px;
+  margin-top: 50px;
 }
 
 .personal_link {
@@ -1028,7 +1028,10 @@ a#tems {
 .question_icon:hover .infomation {
   display: block;
 }
-
+.container {
+  position: relative;
+  z-index: 9999999999999;
+}
 .pre_Id {
   position: fixed;
   top: 11px;
@@ -2193,10 +2196,10 @@ img.welcome_benner_card {
   }
 
   .sidebar_menu {
-    position: fixed;
+    position: relative;
     width: 100%;
     top: 0;
-    /* z-index: 99999; */
+    z-index: 999999999999;
     padding: 0;
   }
 
