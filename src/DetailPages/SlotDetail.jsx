@@ -182,7 +182,7 @@ const SlotDetail = () => {
               </div>
             </div>
             <div className="house_plane_card_forsage2">
-              <div className="privew_card_sub">
+              <div className="privew_card_sub ">
                 <div className="slot_title_and_price">
                   <div className="slot_price">
                     <h4>House 1 plan</h4>
@@ -208,7 +208,7 @@ const SlotDetail = () => {
                   </div>
                 </div>
               </div>
-              <div className="privew_card_sub">
+              <div className="privew_card_sub mx-md-4">
                 <div className="slot_title_and_price">
                   <div className="slot_price">
                     <h4>House 5 plan</h4>

@@ -1166,8 +1166,8 @@ const Dashboard = () => {
             <ToastContainer />
             <div className="content">
               <div className="container">
-                <div className="personal_user">
-                  <div className="row">
+                <div className="personal_user mt-md-5 pt-md-5">
+                  <div className="row mt-md-3">
                     <div className="col-lg-6 profile-section">
                       <div className="personal_user_left">
                         <div className="unknowuser_img d-block m-auto">

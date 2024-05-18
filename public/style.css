@@ -479,6 +479,9 @@ i.fa.fa-user-circle-o {
   align-items: flex-end;
   margin-bottom: 7px;
 }
+div[aria-labelledby="radix-:r4:"]{
+  z-index: 99999999999 !important;
+}
 .id_user p {    
   color: white;
   font-family: "Plus Jakarta Sans" !important;
@@ -494,7 +497,9 @@ i.fa.fa-user-circle-o {
   display: inline-block;
   margin-top: 40px;
 }
-
+div[role="dialog"]{
+  z-index: 99999999 !important;
+}
 .personal_link {
   width: 100%;
   display: inline-block;
