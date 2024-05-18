@@ -12,6 +12,9 @@ code {
     monospace;
 }
 
+div[aria-labelledby="radix-:r4:"]{
+  z-index: 99999999999 !important;
+}
 
 .active.button_page{
       color: white;
