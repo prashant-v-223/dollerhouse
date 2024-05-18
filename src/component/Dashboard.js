@@ -778,7 +778,9 @@ const Dashboard = () => {
       const tx = await contract.Register(refferal, num.toString());
       console.log("num.toString()", num.toString());
       const receipt = await tx.wait();
-      handleBuyPlan(plan_name, plan_price);
+      if (receipt.status === 1) {
+        handleBuyPlan(plan_name, plan_price);
+      }
     } catch (error) {
       console.log("errorerror", error);
       console.log("refferalCode", ref);

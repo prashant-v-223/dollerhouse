@@ -168,8 +168,7 @@ const Registration = ({ id }) => {
 
       if (response.ok) {
         setIsLoading(false);
-        window.location.reload();
-        navigate("/dashboard");
+        user()
       } else {
         console.error("Error:", response.statusText);
       }
