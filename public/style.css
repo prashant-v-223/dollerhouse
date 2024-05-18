@@ -479,7 +479,7 @@ i.fa.fa-user-circle-o {
   align-items: flex-end;
   margin-bottom: 7px;
 }
-.id_user p {
+.id_user p {    
   color: white;
   font-family: "Plus Jakarta Sans" !important;
   font-size: 20px;
