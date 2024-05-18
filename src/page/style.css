@@ -5,6 +5,9 @@ img.wallet_icon_last {
   border-radius: 50px;
 }
 
+div[aria-labelledby="radix-:r4:"]{
+  z-index: 99999999999 !important;
+}
 .table_td_two {
   margin: 0;
   font-size: 18px;
