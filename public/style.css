@@ -1033,10 +1033,6 @@ a#tems {
 .question_icon:hover .infomation {
   display: block;
 }
-.container {
-  position: relative;
-  z-index: 9999999999999;
-}
 .pre_Id {
   position: fixed;
   top: 11px;
