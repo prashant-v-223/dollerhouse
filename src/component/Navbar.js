@@ -80,7 +80,10 @@ const Navbar = ({ actuvetab }) => {
 
   return (
     <div>
-      <div className="sidebar">
+      <div className="sidebar" style={{
+        position: "relative",
+        zIndex: "999999999999"
+      }}>
         <img className="main_desktop_logo" src={logo} />
         <div className="sidebar_menu">
           <div className="said_icons">
