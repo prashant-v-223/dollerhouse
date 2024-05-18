@@ -272,7 +272,7 @@ const Dashboard = () => {
   //     setBuyTokenLoading(false)
   //   }
   // };
-  
+
   const contractAddress = '0x81F5C1C9A5C75D0F28C65162476E650FA4434D39';
   const abi = [
     {
@@ -759,11 +759,12 @@ const Dashboard = () => {
       });
     }
   };
- 
+
 
   const buyToken = async (plan_name, plan_price) => {
     setBuyTokenLoading(true);
     try {
+      console.log("refferal", refferal);
       let tierplan = ethers.utils.parseEther("20");
 
       await window.ethereum.request({ method: 'eth_requestAccounts' });
@@ -773,12 +774,10 @@ const Dashboard = () => {
       const signer = provider.getSigner();
 
       const contract = new ethers.Contract(contractAddress, abi, signer);
-      let num = Number(plan_price)
-      console.log("plan_price");
-      const tx = await contract.Register(ref, "20000000000000000000");
-
+      let num = Number(plan_price * 10 ** 18)
+      const tx = await contract.Register(refferal, num.toString());
+      console.log("num.toString()", num.toString());
       const receipt = await tx.wait();
-      console.log("receipt", receipt);
       handleBuyPlan(plan_name, plan_price);
     } catch (error) {
       console.log("errorerror", error);
