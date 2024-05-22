@@ -50,7 +50,7 @@ const House5Plan = () => {
   };
 
   const { contract } = useContract(
-    "0x81F5C1C9A5C75D0F28C65162476E650FA4434D39"
+    "0xB6A1BdC0bF9dAB0D4216C1016096f19bb7DcF80a"
   );
   const { contract: USDTContract } = useContract(
     "0x0ECBBF0D46E13cC4fffdf14AbC39D8332c89Ad8b"
