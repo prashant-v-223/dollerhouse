@@ -147,7 +147,7 @@ const House5Plan = () => {
       setmissedincome(data?.missedincometotal || 0)
       console.log("data?.datadata?.datadata?.data", data?.data1[0].missedusers);
       setHouse5Plan(data?.data ? data?.data : []);
-      setHouse5Plan2(data?.userdata.missedusers ? data?.userdata.missedusers : []);
+      setHouse5Plan2(data?.data1.referBY ? data?.data1.referBY : []);
       setHouse5Plan1(data?.data1 ? data?.data1 : []);
       setColor(data?.color);
     } catch (error) {
@@ -613,15 +613,15 @@ const House5Plan = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {house5Plan2 &&
-                    house5Plan2.sort((a, b) => {
+                  {house5Plan1 &&
+                    house5Plan1[0]?.referBY?.sort((a, b) => {
                       // Assuming house5Plan is an array of objects with a property 'createdAt'
                       return new Date(a.createdAt) - new Date(b.createdAt);
                     })?.map((item, index) => {
                       let parse = item.depthleval + 1 === 1 ? 0 : item.depthleval + 1 === 2 ? 10 : item.depthleval + 1 === 3 ? 20 : item.depthleval + 1 === 4 ? 20 : item.depthleval + 1 === 5 ? 50 : 0
                       return (<tr key={index}>
                         <td>
-                          {item.status !== "done" ? (
+                          {item.depthleval > 0 ? (
                             <img
                               src="/up-arrow.png"
                               className="wallet_icon_last upline_arrow"
