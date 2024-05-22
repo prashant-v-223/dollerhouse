@@ -621,7 +621,7 @@ const House5Plan = () => {
                       let parse = item.depthleval + 1 === 1 ? 0 : item.depthleval + 1 === 2 ? 10 : item.depthleval + 1 === 3 ? 20 : item.depthleval + 1 === 4 ? 20 : item.depthleval + 1 === 5 ? 50 : 0
                       return (<tr key={index}>
                         <td>
-                          {item.depthleval > 0 ? (
+                          {item.depthleval == 0 ? (
                             <img
                               src="/up-arrow.png"
                               className="wallet_icon_last upline_arrow"
