@@ -127,9 +127,9 @@ const Landingpage = () => {
             }
           }
 
-          hours = "0" + hours
-          minutes = "0" + minutes
-          seconds = "0" + seconds
+          hours = hours.length >= 1 ? hours : "0" + hours
+          minutes = minutes.length >= 1 ? minutes : "0" + minutes
+          seconds = seconds.length >= 1 ? seconds : "0" + seconds
 
           daysSpan.textContent = days;
           hoursSpan.textContent = hours;
@@ -141,7 +141,7 @@ const Landingpage = () => {
         timeInterval = setInterval(timer, 1000);
       };
 
-  
+
       /* Initialize
        * ------------------------------------------------------ */
       (function ssInit() {
@@ -270,28 +270,28 @@ const Landingpage = () => {
             alignItems: "center"
           }}>
             {userID === null || userID === undefined ?
-            <h1 className="s-intro__content-title">
-            Doller house comming soon
-            <br />
-            05 June, 2024
-          </h1> 
-            // <div className="register_left w-100">
-            //   <h1 className="text-center"> Welcome to Dollar House </h1>
-            //   <br />
-            //   <div className="join_bth d-block m-auto mt-4">
-            //     <ConnectWallet className="d-block m-auto" />
-            //     <br />
-            //     <button onClick={scrollToRegistration} className="wath_tut d-block m-auto">
-            //       Join Doller House
-            //     </button>
-            //   </div>
-            // </div>
-             :
-            <h1 className="s-intro__content-title">
-            Doller house comming soon
-            <br />
-            05 June, 2024
-          </h1>
+              <h1 className="s-intro__content-title">
+                Doller house comming soon
+                <br />
+                05 June, 2024
+              </h1>
+              // <div className="register_left w-100">
+              //   <h1 className="text-center"> Welcome to Dollar House </h1>
+              //   <br />
+              //   <div className="join_bth d-block m-auto mt-4">
+              //     <ConnectWallet className="d-block m-auto" />
+              //     <br />
+              //     <button onClick={scrollToRegistration} className="wath_tut d-block m-auto">
+              //       Join Doller House
+              //     </button>
+              //   </div>
+              // </div>
+              :
+              <h1 className="s-intro__content-title">
+                Doller house comming soon
+                <br />
+                05 June, 2024
+              </h1>
               // <div className="register_left w-100">
               //   <div className="id_user right_text d-block m-auto w-100 ">
               //     <div className="d-flex align-items-end mt-4 " >
@@ -337,15 +337,16 @@ const Landingpage = () => {
         <section id="intro" className="s-intro">
           <div className="column lg-12">
             <div className="s-intro__content-bottom">
-              
+
             </div>
           </div>
           <br />
-          <div className="counter"  style={{display:"flex",
-    justifyContent: "space-evenly",
-    alignContent: "stretch",
-    fontSize: "24px"
-}} >
+          <div className="counter" style={{
+            display: "flex",
+            justifyContent: "space-evenly",
+            alignContent: "stretch",
+            fontSize: "24px"
+          }} >
             <div className="counter__time">
               <span className="ss-days" style={{ color: "#fff" }}>365</span>
               <span style={{ color: "#fff" }}>days</span>
