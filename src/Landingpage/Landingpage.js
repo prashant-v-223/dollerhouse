@@ -67,10 +67,6 @@ const Landingpage = () => {
   }
   console.log("datadatadatadatadata", data);
   const [previewID, setPreviewID] = useState("");
-  const [daysSpan, setdaysSpan] = useState("");
-  const [hoursSpan, sethoursSpan] = useState("");
-  const [minutesSpan, setminutesSpan] = useState("");
-  const [secondsSpan, setsecondsSpan] = useState("");
   const [profileData, setprofileData] = useState({});
   const [userData, setUserData] = useState(null);
 
@@ -99,10 +95,10 @@ const Landingpage = () => {
        * ------------------------------------------------------ */
       const ssCountdown = function () {
         const finalDate = new Date(cfg.finalDate).getTime();
-        // const daysSpan = document.querySelector(".counter .ss-days");
-        // const hoursSpan = document.querySelector(".counter .ss-hours");
-        // const minutesSpan = document.querySelector(".counter .ss-minutes");
-        // const secondsSpan = document.querySelector(".counter .ss-seconds");
+        const daysSpan = document.querySelector(".counter .ss-days");
+        const hoursSpan = document.querySelector(".counter .ss-hours");
+        const minutesSpan = document.querySelector(".counter .ss-minutes");
+        const secondsSpan = document.querySelector(".counter .ss-seconds");
         let timeInterval;
 
         if (!(daysSpan && hoursSpan && minutesSpan && secondsSpan)) return;
@@ -131,14 +127,12 @@ const Landingpage = () => {
             }
           }
 
-          hoursSpan <= 9 ? sethoursSpan(hours = "0" + hours) : sethoursSpan(hours)
-          minutesSpan <= 9 ? setminutesSpan(minutes = "0" + minutes) : setminutesSpan(minutes)
-          secondsSpan <= 9 ? setsecondsSpan(seconds = "0" + seconds) : setsecondsSpan(seconds)
+          hours = "0" + hours
+          minutes = "0" + minutes
+          seconds = "0" + seconds
 
-          setdaysSpan(days);
-          sethoursSpan(hours);
-          setminutesSpan(minutes);
-          setsecondsSpan(seconds);
+          daysSpan.textContent = days;
+          hoursSpan.textContent = hours;
           minutesSpan.textContent = minutes;
           secondsSpan.textContent = seconds;
         }
@@ -147,7 +141,7 @@ const Landingpage = () => {
         timeInterval = setInterval(timer, 1000);
       };
 
-
+  
       /* Initialize
        * ------------------------------------------------------ */
       (function ssInit() {
@@ -276,28 +270,28 @@ const Landingpage = () => {
             alignItems: "center"
           }}>
             {userID === null || userID === undefined ?
-              <h1 className="s-intro__content-title">
-                Doller house comming soon
-                <br />
-                05 June, 2024
-              </h1>
-              // <div className="register_left w-100">
-              //   <h1 className="text-center"> Welcome to Dollar House </h1>
-              //   <br />
-              //   <div className="join_bth d-block m-auto mt-4">
-              //     <ConnectWallet className="d-block m-auto" />
-              //     <br />
-              //     <button onClick={scrollToRegistration} className="wath_tut d-block m-auto">
-              //       Join Doller House
-              //     </button>
-              //   </div>
-              // </div>
-              :
-              <h1 className="s-intro__content-title">
-                Doller house comming soon
-                <br />
-                05 June, 2024
-              </h1>
+            <h1 className="s-intro__content-title">
+            Doller house comming soon
+            <br />
+            05 June, 2024
+          </h1> 
+            // <div className="register_left w-100">
+            //   <h1 className="text-center"> Welcome to Dollar House </h1>
+            //   <br />
+            //   <div className="join_bth d-block m-auto mt-4">
+            //     <ConnectWallet className="d-block m-auto" />
+            //     <br />
+            //     <button onClick={scrollToRegistration} className="wath_tut d-block m-auto">
+            //       Join Doller House
+            //     </button>
+            //   </div>
+            // </div>
+             :
+            <h1 className="s-intro__content-title">
+            Doller house comming soon
+            <br />
+            05 June, 2024
+          </h1>
               // <div className="register_left w-100">
               //   <div className="id_user right_text d-block m-auto w-100 ">
               //     <div className="d-flex align-items-end mt-4 " >
@@ -343,30 +337,29 @@ const Landingpage = () => {
         <section id="intro" className="s-intro">
           <div className="column lg-12">
             <div className="s-intro__content-bottom">
-
+              
             </div>
           </div>
           <br />
-          <div className="counter" style={{
-            display: "flex",
-            justifyContent: "space-evenly",
-            alignContent: "stretch",
-            fontSize: "24px"
-          }} >
+          <div className="counter"  style={{display:"flex",
+    justifyContent: "space-evenly",
+    alignContent: "stretch",
+    fontSize: "24px"
+}} >
             <div className="counter__time">
-              <span className="ss-days" style={{ color: "#fff" }}>{daysSpan}</span>
+              <span className="ss-days" style={{ color: "#fff" }}>365</span>
               <span style={{ color: "#fff" }}>days</span>
             </div>
             <div className="counter__time">
-              <span className="ss-hours" style={{ color: "#fff" }}>{hoursSpan}</span>
+              <span className="ss-hours" style={{ color: "#fff" }}>01</span>
               <span style={{ color: "#fff" }}>hours</span>
             </div>
             <div className="counter__time minutes">
-              <span className="ss-minutes" style={{ color: "#fff" }}>{minutesSpan}</span>
+              <span className="ss-minutes" style={{ color: "#fff" }}>01</span>
               <span style={{ color: "#fff" }}>mins</span>
             </div>
             <div className="counter__time">
-              <span className="ss-seconds" style={{ color: "#fff" }}>{secondsSpan}</span>
+              <span className="ss-seconds" style={{ color: "#fff" }}>55</span>
               <span style={{ color: "#fff" }}>secs</span>
             </div>
           </div>
