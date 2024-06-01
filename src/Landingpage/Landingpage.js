@@ -259,7 +259,7 @@ const Landingpage = () => {
             justifyContent: 'space-around'
           }}
         >
-          <div className="register_right" style={{
+          <div className="register_right d-none d-md-block" style={{
             transform: "scaleX(-1)"
           }}>
             <img src={poket_img} alt="pocket_img" className="poket_img" />
