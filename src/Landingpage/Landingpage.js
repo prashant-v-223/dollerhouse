@@ -121,15 +121,15 @@ const Landingpage = () => {
 
           if (days <= 99) {
             if (days <= 9) {
-              days = "0" + days;
+              days = days;
             } else {
               days = days;
             }
           }
 
-          hours = hours.length >= 1 ? hours : "0" + hours
-          minutes = minutes.length >= 1 ? minutes : "0" + minutes
-          seconds = seconds.length >= 1 ? seconds : "0" + seconds
+          hours = hours.length >= 1 ? hours : hours
+          minutes = minutes.length >= 1 ? minutes : minutes
+          seconds = seconds.length >= 1 ? seconds : seconds
 
           daysSpan.textContent = days;
           hoursSpan.textContent = hours;
@@ -272,8 +272,6 @@ const Landingpage = () => {
             {userID === null || userID === undefined ?
               <h1 className="s-intro__content-title">
                 Doller house comming soon
-                <br />
-                05 June, 2024
               </h1>
               // <div className="register_left w-100">
               //   <h1 className="text-center"> Welcome to Dollar House </h1>
@@ -289,8 +287,6 @@ const Landingpage = () => {
               :
               <h1 className="s-intro__content-title">
                 Doller house comming soon
-                <br />
-                05 June, 2024
               </h1>
               // <div className="register_left w-100">
               //   <div className="id_user right_text d-block m-auto w-100 ">
@@ -341,27 +337,27 @@ const Landingpage = () => {
             </div>
           </div>
           <br />
-          <div className="counter" style={{
+          <div className="counter d-block d-md-flex m-auto" style={{
             display: "flex",
             justifyContent: "space-evenly",
             alignContent: "stretch",
             fontSize: "24px"
           }} >
-            <div className="counter__time">
+            <div className="counter__time text-center bg-dark py-3 px-5 my-2">
               <span className="ss-days" style={{ color: "#fff" }}>365</span>
-              <span style={{ color: "#fff" }}>days</span>
+              <span className="px-1" style={{ color: "#fff" }}>days</span>
             </div>
-            <div className="counter__time">
+            <div className="counter__time text-center bg-dark py-3 px-5 my-2">
               <span className="ss-hours" style={{ color: "#fff" }}>01</span>
-              <span style={{ color: "#fff" }}>hours</span>
+              <span className="px-1" style={{ color: "#fff" }}>hours</span>
             </div>
-            <div className="counter__time minutes">
+            <div className="counter__time minutes text-center bg-dark py-3 px-5 my-2">
               <span className="ss-minutes" style={{ color: "#fff" }}>01</span>
-              <span style={{ color: "#fff" }}>mins</span>
+              <span className="px-1" style={{ color: "#fff" }}>mins</span>
             </div>
-            <div className="counter__time">
+            <div className="counter__time text-center bg-dark py-3 px-5 my-2">
               <span className="ss-seconds" style={{ color: "#fff" }}>55</span>
-              <span style={{ color: "#fff" }}>secs</span>
+              <span className="px-1" style={{ color: "#fff" }}>secs</span>
             </div>
           </div>
         </section>
